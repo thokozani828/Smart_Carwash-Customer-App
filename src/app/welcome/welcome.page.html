@@ -1,0 +1,99 @@
+<ion-content class="welcome-content" [scroll]="false">
+  <div class="welcome-container">
+    
+    <!-- ==========================
+    TOP SECTION - FULL SCREEN IMAGE
+    ========================== -->
+    <div class="top-section">
+      <!-- Full Screen Background Image -->
+      <div class="hero-background">
+        <img src="assets/images/logo.png" alt="Smart CarWash" class="hero-image" />
+        <div class="hero-overlay"></div>
+      </div>
+      
+      <!-- Content Overlay -->
+      <div class="hero-content">
+        <!-- Removed brand header with Smart CarWash text -->
+      </div>
+    </div>
+
+    <!-- ==========================
+    BOTTOM SECTION - AUTHENTICATION
+    ========================== -->
+    <div class="bottom-section">
+      
+      <!-- Welcome Text -->
+      <div class="welcome-text-wrapper">
+        <h2 class="welcome-title">Welcome Back</h2>
+        <p class="welcome-subtitle">Sign in to book your smart car wash</p>
+      </div>
+
+      <!-- Login Button -->
+      <button class="btn btn-login" (click)="signInWithEmail()" [disabled]="isLoading">
+        <ion-icon name="mail-outline" class="btn-icon"></ion-icon>
+        <span class="btn-text">Continue with Email</span>
+        <ion-icon name="arrow-forward-outline" class="btn-arrow"></ion-icon>
+      </button>
+
+      <!-- Divider -->
+      <div class="divider-wrapper">
+        <span class="divider-line"></span>
+        <span class="divider-text">or</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- Social Sign In Buttons -->
+      <div class="social-buttons">
+        <button class="btn btn-social btn-google" (click)="signInWithGoogle()" [disabled]="isLoading">
+          <ion-icon name="logo-google" class="social-icon"></ion-icon>
+          <span>Google</span>
+        </button>
+        
+        <button class="btn btn-social btn-facebook" (click)="signInWithFacebook()" [disabled]="isLoading">
+          <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+          <span>Facebook</span>
+        </button>
+
+        <button class="btn btn-social btn-apple" (click)="signInWithApple()" [disabled]="isLoading">
+          <ion-icon name="logo-apple" class="social-icon"></ion-icon>
+          <span>Apple</span>
+        </button>
+      </div>
+
+      <!-- Register Link -->
+      <div class="register-link">
+        <p class="register-text">
+          New to Smart CarWash? 
+          <span (click)="register()" class="register-btn">Create Account</span>
+        </p>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="trust-section">
+        <div class="trust-item">
+          <ion-icon name="shield-checkmark-outline" class="trust-icon"></ion-icon>
+          <span>Secure</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <ion-icon name="water-outline" class="trust-icon"></ion-icon>
+          <span>Eco-Friendly</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <ion-icon name="time-outline" class="trust-icon"></ion-icon>
+          <span>30 Min Service</span>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <p class="terms-text">
+        By continuing, you agree to our 
+        <span (click)="openTerms()" class="terms-link">Terms</span>
+        &amp; 
+        <span (click)="openPrivacy()" class="terms-link">Privacy Policy</span>
+      </p>
+
+    </div>
+  </div>
+</ion-content>

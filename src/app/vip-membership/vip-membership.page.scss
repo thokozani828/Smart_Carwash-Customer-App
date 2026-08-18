@@ -1,0 +1,1508 @@
+// ============================================================
+// VIP PAGE - SLIDING LAYOUT
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$gold-dark: #d97706;
+$purple: #8b5cf6;
+$purple-dark: #7c3aed;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// VIP CONTENT
+// ==========================
+
+.vip-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.vip-container {
+  padding: 16px 16px 110px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+// ==========================
+// ANIMATED BACKGROUND
+// ==========================
+
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(80px);
+    
+    &.glow-1 {
+      width: 300px;
+      height: 300px;
+      background: rgba($brand-blue, 0.15);
+      top: -100px;
+      right: -100px;
+      animation: float-glow 8s ease-in-out infinite;
+    }
+    
+    &.glow-2 {
+      width: 250px;
+      height: 250px;
+      background: rgba($gold, 0.12);
+      bottom: 100px;
+      left: -80px;
+      animation: float-glow 10s ease-in-out infinite reverse;
+    }
+    
+    &.glow-3 {
+      width: 200px;
+      height: 200px;
+      background: rgba($purple, 0.1);
+      bottom: 300px;
+      right: 50%;
+      animation: float-glow 12s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes float-glow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.2); }
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.vip-header {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .vip-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, $gold, $gold-dark);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .vip-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// VIP STATUS CARD
+// ==========================
+
+.vip-status-card {
+  background: $white;
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 2px solid $border-color;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px $shadow-light;
+  
+  &.active {
+    border-color: $gold;
+    background: linear-gradient(145deg, #fffbeb, #fef3c7);
+    box-shadow: 0 4px 24px rgba($gold, 0.15);
+  }
+  
+  .vip-status-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $gold, $gold-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $white;
+    }
+  }
+  
+  .vip-status-info {
+    flex: 1;
+    
+    .vip-status-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0 0 2px;
+    }
+    
+    .vip-status-desc {
+      font-size: 13px;
+      color: $text-gray;
+      margin: 0 0 8px;
+    }
+    
+    .vip-status-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.05);
+      color: $text-gray;
+      
+      &.active {
+        background: rgba($success, 0.15);
+        color: $success;
+      }
+    }
+  }
+}
+
+// ==========================
+// STATS SECTION - SMALLER CARDS, NO PROGRESS BAR
+// ==========================
+
+.stats-section {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+  }
+  
+  .section-period {
+    font-size: 12px;
+    color: $text-gray;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+  
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background: rgba($success, 0.1);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: $success;
+    
+    ion-icon {
+      font-size: 14px;
+    }
+  }
+}
+
+.stats-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 8px;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.stats-scroll {
+  display: flex;
+  gap: 10px;
+}
+
+.stat-card-sm {
+  min-width: 120px;
+  flex: 0 0 auto;
+  background: $white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .stat-icon-sm {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+  
+  .stat-content-sm {
+    flex: 1;
+    min-width: 0;
+    
+    .stat-value-sm {
+      display: block;
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    
+    .stat-label-sm {
+      display: block;
+      font-size: 11px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+  }
+}
+
+// ==========================
+// BENEFITS - 2x2 GRID
+// ==========================
+
+.benefits-section {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  @media (max-width: 380px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}
+
+.benefit-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid $border-color;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .benefit-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 22px;
+      color: $white;
+    }
+  }
+  
+  .benefit-info {
+    flex: 1;
+    width: 100%;
+    
+    .benefit-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0 0 4px;
+    }
+    
+    .benefit-desc {
+      font-size: 12px;
+      color: $text-gray;
+      margin: 0;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+// ==========================
+// PLANS SECTION - HORIZONTAL SCROLL
+// ==========================
+
+.plans-section {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.plans-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 8px;
+  margin: 0 -16px;
+  padding: 4px 16px 8px;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.plans-scroll {
+  display: flex;
+  gap: 14px;
+}
+
+.plan-card {
+  min-width: 280px;
+  flex: 0 0 auto;
+  background: $white;
+  border-radius: 20px;
+  border: 2px solid $border-color;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+  
+  &.popular {
+    border-color: $gold;
+    transform: scale(1.02);
+    
+    &:hover {
+      transform: scale(1.02) translateY(-4px);
+    }
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    box-shadow: 0 0 0 4px rgba($brand-blue, 0.1), 0 8px 32px rgba($brand-blue, 0.08);
+    transform: scale(1.02);
+    
+    &:hover {
+      transform: scale(1.02) translateY(-4px);
+    }
+  }
+  
+  .plan-header {
+    padding: 20px 16px;
+    color: $white;
+    text-align: center;
+    position: relative;
+    
+    .plan-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+    
+    .plan-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+    
+    .plan-price {
+      .price-amount {
+        font-size: 32px;
+        font-weight: 800;
+      }
+      
+      .price-period {
+        font-size: 13px;
+        opacity: 0.8;
+      }
+    }
+    
+    .plan-washes {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .plan-features {
+    list-style: none;
+    padding: 16px 16px 12px;
+    margin: 0;
+    flex: 1;
+    
+    li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: $text-gray;
+      padding: 6px 0;
+      font-family: $font-family;
+      
+      ion-icon {
+        font-size: 16px;
+        color: $success;
+        flex-shrink: 0;
+      }
+    }
+  }
+  
+  // Select Button
+  .plan-select-btn {
+    margin: 0 16px 16px;
+    padding: 12px;
+    border: 2px solid $border-color;
+    border-radius: 12px;
+    background: transparent;
+    color: $text-dark;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: $font-family;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    &.primary {
+      background: linear-gradient(135deg, $gold, $gold-dark);
+      border-color: $gold;
+      color: #1a2634;
+      box-shadow: 0 4px 16px rgba($gold, 0.2);
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba($gold, 0.3);
+      }
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+      border-color: $brand-blue;
+    }
+  }
+  
+  // Customize Button (Only visible when selected)
+  .plan-customize-btn {
+    margin: 0 16px 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, $brand-blue, $brand-hover);
+    color: $white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: $font-family;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba($brand-blue, 0.25);
+    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    .arrow-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba($brand-blue, 0.35);
+      
+      .arrow-icon {
+        transform: translateX(4px);
+      }
+    }
+  }
+  
+  // Selected Badge
+  .plan-selected-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba($success, 0.95);
+    color: $white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba($success, 0.2);
+    
+    ion-icon {
+      font-size: 14px;
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Scroll Indicators
+.scroll-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+  
+  .scroll-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $border-color;
+    transition: all 0.3s ease;
+    
+    &.active {
+      background: $brand-blue;
+      width: 20px;
+      border-radius: 3px;
+    }
+  }
+}
+
+// ==========================
+// SELECTED PLAN CARD
+// ==========================
+
+.selected-plan-card {
+  background: linear-gradient(145deg, #fffbeb, #fef3c7);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba($gold, 0.2);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba($gold, 0.1);
+  animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  .selected-plan-glow {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba($gold, 0.1), transparent);
+    border-radius: 50%;
+  }
+  
+  .selected-plan-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    gap: 12px;
+    
+    .selected-plan-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      
+      .selected-plan-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, $gold, $gold-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        ion-icon {
+          font-size: 22px;
+          color: $white;
+        }
+      }
+      
+      .selected-plan-info {
+        .selected-plan-label {
+          display: block;
+          font-size: 10px;
+          color: $text-gray;
+          text-transform: uppercase;
+          font-weight: 600;
+          letter-spacing: 0.3px;
+        }
+        
+        .selected-plan-name {
+          display: block;
+          font-size: 16px;
+          font-weight: 700;
+          color: $text-dark;
+        }
+        
+        .selected-plan-price {
+          display: block;
+          font-size: 13px;
+          font-weight: 600;
+          color: $gold-dark;
+        }
+      }
+    }
+    
+    .selected-plan-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      
+      .selected-plan-features-preview {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        
+        span {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 11px;
+          color: $text-gray;
+          font-weight: 500;
+          
+          ion-icon {
+            font-size: 14px;
+            color: $success;
+          }
+        }
+      }
+      
+      .selected-plan-action-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: linear-gradient(135deg, $brand-blue, $brand-hover);
+        color: $white;
+        border: none;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: $font-family;
+        white-space: nowrap;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.2);
+        
+        ion-icon {
+          font-size: 16px;
+          transition: transform 0.3s ease;
+        }
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba($brand-blue, 0.3);
+          
+          ion-icon {
+            transform: translateX(4px);
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// ACTION BUTTONS
+// ==========================
+
+.action-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  
+  .action-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    &.renew-btn {
+      background: linear-gradient(135deg, $brand-blue, $brand-hover);
+      color: $white;
+      box-shadow: 0 4px 16px rgba($brand-blue, 0.2);
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba($brand-blue, 0.3);
+      }
+    }
+    
+    &.cancel-btn {
+      background: rgba($danger, 0.1);
+      color: $danger;
+      
+      &:hover {
+        background: rgba($danger, 0.2);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// BOTTOM NAVIGATION
+// ==========================
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $white;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 18px;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px $shadow-light;
+  height: 82px;
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    flex: 1;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $text-light;
+      transition: color 0.3s ease;
+    }
+    
+    span {
+      font-size: 12px;
+      color: $text-light;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-family: $font-family;
+    }
+    
+    &:hover {
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      span {
+        color: $brand-blue;
+      }
+    }
+    
+    &.active:not(.vip-center) {
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      span {
+        color: $brand-blue;
+        font-weight: 600;
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 28px;
+        height: 4px;
+        background: $brand-blue;
+        border-radius: 3px;
+      }
+    }
+    
+    &.vip-center {
+      margin-top: -28px;
+      flex: 1.4;
+      
+      .nav-indicator {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, $gold, $gold-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 28px rgba($gold, 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        
+        ion-icon {
+          font-size: 36px;
+          color: $white;
+          transition: all 0.3s ease;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          inset: -6px;
+          border-radius: 50%;
+          background: rgba($gold, 0.2);
+          animation: pulse-ring 2s ease-in-out infinite;
+        }
+      }
+      
+      span {
+        margin-top: 6px;
+        font-weight: 600;
+        color: $gold;
+        font-size: 12px;
+      }
+      
+      &::after {
+        display: none !important;
+      }
+      
+      &:hover {
+        .nav-indicator {
+          transform: translateY(-3px) scale(1.06);
+          box-shadow: 0 8px 36px rgba($gold, 0.5);
+        }
+      }
+      
+      &:active {
+        .nav-indicator {
+          transform: scale(0.93);
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.15;
+  }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .vip-container {
+    padding: 12px 12px 100px;
+  }
+  
+  .stat-card-sm {
+    min-width: 100px;
+    padding: 12px 14px;
+    
+    .stat-icon-sm {
+      width: 32px;
+      height: 32px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+    
+    .stat-content-sm {
+      .stat-value-sm {
+        font-size: 18px;
+      }
+      
+      .stat-label-sm {
+        font-size: 10px;
+      }
+    }
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .benefit-card {
+    padding: 14px;
+    
+    .benefit-icon {
+      width: 38px;
+      height: 38px;
+      
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+    
+    .benefit-info {
+      .benefit-title {
+        font-size: 13px;
+      }
+      
+      .benefit-desc {
+        font-size: 11px;
+      }
+    }
+  }
+  
+  .plan-card {
+    min-width: 240px;
+    
+    &.popular {
+      transform: scale(1);
+      
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+    
+    &.selected {
+      transform: scale(1);
+      
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+  }
+  
+  .selected-plan-content {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .selected-plan-right {
+      flex-direction: column;
+      
+      .selected-plan-features-preview {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .selected-plan-action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+  
+  .action-section {
+    flex-direction: column;
+  }
+  
+  .vip-header {
+    .header-top {
+      .vip-title {
+        font-size: 18px;
+      }
+    }
+    
+    .vip-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .bottom-nav {
+    padding: 8px 0 14px;
+    height: 74px;
+    
+    .nav-item {
+      padding: 4px 8px;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+      
+      span {
+        font-size: 11px;
+      }
+      
+      &.vip-center {
+        margin-top: -24px;
+        flex: 1.4;
+        
+        .nav-indicator {
+          width: 60px;
+          height: 60px;
+          
+          ion-icon {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+    
+    .nav-item:not(.vip-center) {
+      &.active::after {
+        width: 22px;
+        height: 3px;
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .stat-card-sm {
+    min-width: 85px;
+    padding: 10px 12px;
+    
+    .stat-icon-sm {
+      width: 28px;
+      height: 28px;
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+    
+    .stat-content-sm {
+      .stat-value-sm {
+        font-size: 16px;
+      }
+      
+      .stat-label-sm {
+        font-size: 9px;
+      }
+    }
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .benefit-card {
+    padding: 12px;
+    
+    .benefit-icon {
+      width: 34px;
+      height: 34px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+    
+    .benefit-info {
+      .benefit-title {
+        font-size: 12px;
+      }
+      
+      .benefit-desc {
+        font-size: 10px;
+      }
+    }
+  }
+  
+  .plan-card {
+    min-width: 200px;
+  }
+  
+  .bottom-nav {
+    height: 66px;
+    padding: 6px 0 12px;
+    
+    .nav-item {
+      ion-icon {
+        font-size: 20px;
+      }
+      
+      span {
+        font-size: 9px;
+      }
+      
+      &.vip-center {
+        margin-top: -20px;
+        
+        .nav-indicator {
+          width: 52px;
+          height: 52px;
+          
+          ion-icon {
+            font-size: 26px;
+          }
+        }
+      }
+    }
+    
+    .nav-item:not(.vip-center) {
+      &.active::after {
+        width: 18px;
+        height: 3px;
+      }
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg .glow {
+    animation: none !important;
+  }
+  
+  .nav-indicator::after {
+    animation: none !important;
+  }
+  
+  .vip-center:hover .nav-indicator {
+    transform: none !important;
+  }
+  
+  .plan-card:hover {
+    transform: none !important;
+  }
+  
+  .plan-customize-btn,
+  .plan-selected-badge,
+  .selected-plan-card {
+    animation: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+.skeleton-w-20 { width: 20%; }
+.skeleton-w-15 { width: 15%; }
+
+.vip-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-stats-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  
+  .skeleton-card {
+    min-width: 120px;
+    height: 70px;
+    border-radius: 14px;
+    flex-shrink: 0;
+  }
+}
+
+.skeleton-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  
+  .skeleton-card {
+    height: 80px;
+    border-radius: 12px;
+  }
+}
+
+.skeleton-plans-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  
+  .skeleton-card {
+    min-width: 280px;
+    height: 380px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.skeleton-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

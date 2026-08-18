@@ -1,0 +1,181 @@
+<ion-content class="packages-content" [scroll]="true">
+  <div class="packages-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="packages-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Tabs Skeleton -->
+      <div class="skeleton-tabs">
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+      </div>
+
+      <!-- Packages Grid Skeleton -->
+      <div class="skeleton-packages-grid">
+        <div class="skeleton skeleton-card" style="height:280px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:300px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:280px;border-radius:14px;"></div>
+      </div>
+
+      <!-- Compare Section Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:150px;border-radius:12px;"></div>
+
+      <!-- Mobile Packages Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-mobile-scroll">
+        <div class="skeleton skeleton-card" style="min-width:200px;height:100px;border-radius:12px;flex-shrink:0;"></div>
+        <div class="skeleton skeleton-card" style="min-width:200px;height:100px;border-radius:12px;flex-shrink:0;"></div>
+        <div class="skeleton skeleton-card" style="min-width:200px;height:100px;border-radius:12px;flex-shrink:0;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="packages-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="packages-title">Packages</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="packages-subtitle">Choose the perfect package for your car</p>
+      </div>
+
+      <!-- Package Type Tabs -->
+      <div class="type-tabs">
+        <div class="type-tab" [class.active]="activeType === 'all'" (click)="setType('all')">
+          All Packages
+        </div>
+        <div class="type-tab" [class.active]="activeType === 'onsite'" (click)="setType('onsite')">
+          <ion-icon name="home-outline"></ion-icon>
+          On-site
+        </div>
+        <div class="type-tab" [class.active]="activeType === 'mobile'" (click)="setType('mobile')">
+          <ion-icon name="car-outline"></ion-icon>
+          Mobile
+        </div>
+      </div>
+
+      <!-- Packages Grid -->
+      <div class="packages-grid">
+        <div class="package-card" *ngFor="let pkg of filteredPackages" [class.popular]="pkg.popular" (click)="viewPackage(pkg)">
+          <div class="package-header" [style.background]="pkg.color">
+            <div class="package-badge" *ngIf="pkg.popular">Popular</div>
+            <h3 class="package-name">{{ pkg.name }}</h3>
+            <div class="package-price">
+              <span class="price-amount">{{ pkg.price }}</span>
+              <span class="price-period">/{{ pkg.period }}</span>
+            </div>
+          </div>
+          <div class="package-body">
+            <ul class="package-benefits">
+              <li *ngFor="let benefit of pkg.benefits">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                {{ benefit }}
+              </li>
+            </ul>
+            <button class="package-select-btn" (click)="$event.stopPropagation(); selectPackage(pkg)">
+              Select Package
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compare Packages -->
+      <div class="compare-section">
+        <div class="section-header">
+          <h2 class="section-title">Compare Packages</h2>
+          <span class="view-all" (click)="comparePackages()">View Comparison</span>
+        </div>
+        
+        <div class="compare-table" (click)="comparePackages()">
+          <div class="compare-row header">
+            <div class="compare-cell">Features</div>
+            <div class="compare-cell" *ngFor="let pkg of comparePackagesList">
+              {{ pkg.shortName }}
+            </div>
+          </div>
+          <div class="compare-row" *ngFor="let feature of compareFeatures">
+            <div class="compare-cell feature-name">{{ feature.name }}</div>
+            <div class="compare-cell" *ngFor="let pkg of comparePackagesList">
+              <span *ngIf="getFeatureValue(feature, pkg.id) === 'Yes'" class="feature-check">✓</span>
+              <span *ngIf="getFeatureValue(feature, pkg.id) === 'No'" class="feature-dash">—</span>
+              <span *ngIf="getFeatureValue(feature, pkg.id) !== 'Yes' && getFeatureValue(feature, pkg.id) !== 'No'" class="feature-value">{{ getFeatureValue(feature, pkg.id) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Packages -->
+      <div class="mobile-section" *ngIf="activeType === 'all' || activeType === 'mobile'">
+        <div class="section-header">
+          <h2 class="section-title">🚗 Mobile Packages</h2>
+          <span class="view-all" (click)="viewMobilePackages()">View All</span>
+        </div>
+        
+        <div class="mobile-packages-scroll">
+          <div class="mobile-package-card" *ngFor="let pkg of mobilePackages" (click)="viewPackage(pkg)">
+            <div class="mobile-package-icon" [style.background]="pkg.color">
+              <ion-icon name="car-outline"></ion-icon>
+            </div>
+            <div class="mobile-package-info">
+              <h4 class="mobile-package-name">{{ pkg.name }}</h4>
+              <span class="mobile-package-price">{{ pkg.price }}</span>
+              <span class="mobile-package-desc">{{ pkg.desc }}</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="mobile-arrow"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- On-site Packages -->
+      <div class="onsite-section" *ngIf="activeType === 'all' || activeType === 'onsite'">
+        <div class="section-header">
+          <h2 class="section-title">🏢 On-site Packages</h2>
+          <span class="view-all" (click)="viewOnsitePackages()">View All</span>
+        </div>
+        
+        <div class="onsite-packages-scroll">
+          <div class="onsite-package-card" *ngFor="let pkg of onsitePackages" (click)="viewPackage(pkg)">
+            <div class="onsite-package-icon" [style.background]="pkg.color">
+              <ion-icon name="home-outline"></ion-icon>
+            </div>
+            <div class="onsite-package-info">
+              <h4 class="onsite-package-name">{{ pkg.name }}</h4>
+              <span class="onsite-package-price">{{ pkg.price }}</span>
+              <span class="onsite-package-desc">{{ pkg.desc }}</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="onsite-arrow"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

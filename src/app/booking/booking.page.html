@@ -1,0 +1,355 @@
+<ion-content class="booking-content" [scroll]="true">
+  <div class="booking-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="booking-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton skeleton-circle"></div>
+        <div class="skeleton-header-text">
+          <div class="skeleton skeleton-text skeleton-w-70"></div>
+          <div class="skeleton skeleton-text-sm skeleton-w-40"></div>
+        </div>
+      </div>
+
+      <!-- Form Group Skeleton - Vehicle -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-select"></div>
+      </div>
+
+      <!-- Service Options Skeleton -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton-service-grid">
+          <div class="skeleton skeleton-service-item"></div>
+          <div class="skeleton skeleton-service-item"></div>
+        </div>
+      </div>
+
+      <!-- Wash Type Skeleton -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton-wash-grid">
+          <div class="skeleton skeleton-wash-item"></div>
+          <div class="skeleton skeleton-wash-item"></div>
+        </div>
+      </div>
+
+      <!-- Date Options Skeleton -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton-date-grid">
+          <div class="skeleton skeleton-date-item"></div>
+          <div class="skeleton skeleton-date-item"></div>
+          <div class="skeleton skeleton-date-item"></div>
+          <div class="skeleton skeleton-date-item"></div>
+          <div class="skeleton skeleton-date-item"></div>
+          <div class="skeleton skeleton-date-item"></div>
+          <div class="skeleton skeleton-date-item"></div>
+        </div>
+      </div>
+
+      <!-- Time Options Skeleton -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton-time-grid">
+          <div class="skeleton skeleton-time-item"></div>
+          <div class="skeleton skeleton-time-item"></div>
+          <div class="skeleton skeleton-time-item"></div>
+          <div class="skeleton skeleton-time-item"></div>
+        </div>
+      </div>
+
+      <!-- Payment Options Skeleton -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-payment-item"></div>
+        <div class="skeleton skeleton-payment-item"></div>
+        <div class="skeleton skeleton-payment-item"></div>
+        <div class="skeleton skeleton-payment-item"></div>
+      </div>
+
+      <!-- Notes Skeleton -->
+      <div class="skeleton-form-group">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-notes"></div>
+      </div>
+
+      <!-- Summary Skeleton -->
+      <div class="skeleton skeleton-summary"></div>
+
+      <!-- Confirm Button Skeleton -->
+      <div class="skeleton skeleton-confirm-btn"></div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="booking-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="booking-title">Book a Wash</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="booking-subtitle">Complete the form to book your car wash</p>
+      </div>
+
+      <!-- Booking Form -->
+      <form class="booking-form" (ngSubmit)="confirmBooking()" #bookingForm="ngForm">
+        
+        <!-- Select Vehicle -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="car-outline"></ion-icon>
+            Select Vehicle
+          </label>
+          <div class="select-wrapper" (click)="toggleVehicleSelector()">
+            <div class="select-display">
+              <span class="select-value" [class.placeholder]="!selectedVehicle">
+                {{ selectedVehicle ? selectedVehicle.name : 'Choose your vehicle' }}
+              </span>
+              <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+            </div>
+          </div>
+          <div class="vehicle-list" *ngIf="showVehicles">
+            <div class="vehicle-item" *ngFor="let vehicle of vehicles" (click)="selectVehicle(vehicle)">
+              <div class="vehicle-item-info">
+                <span class="vehicle-item-name">{{ vehicle.name }}</span>
+                <span class="vehicle-item-plate">{{ vehicle.plate }}</span>
+              </div>
+              <ion-icon name="checkmark-outline" class="vehicle-check" *ngIf="selectedVehicle?.id === vehicle.id"></ion-icon>
+            </div>
+            <!-- Add Vehicle Option -->
+            <div class="vehicle-item add-vehicle" (click)="addVehicle()">
+              <div class="vehicle-item-info">
+                <ion-icon name="add-circle-outline" class="add-vehicle-icon"></ion-icon>
+                <span class="vehicle-item-name">Add New Vehicle</span>
+              </div>
+              <ion-icon name="arrow-forward-outline" class="add-vehicle-arrow"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Select Service -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="construct-outline"></ion-icon>
+            Select Service
+          </label>
+          <div class="service-options">
+            <div class="service-option" *ngFor="let service of services" 
+                 [class.selected]="selectedService?.id === service.id"
+                 (click)="selectService(service)">
+              <div class="service-option-icon" [style.background]="service.color">
+                <ion-icon [name]="service.icon"></ion-icon>
+              </div>
+              <div class="service-option-info">
+                <span class="service-option-name">{{ service.name }}</span>
+                <span class="service-option-price">{{ service.price }}</span>
+                <span class="service-option-duration">{{ service.duration }}</span>
+              </div>
+              <ion-icon name="checkmark-circle" class="service-check" *ngIf="selectedService?.id === service.id"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wash Type -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="location-outline"></ion-icon>
+            Wash Type
+          </label>
+          <div class="wash-type-options">
+            <div class="wash-type-option" [class.selected]="washType === 'mobile'" (click)="selectWashType('mobile')">
+              <ion-icon name="car-outline" class="wash-type-icon"></ion-icon>
+              <span>Mobile Wash</span>
+              <span class="wash-type-desc">We come to you</span>
+            </div>
+            <div class="wash-type-option" [class.selected]="washType === 'onsite'" (click)="selectWashType('onsite')">
+              <ion-icon name="home-outline" class="wash-type-icon"></ion-icon>
+              <span>On-site Wash</span>
+              <span class="wash-type-desc">Visit our branch</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- GPS Location (Mobile Wash) -->
+        <div class="form-group" *ngIf="washType === 'mobile'">
+          <label class="form-label">
+            <ion-icon name="navigate-outline"></ion-icon>
+            Your Location
+          </label>
+          <div class="location-wrapper" (click)="getLocation()">
+            <div class="location-display">
+              <ion-icon name="location-outline" class="location-icon"></ion-icon>
+              <span class="location-value" [class.placeholder]="!userLocation">
+                {{ userLocation || 'Tap to share your location' }}
+              </span>
+            </div>
+            <button type="button" class="location-btn">
+              <ion-icon name="locate-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Choose Date -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="calendar-outline"></ion-icon>
+            Choose Date
+          </label>
+          <div class="date-options">
+            <div class="date-option" *ngFor="let date of availableDates" 
+                 [class.selected]="selectedDate === date.value"
+                 (click)="selectDate(date.value)">
+              <span class="date-day">{{ date.day }}</span>
+              <span class="date-number">{{ date.number }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Choose Time -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="time-outline"></ion-icon>
+            Choose Time
+          </label>
+          <div class="time-options">
+            <div class="time-option" *ngFor="let time of availableTimes" 
+                 [class.selected]="selectedTime === time"
+                 (click)="selectTime(time)">
+              {{ time }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Method with Cash Disabled for Mobile -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="card-outline"></ion-icon>
+            Payment Method
+          </label>
+          <div class="payment-options">
+            <!-- Card Payment -->
+            <div class="payment-option" [class.selected]="paymentMethod === 'card'" (click)="selectPaymentMethod('card')">
+              <ion-icon name="card-outline" class="payment-icon"></ion-icon>
+              <div class="payment-info">
+                <span class="payment-name">Card Payment</span>
+                <span class="payment-desc">Credit or Debit Card</span>
+              </div>
+              <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'card'"></ion-icon>
+            </div>
+
+            <!-- EFT Payment -->
+            <div class="payment-option" [class.selected]="paymentMethod === 'eft'" (click)="selectPaymentMethod('eft')">
+              <ion-icon name="swap-horizontal-outline" class="payment-icon"></ion-icon>
+              <div class="payment-info">
+                <span class="payment-name">EFT Payment</span>
+                <span class="payment-desc">Electronic Funds Transfer</span>
+              </div>
+              <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'eft'"></ion-icon>
+            </div>
+
+            <!-- Mobile Payment -->
+            <div class="payment-option" [class.selected]="paymentMethod === 'mobile'" (click)="selectPaymentMethod('mobile')">
+              <ion-icon name="phone-portrait-outline" class="payment-icon"></ion-icon>
+              <div class="payment-info">
+                <span class="payment-name">Mobile Payment</span>
+                <span class="payment-desc">Apple Pay / Google Pay</span>
+              </div>
+              <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'mobile'"></ion-icon>
+            </div>
+
+            <!-- Cash Payment - Disabled for Mobile Wash -->
+            <div class="payment-option" 
+                 [class.selected]="paymentMethod === 'cash'" 
+                 [class.disabled]="!isCashAvailable()"
+                 (click)="selectPaymentMethod('cash')">
+              <ion-icon name="cash-outline" class="payment-icon"></ion-icon>
+              <div class="payment-info">
+                <span class="payment-name">Cash Payment</span>
+                <span class="payment-desc" *ngIf="isCashAvailable()">Pay at the branch</span>
+                <span class="payment-desc" *ngIf="!isCashAvailable()">Not available for mobile wash</span>
+              </div>
+              <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'cash'"></ion-icon>
+              <div class="payment-disabled-overlay" *ngIf="!isCashAvailable()">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+          <label class="form-label">
+            <ion-icon name="create-outline"></ion-icon>
+            Additional Notes
+          </label>
+          <div class="notes-wrapper">
+            <textarea class="notes-input" 
+                      placeholder="Any special requests or instructions..."
+                      [(ngModel)]="notes"
+                      name="notes"
+                      rows="3"></textarea>
+          </div>
+        </div>
+
+        <!-- Total & Confirm -->
+        <div class="booking-summary">
+          <div class="summary-row">
+            <span class="summary-label">Total Amount</span>
+            <span class="summary-value">{{ getTotalAmount() }}</span>
+          </div>
+          <div class="summary-row" *ngIf="paymentMethod">
+            <span class="summary-label">Payment Method</span>
+            <span class="summary-value">{{ getPaymentMethodName() }}</span>
+          </div>
+        </div>
+
+        <!-- Confirm Booking Button -->
+        <button type="submit" class="btn-confirm" [disabled]="!isFormValid()">
+          <span>Confirm Booking</span>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <div class="bottom-nav">
+    <div class="nav-item active book-center" (click)="navigateTo('booking')">
+      <div class="nav-indicator">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <span>Book</span>
+    </div>
+    <div class="nav-item" (click)="navigateTo('booking-history')">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>History</span>
+    </div>
+    <div class="nav-item home-center" (click)="navigateTo('home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" (click)="navigateTo('vehicles')">
+      <ion-icon name="car-outline"></ion-icon>
+      <span>Vehicles</span>
+    </div>
+    <div class="nav-item" (click)="navigateTo('vip-membership')">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>VIP</span>
+    </div>
+  </div>
+</ion-content>

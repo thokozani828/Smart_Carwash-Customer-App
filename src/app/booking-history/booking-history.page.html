@@ -1,0 +1,161 @@
+<ion-content class="history-content" [scroll]="true">
+  <div class="history-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="history-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Tabs Skeleton -->
+      <div class="skeleton-tabs">
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+      </div>
+
+      <!-- Booking List Skeleton -->
+      <div class="skeleton-booking-list">
+        <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="history-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="history-title">Booking History</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="history-subtitle">View all your bookings and their status</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-container">
+        <div class="tab" [class.active]="activeTab === 'upcoming'" (click)="switchTab('upcoming')">
+          <span>Upcoming</span>
+          <span class="tab-count">{{ upcomingBookings.length }}</span>
+        </div>
+        <div class="tab" [class.active]="activeTab === 'completed'" (click)="switchTab('completed')">
+          <span>Completed</span>
+          <span class="tab-count">{{ completedBookings.length }}</span>
+        </div>
+        <div class="tab" [class.active]="activeTab === 'cancelled'" (click)="switchTab('cancelled')">
+          <span>Cancelled</span>
+          <span class="tab-count">{{ cancelledBookings.length }}</span>
+        </div>
+      </div>
+
+      <!-- Booking List -->
+      <div class="bookings-list">
+        <div class="booking-item" *ngFor="let booking of filteredBookings" (click)="viewBookingDetails(booking)">
+          <div class="booking-header">
+            <div class="booking-service">
+              <h3 class="booking-name">{{ booking.service }}</h3>
+              <span class="booking-date">{{ booking.date }}</span>
+            </div>
+            <div class="booking-status-badge" [class]="booking.status">
+              {{ booking.status }}
+            </div>
+          </div>
+          
+          <div class="booking-details">
+            <div class="detail-item">
+              <ion-icon name="time-outline"></ion-icon>
+              <span>{{ booking.time }}</span>
+            </div>
+            <div class="detail-item">
+              <ion-icon name="location-outline"></ion-icon>
+              <span>{{ booking.branch }}</span>
+            </div>
+            <div class="detail-item">
+              <ion-icon name="car-outline"></ion-icon>
+              <span>{{ booking.vehicle }}</span>
+            </div>
+            <div class="detail-item">
+              <ion-icon name="cash-outline"></ion-icon>
+              <span>{{ booking.price }}</span>
+            </div>
+          </div>
+          
+          <div class="booking-actions">
+            <button class="action-btn reschedule-btn" *ngIf="booking.status === 'upcoming'" (click)="$event.stopPropagation(); rescheduleBooking(booking)">
+              <ion-icon name="calendar-outline"></ion-icon>
+              Reschedule
+            </button>
+            <button class="action-btn rebook-btn" *ngIf="booking.status === 'completed'" (click)="$event.stopPropagation(); rebookBooking(booking)">
+              <ion-icon name="refresh-outline"></ion-icon>
+              Rebook
+            </button>
+            <button class="action-btn receipt-btn" *ngIf="booking.status === 'completed'" (click)="$event.stopPropagation(); downloadReceipt(booking)">
+              <ion-icon name="download-outline"></ion-icon>
+              Receipt
+            </button>
+            <button class="action-btn cancel-booking-btn" *ngIf="booking.status === 'upcoming'" (click)="$event.stopPropagation(); cancelBooking(booking)">
+              <ion-icon name="close-outline"></ion-icon>
+              Cancel
+            </button>
+            <span class="booking-id" *ngIf="booking.status === 'cancelled'">#{{ booking.id }}</span>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="filteredBookings.length === 0">
+          <ion-icon name="calendar-outline" class="empty-icon"></ion-icon>
+          <h3 class="empty-title">No {{ activeTab }} Bookings</h3>
+          <p class="empty-desc">You don't have any {{ activeTab }} bookings at the moment</p>
+          <button class="empty-btn" (click)="navigateTo('booking')">
+            <ion-icon name="add-outline"></ion-icon>
+            Book Now
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Bottom Navigation Bar - History Highlighted -->
+  <div class="bottom-nav">
+    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Book</span>
+    </div>
+    <div class="nav-item active history-center" (click)="navigateTo('booking-history')">
+      <div class="nav-indicator">
+        <ion-icon name="time-outline"></ion-icon>
+      </div>
+      <span>History</span>
+    </div>
+     <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('vehicles')" (click)="navigateTo('vehicles')">
+      <ion-icon name="car-outline"></ion-icon>
+      <span>Vehicles</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('vip-membership')" (click)="navigateTo('vip-membership')">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>VIP</span>
+    </div>
+  </div>
+</ion-content>

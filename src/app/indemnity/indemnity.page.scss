@@ -1,0 +1,779 @@
+// ============================================================
+// INDEMNITY PAGE - NO BOTTOM NAV
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// INDEMNITY CONTENT
+// ==========================
+
+.indemnity-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.indemnity-container {
+  padding: 16px 16px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.indemnity-header {
+  margin-bottom: 20px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .indemnity-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .indemnity-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// SECTION HEADER
+// ==========================
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+  }
+  
+  .view-all {
+    font-size: 12px;
+    color: $brand-blue;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ==========================
+// FORM SECTION
+// ==========================
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  
+  &.expanded {
+    max-height: 2000px;
+  }
+  
+  .form-content {
+    .form-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: $text-dark;
+      text-align: center;
+      margin: 0 0 12px;
+      letter-spacing: 0.5px;
+    }
+    
+    .form-body {
+      font-size: 13px;
+      color: $text-gray;
+      line-height: 1.6;
+      
+      p {
+        margin: 0 0 8px;
+        
+        strong {
+          color: $text-dark;
+        }
+      }
+      
+      ul {
+        margin: 0 0 12px;
+        padding-left: 20px;
+        
+        li {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// SIGNATURE SECTION
+// ==========================
+
+.signature-section {
+  margin-bottom: 20px;
+}
+
+.signature-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .signature-area {
+    border: 2px dashed $border-color;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: $brand-blue;
+      background: rgba($brand-blue, 0.02);
+    }
+    
+    .signature-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: $text-light;
+      
+      ion-icon {
+        font-size: 36px;
+      }
+      
+      span {
+        font-size: 13px;
+      }
+    }
+    
+    .signature-preview {
+      width: 100%;
+      
+      .signature-img {
+        max-width: 100%;
+        max-height: 80px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+  
+  .signature-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    
+    .sign-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: $font-family;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+      
+      &.clear-btn {
+        background: rgba($danger, 0.08);
+        color: $danger;
+        
+        &:hover {
+          background: rgba($danger, 0.15);
+        }
+      }
+      
+      &.sign-btn-primary {
+        background: rgba($brand-blue, 0.08);
+        color: $brand-blue;
+        
+        &:hover {
+          background: rgba($brand-blue, 0.15);
+        }
+      }
+      
+      &.save-btn {
+        background: $brand-blue;
+        color: $white;
+        
+        &:hover {
+          background: $brand-hover;
+        }
+      }
+    }
+  }
+  
+  .signature-info {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid $border-color;
+    
+    .signed-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: $text-gray;
+      padding: 4px 0;
+      
+      ion-icon {
+        font-size: 16px;
+        color: $success;
+      }
+    }
+  }
+}
+
+// ==========================
+// QR CODE SECTION
+// ==========================
+
+.qr-section {
+  margin-bottom: 20px;
+}
+
+.qr-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .qr-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    
+    .qr-code-container {
+      .qr-code-img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+      }
+    }
+    
+    .qr-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: $text-light;
+      
+      ion-icon {
+        font-size: 48px;
+      }
+      
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+  
+  .qr-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    
+    .qr-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: $font-family;
+      min-width: 80px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+      
+      &:first-child {
+        background: rgba($brand-blue, 0.08);
+        color: $brand-blue;
+        
+        &:hover {
+          background: rgba($brand-blue, 0.15);
+        }
+      }
+      
+      &:nth-child(2) {
+        background: rgba($purple, 0.08);
+        color: $purple;
+        
+        &:hover {
+          background: rgba($purple, 0.15);
+        }
+      }
+      
+      &:last-child {
+        background: rgba($success, 0.08);
+        color: $success;
+        
+        &:hover {
+          background: rgba($success, 0.15);
+        }
+      }
+    }
+  }
+  
+  .qr-info {
+    text-align: center;
+    font-size: 12px;
+    color: $text-gray;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid $border-color;
+  }
+}
+
+// ==========================
+// HISTORY SECTION
+// ==========================
+
+.history-section {
+  margin-bottom: 20px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  background: $white;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .history-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $white;
+    }
+  }
+  
+  .history-info {
+    flex: 1;
+    
+    .history-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0 0 2px;
+    }
+    
+    .history-desc {
+      font-size: 11px;
+      color: $text-gray;
+      margin: 0 0 2px;
+    }
+    
+    .history-date {
+      font-size: 10px;
+      color: $text-light;
+    }
+  }
+  
+  .history-status {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 10px;
+    background: rgba($success, 0.1);
+    color: $success;
+  }
+}
+
+// ==========================
+// ACTION BUTTONS
+// ==========================
+
+.action-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+  
+  .action-btn {
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    &.primary-btn {
+      background: linear-gradient(135deg, $brand-blue, $brand-hover);
+      color: $white;
+      box-shadow: 0 4px 16px rgba($brand-blue, 0.2);
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba($brand-blue, 0.3);
+      }
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+    
+    &.secondary-btn {
+      background: rgba(0, 0, 0, 0.05);
+      color: $text-dark;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .indemnity-container {
+    padding: 12px 12px 16px;
+  }
+  
+  .indemnity-header {
+    .header-top {
+      .indemnity-title {
+        font-size: 18px;
+      }
+    }
+    
+    .indemnity-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .signature-actions {
+    flex-wrap: wrap;
+    
+    .sign-btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+  
+  .qr-actions .qr-btn {
+    flex: 1;
+    min-width: 60px;
+    font-size: 11px;
+  }
+  
+  .action-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .qr-actions .qr-btn {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .history-item:hover {
+    transform: none !important;
+  }
+  
+  .action-btn:hover {
+    transform: none !important;
+  }
+  
+  .form-card {
+    transition: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+.skeleton-w-20 { width: 20%; }
+.skeleton-w-15 { width: 15%; }
+
+.indemnity-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.skeleton-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.skeleton-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// Dark mode support for skeleton
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+// Reduced motion for skeleton
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

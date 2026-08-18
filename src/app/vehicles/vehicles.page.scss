@@ -1,0 +1,1218 @@
+// ============================================================
+// VEHICLES PAGE - SAME DESIGN AS HOME
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// VEHICLES CONTENT
+// ==========================
+
+.vehicles-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.vehicles-container {
+  padding: 16px 16px 110px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.vehicles-header {
+  margin-bottom: 20px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .vehicles-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+    
+    .add-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $brand-blue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba($brand-blue, 0.2);
+      
+      ion-icon {
+        font-size: 24px;
+        color: $white;
+      }
+      
+      &:hover {
+        background: $brand-hover;
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.3);
+      }
+    }
+  }
+  
+  .vehicles-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// VEHICLE LIST
+// ==========================
+
+.vehicles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vehicle-card {
+  background: $white;
+  border-radius: 14px;
+  border: 1px solid $border-color;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+    border-color: $brand-blue;
+  }
+  
+  .vehicle-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    
+    ion-icon {
+      font-size: 36px;
+      color: $white;
+      opacity: 0.8;
+    }
+    
+    .vehicle-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .vehicle-info {
+    flex: 1;
+    min-width: 0;
+    
+    .vehicle-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0 0 6px;
+      font-family: $font-family;
+    }
+    
+    .vehicle-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      
+      span {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 11px;
+        color: $text-gray;
+        font-weight: 500;
+        font-family: $font-family;
+        background: rgba(0, 0, 0, 0.03);
+        padding: 2px 8px;
+        border-radius: 10px;
+        
+        ion-icon {
+          font-size: 12px;
+          color: $text-light;
+        }
+      }
+    }
+  }
+  
+  .vehicle-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-shrink: 0;
+    
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+      
+      &.edit-btn {
+        background: rgba($brand-blue, 0.1);
+        color: $brand-blue;
+        
+        &:hover {
+          background: rgba($brand-blue, 0.2);
+        }
+      }
+      
+      &.delete-btn {
+        background: rgba($danger, 0.1);
+        color: $danger;
+        
+        &:hover {
+          background: rgba($danger, 0.2);
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// EMPTY STATE
+// ==========================
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  
+  .empty-icon {
+    font-size: 72px;
+    color: $text-light;
+    opacity: 0.3;
+  }
+  
+  .empty-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 16px 0 8px;
+    font-family: $font-family;
+  }
+  
+  .empty-desc {
+    font-size: 14px;
+    color: $text-gray;
+    margin: 0 0 20px;
+    font-family: $font-family;
+  }
+  
+  .empty-add-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, $brand-blue, $brand-hover);
+    color: $white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-family;
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.25);
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba($brand-blue, 0.35);
+    }
+  }
+}
+
+// ==========================
+// ADD/EDIT MODAL
+// ==========================
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+  
+  .modal-content {
+    background: $white;
+    border-radius: 24px 24px 0 0;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+    padding: 0 20px 20px;
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 16px;
+      border-bottom: 1px solid $border-color;
+      position: sticky;
+      top: 0;
+      background: $white;
+      z-index: 1;
+      
+      .modal-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: $text-dark;
+        margin: 0;
+        font-family: $font-family;
+      }
+      
+      .modal-close {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        ion-icon {
+          font-size: 20px;
+          color: $text-dark;
+        }
+        
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+    
+    .modal-body {
+      padding: 16px 0 20px;
+      
+      .form-row {
+        display: flex;
+        gap: 12px;
+        
+        .half {
+          flex: 1;
+        }
+      }
+      
+      .form-group {
+        margin-bottom: 16px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        .form-label {
+          display: block;
+          font-size: 13px;
+          font-weight: 600;
+          color: $text-dark;
+          margin-bottom: 6px;
+          font-family: $font-family;
+        }
+        
+        .form-input {
+          width: 100%;
+          padding: 10px 14px;
+          border: 1px solid $border-color;
+          border-radius: 10px;
+          font-size: 14px;
+          font-family: $font-family;
+          color: $text-dark;
+          transition: all 0.3s ease;
+          background: $white;
+          
+          &:focus {
+            outline: none;
+            border-color: $brand-blue;
+            box-shadow: 0 0 0 3px rgba($brand-blue, 0.1);
+          }
+          
+          &::placeholder {
+            color: $text-light;
+          }
+        }
+        
+        select.form-input {
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 12px center;
+          padding-right: 36px;
+        }
+      }
+      
+      .image-upload-wrapper {
+        border: 2px dashed $border-color;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+          border-color: $brand-blue;
+          background: rgba($brand-blue, 0.02);
+        }
+        
+        .image-preview {
+          position: relative;
+          width: 100%;
+          max-width: 200px;
+          margin: 0 auto;
+          
+          .preview-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+          }
+          
+          .remove-image-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: $danger;
+            color: $white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            ion-icon {
+              font-size: 16px;
+            }
+            
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+        
+        .image-placeholder {
+          .camera-icon {
+            font-size: 40px;
+            color: $text-light;
+            display: block;
+            margin-bottom: 8px;
+          }
+          
+          span {
+            font-size: 13px;
+            color: $text-gray;
+            font-family: $font-family;
+          }
+        }
+      }
+      
+      .color-options {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        
+        .color-option {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          
+          .color-preview {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid $border-color;
+            transition: all 0.3s ease;
+          }
+          
+          .color-name {
+            font-size: 10px;
+            color: $text-gray;
+            font-family: $font-family;
+          }
+          
+          &.selected {
+            .color-preview {
+              border-color: $brand-blue;
+              box-shadow: 0 0 0 3px rgba($brand-blue, 0.2);
+              transform: scale(1.1);
+            }
+            
+            .color-name {
+              color: $brand-blue;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+    
+    .modal-footer {
+      display: flex;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid $border-color;
+      
+      .modal-btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: $font-family;
+        
+        &.cancel-btn {
+          background: rgba(0, 0, 0, 0.05);
+          color: $text-gray;
+          
+          &:hover {
+            background: rgba(0, 0, 0, 0.08);
+          }
+        }
+        
+        &.save-btn {
+          background: linear-gradient(135deg, $brand-blue, $brand-hover);
+          color: $white;
+          box-shadow: 0 4px 16px rgba($brand-blue, 0.25);
+          
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba($brand-blue, 0.35);
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// VEHICLE DETAILS MODAL
+// ==========================
+
+.details-modal {
+  max-height: 90vh;
+  
+  .modal-body {
+    padding: 0 0 20px;
+  }
+  
+  .details-image {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    margin: -4px 0 0;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    ion-icon {
+      font-size: 64px;
+      color: $white;
+      opacity: 0.6;
+    }
+  }
+  
+  .details-info {
+    text-align: center;
+    padding: 16px 20px 0;
+    
+    .details-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0 0 4px;
+    }
+    
+    .details-plate {
+      font-size: 14px;
+      color: $text-gray;
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.04);
+      padding: 2px 14px;
+      border-radius: 12px;
+    }
+  }
+  
+  .details-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 16px 20px;
+    
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.02);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid $border-color;
+      
+      .spec-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        
+        ion-icon {
+          font-size: 16px;
+        }
+      }
+      
+      .spec-info {
+        flex: 1;
+        
+        .spec-label {
+          display: block;
+          font-size: 10px;
+          color: $text-gray;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+        
+        .spec-value {
+          display: block;
+          font-size: 14px;
+          font-weight: 600;
+          color: $text-dark;
+        }
+      }
+    }
+  }
+  
+  .details-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 20px 4px;
+    
+    .details-btn {
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: $font-family;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+      
+      &.primary {
+        background: rgba($brand-blue, 0.08);
+        color: $brand-blue;
+        
+        &:hover {
+          background: rgba($brand-blue, 0.15);
+        }
+      }
+      
+      &.danger {
+        background: rgba($danger, 0.08);
+        color: $danger;
+        
+        &:hover {
+          background: rgba($danger, 0.15);
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// MODAL ANIMATIONS
+// ==========================
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// BOTTOM NAVIGATION - VEHICLES HIGHLIGHTED
+// ==========================
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $white;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 18px;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px $shadow-light;
+  height: 82px;
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    flex: 1;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $text-light;
+      transition: color 0.3s ease;
+    }
+    
+    span {
+      font-size: 12px;
+      color: $text-light;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-family: $font-family;
+    }
+    
+    &:hover {
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      span {
+        color: $brand-blue;
+      }
+    }
+    
+    &.active:not(.vehicles-center) {
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      span {
+        color: $brand-blue;
+        font-weight: 600;
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 28px;
+        height: 4px;
+        background: $brand-blue;
+        border-radius: 3px;
+      }
+    }
+    
+    &.vehicles-center {
+      margin-top: -28px;
+      flex: 1.4;
+      
+      .nav-indicator {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: $brand-blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        
+        ion-icon {
+          font-size: 36px;
+          color: $white;
+          transition: all 0.3s ease;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          inset: -6px;
+          border-radius: 50%;
+          background: rgba($brand-blue, 0.2);
+          animation: pulse-ring 2s ease-in-out infinite;
+        }
+      }
+      
+      span {
+        margin-top: 6px;
+        font-weight: 600;
+        color: $brand-blue;
+        font-size: 12px;
+      }
+      
+      &::after {
+        display: none !important;
+      }
+      
+      &:hover {
+        .nav-indicator {
+          transform: translateY(-3px) scale(1.06);
+          box-shadow: 0 8px 36px rgba($brand-blue, 0.5);
+        }
+      }
+      
+      &:active {
+        .nav-indicator {
+          transform: scale(0.93);
+        }
+      }
+    }
+  }
+}
+
+// Pulse animation for round indicator
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.15;
+  }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .vehicles-container {
+    padding: 12px 12px 100px;
+  }
+  
+  .vehicles-header {
+    .header-top {
+      .vehicles-title {
+        font-size: 18px;
+      }
+    }
+    
+    .vehicles-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .vehicle-card {
+    padding: 12px;
+    
+    .vehicle-image {
+      width: 56px;
+      height: 56px;
+      
+      ion-icon {
+        font-size: 28px;
+      }
+    }
+    
+    .vehicle-info {
+      .vehicle-name {
+        font-size: 14px;
+      }
+      
+      .vehicle-details {
+        span {
+          font-size: 10px;
+          padding: 1px 6px;
+        }
+      }
+    }
+  }
+  
+  .modal-overlay .modal-content {
+    padding: 0 16px 16px;
+    
+    .modal-body {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  }
+  
+  .details-specs {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .details-actions {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .details-image {
+    height: 120px;
+    
+    ion-icon {
+      font-size: 48px;
+    }
+  }
+  
+  .bottom-nav {
+    padding: 8px 0 14px;
+    height: 74px;
+    
+    .nav-item {
+      padding: 4px 8px;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+      
+      span {
+        font-size: 11px;
+      }
+      
+      &.vehicles-center {
+        margin-top: -24px;
+        flex: 1.4;
+        
+        .nav-indicator {
+          width: 60px;
+          height: 60px;
+          
+          ion-icon {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+    
+    .nav-item:not(.vehicles-center) {
+      &.active::after {
+        width: 22px;
+        height: 3px;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .vehicle-card {
+    flex-wrap: wrap;
+    
+    .vehicle-actions {
+      flex-direction: row;
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+  
+  .bottom-nav {
+    height: 66px;
+    padding: 6px 0 12px;
+    
+    .nav-item {
+      ion-icon {
+        font-size: 20px;
+      }
+      
+      span {
+        font-size: 9px;
+      }
+      
+      &.vehicles-center {
+        margin-top: -20px;
+        
+        .nav-indicator {
+          width: 52px;
+          height: 52px;
+          
+          ion-icon {
+            font-size: 26px;
+          }
+        }
+      }
+    }
+    
+    .nav-item:not(.vehicles-center) {
+      &.active::after {
+        width: 18px;
+        height: 3px;
+      }
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay {
+    animation: none !important;
+  }
+  
+  .modal-overlay .modal-content {
+    animation: none !important;
+  }
+  
+  .nav-indicator::after {
+    animation: none !important;
+  }
+  
+  .vehicles-center:hover .nav-indicator {
+    transform: none !important;
+  }
+  
+  .vehicle-card:hover {
+    transform: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+
+.vehicles-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-vehicle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

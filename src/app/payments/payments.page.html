@@ -1,0 +1,218 @@
+<ion-content class="payments-content" [scroll]="true">
+  <div class="payments-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="payments-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Balance Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:120px;border-radius:16px;"></div>
+
+      <!-- Payment Methods Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-methods-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Saved Cards Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-cards-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Payment History Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-history-list">
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="payments-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="payments-title">Payments</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="payments-subtitle">Manage your payments and view history</p>
+      </div>
+
+      <!-- Balance Card -->
+      <div class="balance-card">
+        <div class="balance-info">
+          <span class="balance-label">Total Spent</span>
+          <span class="balance-amount">R4,280.00</span>
+          <span class="balance-period">This month</span>
+        </div>
+        <div class="balance-actions">
+          <button class="balance-btn" (click)="payOnline()">
+            <ion-icon name="card-outline"></ion-icon>
+            Pay Online
+          </button>
+        </div>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="methods-section">
+        <div class="section-header">
+          <h2 class="section-title">Payment Methods</h2>
+        </div>
+        
+        <div class="methods-grid">
+          <div class="method-card" (click)="cardPayment()">
+            <div class="method-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+              <ion-icon name="card-outline"></ion-icon>
+            </div>
+            <div class="method-info">
+              <h4 class="method-title">Card Payment</h4>
+              <p class="method-desc">Pay with credit or debit card</p>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="method-arrow"></ion-icon>
+          </div>
+          
+          <div class="method-card" (click)="eftPayment()">
+            <div class="method-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+              <ion-icon name="swap-horizontal-outline"></ion-icon>
+            </div>
+            <div class="method-info">
+              <h4 class="method-title">EFT Payment</h4>
+              <p class="method-desc">Pay via electronic transfer</p>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="method-arrow"></ion-icon>
+          </div>
+          
+          <div class="method-card" (click)="payOnline()">
+            <div class="method-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+              <ion-icon name="globe-outline"></ion-icon>
+            </div>
+            <div class="method-info">
+              <h4 class="method-title">Pay Online</h4>
+              <p class="method-desc">Secure online payment gateway</p>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="method-arrow"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Cards -->
+      <div class="cards-section" *ngIf="savedCards.length > 0">
+        <div class="section-header">
+          <h2 class="section-title">Saved Cards</h2>
+          <span class="view-all" (click)="addCard()">+ Add Card</span>
+        </div>
+        
+        <div class="cards-list">
+          <div class="card-item" *ngFor="let card of savedCards" (click)="selectCard(card)">
+            <div class="card-icon">
+              <ion-icon [name]="card.icon"></ion-icon>
+            </div>
+            <div class="card-info">
+              <span class="card-number">•••• {{ card.last4 }}</span>
+              <span class="card-expiry">Expires {{ card.expiry }}</span>
+            </div>
+            <div class="card-actions">
+              <span class="card-default" *ngIf="card.isDefault">Default</span>
+              <button class="card-delete-btn" (click)="$event.stopPropagation(); deleteCard(card)">
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Card Section (Optional) -->
+      <div class="add-card-section" *ngIf="showAddCard">
+        <div class="add-card-form">
+          <h3 class="form-title">Add New Card</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Card Number</label>
+            <input type="text" class="form-input" placeholder="1234 5678 9012 3456" [(ngModel)]="newCard.number" />
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group half">
+              <label class="form-label">Expiry Date</label>
+              <input type="text" class="form-input" placeholder="MM/YY" [(ngModel)]="newCard.expiry" />
+            </div>
+            <div class="form-group half">
+              <label class="form-label">CVV</label>
+              <input type="password" class="form-input" placeholder="***" [(ngModel)]="newCard.cvv" maxlength="4" />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Cardholder Name</label>
+            <input type="text" class="form-input" placeholder="John Doe" [(ngModel)]="newCard.name" />
+          </div>
+          
+          <div class="form-actions">
+            <button class="form-btn cancel-btn" (click)="cancelAddCard()">Cancel</button>
+            <button class="form-btn save-btn" (click)="saveCard()">Save Card</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment History -->
+      <div class="history-section">
+        <div class="section-header">
+          <h2 class="section-title">Payment History</h2>
+          <span class="view-all" (click)="viewAllHistory()">View All</span>
+        </div>
+        
+        <div class="history-list">
+          <div class="history-item" *ngFor="let payment of paymentHistory" (click)="viewPaymentDetails(payment)">
+            <div class="history-icon" [style.background]="payment.color">
+              <ion-icon [name]="payment.icon"></ion-icon>
+            </div>
+            <div class="history-info">
+              <h4 class="history-title">{{ payment.title }}</h4>
+              <p class="history-desc">{{ payment.desc }}</p>
+              <span class="history-date">{{ payment.date }}</span>
+            </div>
+            <div class="history-amount" [class]="payment.type">
+              {{ payment.type === 'credit' ? '+' : '-' }}R{{ payment.amount }}
+            </div>
+            <button class="receipt-btn" (click)="$event.stopPropagation(); downloadReceipt(payment)">
+              <ion-icon name="download-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

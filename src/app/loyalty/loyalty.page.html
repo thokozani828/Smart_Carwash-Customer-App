@@ -1,0 +1,182 @@
+<ion-content class="loyalty-content" [scroll]="true">
+  <div class="loyalty-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="loyalty-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Points Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:180px;border-radius:18px;"></div>
+
+      <!-- Quick Stats Skeleton -->
+      <div class="skeleton-grid-2">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:14px;"></div>
+      </div>
+
+      <!-- Rewards Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-rewards-list">
+        <div class="skeleton skeleton-card" style="height:100px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:100px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:100px;border-radius:12px;"></div>
+      </div>
+
+      <!-- How to Earn Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-earn-list">
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="loyalty-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="loyalty-title">Loyalty Rewards</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="loyalty-subtitle">Earn points and redeem exciting rewards</p>
+      </div>
+
+      <!-- Points Summary Card -->
+      <div class="points-card">
+        <div class="points-main">
+          <span class="points-label">Current Points</span>
+          <span class="points-value">2,450</span>
+          <div class="points-progress">
+            <div class="progress-bar" style="width: 78%;"></div>
+          </div>
+          <span class="points-next">250 points to Gold Tier</span>
+        </div>
+        <div class="points-stats">
+          <div class="stat-item">
+            <span class="stat-number">1,850</span>
+            <span class="stat-label">Earned</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">600</span>
+            <span class="stat-label">Redeemed</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Rewards</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats">
+        <div class="quick-stat" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+          <ion-icon name="gift-outline"></ion-icon>
+          <span class="stat-value">5</span>
+          <span class="stat-label">Available Rewards</span>
+        </div>
+        <div class="quick-stat" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+          <ion-icon name="water-outline"></ion-icon>
+          <span class="stat-value">2</span>
+          <span class="stat-label">Free Washes</span>
+        </div>
+      </div>
+
+      <!-- Available Rewards -->
+      <div class="rewards-section">
+        <div class="section-header">
+          <h2 class="section-title">Available Rewards</h2>
+          <span class="view-all" (click)="viewAllRewards()">View All</span>
+        </div>
+        
+        <div class="rewards-grid">
+          <div class="reward-card" *ngFor="let reward of availableRewards" (click)="redeemReward(reward)">
+            <div class="reward-icon" [style.background]="reward.color">
+              <ion-icon [name]="reward.icon"></ion-icon>
+            </div>
+            <div class="reward-info">
+              <h4 class="reward-title">{{ reward.title }}</h4>
+              <p class="reward-desc">{{ reward.desc }}</p>
+              <div class="reward-meta">
+                <span class="reward-points">{{ reward.points }} pts</span>
+                <span class="reward-expiry" *ngIf="reward.expiry">Expires: {{ reward.expiry }}</span>
+              </div>
+            </div>
+            <button class="reward-redeem-btn" (click)="$event.stopPropagation(); redeemReward(reward)">
+              Redeem
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Washes -->
+      <div class="free-washes-section" *ngIf="freeWashes.length > 0">
+        <div class="section-header">
+          <h2 class="section-title">Free Washes</h2>
+          <span class="view-all" (click)="viewAllFreeWashes()">View All</span>
+        </div>
+        
+        <div class="free-washes-list">
+          <div class="free-wash-item" *ngFor="let wash of freeWashes">
+            <div class="wash-icon">
+              <ion-icon name="water-outline"></ion-icon>
+            </div>
+            <div class="wash-info">
+              <span class="wash-title">{{ wash.title }}</span>
+              <span class="wash-desc">{{ wash.desc }}</span>
+            </div>
+            <span class="wash-status" [class]="wash.status">
+              {{ wash.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Earn -->
+      <div class="earn-section">
+        <div class="section-header">
+          <h2 class="section-title">How to Earn Points</h2>
+        </div>
+        
+        <div class="earn-grid">
+          <div class="earn-item" *ngFor="let earn of earnMethods">
+            <div class="earn-icon" [style.background]="earn.color">
+              <ion-icon [name]="earn.icon"></ion-icon>
+            </div>
+            <div class="earn-info">
+              <span class="earn-title">{{ earn.title }}</span>
+              <span class="earn-points">{{ earn.points }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

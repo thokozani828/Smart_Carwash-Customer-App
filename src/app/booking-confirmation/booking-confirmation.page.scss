@@ -1,0 +1,1271 @@
+// ============================================================
+// BOOKING CONFIRMATION PAGE - WITH SKELETON & NO BOTTOM NAV
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// CONFIRMATION CONTENT
+// ==========================
+
+.confirmation-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.confirmation-container {
+  padding: 16px 16px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+// ==========================
+// ANIMATED BACKGROUND
+// ==========================
+
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float-particle 15s ease-in-out infinite;
+}
+
+.particle-1 {
+  width: 120px;
+  height: 120px;
+  top: -30px;
+  right: -30px;
+  background: radial-gradient(circle, $brand-blue, transparent);
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: -20px;
+  background: radial-gradient(circle, $success, transparent);
+  animation-delay: -3s;
+}
+
+.particle-3 {
+  width: 60px;
+  height: 60px;
+  top: 40%;
+  right: -10px;
+  background: radial-gradient(circle, $gold, transparent);
+  animation-delay: -6s;
+}
+
+.particle-4 {
+  width: 100px;
+  height: 100px;
+  bottom: 10%;
+  right: 10%;
+  background: radial-gradient(circle, $purple, transparent);
+  animation-delay: -9s;
+}
+
+.particle-5 {
+  width: 50px;
+  height: 50px;
+  top: 20%;
+  left: 20%;
+  background: radial-gradient(circle, $brand-blue, transparent);
+  animation-delay: -12s;
+}
+
+.particle-6 {
+  width: 150px;
+  height: 150px;
+  bottom: -50px;
+  left: -50px;
+  background: radial-gradient(circle, rgba($brand-blue, 0.1), transparent);
+  animation-delay: -15s;
+}
+
+@keyframes float-particle {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -30px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(10px, -10px) scale(1.05); }
+}
+
+// ==========================
+// PAYMENT STATUS CARD (CASH)
+// ==========================
+
+.payment-status-card {
+  background: rgba($warning, 0.06);
+  border: 1px solid rgba($warning, 0.2);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  box-shadow: 0 2px 8px $shadow-light;
+  position: relative;
+  z-index: 1;
+  
+  .payment-status-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    &.pending {
+      background: rgba($warning, 0.15);
+      
+      ion-icon {
+        font-size: 24px;
+        color: $warning;
+      }
+    }
+    
+    &.completed {
+      background: rgba($success, 0.15);
+      
+      ion-icon {
+        font-size: 24px;
+        color: $success;
+      }
+    }
+  }
+  
+  .payment-status-info {
+    flex: 1;
+    
+    .payment-status-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0 0 2px;
+    }
+    
+    .payment-status-desc {
+      font-size: 13px;
+      color: $text-gray;
+      margin: 0 0 4px;
+      line-height: 1.4;
+    }
+    
+    .payment-status-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 12px;
+      border-radius: 10px;
+      background: rgba($warning, 0.15);
+      color: $warning;
+      
+      &.paid {
+        background: rgba($success, 0.15);
+        color: $success;
+      }
+    }
+  }
+}
+
+// ==========================
+// SUCCESS HEADER
+// ==========================
+
+.success-header {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  .success-icon {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba($success, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    ion-icon {
+      font-size: 44px;
+      color: $success;
+      animation: scalePulse 2s ease-in-out infinite;
+    }
+    
+    .icon-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid rgba($success, 0.2);
+      animation: ringPulse 2s ease-out infinite;
+    }
+    
+    .icon-ring-2 {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      border-radius: 50%;
+      border: 1px solid rgba($success, 0.1);
+      animation: ringPulse 2s ease-out infinite 0.5s;
+    }
+  }
+  
+  .success-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: $text-dark;
+    margin: 0 0 4px;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+  }
+  
+  .success-subtitle {
+    font-size: 14px;
+    color: $text-gray;
+    margin: 0;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+@keyframes scalePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ==========================
+// SUCCESS MESSAGE
+// ==========================
+
+.success-message {
+  margin-top: 4px;
+  
+  .success-subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: $text-gray;
+    margin: 0;
+    padding: 8px 16px;
+    background: rgba($success, 0.06);
+    border-radius: 20px;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $success;
+    }
+    
+    &.cash-message {
+      background: rgba($warning, 0.08);
+      
+      ion-icon {
+        color: $warning;
+      }
+    }
+  }
+}
+
+// ==========================
+// PAYMENT STATUS INDICATOR
+// ==========================
+
+.payment-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba($warning, 0.12);
+  border-radius: 20px;
+  margin: 8px auto;
+  
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+    
+    &.pending {
+      background: $warning;
+    }
+    
+    &.completed {
+      background: $success;
+    }
+    
+    &.failed {
+      background: $danger;
+    }
+  }
+  
+  .status-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: $warning;
+    
+    &.completed {
+      color: $success;
+    }
+    
+    &.failed {
+      color: $danger;
+    }
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+// ==========================
+// REFERENCE CARD
+// ==========================
+
+.reference-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px $shadow-medium;
+  }
+  
+  .reference-label {
+    display: block;
+    font-size: 11px;
+    color: $text-light;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .reference-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: $brand-blue;
+    margin: 4px 0;
+    font-family: monospace;
+    letter-spacing: 1px;
+  }
+  
+  .reference-date {
+    display: block;
+    font-size: 12px;
+    color: $text-gray;
+  }
+}
+
+// ==========================
+// DETAILS CARD
+// ==========================
+
+.details-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.8s both;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px $shadow-medium;
+  }
+  
+  .details-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    animation: slideInRight 0.4s ease-out both;
+    
+    &:nth-child(2) { animation-delay: 0.1s; }
+    &:nth-child(3) { animation-delay: 0.15s; }
+    &:nth-child(4) { animation-delay: 0.2s; }
+    &:nth-child(5) { animation-delay: 0.25s; }
+    &:nth-child(6) { animation-delay: 0.3s; }
+    &:nth-child(7) { animation-delay: 0.35s; }
+    &:nth-child(8) { animation-delay: 0.4s; }
+    &:nth-child(9) { animation-delay: 0.45s; }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .detail-value {
+      font-size: 13px;
+      color: $text-dark;
+      font-weight: 600;
+      text-align: right;
+      
+      &.payment-method {
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+// ==========================
+// PRICE CARD
+// ==========================
+
+.price-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 1s both;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px $shadow-medium;
+  }
+  
+  .price-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    animation: slideInRight 0.4s ease-out both;
+    
+    &:nth-child(2) { animation-delay: 0.1s; }
+    &:nth-child(3) { animation-delay: 0.15s; }
+    &:nth-child(4) { animation-delay: 0.2s; }
+    &:nth-child(5) { animation-delay: 0.25s; }
+    
+    .price-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .price-value {
+      font-size: 13px;
+      color: $text-dark;
+      font-weight: 600;
+      
+      &.discount {
+        color: $success;
+      }
+    }
+    
+    &.total {
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 2px solid $border-color;
+      animation: pulseTotal 2s ease-in-out infinite;
+      
+      .price-label {
+        font-size: 15px;
+        font-weight: 700;
+        color: $text-dark;
+      }
+      
+      .price-value.total-amount {
+        font-size: 20px;
+        font-weight: 800;
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+@keyframes pulseTotal {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+// ==========================
+// PAYMENT CARD (Processing)
+// ==========================
+
+.payment-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 1.2s both;
+  position: relative;
+  z-index: 1;
+  
+  .payment-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 16px;
+  }
+  
+  .payment-loader {
+    .loader-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid $border-color;
+      border-top-color: $brand-blue;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 12px;
+    }
+    
+    .loader-text {
+      font-size: 14px;
+      color: $text-gray;
+      margin: 0;
+      animation: pulseText 1.5s ease-in-out infinite;
+    }
+  }
+  
+  .payment-progress {
+    margin-top: 12px;
+    
+    .progress-bar {
+      height: 4px;
+      background: $brand-blue;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: $brand-blue;
+        box-shadow: 0 0 20px rgba($brand-blue, 0.5);
+        animation: glowPulse 1s ease-in-out infinite;
+      }
+    }
+    
+    .progress-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: $border-color;
+        transition: all 0.3s ease;
+        
+        &.active {
+          background: $brand-blue;
+          box-shadow: 0 0 12px rgba($brand-blue, 0.3);
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
+}
+
+// ==========================
+// PAYMENT SUCCESS
+// ==========================
+
+.payment-success {
+  text-align: center;
+  padding: 16px;
+  background: rgba($success, 0.04);
+  border: 1px solid rgba($success, 0.15);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  animation: successAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+  .payment-success-icon {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba($success, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    
+    ion-icon {
+      font-size: 32px;
+      color: $success;
+      animation: scalePulse 2s ease-in-out infinite;
+    }
+    
+    .success-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid rgba($success, 0.2);
+      animation: ringPulse 2s ease-out infinite;
+    }
+  }
+  
+  .payment-success-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 4px;
+    animation: fadeInUp 0.5s ease-out 0.2s both;
+  }
+  
+  .payment-success-desc {
+    font-size: 14px;
+    color: $text-gray;
+    margin: 0 0 4px;
+    animation: fadeInUp 0.5s ease-out 0.3s both;
+  }
+  
+  .payment-success-ref {
+    font-size: 12px;
+    color: $text-light;
+    font-family: monospace;
+    margin: 0;
+    animation: fadeInUp 0.5s ease-out 0.4s both;
+  }
+}
+
+@keyframes successAppear {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+// ==========================
+// CASH PAYMENT PENDING STATUS
+// ==========================
+
+.payment-success.cash-pending {
+  background: rgba($warning, 0.06);
+  border: 1px solid rgba($warning, 0.15);
+  text-align: center;
+  padding: 24px 20px;
+  margin-bottom: 16px;
+  animation: fadeInUp 0.6s ease-out 0.8s both;
+  border-radius: 14px;
+  z-index: 1;
+  position: relative;
+  
+  .payment-success-icon.pending-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba($warning, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    
+    ion-icon {
+      font-size: 32px;
+      color: $warning;
+    }
+  }
+  
+  .payment-success-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 6px;
+  }
+  
+  .payment-success-desc {
+    font-size: 14px;
+    color: $text-gray;
+    margin: 0 0 8px;
+  }
+  
+  .payment-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba($warning, 0.12);
+    border-radius: 20px;
+    margin: 8px auto;
+    
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse-dot 1.5s ease-in-out infinite;
+      
+      &.pending {
+        background: $warning;
+      }
+    }
+    
+    .status-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: $warning;
+    }
+  }
+  
+  .payment-success-ref {
+    font-size: 13px;
+    color: $text-light;
+    font-family: monospace;
+    margin: 0 0 12px;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    display: inline-block;
+  }
+  
+  .payment-action-btn {
+    padding: 10px 24px;
+    background: $brand-blue;
+    color: $white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    &:hover {
+      background: $brand-hover;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba($brand-blue, 0.3);
+    }
+    
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+
+// ==========================
+// CONFETTI
+// ==========================
+
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: confettiFall 3s ease-in-out infinite;
+}
+
+.confetti-1 { background: $brand-blue; left: 10%; animation-delay: 0s; }
+.confetti-2 { background: $success; left: 25%; animation-delay: 0.3s; }
+.confetti-3 { background: $gold; left: 40%; animation-delay: 0.6s; }
+.confetti-4 { background: $purple; left: 55%; animation-delay: 0.9s; }
+.confetti-5 { background: $danger; left: 70%; animation-delay: 1.2s; }
+.confetti-6 { background: $brand-blue; left: 85%; animation-delay: 1.5s; }
+.confetti-7 { background: $success; left: 15%; animation-delay: 0.5s; }
+.confetti-8 { background: $gold; left: 35%; animation-delay: 0.8s; }
+.confetti-9 { background: $purple; left: 50%; animation-delay: 1.1s; }
+.confetti-10 { background: $danger; left: 65%; animation-delay: 1.4s; }
+.confetti-11 { background: $brand-blue; left: 80%; animation-delay: 1.7s; }
+.confetti-12 { background: $success; left: 90%; animation-delay: 2s; }
+
+@keyframes confettiFall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+// ==========================
+// ACTION BUTTONS
+// ==========================
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.6s ease-out 1.4s both;
+  
+  button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-family;
+    position: relative;
+    overflow: hidden;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    span {
+      flex: 1;
+      text-align: center;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: rotate(45deg) translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+      
+      &::after {
+        transform: rotate(45deg) translateX(100%);
+      }
+    }
+    
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+  
+  .btn-primary {
+    background: $brand-blue;
+    color: $white;
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.3);
+    
+    &:hover {
+      background: $brand-hover;
+      box-shadow: 0 6px 24px rgba($brand-blue, 0.4);
+    }
+  }
+  
+  .btn-secondary {
+    background: rgba($brand-blue, 0.08);
+    color: $brand-blue;
+    
+    &:hover {
+      background: rgba($brand-blue, 0.15);
+    }
+  }
+  
+  .btn-outline {
+    background: transparent;
+    color: $text-gray;
+    border: 1.5px solid $border-color;
+    
+    &:hover {
+      border-color: $brand-blue;
+      color: $brand-blue;
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .confirmation-container {
+    padding: 12px 12px 16px;
+  }
+  
+  .success-header {
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      
+      ion-icon {
+        font-size: 36px;
+      }
+    }
+    
+    .success-title {
+      font-size: 20px;
+    }
+  }
+  
+  .payment-status-card {
+    flex-direction: column;
+    text-align: center;
+    
+    .payment-status-icon {
+      margin: 0 auto;
+    }
+  }
+  
+  .reference-number {
+    font-size: 18px;
+  }
+  
+  .payment-success.cash-pending {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  .price-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg .particle {
+    animation: none !important;
+  }
+  
+  .success-icon {
+    animation: none !important;
+  }
+  
+  .success-icon ion-icon {
+    animation: none !important;
+  }
+  
+  .icon-ring,
+  .icon-ring-2 {
+    animation: none !important;
+  }
+  
+  .success-header {
+    animation: none !important;
+  }
+  
+  .success-title,
+  .success-subtitle,
+  .reference-card,
+  .details-card,
+  .price-card,
+  .payment-card,
+  .payment-success,
+  .action-buttons {
+    animation: none !important;
+  }
+  
+  .detail-row,
+  .price-row {
+    animation: none !important;
+  }
+  
+  .confetti {
+    animation: none !important;
+  }
+  
+  .loader-spinner {
+    animation: none !important;
+  }
+  
+  .pulseTotal {
+    animation: none !important;
+  }
+  
+  .pulse-dot {
+    animation: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+.skeleton-w-20 { width: 20%; }
+.skeleton-w-15 { width: 15%; }
+
+.confirmation-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+// Dark mode support for skeleton
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+// Reduced motion for skeleton
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,217 @@
+<ion-content class="vip-home-content" [scroll]="true">
+  <div class="vip-home-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="vip-home-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:44px;height:44px;"></div>
+          <div class="skeleton-header-text">
+            <div class="skeleton skeleton-text skeleton-w-50"></div>
+            <div class="skeleton skeleton-text-sm skeleton-w-40"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+      </div>
+
+      <!-- VIP Status Banner Skeleton -->
+      <div class="skeleton skeleton-card" style="height:120px;border-radius:18px;"></div>
+
+      <!-- Quick Stats Skeleton -->
+      <div class="skeleton-grid-4">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+      </div>
+
+      <!-- VIP Quick Actions Skeleton -->
+      <div class="skeleton-grid-4">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Active Subscription Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
+
+    </div>
+
+    <!-- Actual Content -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="vip-home-header">
+        <div class="header-top">
+          <div class="greeting">
+            <div class="profile-icon" (click)="navigateTo('profile')">
+              <ion-icon name="person-circle-outline"></ion-icon>
+              <div class="vip-glow-badge">
+                <span>VIP</span>
+              </div>
+            </div>
+            <div class="greeting-text">
+              <span class="greeting-label">Welcome Back, VIP 👑</span>
+              <h1 class="customer-name">{{ userName }}</h1>
+            </div>
+          </div>
+          <div class="header-actions">
+            <div class="notification-btn" (click)="navigateTo('notifications')">
+              <ion-icon name="notifications-outline"></ion-icon>
+              <span class="notification-badge">3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP Status Banner -->
+      <div class="vip-status-banner" (click)="navigateTo('vip-members')">
+        <div class="banner-content">
+          <div class="banner-icon">
+            <ion-icon name="star"></ion-icon>
+          </div>
+          <div class="banner-info">
+            <h3 class="banner-title">VIP Active</h3>
+            <p class="banner-desc">{{ vipData.planName }} • {{ vipData.washesRemaining }} washes remaining</p>
+          </div>
+          <div class="banner-arrow">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP Quick Stats -->
+      <div class="vip-quick-stats">
+        <div class="stat-card" (click)="navigateTo('booking-history')">
+          <div class="stat-icon" style="background: rgba(37, 99, 235, 0.1);">
+            <ion-icon name="calendar-outline" style="color: #2563eb;"></ion-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ vipData.washesUsed }}</span>
+            <span class="stat-label">Washes Used</span>
+          </div>
+        </div>
+        <div class="stat-card" (click)="navigateTo('vip-members')">
+          <div class="stat-icon" style="background: rgba(251, 191, 36, 0.1);">
+            <ion-icon name="star-outline" style="color: #fbbf24;"></ion-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ vipData.washesRemaining }}</span>
+            <span class="stat-label">Washes Left</span>
+          </div>
+        </div>
+        <div class="stat-card" (click)="navigateTo('loyalty')">
+          <div class="stat-icon" style="background: rgba(34, 197, 94, 0.1);">
+            <ion-icon name="gift-outline" style="color: #22c55e;"></ion-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ vipData.points }}</span>
+            <span class="stat-label">Loyalty Points</span>
+          </div>
+        </div>
+        <div class="stat-card" (click)="navigateTo('vip-members')">
+          <div class="stat-icon" style="background: rgba(139, 92, 246, 0.1);">
+            <ion-icon name="trophy-outline" style="color: #8b5cf6;"></ion-icon>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ vipData.tier }}</span>
+            <span class="stat-label">VIP Tier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIP Quick Actions -->
+      <div class="vip-quick-actions">
+        <div class="action-card" (click)="navigateTo('booking')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </div>
+          <span>Book Wash</span>
+        </div>
+        <div class="action-card" (click)="scanQR()">
+          <div class="action-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+            <ion-icon name="qr-code-outline"></ion-icon>
+          </div>
+          <span>Scan QR</span>
+        </div>
+        <div class="action-card" (click)="navigateTo('live-tracking')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+            <ion-icon name="navigate-outline"></ion-icon>
+          </div>
+          <span>Live Track</span>
+        </div>
+        <div class="action-card" (click)="navigateTo('support')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+            <ion-icon name="chatbubble-outline"></ion-icon>
+          </div>
+          <span>VIP Support</span>
+        </div>
+      </div>
+
+      <!-- Active Subscription Card -->
+      <div class="subscription-card" (click)="navigateTo('vip-members')">
+        <div class="subscription-header">
+          <div class="subscription-icon">
+            <ion-icon name="star"></ion-icon>
+          </div>
+          <div class="subscription-info">
+            <h3 class="subscription-title">Your Subscription</h3>
+            <span class="subscription-plan">{{ vipData.planName }}</span>
+          </div>
+          <span class="subscription-status active">Active</span>
+        </div>
+        <div class="subscription-details">
+          <div class="detail-item">
+            <span class="detail-label">Next Billing</span>
+            <span class="detail-value">{{ vipData.nextBilling }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Washes Used</span>
+            <span class="detail-value">{{ vipData.washesUsed }}/{{ vipData.washesRemaining + vipData.washesUsed }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Savings</span>
+            <span class="detail-value" style="color:#22c55e;">{{ vipData.savings }}</span>
+          </div>
+        </div>
+        <div class="subscription-progress">
+          <div class="progress-bar" [style.width.%]="vipData.usagePercentage"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Premium Bottom Navigation Bar - Home Centered & Highlighted -->
+  <div class="bottom-nav">
+    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Book</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('vehicles')" (click)="navigateTo('vehicles')">
+      <ion-icon name="car-outline"></ion-icon>
+      <span>Vehicles</span>
+    </div>
+    <div class="nav-item active home-center" (click)="navigateTo('vip-home')">
+      <div class="home-indicator">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('booking-history')" (click)="navigateTo('booking-history')">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>History</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('profile')" (click)="navigateTo('profile')">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>Profile</span>
+    </div>
+  </div>
+</ion-content>

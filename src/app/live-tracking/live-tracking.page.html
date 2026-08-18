@@ -1,0 +1,186 @@
+<ion-content class="tracking-content" [scroll]="true">
+  <div class="tracking-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="tracking-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Status Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:160px;border-radius:16px;"></div>
+
+      <!-- Progress Section Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:120px;border-radius:12px;"></div>
+
+      <!-- Vehicle Info Skeleton -->
+      <div class="skeleton skeleton-card" style="height:100px;border-radius:14px;"></div>
+
+      <!-- Live Updates Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-updates-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Action Buttons Skeleton -->
+      <div class="skeleton-grid-2">
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="tracking-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="tracking-title">Live Tracking</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="tracking-subtitle">Track your vehicle in real-time</p>
+      </div>
+
+      <!-- Booking Status Card -->
+      <div class="status-card">
+        <div class="status-header">
+          <div class="status-icon" [class]="bookingStatus.toLowerCase()">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </div>
+          <div class="status-info">
+            <span class="status-label">Booking Status</span>
+            <span class="status-value">{{ bookingStatus }}</span>
+          </div>
+        </div>
+        <div class="status-details">
+          <div class="detail-item">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>Estimated Time: <strong>{{ estimatedTime }}</strong></span>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>Washer: <strong>{{ washerAssigned }}</strong></span>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="list-outline"></ion-icon>
+            <span>Queue Position: <strong>#{{ queuePosition }}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vehicle Progress -->
+      <div class="progress-section">
+        <div class="section-header">
+          <h2 class="section-title">Vehicle Progress</h2>
+          <span class="progress-percentage">{{ progressPercentage }}%</span>
+        </div>
+        
+        <div class="progress-track">
+          <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+        </div>
+        
+        <div class="progress-steps">
+          <div class="step" *ngFor="let step of progressSteps" 
+               [class.completed]="step.completed" 
+               [class.active]="step.active">
+            <div class="step-circle">
+              <ion-icon *ngIf="step.completed" name="checkmark"></ion-icon>
+              <span *ngIf="!step.completed">{{ step.number }}</span>
+            </div>
+            <span class="step-label">{{ step.label }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vehicle Info -->
+      <div class="vehicle-info-card">
+        <div class="vehicle-image" [style.background]="vehicleColor">
+          <ion-icon name="car-outline"></ion-icon>
+        </div>
+        <div class="vehicle-details">
+          <h3 class="vehicle-name">{{ vehicleName }}</h3>
+          <p class="vehicle-desc">{{ vehicleDesc }}</p>
+          <span class="vehicle-location">
+            <ion-icon name="location-outline"></ion-icon>
+            {{ vehicleLocation }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Live Updates -->
+      <div class="updates-section">
+        <div class="section-header">
+          <h2 class="section-title">Live Updates</h2>
+          <span class="live-badge">
+            <span class="live-dot"></span>
+            LIVE
+          </span>
+        </div>
+        
+        <div class="updates-list">
+          <div class="update-item" *ngFor="let update of liveUpdates">
+            <div class="update-time">{{ update.time }}</div>
+            <div class="update-content">
+              <div class="update-dot" [class]="update.type"></div>
+              <div class="update-text">{{ update.message }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completed Notification -->
+      <div class="completion-section" *ngIf="bookingStatus === 'Completed'">
+        <div class="completion-card">
+          <div class="completion-icon">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </div>
+          <div class="completion-info">
+            <h3 class="completion-title">Service Completed!</h3>
+            <p class="completion-desc">Your vehicle has been washed and is ready for collection</p>
+          </div>
+          <button class="completion-btn" (click)="viewSummary()">
+            View Summary
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-section">
+        <button class="action-btn primary-btn" (click)="refreshTracking()">
+          <ion-icon name="refresh-outline"></ion-icon>
+          Refresh
+        </button>
+        <button class="action-btn secondary-btn" (click)="contactSupport()">
+          <ion-icon name="chatbubble-outline"></ion-icon>
+          Support
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

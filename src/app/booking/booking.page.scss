@@ -1,0 +1,1402 @@
+// ============================================================
+// BOOK A WASH PAGE - COMPLETE STYLES
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// BOOKING CONTENT
+// ==========================
+
+.booking-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.booking-container {
+  padding: 16px 16px 110px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.booking-header {
+  margin-bottom: 20px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .booking-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .booking-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// FORM
+// ==========================
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+// ==========================
+// FORM GROUP
+// ==========================
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-dark;
+  font-family: $font-family;
+  
+  ion-icon {
+    font-size: 18px;
+    color: $brand-blue;
+  }
+}
+
+// ==========================
+// SELECT WRAPPER
+// ==========================
+
+.select-wrapper {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 0 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: $brand-blue;
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .select-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    
+    .select-value {
+      font-size: 14px;
+      color: $text-dark;
+      font-weight: 500;
+      font-family: $font-family;
+      
+      &.placeholder {
+        color: $text-light;
+        font-weight: 400;
+      }
+    }
+    
+    .select-arrow {
+      font-size: 18px;
+      color: $text-light;
+    }
+  }
+}
+
+// ==========================
+// VEHICLE LIST
+// ==========================
+
+.vehicle-list {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 4px;
+  box-shadow: 0 4px 16px $shadow-light;
+}
+
+.vehicle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid $border-color;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background: rgba($brand-blue, 0.04);
+  }
+  
+  .vehicle-item-info {
+    display: flex;
+    flex-direction: column;
+    
+    .vehicle-item-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+      font-family: $font-family;
+    }
+    
+    .vehicle-item-plate {
+      font-size: 12px;
+      color: $text-gray;
+      font-weight: 500;
+      font-family: $font-family;
+    }
+  }
+  
+  .vehicle-check {
+    font-size: 20px;
+    color: $brand-blue;
+  }
+}
+
+// ==========================
+// ADD VEHICLE
+// ==========================
+
+.vehicle-item.add-vehicle {
+  border-top: 1px solid $border-color;
+  margin-top: 4px;
+  padding-top: 12px;
+  
+  .add-vehicle-icon {
+    font-size: 22px;
+    color: $brand-blue;
+  }
+  
+  .add-vehicle-arrow {
+    font-size: 18px;
+    color: $text-light;
+  }
+  
+  .vehicle-item-name {
+    color: $brand-blue;
+    font-weight: 600;
+  }
+}
+
+// ==========================
+// SERVICE OPTIONS
+// ==========================
+
+.service-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.service-option {
+  background: $white;
+  border: 2px solid $border-color;
+  border-radius: 12px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+  
+  &:hover {
+    border-color: $brand-blue;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    background: rgba($brand-blue, 0.04);
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+  }
+  
+  .service-option-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    
+    ion-icon {
+      font-size: 20px;
+      color: $white;
+    }
+  }
+  
+  .service-option-info {
+    .service-option-name {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-dark;
+      font-family: $font-family;
+    }
+    
+    .service-option-price {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      color: $brand-blue;
+      font-family: $font-family;
+      margin-top: 2px;
+    }
+    
+    .service-option-duration {
+      display: block;
+      font-size: 10px;
+      color: $text-light;
+      font-weight: 500;
+      font-family: $font-family;
+    }
+  }
+  
+  .service-check {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 22px;
+    color: $brand-blue;
+    background: $white;
+    border-radius: 50%;
+  }
+}
+
+// ==========================
+// WASH TYPE OPTIONS
+// ==========================
+
+.wash-type-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.wash-type-option {
+  background: $white;
+  border: 2px solid $border-color;
+  border-radius: 12px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  
+  &:hover {
+    border-color: $brand-blue;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    background: rgba($brand-blue, 0.04);
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+  }
+  
+  .wash-type-icon {
+    font-size: 28px;
+    color: $brand-blue;
+    display: block;
+    margin: 0 auto 4px;
+  }
+  
+  span {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-dark;
+    font-family: $font-family;
+  }
+  
+  .wash-type-desc {
+    font-size: 10px;
+    font-weight: 400;
+    color: $text-light;
+    margin-top: 2px;
+  }
+}
+
+// ==========================
+// LOCATION
+// ==========================
+
+.location-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  
+  .location-display {
+    flex: 1;
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: $brand-blue;
+    }
+    
+    .location-icon {
+      font-size: 18px;
+      color: $brand-blue;
+    }
+    
+    .location-value {
+      padding: 12px 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-dark;
+      font-family: $font-family;
+      
+      &.placeholder {
+        color: $text-light;
+        font-weight: 400;
+      }
+    }
+  }
+  
+  .location-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: $brand-blue;
+    border: none;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    ion-icon {
+      font-size: 22px;
+    }
+    
+    &:hover {
+      background: $brand-hover;
+      transform: scale(1.05);
+    }
+  }
+}
+
+// ==========================
+// DATE OPTIONS
+// ==========================
+
+.date-options {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.date-option {
+  background: $white;
+  border: 2px solid $border-color;
+  border-radius: 10px;
+  padding: 8px 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: $brand-blue;
+    transform: translateY(-2px);
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    background: rgba($brand-blue, 0.08);
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+  }
+  
+  .date-day {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    color: $text-light;
+    text-transform: uppercase;
+    font-family: $font-family;
+  }
+  
+  .date-number {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    font-family: $font-family;
+    margin-top: 2px;
+  }
+}
+
+// ==========================
+// TIME OPTIONS
+// ==========================
+
+.time-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.time-option {
+  background: $white;
+  border: 2px solid $border-color;
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-dark;
+  font-family: $font-family;
+  
+  &:hover {
+    border-color: $brand-blue;
+    transform: translateY(-2px);
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    background: rgba($brand-blue, 0.08);
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+    color: $brand-blue;
+  }
+}
+
+// ==========================
+// PAYMENT OPTIONS
+// ==========================
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: $white;
+  border: 1.5px solid $border-color;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:hover:not(.disabled) {
+    border-color: $brand-blue;
+    background: #f8fafc;
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    background: rgba($brand-blue, 0.04);
+  }
+  
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      border-color: $border-color;
+      background: $white;
+    }
+  }
+  
+  .payment-icon {
+    font-size: 24px;
+    color: #64748b;
+    flex-shrink: 0;
+  }
+  
+  .payment-info {
+    flex: 1;
+    
+    .payment-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+      font-family: $font-family;
+    }
+    
+    .payment-desc {
+      display: block;
+      font-size: 12px;
+      color: $text-gray;
+      font-family: $font-family;
+    }
+  }
+  
+  .payment-check {
+    font-size: 22px;
+    color: $brand-blue;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    &.visible {
+      opacity: 1;
+    }
+  }
+  
+  .payment-disabled-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    
+    ion-icon {
+      font-size: 24px;
+      color: $text-light;
+    }
+  }
+}
+
+// ==========================
+// BOOKING SUMMARY
+// ==========================
+
+.booking-summary {
+  background: rgba($brand-blue, 0.04);
+  border: 1px solid rgba($brand-blue, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 4px 0;
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    
+    &:last-child {
+      border-top: 1px solid rgba($brand-blue, 0.08);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+    
+    .summary-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+      font-family: $font-family;
+    }
+    
+    .summary-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: $text-dark;
+      font-family: $font-family;
+    }
+  }
+}
+
+// ==========================
+// NOTES
+// ==========================
+
+.notes-wrapper {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: all 0.3s ease;
+  
+  &:focus-within {
+    border-color: $brand-blue;
+    box-shadow: 0 0 0 4px rgba($brand-blue, 0.08);
+  }
+  
+  .notes-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: $text-dark;
+    font-family: $font-family;
+    resize: vertical;
+    background: transparent;
+    
+    &::placeholder {
+      color: $text-light;
+    }
+  }
+}
+
+// ==========================
+// CONFIRM BUTTON
+// ==========================
+
+.btn-confirm {
+  background: linear-gradient(145deg, $brand-blue, $brand-hover);
+  color: $white;
+  box-shadow: 0 4px 20px rgba($brand-blue, 0.3);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: $font-family;
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+  
+  ion-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
+  }
+  
+  &:hover:not(:disabled)::after {
+    transform: rotate(45deg) translateX(100%);
+  }
+  
+  &:hover:not(:disabled) ion-icon {
+    transform: translateX(4px);
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// BOTTOM NAVIGATION
+// ==========================
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $white;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0 18px;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px $shadow-light;
+  height: 82px;
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    flex: 1;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $text-light;
+      transition: color 0.3s ease;
+    }
+    
+    span {
+      font-size: 12px;
+      color: $text-light;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-family: $font-family;
+    }
+    
+    &:hover {
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      span {
+        color: $brand-blue;
+      }
+    }
+    
+    &.active:not(.book-center) {
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      span {
+        color: $brand-blue;
+        font-weight: 600;
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 28px;
+        height: 4px;
+        background: $brand-blue;
+        border-radius: 3px;
+      }
+    }
+    
+    &.book-center {
+      margin-top: -28px;
+      flex: 1.4;
+      
+      .nav-indicator {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: $brand-blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        
+        ion-icon {
+          font-size: 36px;
+          color: $white;
+          transition: all 0.3s ease;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          inset: -6px;
+          border-radius: 50%;
+          background: rgba($brand-blue, 0.2);
+          animation: pulse-ring 2s ease-in-out infinite;
+        }
+      }
+      
+      span {
+        margin-top: 6px;
+        font-weight: 600;
+        color: $brand-blue;
+        font-size: 12px;
+      }
+      
+      &::after {
+        display: none !important;
+      }
+      
+      &:hover {
+        .nav-indicator {
+          transform: translateY(-3px) scale(1.06);
+          box-shadow: 0 8px 36px rgba($brand-blue, 0.5);
+        }
+      }
+      
+      &:active {
+        .nav-indicator {
+          transform: scale(0.93);
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.15;
+  }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .booking-container {
+    padding: 12px 12px 100px;
+  }
+  
+  .service-options {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .wash-type-options {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .date-options {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  
+  .time-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .booking-header {
+    .header-top {
+      .booking-title {
+        font-size: 18px;
+      }
+    }
+    
+    .booking-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .bottom-nav {
+    padding: 8px 0 14px;
+    height: 74px;
+    
+    .nav-item {
+      padding: 4px 8px;
+      
+      ion-icon {
+        font-size: 24px;
+      }
+      
+      span {
+        font-size: 11px;
+      }
+      
+      &.book-center {
+        margin-top: -24px;
+        flex: 1.4;
+        
+        .nav-indicator {
+          width: 60px;
+          height: 60px;
+          
+          ion-icon {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+    
+    .nav-item:not(.book-center) {
+      &.active::after {
+        width: 22px;
+        height: 3px;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .service-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .wash-type-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .time-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .date-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .bottom-nav {
+    height: 66px;
+    padding: 6px 0 12px;
+    
+    .nav-item {
+      ion-icon {
+        font-size: 20px;
+      }
+      
+      span {
+        font-size: 9px;
+      }
+      
+      &.book-center {
+        margin-top: -20px;
+        
+        .nav-indicator {
+          width: 52px;
+          height: 52px;
+          
+          ion-icon {
+            font-size: 26px;
+          }
+        }
+      }
+    }
+    
+    .nav-item:not(.book-center) {
+      &.active::after {
+        width: 18px;
+        height: 3px;
+      }
+    }
+  }
+}
+
+// ==========================
+// DARK MODE
+// ==========================
+
+@media (prefers-color-scheme: dark) {
+  .payment-option {
+    background: #1e293b;
+    border-color: #334155;
+    
+    &:hover:not(.disabled) {
+      border-color: $brand-blue;
+      background: #1a3a8a;
+    }
+    
+    &.selected {
+      border-color: $brand-blue;
+      background: rgba($brand-blue, 0.1);
+    }
+    
+    &.disabled {
+      &:hover {
+        border-color: #334155;
+        background: #1e293b;
+      }
+    }
+    
+    .payment-info {
+      .payment-name {
+        color: #ffffff;
+      }
+      
+      .payment-desc {
+        color: #94a3b8;
+      }
+    }
+    
+    .payment-disabled-overlay {
+      background: rgba(15, 23, 42, 0.6);
+      
+      ion-icon {
+        color: #64748b;
+      }
+    }
+  }
+  
+  .vehicle-item.add-vehicle {
+    border-top-color: #334155;
+    
+    .add-vehicle-icon {
+      color: #60a5fa;
+    }
+    
+    .vehicle-item-name {
+      color: #60a5fa;
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-confirm::after {
+    display: none !important;
+  }
+  
+  .btn-confirm:hover ion-icon {
+    transform: none !important;
+  }
+  
+  .nav-indicator::after {
+    animation: none !important;
+  }
+  
+  .book-center:hover .nav-indicator {
+    transform: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-text-lg {
+  height: 20px;
+  border-radius: 4px;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.skeleton-button {
+  height: 48px;
+  border-radius: 12px;
+}
+
+.skeleton-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.booking-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  
+  .skeleton-circle {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .skeleton-header-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    
+    .skeleton-text {
+      height: 18px;
+      width: 70%;
+    }
+    
+    .skeleton-text-sm {
+      width: 40%;
+    }
+  }
+}
+
+.skeleton-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+  .skeleton-label {
+    height: 16px;
+    width: 30%;
+    border-radius: 4px;
+  }
+  
+  .skeleton-select {
+    height: 48px;
+    border-radius: 12px;
+  }
+}
+
+.skeleton-service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  
+  .skeleton-service-item {
+    height: 100px;
+    border-radius: 12px;
+  }
+}
+
+.skeleton-package-scroll {
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+  
+  .skeleton-package-item {
+    min-width: 180px;
+    height: 160px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+}
+
+.skeleton-branch-item {
+  height: 72px;
+  border-radius: 12px;
+}
+
+.skeleton-wash-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  
+  .skeleton-wash-item {
+    height: 80px;
+    border-radius: 12px;
+  }
+}
+
+.skeleton-date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  
+  .skeleton-date-item {
+    height: 56px;
+    border-radius: 10px;
+  }
+}
+
+.skeleton-time-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  
+  .skeleton-time-item {
+    height: 44px;
+    border-radius: 10px;
+  }
+}
+
+.skeleton-payment-item {
+  height: 56px;
+  border-radius: 12px;
+}
+
+.skeleton-notes {
+  height: 80px;
+  border-radius: 12px;
+}
+
+.skeleton-summary {
+  height: 80px;
+  border-radius: 12px;
+}
+
+.skeleton-confirm-btn {
+  height: 56px;
+  border-radius: 14px;
+  margin-top: 4px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+
+// Dark mode skeleton
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+// Reduced motion for skeleton
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

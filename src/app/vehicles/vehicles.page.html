@@ -1,0 +1,299 @@
+<ion-content class="vehicles-content" [scroll]="true">
+  <div class="vehicles-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="vehicles-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Vehicle Cards Skeleton -->
+      <div class="skeleton-vehicle-list">
+        <div class="skeleton skeleton-card" style="height:120px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:120px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:120px;border-radius:14px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="vehicles-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="vehicles-title">My Vehicles</h1>
+          <div class="add-button" (click)="openAddModal()">
+            <ion-icon name="add-outline"></ion-icon>
+          </div>
+        </div>
+        <p class="vehicles-subtitle">Manage your registered vehicles</p>
+      </div>
+
+      <!-- Vehicle List -->
+      <div class="vehicles-list">
+        <div class="vehicle-card" *ngFor="let vehicle of vehicles" (click)="viewVehicle(vehicle)">
+          <div class="vehicle-image" [style.background]="vehicle.color">
+            <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" alt="{{ vehicle.name }}" class="vehicle-img" />
+            <ion-icon *ngIf="!vehicle.imageUrl" name="car-outline"></ion-icon>
+          </div>
+          <div class="vehicle-info">
+            <h3 class="vehicle-name">{{ vehicle.name }}</h3>
+            <div class="vehicle-details">
+              <span class="vehicle-plate">
+                <ion-icon name="card-outline"></ion-icon>
+                {{ vehicle.plate }}
+              </span>
+              <span class="vehicle-make">
+                <ion-icon name="construct-outline"></ion-icon>
+                {{ vehicle.make }}
+              </span>
+              <span class="vehicle-model">
+                <ion-icon name="car-outline"></ion-icon>
+                {{ vehicle.model }}
+              </span>
+              <span class="vehicle-color">
+                <ion-icon name="color-palette-outline"></ion-icon>
+                {{ vehicle.colorName }}
+              </span>
+              <span class="vehicle-type">
+                <ion-icon name="car-sport-outline"></ion-icon>
+                {{ vehicle.type }}
+              </span>
+            </div>
+          </div>
+          <div class="vehicle-actions">
+            <button class="action-btn edit-btn" (click)="$event.stopPropagation(); openEditModal(vehicle)">
+              <ion-icon name="create-outline"></ion-icon>
+            </button>
+            <button class="action-btn delete-btn" (click)="$event.stopPropagation(); deleteVehicle(vehicle)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="vehicles.length === 0">
+          <ion-icon name="car-outline" class="empty-icon"></ion-icon>
+          <h3 class="empty-title">No Vehicles Added</h3>
+          <p class="empty-desc">Add your first vehicle to get started</p>
+          <button class="empty-add-btn" (click)="openAddModal()">
+            <ion-icon name="add-outline"></ion-icon>
+            Add Vehicle
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Add/Edit Vehicle Modal -->
+  <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ isEditing ? 'Edit Vehicle' : 'Add Vehicle' }}</h3>
+        <button class="modal-close" (click)="closeModal()">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Vehicle Image Upload -->
+        <div class="form-group">
+          <label class="form-label">Vehicle Image</label>
+          <div class="image-upload-wrapper" (click)="uploadImage()">
+            <div class="image-preview" *ngIf="formData.imageUrl">
+              <img [src]="formData.imageUrl" alt="Vehicle" class="preview-img" />
+              <button class="remove-image-btn" (click)="$event.stopPropagation(); removeImage()">
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
+            </div>
+            <div class="image-placeholder" *ngIf="!formData.imageUrl">
+              <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+              <span>Tap to add photo</span>
+            </div>
+            <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" style="display:none" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Vehicle Name</label>
+          <input type="text" class="form-input" placeholder="e.g. BMW X5" [(ngModel)]="formData.name" />
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Number Plate</label>
+          <input type="text" class="form-input" placeholder="e.g. ABC 123 GP" [(ngModel)]="formData.plate" />
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half">
+            <label class="form-label">Make</label>
+            <input type="text" class="form-input" placeholder="e.g. BMW" [(ngModel)]="formData.make" />
+          </div>
+          <div class="form-group half">
+            <label class="form-label">Model</label>
+            <input type="text" class="form-input" placeholder="e.g. X5" [(ngModel)]="formData.model" />
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group half">
+            <label class="form-label">Color</label>
+            <input type="text" class="form-input" placeholder="e.g. Blue" [(ngModel)]="formData.colorName" />
+          </div>
+          <div class="form-group half">
+            <label class="form-label">Type</label>
+            <select class="form-input" [(ngModel)]="formData.type">
+              <option value="">Select Type</option>
+              <option value="SUV">SUV</option>
+              <option value="Sedan">Sedan</option>
+              <option value="Hatchback">Hatchback</option>
+              <option value="Coupe">Coupe</option>
+              <option value="Convertible">Convertible</option>
+              <option value="Truck">Truck</option>
+              <option value="Van">Van</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Color Theme</label>
+          <div class="color-options">
+            <div class="color-option" *ngFor="let color of colorOptions" 
+                 [class.selected]="formData.color === color.value"
+                 (click)="selectColor(color.value)">
+              <div class="color-preview" [style.background]="color.value"></div>
+              <span class="color-name">{{ color.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="modal-btn cancel-btn" (click)="closeModal()">Cancel</button>
+        <button class="modal-btn save-btn" (click)="saveVehicle()">
+          {{ isEditing ? 'Update' : 'Add' }} Vehicle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vehicle Details Modal -->
+  <div class="modal-overlay" *ngIf="showDetailsModal" (click)="closeDetailsModal()">
+    <div class="modal-content details-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Vehicle Details</h3>
+        <button class="modal-close" (click)="closeDetailsModal()">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+      
+      <div class="modal-body" *ngIf="selectedVehicleDetails">
+        <!-- Vehicle Image -->
+        <div class="details-image" [style.background]="selectedVehicleDetails.color">
+          <img *ngIf="selectedVehicleDetails.imageUrl" [src]="selectedVehicleDetails.imageUrl" alt="{{ selectedVehicleDetails.name }}" />
+          <ion-icon *ngIf="!selectedVehicleDetails.imageUrl" name="car-outline"></ion-icon>
+        </div>
+        
+        <!-- Vehicle Info -->
+        <div class="details-info">
+          <h2 class="details-name">{{ selectedVehicleDetails.name }}</h2>
+          <span class="details-plate">{{ selectedVehicleDetails.plate }}</span>
+        </div>
+        
+        <!-- Vehicle Specs -->
+        <div class="details-specs">
+          <div class="spec-item">
+            <div class="spec-icon" style="background: rgba(37, 99, 235, 0.1);">
+              <ion-icon name="construct-outline" style="color: #2563eb;"></ion-icon>
+            </div>
+            <div class="spec-info">
+              <span class="spec-label">Make</span>
+              <span class="spec-value">{{ selectedVehicleDetails.make }}</span>
+            </div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-icon" style="background: rgba(251, 191, 36, 0.1);">
+              <ion-icon name="car-outline" style="color: #fbbf24;"></ion-icon>
+            </div>
+            <div class="spec-info">
+              <span class="spec-label">Model</span>
+              <span class="spec-value">{{ selectedVehicleDetails.model }}</span>
+            </div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-icon" style="background: rgba(34, 197, 94, 0.1);">
+              <ion-icon name="color-palette-outline" style="color: #22c55e;"></ion-icon>
+            </div>
+            <div class="spec-info">
+              <span class="spec-label">Color</span>
+              <span class="spec-value">{{ selectedVehicleDetails.colorName }}</span>
+            </div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-icon" style="background: rgba(139, 92, 246, 0.1);">
+              <ion-icon name="car-sport-outline" style="color: #8b5cf6;"></ion-icon>
+            </div>
+            <div class="spec-info">
+              <span class="spec-label">Type</span>
+              <span class="spec-value">{{ selectedVehicleDetails.type }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="details-actions">
+          <button class="details-btn primary" (click)="editFromDetails()">
+            <ion-icon name="create-outline"></ion-icon>
+            Edit Vehicle
+          </button>
+          <button class="details-btn danger" (click)="deleteFromDetails()">
+            <ion-icon name="trash-outline"></ion-icon>
+            Delete Vehicle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar - Vehicles Highlighted -->
+  <div class="bottom-nav">
+    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Book</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('booking-history')" (click)="navigateTo('booking-history')">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>History</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Home</span>
+    </div>
+    <div class="nav-item active vehicles-center" (click)="navigateTo('vehicles')">
+      <div class="nav-indicator">
+        <ion-icon name="car-outline"></ion-icon>
+      </div>
+      <span>Vehicles</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('vip-membership')" (click)="navigateTo('vip-membership')">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>VIP</span>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,173 @@
+<ion-content class="support-content" [scroll]="true">
+  <div class="support-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="support-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Contact Section Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-contact-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Live Chat Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:80px;border-radius:14px;"></div>
+
+      <!-- FAQ Section Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-40"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-faq-list">
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Branch Hours Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:160px;border-radius:14px;"></div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="support-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="support-title">Support</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="support-subtitle">We're here to help you 24/7</p>
+      </div>
+
+      <!-- Quick Contact -->
+      <div class="contact-section">
+        <div class="section-header">
+          <h2 class="section-title">Contact Us</h2>
+        </div>
+        
+        <div class="contact-grid">
+          <div class="contact-card" (click)="callBranch()">
+            <div class="contact-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <span class="contact-title">Call Branch</span>
+              <span class="contact-desc">Speak to our team</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="contact-arrow"></ion-icon>
+          </div>
+          
+          <div class="contact-card" (click)="whatsappSupport()">
+            <div class="contact-icon" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <span class="contact-title">WhatsApp</span>
+              <span class="contact-desc">Chat with us instantly</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="contact-arrow"></ion-icon>
+          </div>
+          
+          <div class="contact-card" (click)="emailSupport()">
+            <div class="contact-icon" style="background: linear-gradient(135deg, #ea4335, #c62828);">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <span class="contact-title">Email Support</span>
+              <span class="contact-desc">We'll respond within 24hrs</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="contact-arrow"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Chat -->
+      <div class="chat-section">
+        <div class="section-header">
+          <h2 class="section-title">Live Chat</h2>
+          <span class="live-badge">
+            <span class="live-dot"></span>
+            Online
+          </span>
+        </div>
+        
+        <div class="chat-card" (click)="liveChat()">
+          <div class="chat-icon">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          </div>
+          <div class="chat-info">
+            <h3 class="chat-title">Chat with an Agent</h3>
+            <p class="chat-desc">Get instant help from our support team</p>
+            <span class="chat-status">Available now</span>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="chat-arrow"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Frequently Asked Questions -->
+      <div class="faq-section">
+        <div class="section-header">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <span class="view-all" (click)="viewAllFAQs()">View All</span>
+        </div>
+        
+        <div class="faq-list">
+          <div class="faq-item" *ngFor="let faq of faqs; let i = index" (click)="toggleFAQ(i)">
+            <div class="faq-header">
+              <span class="faq-question">{{ faq.question }}</span>
+              <ion-icon [name]="faq.expanded ? 'chevron-up-outline' : 'chevron-down-outline'" class="faq-icon"></ion-icon>
+            </div>
+            <div class="faq-answer" *ngIf="faq.expanded">
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch Hours -->
+      <div class="hours-section">
+        <div class="section-header">
+          <h2 class="section-title">Branch Hours</h2>
+        </div>
+        
+        <div class="hours-card">
+          <div class="hours-item" *ngFor="let hour of branchHours">
+            <span class="hours-day">{{ hour.day }}</span>
+            <span class="hours-time">{{ hour.time }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

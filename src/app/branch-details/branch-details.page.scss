@@ -1,0 +1,827 @@
+// ============================================================
+// BRANCH DETAILS PAGE - WITH MAP
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// BRANCH DETAILS CONTENT
+// ==========================
+
+.branch-details-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.branch-details-container {
+  padding: 16px 16px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.branch-details-header {
+  margin-bottom: 16px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .branch-details-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .branch-details-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// BRANCH IMAGE
+// ==========================
+
+.branch-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 16px;
+  overflow: hidden;
+  
+  .branch-image-overlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    
+    .branch-badge {
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba($success, 0.9);
+      color: $white;
+      
+      &.closed {
+        background: rgba($danger, 0.9);
+      }
+    }
+  }
+  
+  ion-icon {
+    font-size: 64px;
+    color: $white;
+    opacity: 0.6;
+  }
+}
+
+// ==========================
+// MAP SECTION
+// ==========================
+
+.map-section {
+  margin-bottom: 16px;
+}
+
+.map-container {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 200px;
+  background: #e8ecf1;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .map-static {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      color: $white;
+      
+      .map-address {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      
+      .map-action {
+        display: block;
+        font-size: 11px;
+        opacity: 0.7;
+        margin-top: 2px;
+      }
+    }
+  }
+  
+  .map-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    
+    .map-marker {
+      position: relative;
+      display: inline-block;
+      
+      ion-icon {
+        font-size: 40px;
+        color: #ef4444;
+        filter: drop-shadow(0 2px 8px rgba(239, 68, 68, 0.3));
+      }
+      
+      .marker-pulse {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid rgba(239, 68, 68, 0.3);
+        animation: marker-pulse 1.5s ease-out infinite;
+      }
+    }
+    
+    .map-info {
+      margin-top: 8px;
+      
+      .map-address {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: $text-dark;
+      }
+      
+      .map-action {
+        display: block;
+        font-size: 12px;
+        color: $brand-blue;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@keyframes marker-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+// ==========================
+// BRANCH INFO CARD
+// ==========================
+
+.branch-info-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid $border-color;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .branch-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: $text-dark;
+    margin: 0 0 4px;
+  }
+  
+  .branch-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    
+    .stars {
+      display: flex;
+      gap: 2px;
+      
+      ion-icon {
+        font-size: 16px;
+        color: $gold;
+      }
+    }
+    
+    .rating-text {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+  }
+  
+  .branch-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 12px;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $brand-blue;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    
+    span {
+      font-size: 13px;
+      color: $text-gray;
+      line-height: 1.4;
+    }
+  }
+  
+  .branch-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      ion-icon {
+        font-size: 18px;
+        color: $text-light;
+        flex-shrink: 0;
+      }
+      
+      div {
+        flex: 1;
+        
+        .detail-label {
+          display: block;
+          font-size: 10px;
+          color: $text-light;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+        
+        .detail-value {
+          display: block;
+          font-size: 12px;
+          font-weight: 600;
+          color: $text-dark;
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// QUICK ACTIONS
+// ==========================
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+  
+  .action-btn {
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+    
+    &.primary {
+      background: $brand-blue;
+      color: $white;
+      box-shadow: 0 4px 16px rgba($brand-blue, 0.2);
+      
+      &:hover {
+        background: $brand-hover;
+        box-shadow: 0 6px 24px rgba($brand-blue, 0.3);
+      }
+    }
+    
+    &.secondary {
+      background: rgba($brand-blue, 0.08);
+      color: $brand-blue;
+      
+      &:hover {
+        background: rgba($brand-blue, 0.15);
+      }
+    }
+  }
+}
+
+// ==========================
+// SERVICES SECTION
+// ==========================
+
+.services-section {
+  margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+  }
+  
+  .view-all {
+    font-size: 12px;
+    color: $brand-blue;
+    font-weight: 500;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-item {
+  background: $white;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $white;
+    }
+  }
+  
+  .service-info {
+    flex: 1;
+    
+    .service-name {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    .service-price {
+      display: block;
+      font-size: 12px;
+      color: $brand-blue;
+      font-weight: 700;
+    }
+  }
+  
+  .service-availability {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 10px;
+    background: rgba($danger, 0.1);
+    color: $danger;
+    
+    &.available {
+      background: rgba($success, 0.1);
+      color: $success;
+    }
+  }
+}
+
+// ==========================
+// REVIEWS SECTION
+// ==========================
+
+.reviews-section {
+  margin-bottom: 16px;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-item {
+  background: $white;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      .reviewer-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        font-weight: 700;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      
+      .reviewer-info {
+        .reviewer-name {
+          display: block;
+          font-size: 13px;
+          font-weight: 600;
+          color: $text-dark;
+        }
+        
+        .review-date {
+          font-size: 11px;
+          color: $text-light;
+        }
+      }
+    }
+    
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .review-text {
+    font-size: 13px;
+    color: $text-gray;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .branch-details-container {
+    padding: 12px 12px 16px;
+  }
+  
+  .branch-details-header {
+    .header-top {
+      .branch-details-title {
+        font-size: 18px;
+      }
+    }
+    
+    .branch-details-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .branch-image {
+    height: 140px;
+    
+    ion-icon {
+      font-size: 48px;
+    }
+  }
+  
+  .map-container {
+    height: 160px;
+  }
+  
+  .branch-details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-item {
+    flex-wrap: wrap;
+    
+    .service-availability {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  .review-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .branch-name {
+    font-size: 18px;
+  }
+  
+  .service-item {
+    padding: 10px 12px;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .action-btn:hover {
+    transform: none !important;
+  }
+  
+  .marker-pulse {
+    animation: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+.skeleton-w-20 { width: 20%; }
+.skeleton-w-15 { width: 15%; }
+
+.branch-details-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.skeleton-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.skeleton-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+// Dark mode support for skeleton
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+// Reduced motion for skeleton
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

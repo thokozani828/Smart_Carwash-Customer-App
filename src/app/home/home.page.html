@@ -1,20 +1,260 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="home-content" [scroll]="true">
+  <div class="home-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="home-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:44px;height:44px;"></div>
+          <div class="skeleton-header-text">
+            <div class="skeleton skeleton-text skeleton-w-50"></div>
+            <div class="skeleton skeleton-text-sm skeleton-w-40"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <!-- Mega Booking CTA Skeleton -->
+      <div class="skeleton-card" style="height:180px;border-radius:18px;"></div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <!-- Quick Actions Skeleton -->
+      <div class="skeleton-grid-4">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Active Booking Skeleton -->
+      <div class="skeleton-card" style="height:200px;border-radius:14px;"></div>
+
+      <!-- Services Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-grid-4">
+        <div class="skeleton skeleton-card" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:90px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:90px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Loyalty & VIP Skeleton -->
+      <div class="skeleton-grid-2">
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="home-header">
+        <div class="header-top">
+          <div class="greeting">
+            <div class="profile-icon" (click)="navigateTo('profile')">
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </div>
+            <div class="greeting-text">
+              <span class="greeting-label">Good Morning 👋</span>
+              <h1 class="customer-name">John Doe</h1>
+            </div>
+          </div>
+          <div class="header-actions">
+            <div class="notification-btn" (click)="navigateTo('notifications')">
+              <ion-icon name="notifications-outline"></ion-icon>
+              <span class="notification-badge">3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================== -->
+      <!-- MEGA BOOKING CTA - NEW LAYOUT -->
+      <!-- ========================== -->
+      <div class="mega-booking-cta" (click)="navigateTo('booking')">
+        <div class="mega-cta-content">
+          <div class="mega-cta-left">
+            <div class="mega-cta-badge">
+              <ion-icon name="flash"></ion-icon>
+              <span>Express Booking</span>
+            </div>
+            <h2 class="mega-cta-title">Book Your Wash <br><span class="highlight">in 60 Seconds</span></h2>
+          </div>
+          <div class="mega-cta-right">
+            <div class="mega-cta-circle">
+              <ion-icon name="arrow-forward"></ion-icon>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book Now Button - Directly below 60 Seconds -->
+        <button class="book-now-btn" (click)="$event.stopPropagation(); navigateTo('booking')">
+          <ion-icon name="calendar-outline"></ion-icon>
+          Book Now
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </button>
+        
+        <!-- Features Row -->
+        <div class="mega-cta-features">
+          <div class="feature-chip">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>15 min</span>
+          </div>
+          <div class="feature-chip">
+            <ion-icon name="star"></ion-icon>
+            <span>4.8 ★</span>
+          </div>
+          <div class="feature-chip">
+            <ion-icon name="people-outline"></ion-icon>
+            <span>1.2k+</span>
+          </div>
+          <div class="feature-chip">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            <span>100% Guarantee</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions-grid">
+        <div class="quick-action-card" (click)="navigateTo('vehicles')">
+          <div class="quick-action-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+            <ion-icon name="car-outline"></ion-icon>
+          </div>
+          <span>Vehicles</span>
+        </div>
+        <div class="quick-action-card" (click)="navigateTo('booking-history')">
+          <div class="quick-action-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+          <span>History</span>
+        </div>
+        <div class="quick-action-card" (click)="navigateTo('payments')">
+          <div class="quick-action-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+            <ion-icon name="card-outline"></ion-icon>
+          </div>
+          <span>Payments</span>
+        </div>
+        <div class="quick-action-card" (click)="navigateTo('vip-membership')">
+          <div class="quick-action-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+            <ion-icon name="star-outline"></ion-icon>
+          </div>
+          <span>VIP</span>
+        </div>
+      </div>
+
+      <!-- Active Booking -->
+      <div class="active-booking-card" (click)="navigateTo('live-tracking')">
+        <div class="active-booking-header">
+          <div class="active-booking-status">
+            <span class="status-dot"></span>
+            <span class="status-text">In Progress</span>
+          </div>
+          <span class="queue-badge">Queue #3</span>
+        </div>
+        <div class="active-booking-info">
+          <h3>Premium Wash</h3>
+          <p>
+            <ion-icon name="car-outline"></ion-icon>
+            BMW X5 · Blue
+          </p>
+          <p>
+            <ion-icon name="location-outline"></ion-icon>
+            Kwamashu
+          </p>
+        </div>
+        <div class="active-booking-progress">
+          <div class="progress-steps">
+            <div class="step completed">Booked</div>
+            <div class="step active">Washing</div>
+            <div class="step">Drying</div>
+            <div class="step">Done</div>
+          </div>
+        </div>
+        <button class="track-btn" (click)="$event.stopPropagation(); navigateTo('live-tracking')">
+          <ion-icon name="location-outline"></ion-icon>
+          Track Now
+        </button>
+      </div>
+
+      <!-- Services Section -->
+      <div class="services-section">
+        <div class="section-header">
+          <h2 class="section-title">Popular Services</h2>
+          <span class="view-all" (click)="navigateTo('services')">See All</span>
+        </div>
+        
+        <div class="services-grid">
+          <div class="service-card" *ngFor="let service of services" (click)="navigateTo('booking')">
+            <div class="service-icon" [style.background]="service.color">
+              <ion-icon [name]="service.icon"></ion-icon>
+            </div>
+            <div class="service-info">
+              <h4 class="service-name">{{ service.name }}</h4>
+              <span class="service-price">{{ service.price }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loyalty & VIP -->
+      <div class="loyalty-vip-row">
+        <div class="loyalty-card" (click)="navigateTo('loyalty')">
+          <div class="loyalty-icon">
+            <ion-icon name="gift-outline"></ion-icon>
+          </div>
+          <div class="loyalty-info">
+            <span class="loyalty-label">Points</span>
+            <span class="loyalty-value">2,450</span>
+          </div>
+        </div>
+        <div class="vip-card" (click)="navigateTo('vip-membership')">
+          <div class="vip-icon">
+            <ion-icon name="star"></ion-icon>
+          </div>
+          <div class="vip-info">
+            <span class="vip-label">VIP Status</span>
+            <span class="vip-value gold">Gold Member</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Bottom Navigation Bar - Centered Home Button -->
+  <div class="bottom-nav">
+    <div class="nav-item" (click)="navigateTo('booking')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Book</span>
+    </div>
+    <div class="nav-item" (click)="navigateTo('booking-history')">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>History</span>
+    </div>
+    <div class="nav-item active home-center" (click)="navigateTo('home')">
+      <div class="home-indicator">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" (click)="navigateTo('vehicles')">
+      <ion-icon name="car-outline"></ion-icon>
+      <span>Vehicles</span>
+    </div>
+    <div class="nav-item" (click)="navigateTo('vip-membership')">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>VIP</span>
+    </div>
   </div>
 </ion-content>

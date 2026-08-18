@@ -1,0 +1,1 @@
+ionic serve --host 192.168.15.34 --port 8100

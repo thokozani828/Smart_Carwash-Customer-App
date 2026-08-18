@@ -1,0 +1,202 @@
+<ion-content class="settings-content" [scroll]="true">
+  <div class="settings-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="settings-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Version Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:60px;border-radius:14px;"></div>
+
+      <!-- Settings Group Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text-sm skeleton-w-20"></div>
+      </div>
+      <div class="skeleton-settings-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Security & Privacy Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text-sm skeleton-w-25"></div>
+      </div>
+      <div class="skeleton-settings-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Legal Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-settings-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="settings-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="settings-title">Settings</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="settings-subtitle">Customize your app experience</p>
+      </div>
+
+      <!-- App Version -->
+      <div class="version-card">
+        <div class="version-info">
+          <ion-icon name="code-outline" class="version-icon"></ion-icon>
+          <div class="version-details">
+            <span class="version-label">App Version</span>
+            <span class="version-number">v2.4.1 (Build 2026.07.17)</span>
+          </div>
+        </div>
+        <span class="version-status">Latest</span>
+      </div>
+
+      <!-- Settings Groups -->
+      <div class="settings-group">
+        <div class="group-header">
+          <span class="group-title">Preferences</span>
+        </div>
+        
+        <!-- Dark Mode -->
+        <div class="setting-item">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(37, 99, 235, 0.1);">
+              <ion-icon name="moon-outline" style="color: #2563eb;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Dark Mode</span>
+              <span class="setting-desc">Switch between light and dark theme</span>
+            </div>
+          </div>
+          <ion-toggle [checked]="darkMode" (ionChange)="toggleDarkMode($event)"></ion-toggle>
+        </div>
+
+        <!-- Language -->
+        <div class="setting-item" (click)="changeLanguage()">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(251, 191, 36, 0.1);">
+              <ion-icon name="language-outline" style="color: #fbbf24;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Language</span>
+              <span class="setting-desc">{{ selectedLanguage }}</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="setting-arrow"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Security & Privacy -->
+      <div class="settings-group">
+        <div class="group-header">
+          <span class="group-title">Security & Privacy</span>
+        </div>
+
+        <!-- Privacy Settings -->
+        <div class="setting-item" (click)="privacySettings()">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(139, 92, 246, 0.1);">
+              <ion-icon name="shield-outline" style="color: #8b5cf6;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Privacy Settings</span>
+              <span class="setting-desc">Manage your privacy preferences</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="setting-arrow"></ion-icon>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="setting-item" (click)="notificationSettings()">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(239, 68, 68, 0.1);">
+              <ion-icon name="notifications-outline" style="color: #ef4444;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Notification Settings</span>
+              <span class="setting-desc">Manage your notification preferences</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="setting-arrow"></ion-icon>
+        </div>
+
+        <!-- Biometric Login -->
+        <div class="setting-item">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(34, 197, 94, 0.1);">
+              <ion-icon name="finger-print-outline" style="color: #22c55e;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Biometric Login</span>
+              <span class="setting-desc">Use fingerprint or face to unlock</span>
+            </div>
+          </div>
+          <ion-toggle [checked]="biometricLogin" (ionChange)="toggleBiometric($event)"></ion-toggle>
+        </div>
+      </div>
+
+      <!-- Legal -->
+      <div class="settings-group">
+        <div class="group-header">
+          <span class="group-title">Legal</span>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="setting-item" (click)="viewTerms()">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(37, 99, 235, 0.1);">
+              <ion-icon name="document-text-outline" style="color: #2563eb;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Terms & Conditions</span>
+              <span class="setting-desc">Read our terms of service</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="setting-arrow"></ion-icon>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div class="setting-item" (click)="viewPrivacy()">
+          <div class="setting-left">
+            <div class="setting-icon" style="background: rgba(139, 92, 246, 0.1);">
+              <ion-icon name="shield-checkmark-outline" style="color: #8b5cf6;"></ion-icon>
+            </div>
+            <div class="setting-info">
+              <span class="setting-label">Privacy Policy</span>
+              <span class="setting-desc">Learn how we handle your data</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="setting-arrow"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

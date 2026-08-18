@@ -1,0 +1,133 @@
+<ion-content class="login-content" [scroll]="false">
+  
+  <!-- ==========================
+  LOGIN FORM
+  ========================== -->
+  <div class="login-wrapper">
+    
+    <!-- Back Button -->
+    <button class="back-button" (click)="goBack()" aria-label="Go back">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+
+    <!-- Brand Logo - Centered -->
+    <div class="brand-logo">
+      <div class="logo-image-wrapper">
+        <img 
+          src="assets/images/logo_name-removebg-preview.png" 
+          alt="Smart CarWash" 
+          class="brand-image"
+          (error)="handleImageError($event)"
+        />
+      </div>
+    </div>
+
+    <!-- Welcome Text - Left Aligned -->
+    <div class="welcome-text">
+      <h2>Welcome Back</h2>
+      <p>Sign in to continue</p>
+    </div>
+
+    <!-- Login Form -->
+    <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
+      
+      <!-- Email/Phone Field -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.focused]="identifierFocused">
+          <ion-icon name="person-outline" class="input-icon"></ion-icon>
+          <input 
+            type="text" 
+            class="form-input" 
+            placeholder="Email or Phone Number"
+            [(ngModel)]="identifier"
+            name="identifier"
+            required
+            (focus)="identifierFocused = true"
+            (blur)="identifierFocused = false"
+          />
+        </div>
+        <div class="error-message" *ngIf="!identifier && submitted">
+          <span>Email or phone number is required</span>
+        </div>
+        <div class="error-message" *ngIf="identifier && !isValidIdentifier() && submitted">
+          <span>Please enter a valid email or phone number</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.focused]="passwordFocused">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            class="form-input" 
+            placeholder="Password"
+            [(ngModel)]="password"
+            name="password"
+            required
+            (focus)="passwordFocused = true"
+            (blur)="passwordFocused = false"
+          />
+          <ion-icon 
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+            class="password-toggle"
+            (click)="togglePassword()"
+          ></ion-icon>
+        </div>
+        <div class="error-message" *ngIf="!password && submitted">
+          <span>Password is required</span>
+        </div>
+      </div>
+
+      <!-- Form Options -->
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
+          <span>Remember me</span>
+        </label>
+        <span class="forgot-password" (click)="forgotPassword()">Forgot Password?</span>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn-login" [disabled]="isLoading">
+        <span>{{ isLoading ? 'Signing In...' : 'Sign In' }}</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </button>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span class="line"></span>
+      <span class="text">or continue with</span>
+      <span class="line"></span>
+    </div>
+
+    <!-- Social Login -->
+    <div class="social-login">
+      <button class="social-btn google" (click)="loginWithGoogle()">
+        <ion-icon name="logo-google" class="social-icon"></ion-icon>
+        <span class="social-name">Google</span>
+      </button>
+      
+      <button class="social-btn facebook" (click)="loginWithFacebook()">
+        <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+        <span class="social-name">Facebook</span>
+      </button>
+
+      <button class="social-btn apple" (click)="loginWithApple()">
+        <ion-icon name="logo-apple" class="social-icon"></ion-icon>
+        <span class="social-name">Apple</span>
+      </button>
+    </div>
+
+    <!-- Register Link - Left Aligned -->
+    <div class="register-link">
+      <p>
+        Don't have an account? 
+        <span class="register-btn" (click)="goToSignup()">Sign Up</span>
+      </p>
+    </div>
+
+  </div>
+</ion-content>

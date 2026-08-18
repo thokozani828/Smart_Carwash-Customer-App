@@ -1,0 +1,376 @@
+<!-- ============================================================
+CUSTOMIZE SUBSCRIPTION PAGE
+============================================================ -->
+
+<ion-content class="customize-content" [fullscreen]="true">
+  <div class="customize-container">
+    
+    <!-- ==========================
+    SKELETON LOADING
+    ========================== -->
+    <div *ngIf="isLoading" class="customize-skeleton">
+      <!-- Header Skeleton -->
+      <div class="skeleton-flex">
+        <div class="skeleton skeleton-circle" style="width:44px;height:44px;"></div>
+        <div class="skeleton skeleton-text skeleton-w-40"></div>
+        <div style="width:44px;"></div>
+      </div>
+      
+      <!-- Plan Summary Skeleton -->
+      <div class="skeleton skeleton-card" style="height:90px;border-radius:18px;margin-bottom:18px;"></div>
+      
+      <!-- Features Skeleton -->
+      <div class="skeleton skeleton-card" style="height:120px;border-radius:18px;margin-bottom:18px;"></div>
+      
+      <!-- Service Type Skeleton -->
+      <div class="skeleton skeleton-card" style="height:80px;border-radius:18px;margin-bottom:18px;"></div>
+      
+      <!-- Week Tabs Skeleton -->
+      <div class="skeleton-flex" style="margin-bottom:10px;">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      
+      <!-- Days Grid Skeleton -->
+      <div class="skeleton-grid-7">
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:14px;" *ngFor="let i of [1,2,3,4,5,6,7]"></div>
+      </div>
+      
+      <!-- Time Grid Skeleton -->
+      <div class="skeleton-time-grid">
+        <div class="skeleton skeleton-card" style="height:50px;border-radius:14px;" *ngFor="let i of [1,2,3,4]"></div>
+      </div>
+      
+      <!-- Summary Skeleton -->
+      <div class="skeleton skeleton-card" style="height:150px;border-radius:18px;margin-bottom:18px;"></div>
+      
+      <!-- Pay Button Skeleton -->
+      <div class="skeleton skeleton-card" style="height:60px;border-radius:16px;"></div>
+    </div>
+
+    <!-- ==========================
+    MAIN CONTENT
+    ========================== -->
+    <ng-container *ngIf="!isLoading">
+      
+      <!-- ==========================
+      HEADER
+      ========================== -->
+      <div class="customize-header">
+        <div class="header-top">
+          <button class="back-button" (click)="goBack()" aria-label="Go back">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </button>
+          <h1 class="customize-title">Customize</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="customize-subtitle">Choose your service preferences</p>
+      </div>
+
+      <!-- ==========================
+      PLAN SUMMARY CARD
+      ========================== -->
+      <div class="plan-summary-card" *ngIf="selectedPlan">
+        <div class="plan-summary-icon" [style.background]="selectedPlan.color || 'linear-gradient(135deg, #2563eb, #1d4ed8)'">
+          <ion-icon name="diamond-outline"></ion-icon>
+        </div>
+        <div class="plan-summary-info">
+          <span class="plan-summary-label">{{ isRenewal ? 'Renewing' : 'Selected' }} Plan</span>
+          <span class="plan-summary-name">{{ selectedPlan.name }}</span>
+          <span class="plan-summary-price">{{ selectedPlan.price }}</span>
+          <div class="plan-summary-washes">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ selectedPlan.maxDays }} washes per month</span>
+          </div>
+        </div>
+        <span class="plan-summary-badge" [class.popular]="selectedPlan.popular">
+          {{ selectedPlan.popular ? '⭐ Popular' : '' }}
+        </span>
+      </div>
+
+      <!-- ==========================
+      PACKAGE FEATURES
+      ========================== -->
+      <div class="package-features" *ngIf="selectedPlan">
+        <div class="package-features-header">
+          <ion-icon name="sparkles-outline"></ion-icon>
+          <span>What's Included</span>
+        </div>
+        <div class="package-features-list">
+          <div class="feature-item" *ngFor="let feature of selectedPlan.features">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span>{{ feature }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================
+      SERVICE TYPE SELECTION
+      ========================== -->
+      <div class="service-type-section">
+        <div class="service-type-grid">
+          <!-- Onsite Service -->
+          <div 
+            class="service-type-card" 
+            [class.selected]="selectedServiceType === 'onsite'"
+            (click)="selectServiceType('onsite')"
+          >
+            <div class="service-icon">
+              <ion-icon name="business-outline"></ion-icon>
+            </div>
+            <div class="service-info">
+              <span class="service-name">Onsite</span>
+              <span class="service-desc">At our location</span>
+              <span class="service-price">No extra fee</span>
+            </div>
+            <div class="service-check" *ngIf="selectedServiceType === 'onsite'">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </div>
+          </div>
+
+          <!-- Mobile Service -->
+          <div 
+            class="service-type-card" 
+            [class.selected]="selectedServiceType === 'mobile'"
+            (click)="selectServiceType('mobile')"
+          >
+            <div class="service-icon">
+              <ion-icon name="car-outline"></ion-icon>
+            </div>
+            <div class="service-info">
+              <span class="service-name">Mobile</span>
+              <span class="service-desc">We come to you</span>
+              <span class="service-price">+ R{{ serviceFee }} fee</span>
+            </div>
+            <div class="service-check" *ngIf="selectedServiceType === 'mobile'">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================
+      ADDRESS SECTION (Mobile Service Only)
+      ========================== -->
+      <div class="address-section" *ngIf="selectedServiceType === 'mobile'">
+        <div class="address-input-container">
+          <div class="address-icon">
+            <ion-icon name="pin-outline"></ion-icon>
+          </div>
+          <input 
+            type="text" 
+            class="address-input" 
+            placeholder="Enter your address..."
+            [(ngModel)]="serviceAddress"
+            (input)="onAddressChange()"
+            aria-label="Service address"
+          />
+          <button 
+            class="address-clear-btn" 
+            *ngIf="serviceAddress.length > 0"
+            (click)="clearAddress()"
+            aria-label="Clear address"
+          >
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </button>
+        </div>
+        
+        <!-- Address Suggestions -->
+        <div class="address-suggestions" *ngIf="addressSuggestions.length > 0">
+          <div 
+            class="suggestion-item" 
+            *ngFor="let suggestion of addressSuggestions"
+            (click)="selectSuggestion(suggestion)"
+          >
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ suggestion }}</span>
+          </div>
+        </div>
+
+        <div class="address-hint">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span>Enter a valid address for mobile service delivery</span>
+        </div>
+      </div>
+
+      <!-- ==========================
+      WEEK TABS
+      ========================== -->
+      <div class="week-tabs">
+        <div 
+          class="week-tab" 
+          *ngFor="let week of weeks; let i = index"
+          [class.active]="selectedWeek === i"
+          (click)="selectWeek(i)"
+        >
+          <span class="week-label">Week {{ week.weekNumber }}</span>
+          <span class="week-dates">{{ week.startDate }} – {{ week.endDate }}</span>
+          <span class="week-count" *ngIf="getWeekSelectedCount(i) > 0">
+            {{ getWeekSelectedCount(i) }}/{{ maxDaysPerWeek }}
+          </span>
+        </div>
+      </div>
+
+      <!-- ==========================
+      DAYS SELECTION
+      ========================== -->
+      <div class="selection-section">
+        <div class="section-header">
+          <h2 class="section-title">Select Your Days</h2>
+          <span class="selection-count">{{ totalSelectedDays }}/{{ selectedPlan?.maxDays }}</span>
+        </div>
+        <p class="section-subtitle">
+          Choose up to {{ maxDaysPerWeek }} day{{ maxDaysPerWeek > 1 ? 's' : '' }} per week
+        </p>
+
+        <!-- Current Week Days -->
+        <div class="days-grid" *ngIf="weeks.length > 0">
+          <div 
+            class="day-card" 
+            *ngFor="let day of weeks[selectedWeek]?.days"
+            [class.selected]="day.selected"
+            [class.past]="day.isPast"
+            [class.disabled]="!day.selected && getWeekSelectedCount(selectedWeek) >= maxDaysPerWeek && !day.isPast"
+            (click)="toggleDay(selectedWeek, day.date)"
+          >
+            <span class="day-name">{{ day.name }}</span>
+            <span class="day-date">{{ day.date }}</span>
+            <div class="day-check" *ngIf="day.selected">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selection Info -->
+        <div class="selection-info" *ngIf="totalSelectedDays === selectedPlan?.maxDays">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>You've selected all {{ selectedPlan?.maxDays }} washes for this month</span>
+        </div>
+        <div class="selection-info" *ngIf="totalSelectedDays < selectedPlan?.maxDays && totalSelectedDays > 0">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ selectedPlan?.maxDays - totalSelectedDays }} wash{{ (selectedPlan?.maxDays - totalSelectedDays) > 1 ? 'es' : '' }} remaining</span>
+        </div>
+      </div>
+
+      <!-- ==========================
+      SELECTED DAYS SUMMARY
+      ========================== -->
+      <div class="selected-days-summary" *ngIf="getAllSelectedDays().length > 0">
+        <h3 class="summary-title">Selected Days</h3>
+        <div class="selected-days-list">
+          <div 
+            class="selected-day-item" 
+            *ngFor="let day of getAllSelectedDays()"
+          >
+            <span class="selected-day-week">Week {{ day.weekNumber }}</span>
+            <span class="selected-day-name">{{ day.dayName }}</span>
+            <span class="selected-day-date">{{ day.date }}/{{ day.month }}/{{ day.year }}</span>
+            <button class="remove-day-btn" (click)="removeDay(day.week, day.date)" aria-label="Remove day">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        <div class="total-selected-count">
+          {{ totalSelectedDays }} wash{{ totalSelectedDays > 1 ? 'es' : '' }} selected
+        </div>
+      </div>
+
+      <!-- ==========================
+      TIME SELECTION
+      ========================== -->
+      <div class="selection-section">
+        <div class="section-header">
+          <h2 class="section-title">Preferred Time</h2>
+          <span class="selection-count" *ngIf="selectedTime">Selected</span>
+        </div>
+        <p class="section-subtitle">Choose your preferred wash time</p>
+
+        <div class="time-grid">
+          <div 
+            class="time-card" 
+            *ngFor="let slot of timeSlots"
+            [class.selected]="selectedTime === slot.value"
+            (click)="selectTime(slot.value)"
+          >
+            <ion-icon name="time-outline"></ion-icon>
+            <span class="time-label">{{ slot.label }}</span>
+            <span class="time-period">{{ slot.period }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================
+      SUBSCRIPTION SUMMARY
+      ========================== -->
+      <div class="subscription-summary">
+        <h3 class="summary-title">Order Summary</h3>
+        
+        <div class="summary-row">
+          <span class="summary-label">Package</span>
+          <span class="summary-value">{{ selectedPlan?.name }}</span>
+        </div>
+        
+        <div class="summary-row">
+          <span class="summary-label">Washes</span>
+          <span class="summary-value">{{ totalSelectedDays }} / {{ selectedPlan?.maxDays }}</span>
+        </div>
+        
+        <div class="summary-row">
+          <span class="summary-label">Time Slot</span>
+          <span class="summary-value">{{ selectedTime ? getTimeLabel(selectedTime) : 'Not selected' }}</span>
+        </div>
+        
+        <div class="summary-row" *ngIf="selectedServiceType === 'mobile'">
+          <span class="summary-label">Service Type</span>
+          <span class="summary-value">
+            Mobile
+            <span class="service-fee">+ R{{ serviceFee }} fee</span>
+          </span>
+        </div>
+        
+        <div class="summary-row" *ngIf="selectedServiceType === 'mobile' && serviceAddress">
+          <span class="summary-label">Address</span>
+          <span class="summary-value address-value">{{ serviceAddress }}</span>
+        </div>
+        
+        <div class="summary-row total">
+          <span class="summary-label">Total</span>
+          <span class="summary-value total-amount">{{ calculateTotal() }}</span>
+        </div>
+      </div>
+
+      <!-- ==========================
+      PAY SECTION
+      ========================== -->
+      <div class="pay-section">
+        <button 
+          class="pay-btn" 
+          (click)="proceedToPayment()"
+          [disabled]="!canProceed()"
+          aria-label="Proceed to payment"
+        >
+          <ion-icon name="card-outline"></ion-icon>
+          Proceed to Payment
+          <span class="pay-amount">{{ calculateTotal() }}</span>
+        </button>
+        <p class="pay-note" *ngIf="!canProceed()">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <span *ngIf="!selectedServiceType">Please select a service type</span>
+          <span *ngIf="selectedServiceType === 'mobile' && !serviceAddress">Please enter your address</span>
+          <span *ngIf="totalSelectedDays === 0">Please select at least one day</span>
+          <span *ngIf="!selectedTime">Please select a time slot</span>
+        </p>
+        <p class="pay-note" *ngIf="canProceed()">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+          <span>Secure payment with credit card, debit card, or EFT</span>
+        </p>
+      </div>
+
+      <!-- ==========================
+      BOTTOM SPACER
+      ========================== -->
+      <div class="bottom-spacer"></div>
+
+    </ng-container>
+  </div>
+</ion-content>

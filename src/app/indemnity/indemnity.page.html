@@ -1,0 +1,249 @@
+<ion-content class="indemnity-content" [scroll]="true">
+  <div class="indemnity-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="indemnity-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Form Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:200px;border-radius:14px;"></div>
+
+      <!-- Signature Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:150px;border-radius:14px;"></div>
+
+      <!-- QR Code Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:200px;border-radius:14px;"></div>
+
+      <!-- History Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-history-list">
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Action Buttons Skeleton -->
+      <div class="skeleton-grid-2">
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="indemnity-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="indemnity-title">Digital Indemnity</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="indemnity-subtitle">Review and sign your indemnity form digitally</p>
+      </div>
+
+      <!-- Indemnity Form (Readable) -->
+      <div class="form-section">
+        <div class="section-header">
+          <h2 class="section-title">Indemnity Form</h2>
+          <span class="view-all" (click)="toggleForm()">{{ showFullForm ? 'Hide' : 'Read Full' }}</span>
+        </div>
+        
+        <div class="form-card" [class.expanded]="showFullForm">
+          <div class="form-content">
+            <h3 class="form-title">VEHICLE WASH INDEMNITY AGREEMENT</h3>
+            
+            <div class="form-body">
+              <p><strong>1. Introduction</strong></p>
+              <p>This Indemnity Agreement ("Agreement") is entered into between Smart Carwash ("Service Provider") and the customer ("Customer") for the provision of vehicle washing and detailing services.</p>
+              
+              <p><strong>2. Acceptance of Terms</strong></p>
+              <p>By signing this agreement, the Customer acknowledges and agrees to the following terms and conditions:</p>
+              
+              <p><strong>3. Liability Waiver</strong></p>
+              <p>The Customer agrees to release and hold harmless Smart Carwash, its employees, agents, and affiliates from any and all claims, damages, or liabilities arising from:</p>
+              <ul>
+                <li>Any pre-existing damage to the vehicle</li>
+                <li>Normal wear and tear during the washing process</li>
+                <li>Any mechanical or electrical issues that may arise</li>
+                <li>Loss or damage to personal items left in the vehicle</li>
+              </ul>
+              
+              <p><strong>4. Vehicle Condition</strong></p>
+              <p>The Customer confirms that they have inspected their vehicle and acknowledge its current condition. Any existing damage, scratches, or issues have been noted and documented.</p>
+              
+              <p><strong>5. Service Scope</strong></p>
+              <p>The Customer understands that the service provided includes:</p>
+              <ul>
+                <li>Exterior wash and drying</li>
+                <li>Interior vacuuming and cleaning</li>
+                <li>Window cleaning</li>
+                <li>Tyre cleaning and dressing</li>
+              </ul>
+              
+              <p><strong>6. Payment Terms</strong></p>
+              <p>All services must be paid for in full prior to or upon completion of the service. Payment methods accepted include cash, card, and mobile payments.</p>
+              
+              <p><strong>7. Service Guarantee</strong></p>
+              <p>If you are not completely satisfied with our service, please notify us immediately. We will make every effort to resolve any issues to your satisfaction.</p>
+              
+              <p><strong>8. Data Privacy</strong></p>
+              <p>Your personal information will be handled in accordance with our Privacy Policy. Your data will not be shared with third parties without your consent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Section -->
+      <div class="signature-section">
+        <div class="section-header">
+          <h2 class="section-title">Digital Signature</h2>
+          <span class="view-all" *ngIf="isSigned" style="color: #22c55e;">
+            <ion-icon name="checkmark-circle"></ion-icon> Signed
+          </span>
+        </div>
+        
+        <div class="signature-card">
+          <div class="signature-area" (click)="openSignaturePad()">
+            <div class="signature-placeholder" *ngIf="!signatureData">
+              <ion-icon name="create-outline"></ion-icon>
+              <span>Tap to sign here</span>
+            </div>
+            <div class="signature-preview" *ngIf="signatureData">
+              <img [src]="signatureData" alt="Signature" class="signature-img" />
+            </div>
+          </div>
+          
+          <div class="signature-actions">
+            <button class="sign-btn clear-btn" (click)="clearSignature()" *ngIf="signatureData">
+              <ion-icon name="close-outline"></ion-icon>
+              Clear
+            </button>
+            <button class="sign-btn sign-btn-primary" (click)="openSignaturePad()">
+              <ion-icon name="create-outline"></ion-icon>
+              {{ signatureData ? 'Re-sign' : 'Sign Here' }}
+            </button>
+            <button class="sign-btn save-btn" (click)="saveSignature()" *ngIf="signatureData && !isSigned">
+              <ion-icon name="checkmark-outline"></ion-icon>
+              Confirm
+            </button>
+          </div>
+          
+          <div class="signature-info" *ngIf="isSigned">
+            <div class="signed-info">
+              <ion-icon name="checkmark-circle"></ion-icon>
+              <span>Signed on: {{ signatureDate }}</span>
+            </div>
+            <div class="signed-info">
+              <ion-icon name="person-outline"></ion-icon>
+              <span>Signed by: {{ customerName }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR Code Section -->
+      <div class="qr-section">
+        <div class="section-header">
+          <h2 class="section-title">QR Code Signing</h2>
+          <span class="view-all" (click)="generateQRCode()">Generate</span>
+        </div>
+        
+        <div class="qr-card">
+          <div class="qr-display">
+            <div class="qr-code-container" *ngIf="qrCodeData">
+              <img [src]="qrCodeData" alt="QR Code" class="qr-code-img" />
+            </div>
+            <div class="qr-placeholder" *ngIf="!qrCodeData">
+              <ion-icon name="qr-code-outline"></ion-icon>
+              <span>Tap Generate to create QR code</span>
+            </div>
+          </div>
+          <div class="qr-actions">
+            <button class="qr-btn" (click)="generateQRCode()">
+              <ion-icon name="refresh-outline"></ion-icon>
+              Generate QR
+            </button>
+            <button class="qr-btn" (click)="scanQRCode()" *ngIf="qrCodeData">
+              <ion-icon name="camera-outline"></ion-icon>
+              Scan to Sign
+            </button>
+            <button class="qr-btn" (click)="downloadQRCode()" *ngIf="qrCodeData">
+              <ion-icon name="download-outline"></ion-icon>
+              Download QR
+            </button>
+          </div>
+          <p class="qr-info" *ngIf="qrCodeData">Scan this QR code to sign the indemnity form on your mobile device</p>
+        </div>
+      </div>
+
+      <!-- Signature History -->
+      <div class="history-section">
+        <div class="section-header">
+          <h2 class="section-title">Signature History</h2>
+          <span class="view-all" (click)="viewSignatureHistory()">View All</span>
+        </div>
+        
+        <div class="history-list">
+          <div class="history-item" *ngFor="let record of signatureHistory">
+            <div class="history-icon" [style.background]="record.color">
+              <ion-icon [name]="record.icon"></ion-icon>
+            </div>
+            <div class="history-info">
+              <h4 class="history-title">{{ record.title }}</h4>
+              <p class="history-desc">{{ record.desc }}</p>
+              <span class="history-date">{{ record.date }}</span>
+            </div>
+            <div class="history-status" [class]="record.status">
+              {{ record.status }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-section">
+        <button class="action-btn primary-btn" (click)="downloadPDF()" [disabled]="!isSigned">
+          <ion-icon name="download-outline"></ion-icon>
+          Download PDF
+        </button>
+        <button class="action-btn secondary-btn" (click)="resetForm()">
+          <ion-icon name="refresh-outline"></ion-icon>
+          Reset
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

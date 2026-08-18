@@ -1,0 +1,731 @@
+// ============================================================
+// FEEDBACK PAGE - NO BOTTOM NAV
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// REVIEWS CONTENT
+// ==========================
+
+.reviews-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.reviews-container {
+  padding: 16px 16px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.reviews-header {
+  margin-bottom: 20px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .reviews-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, $gold, #f59e0b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .reviews-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// QUICK ACTIONS
+// ==========================
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.action-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 14px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid $border-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+    border-color: $brand-blue;
+  }
+  
+  .action-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    ion-icon {
+      font-size: 22px;
+      color: $white;
+    }
+  }
+  
+  .action-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: $text-dark;
+    text-align: center;
+  }
+}
+
+// ==========================
+// FORM SECTION
+// ==========================
+
+.review-form-section {
+  margin-bottom: 20px;
+}
+
+.form-card {
+  background: $white;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid $border-color;
+  box-shadow: 0 4px 16px $shadow-light;
+  
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    .form-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0;
+    }
+    
+    .form-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-gray;
+      }
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+  
+  .form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      
+      .form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: $text-dark;
+      }
+      
+      .form-input {
+        padding: 10px 14px;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: $font-family;
+        color: $text-dark;
+        transition: all 0.3s ease;
+        
+        &:focus {
+          outline: none;
+          border-color: $brand-blue;
+          box-shadow: 0 0 0 3px rgba($brand-blue, 0.08);
+        }
+        
+        &::placeholder {
+          color: $text-light;
+        }
+      }
+      
+      .form-textarea {
+        padding: 10px 14px;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: $font-family;
+        color: $text-dark;
+        resize: vertical;
+        min-height: 100px;
+        transition: all 0.3s ease;
+        
+        &:focus {
+          outline: none;
+          border-color: $brand-blue;
+          box-shadow: 0 0 0 3px rgba($brand-blue, 0.08);
+        }
+        
+        &::placeholder {
+          color: $text-light;
+        }
+      }
+      
+      select.form-input {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+      }
+    }
+  }
+}
+
+// ==========================
+// STAR RATING
+// ==========================
+
+.star-rating {
+  display: flex;
+  gap: 6px;
+  
+  ion-icon {
+    font-size: 32px;
+    color: #e2e8f0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &.star {
+      color: $gold;
+    }
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ==========================
+// SUBMIT BUTTON
+// ==========================
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, $brand-blue, $brand-hover);
+  color: $white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: $font-family;
+  box-shadow: 0 4px 16px rgba($brand-blue, 0.2);
+  
+  ion-icon {
+    font-size: 18px;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba($brand-blue, 0.3);
+  }
+}
+
+// ==========================
+// REVIEWS LIST
+// ==========================
+
+.reviews-section {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+  }
+  
+  .view-all {
+    font-size: 12px;
+    color: $brand-blue;
+    font-weight: 500;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-item {
+  background: $white;
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      .reviewer-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        font-weight: 700;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      
+      .reviewer-details {
+        .reviewer-name {
+          display: block;
+          font-size: 13px;
+          font-weight: 600;
+          color: $text-dark;
+        }
+        
+        .review-date {
+          font-size: 11px;
+          color: $text-light;
+        }
+      }
+    }
+    
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .review-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 0 0 4px;
+  }
+  
+  .review-text {
+    font-size: 13px;
+    color: $text-gray;
+    line-height: 1.5;
+    margin: 0 0 10px;
+  }
+  
+  .review-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .review-type {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      
+      &.Review {
+        background: rgba($brand-blue, 0.1);
+        color: $brand-blue;
+      }
+      
+      &.Rating {
+        background: rgba($gold, 0.1);
+        color: $gold;
+      }
+      
+      &.Complaint {
+        background: rgba($danger, 0.1);
+        color: $danger;
+      }
+      
+      &.Suggestion {
+        background: rgba($purple, 0.1);
+        color: $purple;
+      }
+    }
+    
+    .review-status {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 10px;
+      
+      &.Published {
+        background: rgba($success, 0.1);
+        color: $success;
+      }
+      
+      &.Pending {
+        background: rgba($warning, 0.1);
+        color: $warning;
+      }
+    }
+  }
+}
+
+// ==========================
+// EMPTY STATE
+// ==========================
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  
+  .empty-icon {
+    font-size: 64px;
+    color: $text-light;
+    opacity: 0.3;
+  }
+  
+  .empty-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 12px 0 4px;
+  }
+  
+  .empty-desc {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 0;
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .reviews-container {
+    padding: 12px 12px 16px;
+  }
+  
+  .reviews-header {
+    .header-top {
+      .reviews-title {
+        font-size: 18px;
+      }
+    }
+    
+    .reviews-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .action-card {
+    padding: 12px 8px;
+  }
+  
+  .star-rating ion-icon {
+    font-size: 28px;
+  }
+  
+  .form-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .quick-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .review-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .action-card:hover {
+    transform: none !important;
+  }
+  
+  .submit-btn:hover {
+    transform: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+.skeleton-w-20 { width: 20%; }
+.skeleton-w-15 { width: 15%; }
+
+.reviews-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.skeleton-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.skeleton-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// Dark mode support for skeleton
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+// Reduced motion for skeleton
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

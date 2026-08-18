@@ -1,0 +1,208 @@
+<ion-content class="confirmation-content" [scroll]="true">
+  <div class="confirmation-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="confirmation-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Success Header Skeleton -->
+      <div class="skeleton-flex-center">
+        <div class="skeleton skeleton-circle" style="width:80px;height:80px;"></div>
+      </div>
+      <div class="skeleton-flex-center" style="flex-direction:column;gap:8px;margin-top:12px;">
+        <div class="skeleton skeleton-text skeleton-w-50"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-60"></div>
+      </div>
+
+      <!-- Reference Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:80px;border-radius:14px;"></div>
+
+      <!-- Details Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:180px;border-radius:14px;"></div>
+
+      <!-- Price Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:150px;border-radius:14px;"></div>
+
+      <!-- Payment Processing Skeleton -->
+      <div class="skeleton skeleton-card" style="height:160px;border-radius:14px;"></div>
+
+      <!-- Action Buttons Skeleton -->
+      <div class="skeleton-grid-2">
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Animated Background -->
+      <div class="animated-bg">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+        <div class="particle particle-6"></div>
+      </div>
+
+      <!-- Payment Status for Cash -->
+      <div class="payment-status-card" *ngIf="bookingData?.isCashPayment">
+        <div class="payment-status-icon pending">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <div class="payment-status-info">
+          <h3 class="payment-status-title">Booking Confirmed!</h3>
+          <p class="payment-status-desc">Your booking has been created. Please pay at the branch.</p>
+          <span class="payment-status-badge">Pending Payment</span>
+        </div>
+      </div>
+
+      <!-- Success Header -->
+      <div class="success-header">
+        <div class="success-icon">
+          <div class="icon-ring"></div>
+          <div class="icon-ring-2"></div>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <h1 class="success-title">Booking Confirmed!</h1>
+        <div class="success-message">
+          <p class="success-subtitle" *ngIf="!bookingData?.isCashPayment">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            Your booking has been successfully processed
+          </p>
+          <p class="success-subtitle cash-message" *ngIf="bookingData?.isCashPayment">
+            <ion-icon name="cash-outline"></ion-icon>
+            Your booking is confirmed. Please pay at the branch.
+          </p>
+        </div>
+      </div>
+
+      <!-- Booking Reference -->
+      <div class="reference-card">
+        <span class="reference-label">Booking Reference</span>
+        <span class="reference-number">#{{ bookingReference }}</span>
+        <span class="reference-date">{{ currentDate }}</span>
+      </div>
+
+      <!-- Booking Details -->
+      <div class="details-card">
+        <h3 class="details-title">Booking Details</h3>
+        
+        <div class="detail-row" *ngFor="let detail of bookingDetails">
+          <span class="detail-label">{{ detail.label }}</span>
+          <span class="detail-value" [class.payment-method]="detail.isPayment">{{ detail.value }}</span>
+        </div>
+      </div>
+
+      <!-- Price Breakdown -->
+      <div class="price-card">
+        <h3 class="price-title">Price Breakdown</h3>
+        
+        <div class="price-row" *ngFor="let item of priceBreakdown">
+          <span class="price-label">{{ item.label }}</span>
+          <span class="price-value" [class.discount]="item.isDiscount" [class.total-amount]="item.isTotal">
+            {{ item.value }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Payment Processing (Only for non-cash payments) -->
+      <div class="payment-card" *ngIf="!paymentProcessed && !bookingData?.isCashPayment">
+        <h3 class="payment-title">Processing Payment</h3>
+        <div class="payment-loader">
+          <div class="loader-spinner"></div>
+          <p class="loader-text">{{ paymentStatus }}</p>
+        </div>
+        <div class="payment-progress">
+          <div class="progress-bar" [style.width.%]="paymentProgress"></div>
+          <div class="progress-dots">
+            <span class="dot" *ngFor="let dot of [1,2,3,4,5]" 
+                  [class.active]="paymentProgress >= (dot * 20)"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Success (Only for non-cash payments) -->
+      <div class="payment-success" *ngIf="paymentProcessed && !bookingData?.isCashPayment">
+        <div class="payment-success-icon">
+          <div class="success-ring"></div>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <h3 class="payment-success-title">Payment Successful!</h3>
+        <p class="payment-success-desc">Your payment of {{ calculateTotal() }} has been processed</p>
+        <p class="payment-success-ref">Transaction ID: {{ transactionId }}</p>
+      </div>
+
+      <!-- Cash Payment Pending Status -->
+      <div class="payment-success cash-pending" *ngIf="bookingData?.isCashPayment">
+        <div class="payment-success-icon pending-icon">
+          <ion-icon name="cash-outline"></ion-icon>
+        </div>
+        <h3 class="payment-success-title">Awaiting Payment</h3>
+        <p class="payment-success-desc">Please pay {{ calculateTotal() }} at the branch</p>
+        <div class="payment-status-indicator">
+          <span class="status-dot pending"></span>
+          <span class="status-label">Pending Payment</span>
+        </div>
+        <p class="payment-success-ref">Booking Reference: {{ bookingReference }}</p>
+        <button class="payment-action-btn" (click)="viewBranchDetails()">
+          <ion-icon name="location-outline"></ion-icon>
+          View Branch Details
+        </button>
+      </div>
+
+      <!-- Confetti Effect (Only for non-cash payments) -->
+      <div class="confetti-container" *ngIf="paymentProcessed && !bookingData?.isCashPayment">
+        <div class="confetti confetti-1"></div>
+        <div class="confetti confetti-2"></div>
+        <div class="confetti confetti-3"></div>
+        <div class="confetti confetti-4"></div>
+        <div class="confetti confetti-5"></div>
+        <div class="confetti confetti-6"></div>
+        <div class="confetti confetti-7"></div>
+        <div class="confetti confetti-8"></div>
+        <div class="confetti confetti-9"></div>
+        <div class="confetti confetti-10"></div>
+        <div class="confetti confetti-11"></div>
+        <div class="confetti confetti-12"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn-primary" (click)="viewBooking()">
+          <ion-icon name="eye-outline"></ion-icon>
+          <span>View Booking</span>
+        </button>
+        <button class="btn-secondary" (click)="downloadReceipt()" *ngIf="!bookingData?.isCashPayment">
+          <ion-icon name="download-outline"></ion-icon>
+          <span>Download Receipt</span>
+        </button>
+        <button class="btn-secondary" (click)="getDirections()" *ngIf="bookingData?.isCashPayment">
+          <ion-icon name="navigate-outline"></ion-icon>
+          <span>Get Directions</span>
+        </button>
+        <button class="btn-outline" (click)="goHome()">
+          <ion-icon name="home-outline"></ion-icon>
+          <span>Back to Home</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,644 @@
+// ============================================================
+// SUPPORT PAGE - NO BOTTOM NAV
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// SUPPORT CONTENT
+// ==========================
+
+.support-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.support-container {
+  padding: 16px 16px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.support-header {
+  margin-bottom: 20px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .support-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #2563eb, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .support-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// SECTION HEADER
+// ==========================
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0;
+  }
+  
+  .view-all {
+    font-size: 12px;
+    color: $brand-blue;
+    font-weight: 500;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ==========================
+// CONTACT SECTION
+// ==========================
+
+.contact-section {
+  margin-bottom: 20px;
+}
+
+.contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    transform: translateX(4px);
+    border-color: $brand-blue;
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 22px;
+      color: $white;
+    }
+  }
+  
+  .contact-info {
+    flex: 1;
+    
+    .contact-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    .contact-desc {
+      display: block;
+      font-size: 11px;
+      color: $text-gray;
+    }
+  }
+  
+  .contact-arrow {
+    font-size: 18px;
+    color: $text-light;
+  }
+}
+
+// ==========================
+// LIVE CHAT
+// ==========================
+
+.chat-section {
+  margin-bottom: 20px;
+  
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: $success;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $success;
+      animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.8); }
+}
+
+.chat-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    transform: translateX(4px);
+    border-color: $brand-blue;
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .chat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba($brand-blue, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 24px;
+      color: $brand-blue;
+    }
+  }
+  
+  .chat-info {
+    flex: 1;
+    
+    .chat-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0 0 2px;
+    }
+    
+    .chat-desc {
+      font-size: 12px;
+      color: $text-gray;
+      margin: 0 0 4px;
+    }
+    
+    .chat-status {
+      font-size: 10px;
+      font-weight: 600;
+      color: $success;
+    }
+  }
+  
+  .chat-arrow {
+    font-size: 18px;
+    color: $text-light;
+  }
+}
+
+// ==========================
+// FAQ SECTION
+// ==========================
+
+.faq-section {
+  margin-bottom: 20px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faq-item {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    border-color: $brand-blue;
+  }
+  
+  .faq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    
+    .faq-question {
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-dark;
+      flex: 1;
+    }
+    
+    .faq-icon {
+      font-size: 18px;
+      color: $text-light;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  .faq-answer {
+    padding-top: 10px;
+    border-top: 1px solid $border-color;
+    margin-top: 10px;
+    
+    p {
+      font-size: 13px;
+      color: $text-gray;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+}
+
+// ==========================
+// BRANCH HOURS
+// ==========================
+
+.hours-section {
+  margin-bottom: 20px;
+}
+
+.hours-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 8px $shadow-light;
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid $border-color;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  .hours-day {
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-dark;
+  }
+  
+  .hours-time {
+    font-size: 13px;
+    color: $text-gray;
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .support-container {
+    padding: 12px 12px 16px;
+  }
+  
+  .support-header {
+    .header-top {
+      .support-title {
+        font-size: 18px;
+      }
+    }
+    
+    .support-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .contact-card {
+    padding: 10px 14px;
+    
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+    
+    .contact-info {
+      .contact-title {
+        font-size: 13px;
+      }
+    }
+  }
+  
+  .chat-card {
+    padding: 14px 16px;
+    
+    .chat-icon {
+      width: 40px;
+      height: 40px;
+      
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+    
+    .chat-info {
+      .chat-title {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .faq-item {
+    padding: 10px 14px;
+    
+    .faq-header {
+      .faq-question {
+        font-size: 12px;
+      }
+    }
+    
+    .faq-answer p {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .hours-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none !important;
+  }
+  
+  .contact-card:hover {
+    transform: none !important;
+  }
+  
+  .chat-card:hover {
+    transform: none !important;
+  }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.skeleton {
+  background: #e8ecf1;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 20px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.4) 50%, 
+      transparent 100%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-text-sm {
+  height: 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+.skeleton-card {
+  border-radius: 12px;
+  min-height: 60px;
+}
+
+.skeleton-w-100 { width: 100%; }
+.skeleton-w-75 { width: 75%; }
+.skeleton-w-50 { width: 50%; }
+.skeleton-w-25 { width: 25%; }
+.skeleton-w-70 { width: 70%; }
+.skeleton-w-40 { width: 40%; }
+.skeleton-w-30 { width: 30%; }
+.skeleton-w-20 { width: 20%; }
+.skeleton-w-15 { width: 15%; }
+
+.support-skeleton {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.skeleton-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+// Dark mode support for skeleton
+@media (prefers-color-scheme: dark) {
+  .skeleton {
+    background: #2d3748;
+  }
+  
+  .skeleton::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      transparent 100%
+    );
+  }
+}
+
+// Reduced motion for skeleton
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,771 @@
+// ============================================================
+// CASH PAYMENT PAGE
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+.skeleton-wrapper {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    #e2e8f0 25%,
+    #f1f5f9 50%,
+    #e2e8f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  height: 12px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+// Header Skeleton
+.skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  .skeleton-back-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e2e8f0;
+  }
+  
+  .skeleton-title {
+    width: 150px;
+    height: 24px;
+    border-radius: 4px;
+    background: #e2e8f0;
+  }
+  
+  .skeleton-placeholder {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// Skeleton Cards
+.skeleton-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+}
+
+.skeleton-title-line {
+  height: 20px;
+  width: 60%;
+  margin-bottom: 12px;
+  background: #e2e8f0;
+}
+
+.skeleton-label {
+  width: 80px;
+  height: 10px;
+  margin-bottom: 4px;
+}
+
+.skeleton-amount {
+  width: 120px;
+  height: 28px;
+  margin: 4px 0;
+}
+
+.skeleton-status {
+  width: 90px;
+  height: 12px;
+}
+
+// Summary Skeleton
+.summary-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(145deg, $brand-blue, $brand-dark);
+  
+  .skeleton-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+  }
+  
+  .skeleton-content {
+    flex: 1;
+    
+    .skeleton-line {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    
+    .skeleton-label {
+      height: 10px;
+      width: 80px;
+    }
+    
+    .skeleton-amount {
+      height: 28px;
+      width: 120px;
+    }
+    
+    .skeleton-status {
+      height: 12px;
+      width: 90px;
+    }
+  }
+}
+
+// Detail Rows Skeleton
+.skeleton-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  
+  .skeleton-label-short {
+    width: 100px;
+    height: 12px;
+  }
+  
+  .skeleton-value-short {
+    width: 80px;
+    height: 12px;
+  }
+  
+  .skeleton-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  
+  .skeleton-text-long {
+    width: 70%;
+    height: 12px;
+  }
+  
+  .skeleton-text-medium {
+    width: 50%;
+    height: 12px;
+  }
+}
+
+// Price Rows Skeleton
+.skeleton-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  
+  .skeleton-label-short {
+    width: 120px;
+    height: 12px;
+  }
+  
+  .skeleton-value-short {
+    width: 70px;
+    height: 12px;
+  }
+}
+
+// Instructions Skeleton
+.skeleton-instruction {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  
+  .skeleton-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  
+  .skeleton-text-medium {
+    width: 60%;
+    height: 12px;
+  }
+}
+
+// Action Buttons Skeleton
+.skeleton-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  
+  .skeleton-button {
+    height: 50px;
+    border-radius: 12px;
+    background: #e2e8f0;
+    
+    &.primary {
+      background: #e2e8f0;
+    }
+    
+    &.secondary {
+      background: #e2e8f0;
+    }
+    
+    &.outline {
+      background: #e2e8f0;
+      height: 48px;
+    }
+  }
+}
+
+// ==========================
+// CASH PAYMENT CONTENT
+// ==========================
+
+.cash-payment-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.cash-payment-container {
+  padding: 16px 16px 80px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.payment-header {
+  margin-bottom: 16px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .payment-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .payment-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// SUMMARY CARD
+// ==========================
+
+.summary-card {
+  background: linear-gradient(145deg, $brand-blue, $brand-dark);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba($brand-blue, 0.25);
+  animation: slideDown 0.6s ease-out;
+  
+  .summary-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $white;
+    }
+  }
+  
+  .summary-info {
+    flex: 1;
+    
+    .summary-label {
+      display: block;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .summary-amount {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      color: $white;
+      margin: 2px 0;
+    }
+    
+    .summary-status {
+      font-size: 12px;
+      color: rgba($gold, 0.8);
+      font-weight: 500;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ==========================
+// DETAILS CARD
+// ==========================
+
+.details-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  
+  .details-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .detail-value {
+      font-size: 13px;
+      color: $text-dark;
+      font-weight: 600;
+      text-align: right;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ==========================
+// PRICE CARD
+// ==========================
+
+.price-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+  
+  .price-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    
+    .price-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .price-value {
+      font-size: 13px;
+      color: $text-dark;
+      font-weight: 600;
+      
+      &.discount {
+        color: $success;
+      }
+    }
+    
+    &.total {
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 2px solid $border-color;
+      
+      .price-label {
+        font-size: 15px;
+        font-weight: 700;
+        color: $text-dark;
+      }
+      
+      .price-value.total-amount {
+        font-size: 20px;
+        font-weight: 800;
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+// ==========================
+// BRANCH INFO CARD
+// ==========================
+
+.branch-info-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+  
+  .branch-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .branch-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    color: $text-gray;
+    font-size: 13px;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $brand-blue;
+      flex-shrink: 0;
+      width: 24px;
+    }
+    
+    span {
+      flex: 1;
+    }
+  }
+}
+
+// ==========================
+// INSTRUCTIONS CARD
+// ==========================
+
+.instructions-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.8s both;
+  
+  .instructions-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .instruction-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .instruction-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba($brand-blue, 0.08);
+      color: $brand-blue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .instruction-text {
+      font-size: 13px;
+      color: $text-gray;
+      line-height: 1.4;
+      padding-top: 3px;
+    }
+  }
+}
+
+// ==========================
+// ACTION BUTTONS
+// ==========================
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeInUp 0.6s ease-out 1s both;
+  
+  button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    span {
+      flex: 1;
+      text-align: center;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+  
+  .btn-primary {
+    background: $brand-blue;
+    color: $white;
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.3);
+    
+    &:hover {
+      background: $brand-hover;
+      box-shadow: 0 6px 24px rgba($brand-blue, 0.4);
+    }
+  }
+  
+  .btn-secondary {
+    background: rgba($brand-blue, 0.08);
+    color: $brand-blue;
+    
+    &:hover {
+      background: rgba($brand-blue, 0.15);
+    }
+  }
+  
+  .btn-outline {
+    background: transparent;
+    color: $text-gray;
+    border: 1.5px solid $border-color;
+    
+    &:hover {
+      border-color: $brand-blue;
+      color: $brand-blue;
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .cash-payment-container {
+    padding: 12px 12px 80px;
+  }
+  
+  .summary-card {
+    padding: 16px 18px;
+    
+    .summary-icon {
+      width: 44px;
+      height: 44px;
+      
+      ion-icon {
+        font-size: 22px;
+      }
+    }
+    
+    .summary-info .summary-amount {
+      font-size: 24px;
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .summary-card {
+    animation: none !important;
+  }
+  
+  .details-card {
+    animation: none !important;
+  }
+  
+  .price-card {
+    animation: none !important;
+  }
+  
+  .branch-info-card {
+    animation: none !important;
+  }
+  
+  .instructions-card {
+    animation: none !important;
+  }
+  
+  .action-buttons {
+    animation: none !important;
+  }
+  
+  .skeleton-wrapper {
+    animation: none !important;
+  }
+  
+  .skeleton-line {
+    animation: none !important;
+  }
+}

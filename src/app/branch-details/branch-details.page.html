@@ -1,0 +1,159 @@
+<ion-content class="branch-details-content" [scroll]="true">
+  <div class="branch-details-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="branch-details-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Branch Image Skeleton -->
+      <div class="skeleton skeleton-card" style="height:180px;border-radius:16px;"></div>
+
+      <!-- Map Skeleton -->
+      <div class="skeleton skeleton-card" style="height:200px;border-radius:14px;"></div>
+
+      <!-- Branch Info Skeleton -->
+      <div class="skeleton skeleton-card" style="height:220px;border-radius:14px;"></div>
+
+      <!-- Quick Actions Skeleton -->
+      <div class="skeleton-grid-2">
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:48px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Services Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-services-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Reviews Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-reviews-list">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="branch-details-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="branch-details-title">Branch Details</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="branch-details-subtitle">View branch information and location</p>
+      </div>
+
+
+      <!-- Map Section -->
+      <div class="map-section">
+        <div class="map-container" (click)="openMap()">
+          <!-- Map with Google Static Map -->
+          <div class="map-static" [style.backgroundImage]="'url(' + getMapUrl() + ')'">
+            <div class="map-overlay">
+              <span class="map-address">{{ branchData.address }}</span>
+              <span class="map-action">Tap to open in maps</span>
+            </div>
+          </div>
+          <!-- Map Placeholder (shown if image fails) -->
+          <div class="map-placeholder">
+            <div class="map-marker">
+              <ion-icon name="location"></ion-icon>
+              <div class="marker-pulse"></div>
+            </div>
+            <div class="map-info">
+              <span class="map-address">{{ branchData.address }}</span>
+              <span class="map-action">Tap to open in maps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch Info Card -->
+      <div class="branch-info-card">
+        <h2 class="branch-name">{{ branchData.name }}</h2>
+        <div class="branch-rating">
+          <div class="stars">
+            <ion-icon name="star" *ngFor="let star of [1,2,3,4,5]"></ion-icon>
+          </div>
+          <span class="rating-text">{{ branchData.rating }} ({{ branchData.reviews }} reviews)</span>
+        </div>
+        
+        <div class="branch-address">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ branchData.address }}</span>
+        </div>
+        
+        <div class="branch-details-grid">
+          <div class="detail-item">
+            <ion-icon name="call-outline"></ion-icon>
+            <div>
+              <span class="detail-label">Phone</span>
+              <span class="detail-value">{{ branchData.phone }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="time-outline"></ion-icon>
+            <div>
+              <span class="detail-label">Hours</span>
+              <span class="detail-value">{{ branchData.hours }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="car-outline"></ion-icon>
+            <div>
+              <span class="detail-label">Parking</span>
+              <span class="detail-value">{{ branchData.parking }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="people-outline"></ion-icon>
+            <div>
+              <span class="detail-label">Capacity</span>
+              <span class="detail-value">{{ branchData.capacity }} cars</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <button class="action-btn primary" (click)="getDirections()">
+          <ion-icon name="navigate-outline"></ion-icon>
+          Get Directions
+        </button>
+        <button class="action-btn secondary" (click)="callBranch()">
+          <ion-icon name="call-outline"></ion-icon>
+          Call Branch
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

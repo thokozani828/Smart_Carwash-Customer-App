@@ -1,0 +1,196 @@
+<ion-content class="cash-payment-content" [scroll]="true">
+  <div class="cash-payment-container">
+    
+    <!-- SKELETON LOADING STATE -->
+    <div class="skeleton-wrapper" *ngIf="isLoading">
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-back-button"></div>
+        <div class="skeleton-title"></div>
+        <div class="skeleton-placeholder"></div>
+      </div>
+      
+      <!-- Summary Card Skeleton -->
+      <div class="skeleton-card summary-skeleton">
+        <div class="skeleton-icon"></div>
+        <div class="skeleton-content">
+          <div class="skeleton-line skeleton-label"></div>
+          <div class="skeleton-line skeleton-amount"></div>
+          <div class="skeleton-line skeleton-status"></div>
+        </div>
+      </div>
+      
+      <!-- Details Card Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-detail-row" *ngFor="let _ of [1,2,3,4,5]">
+          <div class="skeleton-line skeleton-label-short"></div>
+          <div class="skeleton-line skeleton-value-short"></div>
+        </div>
+      </div>
+      
+      <!-- Price Card Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-price-row" *ngFor="let _ of [1,2,3]">
+          <div class="skeleton-line skeleton-label-short"></div>
+          <div class="skeleton-line skeleton-value-short"></div>
+        </div>
+      </div>
+      
+      <!-- Branch Info Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-detail-row" *ngFor="let _ of [1,2,3,4]">
+          <div class="skeleton-line skeleton-icon"></div>
+          <div class="skeleton-line skeleton-text-long"></div>
+        </div>
+      </div>
+      
+      <!-- Instructions Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-instruction" *ngFor="let _ of [1,2,3,4]">
+          <div class="skeleton-line skeleton-circle"></div>
+          <div class="skeleton-line skeleton-text-medium"></div>
+        </div>
+      </div>
+      
+      <!-- Action Buttons Skeleton -->
+      <div class="skeleton-actions">
+        <div class="skeleton-button primary"></div>
+        <div class="skeleton-button secondary"></div>
+        <div class="skeleton-button outline"></div>
+      </div>
+    </div>
+
+    <!-- CONTENT LOADED STATE -->
+    <ng-container *ngIf="!isLoading">
+      <!-- Header -->
+      <div class="payment-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="payment-title">Cash Payment</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="payment-subtitle">Pay at the branch when you arrive</p>
+      </div>
+
+      <!-- Payment Summary -->
+      <div class="summary-card">
+        <div class="summary-icon">
+          <ion-icon name="cash-outline"></ion-icon>
+        </div>
+        <div class="summary-info">
+          <span class="summary-label">Total Amount Due</span>
+          <span class="summary-amount">{{ totalAmount }}</span>
+          <span class="summary-status">Pay on arrival</span>
+        </div>
+      </div>
+
+      <!-- Booking Details -->
+      <div class="details-card">
+        <h3 class="details-title">Booking Summary</h3>
+        
+        <div class="detail-row">
+          <span class="detail-label">Booking Reference</span>
+          <span class="detail-value">{{ bookingReference }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Vehicle</span>
+          <span class="detail-value">{{ bookingData?.vehicle?.name || 'BMW X5' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Service</span>
+          <span class="detail-value">{{ bookingData?.service?.name || 'Premium Wash' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Branch</span>
+          <span class="detail-value">{{ bookingData?.branch?.name || 'Sandton City' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Date & Time</span>
+          <span class="detail-value">{{ bookingData?.date || '17 July 2026' }} at {{ bookingData?.time || '10:30 AM' }}</span>
+        </div>
+      </div>
+
+      <!-- Price Breakdown -->
+      <div class="price-card">
+        <h3 class="price-title">Price Breakdown</h3>
+        
+        <div class="price-row" *ngFor="let item of priceBreakdown">
+          <span class="price-label">{{ item.label }}</span>
+          <span class="price-value" [class.discount]="item.isDiscount" [class.total-amount]="item.isTotal">
+            {{ item.value }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Branch Information -->
+      <div class="branch-info-card">
+        <h3 class="branch-title">📍 Branch Information</h3>
+        
+        <div class="branch-detail">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ bookingData?.branch?.address || 'Shop 45, Sandton City Mall, Sandton' }}</span>
+        </div>
+        <div class="branch-detail">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>Open: Mon-Fri 7:00 AM - 6:00 PM</span>
+        </div>
+        <div class="branch-detail">
+          <ion-icon name="call-outline"></ion-icon>
+          <span>+27 12 345 6789</span>
+        </div>
+        <div class="branch-detail">
+          <ion-icon name="navigate-outline"></ion-icon>
+          <span>1.2 km from your location</span>
+        </div>
+      </div>
+
+      <!-- Payment Instructions -->
+      <div class="instructions-card">
+        <h3 class="instructions-title">📋 Payment Instructions</h3>
+        
+        <div class="instruction-item">
+          <span class="instruction-number">1</span>
+          <span class="instruction-text">Arrive at the branch at your scheduled time</span>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-number">2</span>
+          <span class="instruction-text">Inform the receptionist you have a booking</span>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-number">3</span>
+          <span class="instruction-text">Make payment at the counter (cash only)</span>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-number">4</span>
+          <span class="instruction-text">Receive your receipt and service will begin</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn-primary" (click)="confirmCashPayment()">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>I'll Pay at Branch</span>
+        </button>
+        <button class="btn-secondary" (click)="changePaymentMethod()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <span>Change Payment Method</span>
+        </button>
+        <button class="btn-outline" (click)="goHome()">
+          <ion-icon name="home-outline"></ion-icon>
+          <span>Back to Home</span>
+        </button>
+      </div>
+    </ng-container>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,184 @@
+<ion-content class="profile-content" [scroll]="true">
+  <div class="profile-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="profile-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+      </div>
+
+      <!-- Profile Card Skeleton -->
+      <div class="skeleton-profile-card">
+        <div class="skeleton-flex-center">
+          <div class="skeleton skeleton-circle" style="width:80px;height:80px;"></div>
+        </div>
+        <div class="skeleton-flex-center" style="flex-direction:column;gap:6px;margin-top:12px;">
+          <div class="skeleton skeleton-text skeleton-w-50"></div>
+          <div class="skeleton skeleton-text-sm skeleton-w-60"></div>
+          <div class="skeleton skeleton-text-sm skeleton-w-40"></div>
+          <div class="skeleton skeleton-button" style="width:120px;height:36px;border-radius:10px;"></div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Skeleton -->
+      <div class="skeleton-grid-3">
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Menu Sections Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-menu-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Account Section Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-menu-list">
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:60px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Logout Button Skeleton -->
+      <div class="skeleton skeleton-button" style="height:50px;border-radius:12px;"></div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="profile-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="profile-title">Profile</h1>
+          <div class="placeholder"></div>
+        </div>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-avatar">
+          <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563eb&color=fff&size=100&bold=true" alt="Profile" />
+          <div class="profile-status"></div>
+        </div>
+        <div class="profile-info">
+          <h2 class="profile-name">John Doe</h2>
+          <p class="profile-email">john.doe@email.com</p>
+          <p class="profile-phone">+27 82 123 4567</p>
+          <button class="edit-profile-btn" (click)="editProfile()">
+            <ion-icon name="create-outline"></ion-icon>
+            Edit Profile
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats">
+        <div class="stat-item">
+          <span class="stat-number">12</span>
+          <span class="stat-label">Bookings</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2,450</span>
+          <span class="stat-label">Points</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">VIP</span>
+          <span class="stat-label">Status</span>
+        </div>
+      </div>
+
+      <!-- Menu Sections -->
+      <div class="menu-section">
+        <div class="section-header">
+          <h2 class="section-title">App Features</h2>
+        </div>
+        
+        <div class="menu-grid">
+          <div class="menu-item" *ngFor="let menu of appMenus" (click)="navigateTo(menu.route)">
+            <div class="menu-icon" [style.background]="menu.color">
+              <ion-icon [name]="menu.icon"></ion-icon>
+            </div>
+            <div class="menu-info">
+              <span class="menu-title">{{ menu.title }}</span>
+              <span class="menu-desc">{{ menu.desc }}</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="menu-arrow"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Settings -->
+      <div class="menu-section">
+        <div class="section-header">
+          <h2 class="section-title">Account</h2>
+        </div>
+        
+        <div class="menu-grid">
+          <div class="menu-item" *ngFor="let menu of accountMenus" (click)="navigateTo(menu.route)">
+            <div class="menu-icon" [style.background]="menu.color">
+              <ion-icon [name]="menu.icon"></ion-icon>
+            </div>
+            <div class="menu-info">
+              <span class="menu-title">{{ menu.title }}</span>
+              <span class="menu-desc">{{ menu.desc }}</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="menu-arrow"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logout Button -->
+      <button class="logout-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        <span>Logout</span>
+      </button>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Bottom Navigation Bar - No Highlight -->
+  <div class="bottom-nav">
+    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Book</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('booking-history')" (click)="navigateTo('booking-history')">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>History</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Home</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('vehicles')" (click)="navigateTo('vehicles')">
+      <ion-icon name="car-outline"></ion-icon>
+      <span>Vehicles</span>
+    </div>
+    <div class="nav-item" [class.active]="isActive('vip-membership')" (click)="navigateTo('vip-membership')">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>VIP</span>
+    </div>
+  </div>
+</ion-content>

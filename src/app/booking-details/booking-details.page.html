@@ -1,0 +1,289 @@
+<ion-content class="booking-details-content" [scroll]="true">
+  <div class="booking-details-container">
+    
+    <!-- SKELETON LOADING STATE -->
+    <div class="skeleton-wrapper" *ngIf="isLoading">
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-back-button"></div>
+        <div class="skeleton-title"></div>
+        <div class="skeleton-placeholder"></div>
+      </div>
+      
+      <!-- QR Code Skeleton -->
+      <div class="skeleton-card qr-skeleton">
+        <div class="skeleton-qr-header">
+          <div class="skeleton-line skeleton-icon-small"></div>
+          <div class="skeleton-line skeleton-text-short"></div>
+        </div>
+        <div class="skeleton-qr-box"></div>
+        <div class="skeleton-qr-footer">
+          <div class="skeleton-line skeleton-text-short"></div>
+          <div class="skeleton-line skeleton-text-medium"></div>
+          <div class="skeleton-button small"></div>
+        </div>
+      </div>
+      
+      <!-- Status Banner Skeleton -->
+      <div class="skeleton-card status-skeleton">
+        <div class="skeleton-status-row">
+          <div class="skeleton-line skeleton-icon-medium"></div>
+          <div class="skeleton-status-content">
+            <div class="skeleton-line skeleton-text-short"></div>
+            <div class="skeleton-line skeleton-text-medium"></div>
+          </div>
+          <div class="skeleton-line skeleton-text-short"></div>
+        </div>
+      </div>
+      
+      <!-- Reference Card Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-text-short"></div>
+        <div class="skeleton-line skeleton-text-medium"></div>
+        <div class="skeleton-line skeleton-text-short"></div>
+      </div>
+      
+      <!-- Details Card Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-detail-row" *ngFor="let _ of [1,2,3,4,5,6]">
+          <div class="skeleton-line skeleton-label-short"></div>
+          <div class="skeleton-line skeleton-value-short"></div>
+        </div>
+      </div>
+      
+      <!-- Vehicle Card Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-vehicle-row">
+          <div class="skeleton-circle large"></div>
+          <div class="skeleton-vehicle-content">
+            <div class="skeleton-line skeleton-text-medium"></div>
+            <div class="skeleton-line skeleton-text-short"></div>
+            <div class="skeleton-line skeleton-text-short"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service & Package Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-service-row">
+          <div class="skeleton-circle medium"></div>
+          <div class="skeleton-service-content">
+            <div class="skeleton-line skeleton-text-short"></div>
+            <div class="skeleton-line skeleton-text-medium"></div>
+            <div class="skeleton-line skeleton-text-short"></div>
+          </div>
+        </div>
+        <div class="skeleton-divider"></div>
+        <div class="skeleton-service-row">
+          <div class="skeleton-circle medium"></div>
+          <div class="skeleton-service-content">
+            <div class="skeleton-line skeleton-text-short"></div>
+            <div class="skeleton-line skeleton-text-medium"></div>
+            <div class="skeleton-line skeleton-text-short"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Branch Card Skeleton -->
+      <div class="skeleton-card branch-skeleton">
+        <div class="skeleton-branch-row">
+          <div class="skeleton-circle medium"></div>
+          <div class="skeleton-branch-content">
+            <div class="skeleton-line skeleton-text-short"></div>
+            <div class="skeleton-line skeleton-text-medium"></div>
+            <div class="skeleton-line skeleton-text-short"></div>
+          </div>
+          <div class="skeleton-icon-small"></div>
+        </div>
+      </div>
+      
+      <!-- Payment Details Skeleton -->
+      <div class="skeleton-card">
+        <div class="skeleton-line skeleton-title-line"></div>
+        <div class="skeleton-payment-row" *ngFor="let _ of [1,2]">
+          <div class="skeleton-line skeleton-text-short"></div>
+          <div class="skeleton-line skeleton-text-short"></div>
+        </div>
+        <div class="skeleton-divider"></div>
+        <div class="skeleton-payment-row total">
+          <div class="skeleton-line skeleton-text-medium"></div>
+          <div class="skeleton-line skeleton-text-medium"></div>
+        </div>
+      </div>
+      
+      <!-- Action Buttons Skeleton -->
+      <div class="skeleton-actions">
+        <div class="skeleton-button primary"></div>
+        <div class="skeleton-button secondary"></div>
+        <div class="skeleton-button danger"></div>
+        <div class="skeleton-button outline"></div>
+      </div>
+    </div>
+
+    <!-- CONTENT LOADED STATE -->
+    <ng-container *ngIf="!isLoading">
+      <!-- Header -->
+      <div class="details-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="details-title">Booking Details</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="details-subtitle">View your booking information</p>
+      </div>
+
+      <!-- QR Code Card -->
+      <div class="qr-code-card">
+        <div class="qr-code-header">
+          <ion-icon name="qr-code-outline"></ion-icon>
+          <span>Scan to Check-in</span>
+        </div>
+        <div class="qr-code-container">
+          <div class="qr-code-wrapper" *ngIf="qrCodeData">
+            <img [src]="qrCodeData" alt="QR Code" class="qr-code-image" />
+          </div>
+          <div class="qr-loading" *ngIf="!qrCodeData">
+            <ion-icon name="reload-outline"></ion-icon>
+            <span>Generating QR Code...</span>
+          </div>
+        </div>
+        <div class="qr-code-footer">
+          <span class="qr-label">Booking Reference</span>
+          <span class="qr-reference">#{{ bookingReference }}</span>
+          <button class="qr-download-btn" (click)="downloadQRCode()">
+            <ion-icon name="download-outline"></ion-icon>
+            Download QR
+          </button>
+        </div>
+      </div>
+
+      <!-- Booking Status Banner -->
+      <div class="status-banner" [class]="bookingStatus">
+        <div class="status-icon">
+          <ion-icon [name]="getStatusIcon()"></ion-icon>
+        </div>
+        <div class="status-info">
+          <span class="status-label">Booking Status</span>
+          <span class="status-value">{{ bookingStatus }}</span>
+        </div>
+        <span class="status-date">{{ bookingDate }}</span>
+      </div>
+
+      <!-- Booking Reference -->
+      <div class="reference-card">
+        <span class="reference-label">Booking Reference</span>
+        <span class="reference-number">#{{ bookingReference }}</span>
+        <span class="reference-date">{{ bookingDate }}</span>
+      </div>
+
+      <!-- Booking Details -->
+      <div class="details-card">
+        <h3 class="details-title">Booking Information</h3>
+        
+        <div class="detail-row" *ngFor="let detail of bookingDetails">
+          <span class="detail-label">{{ detail.label }}</span>
+          <span class="detail-value" [class.payment-method]="detail.isPayment">{{ detail.value }}</span>
+        </div>
+      </div>
+
+      <!-- Vehicle Details -->
+      <div class="vehicle-card">
+        <h3 class="vehicle-title">🚗 Vehicle Details</h3>
+        
+        <div class="vehicle-info">
+          <div class="vehicle-image" [style.background]="vehicleColor">
+            <ion-icon name="car-outline"></ion-icon>
+          </div>
+          <div class="vehicle-details">
+            <h4 class="vehicle-name">{{ vehicleName }}</h4>
+            <span class="vehicle-plate">{{ vehiclePlate }}</span>
+            <span class="vehicle-make-model">{{ vehicleMake }} {{ vehicleModel }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service & Package -->
+      <div class="service-package-card">
+        <div class="service-info">
+          <div class="service-icon" [style.background]="serviceColor">
+            <ion-icon [name]="serviceIcon"></ion-icon>
+          </div>
+          <div class="service-details">
+            <span class="service-label">Service</span>
+            <span class="service-name">{{ serviceName }}</span>
+            <span class="service-price">{{ servicePrice }}</span>
+          </div>
+        </div>
+        <div class="package-info" *ngIf="packageName">
+          <div class="package-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+            <ion-icon name="gift-outline"></ion-icon>
+          </div>
+          <div class="package-details">
+            <span class="package-label">Package</span>
+            <span class="package-name">{{ packageName }}</span>
+            <span class="package-price">{{ packagePrice }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Branch Location -->
+      <div class="branch-card" (click)="getDirections()">
+        <div class="branch-icon">
+          <ion-icon name="location-outline"></ion-icon>
+        </div>
+        <div class="branch-info">
+          <span class="branch-label">Branch Location</span>
+          <span class="branch-name">{{ branchName }}</span>
+          <span class="branch-address">{{ branchAddress }}</span>
+        </div>
+        <ion-icon name="navigate-outline" class="branch-arrow"></ion-icon>
+      </div>
+      
+      <!-- Payment Details -->
+      <div class="payment-details-card">
+        <h3 class="payment-title">💳 Payment Details</h3>
+        
+        <div class="payment-row">
+          <span class="payment-label">Payment Method</span>
+          <span class="payment-value">{{ paymentMethod }}</span>
+        </div>
+        <div class="payment-row">
+          <span class="payment-label">Payment Status</span>
+          <span class="payment-value" [class]="paymentStatusClass">{{ paymentStatus }}</span>
+        </div>
+        <div class="payment-row total">
+          <span class="payment-label">Total Amount</span>
+          <span class="payment-value total-amount">{{ totalAmount }}</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn-primary" (click)="rebookBooking()" *ngIf="bookingStatus === 'Completed'">
+          <ion-icon name="refresh-outline"></ion-icon>
+          Rebook
+        </button>
+        <button class="btn-secondary" (click)="downloadReceipt()" *ngIf="bookingStatus === 'Completed' || bookingStatus === 'Confirmed'">
+          <ion-icon name="download-outline"></ion-icon>
+          Download Receipt
+        </button>
+        <button class="btn-danger" (click)="cancelBooking()" *ngIf="bookingStatus === 'Confirmed' || bookingStatus === 'Pending'">
+          <ion-icon name="close-outline"></ion-icon>
+          Cancel Booking
+        </button>
+        <button class="btn-outline" (click)="goBack()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          Back
+        </button>
+      </div>
+    </ng-container>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

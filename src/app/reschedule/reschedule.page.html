@@ -1,0 +1,174 @@
+<ion-content class="reschedule-content" [scroll]="true">
+  <div class="reschedule-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="reschedule-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Booking Info Skeleton -->
+      <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
+
+      <!-- Date Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-grid-7">
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:56px;border-radius:10px;"></div>
+      </div>
+
+      <!-- Time Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-grid-4">
+        <div class="skeleton skeleton-card" style="height:44px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:44px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:44px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="height:44px;border-radius:10px;"></div>
+      </div>
+
+      <!-- Confirm Button Skeleton -->
+      <div class="skeleton skeleton-button" style="height:50px;border-radius:12px;margin-top:20px;"></div>
+
+    </div>
+
+    <!-- Actual Content -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="reschedule-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="reschedule-title">Reschedule Booking</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="reschedule-subtitle">Choose a new date and time for your booking</p>
+      </div>
+
+      <!-- Current Booking Info -->
+      <div class="booking-info-card">
+        <div class="booking-info-header">
+          <div class="booking-info-icon">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </div>
+          <div class="booking-info-text">
+            <span class="booking-info-label">Current Booking</span>
+            <span class="booking-info-service">{{ bookingData?.service || 'Premium Wash' }}</span>
+          </div>
+        </div>
+        <div class="booking-info-details">
+          <div class="info-item">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <span>{{ bookingData?.date || '2026-07-20' }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ bookingData?.time || '10:30 AM' }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ bookingData?.branch || 'Sandton City' }}</span>
+          </div>
+          <div class="info-item">
+            <ion-icon name="car-outline"></ion-icon>
+            <span>{{ bookingData?.vehicle || 'BMW X5' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Choose New Date -->
+      <div class="date-section">
+        <div class="section-header">
+          <h2 class="section-title">Choose New Date</h2>
+          <span class="section-subtitle">Select a new date for your booking</span>
+        </div>
+        
+        <div class="date-options">
+          <div class="date-option" *ngFor="let date of availableDates" 
+               [class.selected]="selectedDate === date.value"
+               [class.disabled]="date.disabled"
+               (click)="selectDate(date)">
+            <span class="date-day">{{ date.day }}</span>
+            <span class="date-number">{{ date.number }}</span>
+            <span class="date-month">{{ date.month }}</span>
+            <span class="date-badge" *ngIf="date.isToday">Today</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Choose New Time -->
+      <div class="time-section">
+        <div class="section-header">
+          <h2 class="section-title">Choose New Time</h2>
+          <span class="section-subtitle">Select a new time slot</span>
+        </div>
+        
+        <div class="time-options">
+          <div class="time-option" *ngFor="let time of availableTimes" 
+               [class.selected]="selectedTime === time"
+               [class.disabled]="time.disabled"
+               (click)="selectTime(time)">
+            {{ time.display }}
+            <span class="time-availability" *ngIf="time.available">Available</span>
+            <span class="time-availability booked" *ngIf="!time.available">Booked</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reschedule Summary -->
+      <div class="reschedule-summary" *ngIf="selectedDate && selectedTime">
+        <div class="summary-header">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>New Booking Time</span>
+        </div>
+        <div class="summary-details">
+          <div class="summary-item">
+            <span class="summary-label">Date</span>
+            <span class="summary-value">{{ selectedDate | date:'fullDate' }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Time</span>
+            <span class="summary-value">{{ selectedTime.display }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Service</span>
+            <span class="summary-value">{{ bookingData?.service || 'Premium Wash' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-section">
+        <button class="action-btn cancel-btn" (click)="goBack()">
+          Cancel
+        </button>
+        <button class="action-btn confirm-btn" (click)="confirmReschedule()" [disabled]="!selectedDate || !selectedTime">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          Confirm Reschedule
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,232 @@
+<ion-content class="vip-payment-content" [scroll]="true">
+  <div class="vip-payment-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="vip-payment-skeleton">
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Unlock Animation Skeleton -->
+      <div class="skeleton skeleton-card" style="height:180px;border-radius:20px;"></div>
+
+      <!-- Plan Summary Skeleton -->
+      <div class="skeleton skeleton-card" style="height:80px;border-radius:16px;"></div>
+
+      <!-- Features Skeleton -->
+      <div class="skeleton skeleton-card" style="height:180px;border-radius:16px;"></div>
+
+      <!-- Payment Methods Skeleton -->
+      <div class="skeleton skeleton-card" style="height:200px;border-radius:16px;"></div>
+
+      <!-- Payment Summary Skeleton -->
+      <div class="skeleton skeleton-card" style="height:140px;border-radius:16px;"></div>
+
+      <!-- Pay Button Skeleton -->
+      <div class="skeleton skeleton-card" style="height:56px;border-radius:14px;"></div>
+    </div>
+
+    <!-- Actual Content -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Animated Background -->
+      <div class="animated-bg">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+        <div class="confetti-container" *ngIf="paymentSuccess">
+          <div class="confetti confetti-1"></div>
+          <div class="confetti confetti-2"></div>
+          <div class="confetti confetti-3"></div>
+          <div class="confetti confetti-4"></div>
+          <div class="confetti confetti-5"></div>
+          <div class="confetti confetti-6"></div>
+          <div class="confetti confetti-7"></div>
+          <div class="confetti confetti-8"></div>
+          <div class="confetti confetti-9"></div>
+          <div class="confetti confetti-10"></div>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="payment-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="payment-title">VIP Payment</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="payment-subtitle">Complete your VIP membership purchase</p>
+      </div>
+
+      <!-- Unlock Premium Animation -->
+      <div class="unlock-animation" *ngIf="!paymentSuccess">
+        <div class="unlock-icon">
+          <div class="lock-icon">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+          </div>
+          <div class="unlock-ring"></div>
+          <div class="unlock-ring-2"></div>
+          <div class="unlock-sparkle sparkle-1">✦</div>
+          <div class="unlock-sparkle sparkle-2">✦</div>
+          <div class="unlock-sparkle sparkle-3">✦</div>
+          <div class="unlock-sparkle sparkle-4">✦</div>
+        </div>
+        <h2 class="unlock-title">Unlock Premium VIP</h2>
+        <p class="unlock-desc">Get exclusive benefits and priority service</p>
+      </div>
+
+      <!-- Payment Success Animation -->
+      <div class="payment-success-animation" *ngIf="paymentSuccess">
+        <div class="success-circle">
+          <div class="success-ring"></div>
+          <div class="success-ring-2"></div>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <h2 class="success-title">Payment Successful! 🎉</h2>
+        <p class="success-desc">Your VIP membership is now active</p>
+        <div class="success-badge">
+          <ion-icon name="star"></ion-icon>
+          VIP Member
+        </div>
+      </div>
+
+      <!-- Subscription Summary -->
+      <div class="subscription-summary-card" *ngIf="subscriptionData">
+        <h3 class="subscription-title">📋 Subscription Details</h3>
+        
+        <div class="summary-row">
+          <span class="summary-label">Package</span>
+          <span class="summary-value">{{ subscriptionData.packageName || planData?.name || 'Premium' }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Price</span>
+          <span class="summary-value">{{ subscriptionData.totalAmount || planData?.price || 'R599' }}/month</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Total Washes</span>
+          <span class="summary-value">{{ subscriptionData.totalWashes || planData?.maxDays || 4 }} washes/month</span>
+        </div>
+        <div class="summary-row" *ngIf="subscriptionData.selectedDays">
+          <span class="summary-label">Selected Days</span>
+          <span class="summary-value">{{ getSelectedDaysDisplay() }}</span>
+        </div>
+        <div class="summary-row" *ngIf="subscriptionData.selectedTime">
+          <span class="summary-label">Time Slot</span>
+          <span class="summary-value">{{ subscriptionData.selectedTime }}</span>
+        </div>
+        <div class="summary-row total" *ngIf="subscriptionData.weeks?.length > 0">
+          <span class="summary-label">Weeks</span>
+          <span class="summary-value">{{ subscriptionData.weeks.length }} weeks</span>
+        </div>
+      </div>
+
+      <!-- Plan Summary -->
+      <div class="plan-summary-card" [class.success]="paymentSuccess">
+        <div class="plan-summary-icon" [style.background]="planData?.color || 'linear-gradient(135deg, #fbbf24, #f59e0b)'">
+          <ion-icon name="star"></ion-icon>
+        </div>
+        <div class="plan-summary-info">
+          <span class="plan-summary-label">Selected Plan</span>
+          <span class="plan-summary-name">{{ planData?.name || 'Premium' }}</span>
+          <span class="plan-summary-price">{{ planData?.price || 'R599' }}/month</span>
+          <span class="plan-summary-washes" *ngIf="planData?.maxDays">
+            <ion-icon name="calendar-outline"></ion-icon>
+            {{ planData.maxDays }} washes/month
+          </span>
+        </div>
+        <div class="plan-summary-badge" [class.popular]="planData?.popular">
+          {{ planData?.popular ? '★ Popular' : '' }}
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="features-card">
+        <h3 class="features-title">✨ What's Included</h3>
+        <ul class="features-list">
+          <li *ngFor="let feature of planData?.features || []">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            {{ feature }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="payment-methods-card">
+        <h3 class="payment-methods-title">💳 Payment Method</h3>
+        
+        <div class="payment-option" [class.selected]="selectedPayment === 'card'" (click)="selectPayment('card')">
+          <ion-icon name="card-outline" class="payment-option-icon"></ion-icon>
+          <div class="payment-option-info">
+            <span class="payment-option-name">Card Payment</span>
+            <span class="payment-option-desc">Credit or Debit Card</span>
+          </div>
+          <ion-icon name="checkmark-circle" class="payment-option-check" *ngIf="selectedPayment === 'card'"></ion-icon>
+        </div>
+        
+        <div class="payment-option" [class.selected]="selectedPayment === 'eft'" (click)="selectPayment('eft')">
+          <ion-icon name="swap-horizontal-outline" class="payment-option-icon"></ion-icon>
+          <div class="payment-option-info">
+            <span class="payment-option-name">EFT Payment</span>
+            <span class="payment-option-desc">Electronic Funds Transfer</span>
+          </div>
+          <ion-icon name="checkmark-circle" class="payment-option-check" *ngIf="selectedPayment === 'eft'"></ion-icon>
+        </div>
+        
+        <div class="payment-option" [class.selected]="selectedPayment === 'mobile'" (click)="selectPayment('mobile')">
+          <ion-icon name="phone-portrait-outline" class="payment-option-icon"></ion-icon>
+          <div class="payment-option-info">
+            <span class="payment-option-name">Mobile Payment</span>
+            <span class="payment-option-desc">Apple Pay / Google Pay</span>
+          </div>
+          <ion-icon name="checkmark-circle" class="payment-option-check" *ngIf="selectedPayment === 'mobile'"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Payment Summary -->
+      <div class="payment-summary-card">
+        <div class="summary-row">
+          <span class="summary-label">Plan Price</span>
+          <span class="summary-value">{{ planData?.price || 'R599' }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">VAT (15%)</span>
+          <span class="summary-value">{{ calculateVAT() }}</span>
+        </div>
+        <div class="summary-row total">
+          <span class="summary-label">Total Due</span>
+          <span class="summary-value total-amount">{{ calculateTotal() }}</span>
+        </div>
+      </div>
+
+      <!-- Payment Button -->
+      <div class="payment-button-wrapper">
+        <button class="pay-now-btn" (click)="processPayment()" [disabled]="!selectedPayment || processing">
+          <span class="btn-content" *ngIf="!processing">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            Pay {{ calculateTotal() }}
+          </span>
+          <span class="btn-content processing" *ngIf="processing">
+            <ion-icon name="reload-outline" class="spinning"></ion-icon>
+            Processing...
+          </span>
+        </button>
+        <p class="secure-text" *ngIf="!processing">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+          Secure payment powered by PayFast
+        </p>
+      </div>
+
+      <!-- Bottom Spacer -->
+      <div class="bottom-spacer"></div>
+
+    </div>
+  </div>
+</ion-content>

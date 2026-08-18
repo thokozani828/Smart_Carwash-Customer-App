@@ -1,0 +1,1450 @@
+// ============================================================
+// CUSTOMIZE SUBSCRIPTION PAGE
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+.customize-skeleton {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.skeleton-text {
+  height: 20px;
+  border-radius: 4px;
+  
+  &.skeleton-w-40 {
+    width: 40%;
+  }
+  
+  &.skeleton-w-30 {
+    width: 30%;
+  }
+}
+
+.skeleton-text-sm {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-circle {
+  border-radius: 50% !important;
+}
+
+.skeleton-card {
+  background: #e2e8f0;
+}
+
+.skeleton-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0 10px;
+}
+
+.skeleton-grid-7 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-time-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+// ==========================
+// CUSTOMIZE CONTENT
+// ==========================
+
+.customize-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.customize-container {
+  padding: 16px 16px 80px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER - SMALLER FONT
+// ==========================
+
+.customize-header {
+  margin-bottom: 20px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    
+    .back-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 22px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .customize-title {
+      font-size: 18px !important;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 160px;
+    }
+    
+    .placeholder {
+      width: 44px;
+    }
+  }
+  
+  .customize-subtitle {
+    font-size: 14px !important;
+    color: $text-gray;
+    margin: 4px 0 0 56px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// PLAN SUMMARY CARD
+// ==========================
+
+.plan-summary-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  position: relative;
+  
+  .plan-summary-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $white;
+    }
+  }
+  
+  .plan-summary-info {
+    flex: 1;
+    
+    .plan-summary-label {
+      display: block;
+      font-size: 11px;
+      color: $text-light;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    
+    .plan-summary-name {
+      display: block;
+      font-size: 20px !important;
+      font-weight: 700;
+      color: $text-dark;
+    }
+    
+    .plan-summary-price {
+      display: block;
+      font-size: 16px !important;
+      font-weight: 600;
+      color: $brand-blue;
+    }
+    
+    .plan-summary-washes {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: $text-gray;
+      margin-top: 4px;
+      
+      ion-icon {
+        font-size: 15px;
+      }
+    }
+  }
+  
+  .plan-summary-badge {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $text-light;
+    
+    &.popular {
+      color: $gold;
+    }
+  }
+}
+
+// ==========================
+// PACKAGE FEATURES
+// ==========================
+
+.package-features {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 18px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .package-features-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 12px;
+    
+    ion-icon {
+      font-size: 20px;
+      color: $brand-blue;
+    }
+    
+    span {
+      font-size: 16px !important;
+      font-weight: 700;
+      color: $text-dark;
+    }
+  }
+  
+  .package-features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 0;
+      
+      ion-icon {
+        font-size: 18px !important;
+        color: $success;
+        flex-shrink: 0;
+      }
+      
+      span {
+        font-size: 14px !important;
+        color: $text-gray;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// ==========================
+// SERVICE TYPE SELECTION
+// ==========================
+
+.service-type-section {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.service-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.service-type-card {
+  background: $white;
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 2px solid $border-color;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  &.selected {
+    border-color: $brand-blue;
+    background: rgba($brand-blue, 0.04);
+    box-shadow: 0 0 0 4px rgba($brand-blue, 0.08);
+  }
+  
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba($brand-blue, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 26px;
+      color: $brand-blue;
+    }
+  }
+  
+  .service-info {
+    flex: 1;
+    
+    .service-name {
+      display: block;
+      font-size: 17px !important;
+      font-weight: 700;
+      color: $text-dark;
+    }
+    
+    .service-desc {
+      display: block;
+      font-size: 13px !important;
+      color: $text-gray;
+    }
+    
+    .service-price {
+      display: block;
+      font-size: 14px !important;
+      font-weight: 600;
+      color: $brand-blue;
+      margin-top: 2px;
+    }
+  }
+  
+  .service-check {
+    ion-icon {
+      font-size: 24px;
+      color: $success;
+    }
+  }
+}
+
+// ==========================
+// ADDRESS SECTION
+// ==========================
+
+.address-section {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  animation: slideDown 0.3s ease;
+}
+
+.address-input-container {
+  display: flex;
+  align-items: center;
+  background: $white;
+  border: 2px solid $border-color;
+  border-radius: 14px;
+  padding: 0 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:focus-within {
+    border-color: $brand-blue;
+    box-shadow: 0 0 0 4px rgba($brand-blue, 0.08);
+  }
+  
+  .address-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: $text-light;
+    
+    ion-icon {
+      font-size: 22px;
+    }
+  }
+  
+  .address-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 0;
+    font-size: 15px;
+    font-family: $font-family;
+    color: $text-dark;
+    background: transparent;
+    min-height: 52px;
+    
+    &::placeholder {
+      color: $text-light;
+      font-weight: 400;
+    }
+  }
+  
+  .address-clear-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-light;
+    transition: all 0.3s ease;
+    
+    ion-icon {
+      font-size: 20px;
+    }
+    
+    &:hover {
+      color: $danger;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.address-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 0 4px;
+  font-size: 12px;
+  color: $text-light;
+  
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+.address-suggestions {
+  margin-top: 8px;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px $shadow-medium;
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+  
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    ion-icon {
+      font-size: 18px;
+      color: $text-light;
+    }
+    
+    span {
+      font-size: 14px;
+      color: $text-dark;
+      font-weight: 500;
+    }
+    
+    &:hover {
+      background: rgba($brand-blue, 0.05);
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ==========================
+// WEEK TABS
+// ==========================
+
+.week-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+  
+  .week-tab {
+    background: $white;
+    border: 2px solid $border-color;
+    border-radius: 14px;
+    padding: 12px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: $font-family;
+    position: relative;
+    
+    &:hover {
+      border-color: $brand-blue;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    &.active {
+      border-color: $brand-blue;
+      background: rgba($brand-blue, 0.05);
+      box-shadow: 0 4px 16px rgba($brand-blue, 0.12);
+    }
+    
+    .week-label {
+      display: block;
+      font-size: 14px !important;
+      font-weight: 700;
+      color: $text-dark;
+    }
+    
+    .week-dates {
+      display: block;
+      font-size: 11px !important;
+      color: $text-gray;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    
+    .week-count {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 10px !important;
+      font-weight: 600;
+      color: $brand-blue;
+      background: rgba($brand-blue, 0.1);
+      padding: 2px 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+// ==========================
+// SELECTION SECTION
+// ==========================
+
+.selection-section {
+  margin-bottom: 22px;
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 0 4px;
+    
+    .section-title {
+      font-size: 19px !important;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0;
+    }
+    
+    .selection-count {
+      font-size: 13px !important;
+      font-weight: 600;
+      color: $brand-blue;
+      background: rgba($brand-blue, 0.08);
+      padding: 3px 14px;
+      border-radius: 12px;
+    }
+  }
+  
+  .section-subtitle {
+    font-size: 14px !important;
+    color: $text-gray;
+    margin: 0 0 14px 4px;
+  }
+}
+
+// ==========================
+// DAYS GRID
+// ==========================
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  
+  .day-card {
+    background: $white;
+    border: 2px solid $border-color;
+    border-radius: 14px;
+    padding: 12px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px $shadow-light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    
+    &:hover:not(.disabled):not(.past) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .day-name {
+      font-size: 13px !important;
+      font-weight: 600;
+      color: $text-gray;
+      text-transform: uppercase;
+    }
+    
+    .day-date {
+      font-size: 18px !important;
+      font-weight: 700;
+      color: $text-dark;
+    }
+    
+    .day-check {
+      font-size: 20px;
+      color: $text-light;
+      
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+    
+    &.selected {
+      border-color: $brand-blue;
+      background: rgba($brand-blue, 0.05);
+      
+      .day-name {
+        color: $brand-blue;
+      }
+      
+      .day-date {
+        color: $brand-blue;
+      }
+      
+      .day-check {
+        color: $brand-blue;
+      }
+    }
+    
+    &.past {
+      opacity: 0.4;
+      cursor: not-allowed;
+      background: #f1f5f9;
+      
+      .day-name, .day-date {
+        color: $text-light;
+      }
+      
+      &:hover {
+        transform: none !important;
+      }
+    }
+    
+    &.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}
+
+// ==========================
+// SELECTION INFO
+// ==========================
+
+.selection-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: rgba($warning, 0.08);
+  border: 1px solid rgba($warning, 0.2);
+  border-radius: 12px;
+  
+  ion-icon {
+    font-size: 20px;
+    color: $warning;
+    flex-shrink: 0;
+  }
+  
+  span {
+    font-size: 13px !important;
+    color: $text-gray;
+    font-weight: 500;
+  }
+}
+
+// ==========================
+// SELECTED DAYS SUMMARY
+// ==========================
+
+.selected-days-summary {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .summary-title {
+    font-size: 17px !important;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .selected-days-list {
+    max-height: 200px;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $border-color;
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $brand-blue;
+      border-radius: 2px;
+    }
+  }
+  
+  .selected-day-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .selected-day-week {
+      font-size: 11px !important;
+      font-weight: 600;
+      color: $brand-blue;
+      background: rgba($brand-blue, 0.08);
+      padding: 3px 10px;
+      border-radius: 8px;
+      min-width: 55px;
+      text-align: center;
+    }
+    
+    .selected-day-name {
+      font-size: 14px !important;
+      font-weight: 600;
+      color: $text-dark;
+      flex: 1;
+    }
+    
+    .selected-day-date {
+      font-size: 13px !important;
+      color: $text-gray;
+    }
+    
+    .remove-day-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: rgba($danger, 0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $danger;
+      }
+      
+      &:hover {
+        background: rgba($danger, 0.15);
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  .total-selected-count {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 2px solid $border-color;
+    font-size: 15px !important;
+    font-weight: 700;
+    color: $brand-blue;
+    text-align: center;
+  }
+}
+
+// ==========================
+// TIME GRID
+// ==========================
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  
+  .time-card {
+    background: $white;
+    border: 2px solid $border-color;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px $shadow-light;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    ion-icon {
+      font-size: 22px;
+      color: $text-light;
+    }
+    
+    .time-label {
+      flex: 1;
+      font-size: 15px !important;
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    .time-period {
+      font-size: 12px !important;
+      font-weight: 500;
+      color: $text-light;
+    }
+    
+    &.selected {
+      border-color: $brand-blue;
+      background: rgba($brand-blue, 0.05);
+      
+      ion-icon {
+        color: $brand-blue;
+      }
+      
+      .time-label {
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+// ==========================
+// SUBSCRIPTION SUMMARY
+// ==========================
+
+.subscription-summary {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .summary-title {
+    font-size: 18px !important;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .summary-label {
+      font-size: 15px !important;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .summary-value {
+      font-size: 15px !important;
+      color: $text-dark;
+      font-weight: 600;
+      text-align: right;
+      
+      .text-muted {
+        color: $text-light;
+        font-weight: 400;
+      }
+      
+      .service-fee {
+        display: block;
+        font-size: 12px !important;
+        color: $brand-blue;
+        font-weight: 500;
+      }
+      
+      .address-value {
+        font-size: 13px !important;
+        max-width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+      }
+    }
+    
+    &.total {
+      padding-top: 12px;
+      margin-top: 8px;
+      border-top: 2px solid $border-color;
+      
+      .summary-label {
+        font-size: 17px !important;
+        font-weight: 700;
+        color: $text-dark;
+      }
+      
+      .summary-value {
+        font-size: 17px !important;
+        font-weight: 700;
+        color: $text-dark;
+        
+        &.total-amount {
+          font-size: 22px !important;
+          font-weight: 800;
+          color: $brand-blue;
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// PAY SECTION
+// ==========================
+
+.pay-section {
+  .pay-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, $brand-blue, $brand-hover);
+    color: $white;
+    border: none;
+    border-radius: 16px;
+    font-size: 17px !important;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba($brand-blue, 0.3);
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 24px;
+    }
+    
+    .pay-amount {
+      background: rgba($white, 0.15);
+      padding: 3px 14px;
+      border-radius: 12px;
+      font-size: 16px !important;
+      font-weight: 600;
+    }
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
+    }
+    
+    &:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .pay-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px !important;
+    color: $text-gray;
+    margin: 12px 0 0;
+    justify-content: center;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $warning;
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .customize-container {
+    padding: 12px 12px 80px;
+  }
+  
+  .customize-header {
+    .customize-title {
+      font-size: 20px !important;
+    }
+    
+    .customize-subtitle {
+      font-size: 13px !important;
+      margin-left: 0;
+    }
+  }
+  
+  .service-type-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .service-type-card {
+    padding: 14px 16px;
+    
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      
+      ion-icon {
+        font-size: 22px;
+      }
+    }
+    
+    .service-info {
+      .service-name {
+        font-size: 15px !important;
+      }
+      
+      .service-desc {
+        font-size: 12px !important;
+      }
+      
+      .service-price {
+        font-size: 13px !important;
+      }
+    }
+  }
+  
+  .week-tabs {
+    gap: 6px;
+    
+    .week-tab {
+      padding: 10px 8px;
+      
+      .week-label {
+        font-size: 12px !important;
+      }
+      
+      .week-dates {
+        font-size: 9px !important;
+      }
+      
+      .week-count {
+        font-size: 9px !important;
+      }
+    }
+  }
+  
+  .days-grid {
+    gap: 6px;
+    
+    .day-card {
+      padding: 10px 4px;
+      
+      .day-name {
+        font-size: 11px !important;
+      }
+      
+      .day-date {
+        font-size: 15px !important;
+      }
+      
+      .day-check {
+        font-size: 17px;
+        
+        ion-icon {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+  
+  .time-grid {
+    gap: 8px;
+    
+    .time-card {
+      padding: 12px 14px;
+      
+      ion-icon {
+        font-size: 18px;
+      }
+      
+      .time-label {
+        font-size: 13px !important;
+      }
+      
+      .time-period {
+        font-size: 10px !important;
+      }
+    }
+  }
+  
+  .plan-summary-card {
+    padding: 14px 16px;
+    
+    .plan-summary-icon {
+      width: 48px;
+      height: 48px;
+      
+      ion-icon {
+        font-size: 22px;
+      }
+    }
+    
+    .plan-summary-info {
+      .plan-summary-name {
+        font-size: 17px !important;
+      }
+      
+      .plan-summary-price {
+        font-size: 14px !important;
+      }
+    }
+  }
+  
+  .package-features {
+    padding: 14px 16px;
+    
+    .package-features-list {
+      grid-template-columns: 1fr;
+      gap: 4px 0;
+      
+      .feature-item {
+        span {
+          font-size: 13px !important;
+        }
+      }
+    }
+  }
+  
+  .selected-days-summary {
+    padding: 14px 16px;
+    
+    .selected-day-item {
+      padding: 8px 4px;
+      
+      .selected-day-week {
+        font-size: 10px !important;
+        min-width: 45px;
+      }
+      
+      .selected-day-name {
+        font-size: 13px !important;
+      }
+      
+      .selected-day-date {
+        font-size: 12px !important;
+      }
+    }
+  }
+  
+  .subscription-summary {
+    padding: 14px 16px;
+    
+    .summary-title {
+      font-size: 16px !important;
+    }
+    
+    .summary-row {
+      .summary-label {
+        font-size: 13px !important;
+      }
+      
+      .summary-value {
+        font-size: 13px !important;
+      }
+      
+      &.total {
+        .summary-label {
+          font-size: 15px !important;
+        }
+        
+        .summary-value.total-amount {
+          font-size: 19px !important;
+        }
+      }
+    }
+  }
+  
+  .pay-section .pay-btn {
+    padding: 15px;
+    font-size: 15px !important;
+    
+    .pay-amount {
+      font-size: 14px !important;
+    }
+  }
+  
+  .selection-section {
+    .section-header {
+      .section-title {
+        font-size: 17px !important;
+      }
+      
+      .selection-count {
+        font-size: 12px !important;
+      }
+    }
+    
+    .section-subtitle {
+      font-size: 13px !important;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .week-tabs {
+    gap: 4px;
+    
+    .week-tab {
+      padding: 8px 6px;
+      
+      .week-label {
+        font-size: 10px !important;
+      }
+      
+      .week-dates {
+        font-size: 8px !important;
+      }
+      
+      .week-count {
+        font-size: 8px !important;
+      }
+    }
+  }
+  
+  .days-grid {
+    gap: 4px;
+    
+    .day-card {
+      padding: 8px 2px;
+      border-radius: 10px;
+      
+      .day-name {
+        font-size: 10px !important;
+      }
+      
+      .day-date {
+        font-size: 13px !important;
+      }
+      
+      .day-check {
+        font-size: 15px;
+        
+        ion-icon {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+  
+  .time-grid {
+    gap: 6px;
+    
+    .time-card {
+      padding: 10px 12px;
+      border-radius: 10px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+      
+      .time-label {
+        font-size: 12px !important;
+      }
+      
+      .time-period {
+        font-size: 9px !important;
+      }
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .customize-skeleton {
+    animation: none !important;
+  }
+  
+  .skeleton {
+    animation: none !important;
+  }
+  
+  .day-card:hover:not(.disabled):not(.past) {
+    transform: none !important;
+  }
+  
+  .time-card:hover {
+    transform: none !important;
+  }
+  
+  .week-tab:hover {
+    transform: none !important;
+  }
+  
+  .pay-btn:hover:not(:disabled) {
+    transform: none !important;
+  }
+  
+  .service-type-card:hover {
+    transform: none !important;
+  }
+}

@@ -1,2 +1,38 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+// ============================================================
+// SMART CARWASH THEME VARIABLES
+// ============================================================
+
+:root {
+  --sc-blue: #1e6fff;
+  --sc-blue-light: #4fa0ff;
+  --sc-amber: #f5a623;
+  --sc-ink: #0b1a33;
+  --sc-muted: #6b7e9c;
+  --sc-bg: #f0f5fe;
+  --sc-panel: #ffffff;
+}
+
+body.light-theme {
+  --sc-blue: #1e6fff;
+  --sc-blue-light: #4fa0ff;
+  --sc-amber: #f5a623;
+  --sc-ink: #0b1a33;
+  --sc-muted: #6b7e9c;
+  --sc-bg: #f0f5fe;
+  --sc-panel: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sc-ink: #f0f5fe;
+    --sc-muted: #8ba0c4;
+    --sc-bg: #0b1a33;
+    --sc-panel: #132a4a;
+    --sc-blue: #4fa0ff;
+    --sc-blue-light: #7bb8ff;
+    --sc-amber: #f5a623;
+  }
+}

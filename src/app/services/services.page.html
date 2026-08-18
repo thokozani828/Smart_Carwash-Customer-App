@@ -1,0 +1,125 @@
+<ion-content class="services-content" [scroll]="true">
+  <div class="services-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="services-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Category Tabs Skeleton -->
+      <div class="skeleton-tabs">
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+        <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
+      </div>
+
+      <!-- Services Grid Skeleton -->
+      <div class="skeleton-services-grid">
+        <div class="skeleton skeleton-card" style="height:220px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:220px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:220px;border-radius:14px;"></div>
+        <div class="skeleton skeleton-card" style="height:220px;border-radius:14px;"></div>
+      </div>
+
+      <!-- Featured Package Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:180px;border-radius:14px;"></div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="services-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="services-title">Our Services</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="services-subtitle">Professional car care services at your fingertips</p>
+      </div>
+
+      <!-- Service Categories -->
+      <div class="category-tabs">
+        <div class="category-tab" [class.active]="activeCategory === 'all'" (click)="setCategory('all')">
+          All
+        </div>
+        <div class="category-tab" [class.active]="activeCategory === 'wash'" (click)="setCategory('wash')">
+          Washes
+        </div>
+        <div class="category-tab" [class.active]="activeCategory === 'detail'" (click)="setCategory('detail')">
+          Detailing
+        </div>
+        <div class="category-tab" [class.active]="activeCategory === 'special'" (click)="setCategory('special')">
+          Special
+        </div>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="services-grid">
+        <div class="service-card" *ngFor="let service of filteredServices" (click)="viewService(service)">
+          <div class="service-image" [style.background]="service.color">
+            <ion-icon [name]="service.icon"></ion-icon>
+            <span class="service-badge" *ngIf="service.popular">Popular</span>
+          </div>
+          <div class="service-info">
+            <h3 class="service-name">{{ service.name }}</h3>
+            <p class="service-description">{{ service.description }}</p>
+            <div class="service-meta">
+              <span class="service-price">{{ service.price }}</span>
+              <span class="service-duration">
+                <ion-icon name="time-outline"></ion-icon>
+                {{ service.duration }}
+              </span>
+            </div>
+            <button class="service-book-btn" (click)="$event.stopPropagation(); bookService(service)">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Package -->
+      <div class="featured-section">
+        <div class="section-header">
+          <h2 class="section-title">✨ Featured Package</h2>
+        </div>
+        
+        <div class="featured-card" (click)="viewPackage()">
+          <div class="featured-content">
+            <div class="featured-badge">Best Value</div>
+            <h3 class="featured-title">Ultimate Car Care Package</h3>
+            <p class="featured-desc">Includes Premium Wash, Interior Detail, Engine Cleaning, and Tyre Shine</p>
+            <div class="featured-price">
+              <span class="price-original">R1,280</span>
+              <span class="price-discount">R899</span>
+            </div>
+            <button class="featured-btn">View Package</button>
+          </div>
+          <div class="featured-image">
+            <ion-icon name="sparkles-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

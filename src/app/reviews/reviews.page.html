@@ -1,0 +1,192 @@
+<ion-content class="reviews-content" [scroll]="true">
+  <div class="reviews-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="reviews-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- Rating Summary Skeleton -->
+      <div class="skeleton skeleton-card" style="height:160px;border-radius:14px;"></div>
+
+      <!-- Quick Actions Skeleton -->
+      <div class="skeleton-grid-4">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Review Form Skeleton -->
+      <div class="skeleton skeleton-card" style="height:350px;border-radius:14px;"></div>
+
+      <!-- Previous Reviews Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-reviews-list">
+        <div class="skeleton skeleton-card" style="height:120px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:120px;border-radius:12px;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="reviews-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="reviews-title">Feedback</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="reviews-subtitle">Share your experience with us</p>
+      </div>
+
+      <!-- Quick Action Cards -->
+      <div class="quick-actions">
+        <div class="action-card" (click)="openForm('rate')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+            <ion-icon name="star-outline"></ion-icon>
+          </div>
+          <span class="action-label">Rate Service</span>
+        </div>
+        <div class="action-card" (click)="openForm('review')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+            <ion-icon name="create-outline"></ion-icon>
+          </div>
+          <span class="action-label">Write Review</span>
+        </div>
+        <div class="action-card" (click)="openForm('complaint')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          </div>
+          <span class="action-label">Submit Complaint</span>
+        </div>
+        <div class="action-card" (click)="openForm('suggestion')">
+          <div class="action-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+            <ion-icon name="bulb-outline"></ion-icon>
+          </div>
+          <span class="action-label">Suggest Improvement</span>
+        </div>
+      </div>
+
+      <!-- Feedback Form -->
+      <div class="review-form-section" *ngIf="showForm">
+        <div class="form-card">
+          <div class="form-header">
+            <h3 class="form-title">{{ formMode === 'complaint' ? 'Submit Complaint' : 
+                                     formMode === 'suggestion' ? 'Suggest Improvement' : 
+                                     formMode === 'rate' ? 'Rate Service' : 'Write a Review' }}</h3>
+            <button class="form-close-btn" (click)="closeForm()">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+          
+          <div class="form-body">
+            <!-- Rating Stars (for rate and review) -->
+            <div class="form-group" *ngIf="formMode === 'rate' || formMode === 'review'">
+              <label class="form-label">Your Rating</label>
+              <div class="star-rating">
+                <ion-icon *ngFor="let star of [1,2,3,4,5]" 
+                          [name]="star <= selectedRating ? 'star' : 'star-outline'"
+                          (click)="setRating(star)">
+                </ion-icon>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Title</label>
+              <input type="text" class="form-input" placeholder="Summarize your experience" [(ngModel)]="feedbackTitle" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Your Feedback</label>
+              <textarea class="form-textarea" placeholder="Share your experience in detail..." [(ngModel)]="feedbackContent" rows="4"></textarea>
+            </div>
+
+            <div class="form-group" *ngIf="formMode === 'complaint'">
+              <label class="form-label">Priority</label>
+              <select class="form-input" [(ngModel)]="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+
+            <button class="submit-btn" (click)="submitFeedback()">
+              <ion-icon name="send-outline"></ion-icon>
+              {{ formMode === 'complaint' ? 'Submit Complaint' : 
+               formMode === 'suggestion' ? 'Submit Suggestion' : 
+               formMode === 'rate' ? 'Submit Rating' : 'Submit Review' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Feedback History -->
+      <div class="reviews-section">
+        <div class="section-header">
+          <h2 class="section-title">My Feedback History</h2>
+          <span class="view-all" *ngIf="myFeedback.length > 3" (click)="viewAllFeedback()">View All</span>
+        </div>
+        
+        <div class="reviews-list">
+          <div class="review-item" *ngFor="let feedback of myFeedback.slice(0, 3)">
+            <div class="review-header">
+              <div class="reviewer-info">
+                <div class="reviewer-avatar" [style.background]="feedback.avatarColor">
+                  <span>{{ feedback.name.charAt(0) }}</span>
+                </div>
+                <div class="reviewer-details">
+                  <span class="reviewer-name">{{ feedback.name }}</span>
+                  <span class="review-date">{{ feedback.date }}</span>
+                </div>
+              </div>
+              <div class="review-stars" *ngIf="feedback.rating">
+                <ion-icon name="star" *ngFor="let star of [1,2,3,4,5]"
+                          [style.color]="star <= feedback.rating ? '#fbbf24' : '#e2e8f0'">
+                </ion-icon>
+              </div>
+            </div>
+            <h4 class="review-title">{{ feedback.title }}</h4>
+            <p class="review-text">{{ feedback.content }}</p>
+            <div class="review-footer">
+              <span class="review-type" [class]="feedback.type">
+                {{ feedback.type }}
+              </span>
+              <span class="review-status" [class]="feedback.status">
+                {{ feedback.status }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-state" *ngIf="myFeedback.length === 0">
+            <ion-icon name="chatbubble-outline" class="empty-icon"></ion-icon>
+            <h3 class="empty-title">No Feedback Yet</h3>
+            <p class="empty-desc">Share your experience by tapping one of the options above</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+</ion-content>

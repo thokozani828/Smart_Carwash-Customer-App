@@ -1,0 +1,221 @@
+<ion-content class="vip-content" [scroll]="true">
+  <div class="vip-container">
+    
+    <!-- Skeleton Loading -->
+    <div *ngIf="isLoading" class="vip-skeleton">
+      
+      <!-- Header Skeleton -->
+      <div class="skeleton-header">
+        <div class="skeleton-flex">
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+          <div class="skeleton skeleton-text skeleton-w-40"></div>
+          <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
+        </div>
+        <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
+      </div>
+
+      <!-- VIP Status Card Skeleton -->
+      <div class="skeleton skeleton-card" style="height:130px;border-radius:18px;"></div>
+
+      <!-- Benefits Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+      </div>
+      <div class="skeleton-benefits-grid">
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+        <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
+      </div>
+
+      <!-- Plans Skeleton -->
+      <div class="skeleton-section-header">
+        <div class="skeleton skeleton-text skeleton-w-30"></div>
+        <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
+      </div>
+      <div class="skeleton-plans-scroll">
+        <div class="skeleton skeleton-card" style="min-width:280px;height:380px;border-radius:20px;flex-shrink:0;"></div>
+        <div class="skeleton skeleton-card" style="min-width:280px;height:380px;border-radius:20px;flex-shrink:0;"></div>
+        <div class="skeleton skeleton-card" style="min-width:280px;height:380px;border-radius:20px;flex-shrink:0;"></div>
+      </div>
+
+    </div>
+
+    <!-- Actual Content (shown when not loading) -->
+    <div *ngIf="!isLoading">
+      
+      <!-- Header -->
+      <div class="vip-header">
+        <div class="header-top">
+          <div class="back-button" (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </div>
+          <h1 class="vip-title">VIP Membership</h1>
+          <div class="placeholder"></div>
+        </div>
+        <p class="vip-subtitle">Exclusive benefits and premium service</p>
+      </div>
+
+      <!-- VIP Status Card -->
+      <div class="vip-status-card" [class.active]="isVIPActive">
+        <div class="vip-status-icon">
+          <ion-icon name="star-outline"></ion-icon>
+        </div>
+        <div class="vip-status-info">
+          <h2 class="vip-status-title">{{ isVIPActive ? 'VIP Member' : 'Join VIP Today' }}</h2>
+          <p class="vip-status-desc">
+            {{ isVIPActive ? 'Enjoy exclusive benefits and priority service' : 'Upgrade to VIP for premium benefits' }}
+          </p>
+          <div class="vip-status-badge" [class.active]="isVIPActive">
+            {{ isVIPActive ? 'Active' : 'Inactive' }}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Membership Benefits -->
+      <div class="benefits-section">
+        <div class="section-header">
+          <h2 class="section-title">Membership Benefits</h2>
+        </div>
+        
+        <div class="benefits-grid">
+          <div class="benefit-card" *ngFor="let benefit of benefits">
+            <div class="benefit-icon" [style.background]="benefit.color">
+              <ion-icon [name]="benefit.icon"></ion-icon>
+            </div>
+            <div class="benefit-info">
+              <h4 class="benefit-title">{{ benefit.title }}</h4>
+              <p class="benefit-desc">{{ benefit.desc }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Plans - Horizontal Scroll with Select + Customize -->
+      <div class="plans-section">
+        <div class="section-header">
+          <h2 class="section-title">Membership Plans</h2>
+          <span class="section-badge" *ngIf="selectedPlan">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            {{ selectedPlan.name }} Selected
+          </span>
+        </div>
+        
+        <div class="plans-scroll-wrapper">
+          <div class="plans-scroll">
+            <div class="plan-card" 
+                 [class.popular]="plan.popular" 
+                 [class.selected]="selectedPlan?.id === plan.id" 
+                 *ngFor="let plan of plans">
+              
+              <div class="plan-header" [style.background]="plan.color">
+                <div class="plan-badge" *ngIf="plan.popular">🌟 Most Popular</div>
+                <h3 class="plan-name">{{ plan.name }}</h3>
+                <div class="plan-price">
+                  <span class="price-amount">{{ plan.price }}</span>
+                  <span class="price-period">/month</span>
+                </div>
+                <div class="plan-washes" *ngIf="plan.maxDays">
+                  <ion-icon name="calendar-outline"></ion-icon>
+                  {{ plan.maxDays }} washes/month
+                </div>
+              </div>
+              
+              <ul class="plan-features">
+                <li *ngFor="let feature of plan.features">
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  {{ feature }}
+                </li>
+              </ul>
+              
+              <!-- Select Button (Always Visible when not selected) -->
+              <button class="plan-select-btn" 
+                      [class.primary]="plan.popular"
+                      (click)="selectPlan(plan)"
+                      *ngIf="selectedPlan?.id !== plan.id">
+                <ion-icon name="checkbox-outline"></ion-icon>
+                <span>Select {{ plan.name }}</span>
+              </button>
+
+              <!-- Customize Button (Only visible when selected) -->
+              <button class="plan-customize-btn" 
+                      (click)="openCustomizeModal(plan)"
+                      *ngIf="selectedPlan?.id === plan.id">
+                <ion-icon name="create-outline"></ion-icon>
+                <span>Customize Plan</span>
+                <ion-icon name="arrow-forward-outline" class="arrow-icon"></ion-icon>
+              </button>
+
+              <!-- Selected Badge -->
+              <div class="plan-selected-badge" *ngIf="selectedPlan?.id === plan.id">
+                <ion-icon name="checkmark-circle"></ion-icon>
+                <span>Selected</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scroll Indicators -->
+        <div class="scroll-indicators">
+          <span class="scroll-dot active"></span>
+          <span class="scroll-dot"></span>
+          <span class="scroll-dot"></span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-section" *ngIf="isVIPActive">
+        <button class="action-btn renew-btn" (click)="renewMembership()">
+          <ion-icon name="refresh-outline"></ion-icon>
+          Renew Membership
+        </button>
+        <button class="action-btn cancel-btn" (click)="cancelMembership()">
+          <ion-icon name="close-outline"></ion-icon>
+          Cancel Membership
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Spacer -->
+    <div class="bottom-spacer"></div>
+
+  </div>
+
+  <!-- Bottom Navigation Bar - VIP Highlighted -->
+  <div class="bottom-nav">
+    <!-- Book -->
+    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Book</span>
+    </div>
+    
+    <!-- History -->
+    <div class="nav-item" [class.active]="isActive('booking-history')" (click)="navigateTo('booking-history')">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>History</span>
+    </div>
+    
+    <!-- Home -->
+    <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Home</span>
+    </div>
+    
+    <!-- Vehicles -->
+    <div class="nav-item" [class.active]="isActive('vehicles')" (click)="navigateTo('vehicles')">
+      <ion-icon name="car-outline"></ion-icon>
+      <span>Vehicles</span>
+    </div>
+    
+    <!-- VIP - Highlighted with Big Round Indicator -->
+    <div class="nav-item active vip-center" (click)="navigateTo('vip-membership')">
+      <div class="nav-indicator">
+        <ion-icon name="star-outline"></ion-icon>
+      </div>
+      <span>VIP</span>
+    </div>
+  </div>
+</ion-content>

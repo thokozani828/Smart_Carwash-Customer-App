@@ -1,0 +1,1314 @@
+// ============================================================
+// BOOKING DETAILS PAGE
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$text-dark: #0f172a;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$gold: #fbbf24;
+$purple: #8b5cf6;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+.skeleton-wrapper {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    #e2e8f0 25%,
+    #f1f5f9 50%,
+    #e2e8f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  height: 12px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+// Skeleton Cards
+.skeleton-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+}
+
+.skeleton-title-line {
+  height: 20px;
+  width: 60%;
+  margin-bottom: 12px;
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+// Header Skeleton
+.skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  .skeleton-back-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e2e8f0;
+  }
+  
+  .skeleton-title {
+    width: 150px;
+    height: 24px;
+    border-radius: 4px;
+    background: #e2e8f0;
+  }
+  
+  .skeleton-placeholder {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// Text sizes
+.skeleton-text-short {
+  height: 10px;
+  width: 80px;
+  border-radius: 4px;
+  background: #e2e8f0;
+}
+
+.skeleton-text-medium {
+  height: 14px;
+  width: 120px;
+  border-radius: 4px;
+  background: #e2e8f0;
+}
+
+.skeleton-label-short {
+  height: 12px;
+  width: 100px;
+  border-radius: 4px;
+  background: #e2e8f0;
+}
+
+.skeleton-value-short {
+  height: 12px;
+  width: 80px;
+  border-radius: 4px;
+  background: #e2e8f0;
+}
+
+// Icons
+.skeleton-icon-small {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: #e2e8f0;
+}
+
+.skeleton-icon-medium {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e8f0;
+}
+
+// QR Code Skeleton
+.qr-skeleton {
+  .skeleton-qr-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .skeleton-qr-box {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 16px;
+    background: #e2e8f0;
+    border-radius: 12px;
+  }
+  
+  .skeleton-qr-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    
+    .skeleton-button {
+      width: 140px;
+      height: 36px;
+      border-radius: 8px;
+      background: #e2e8f0;
+    }
+  }
+}
+
+// Status Banner Skeleton
+.status-skeleton {
+  .skeleton-status-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    .skeleton-status-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+}
+
+// Detail Rows Skeleton
+.skeleton-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+// Vehicle Row Skeleton
+.skeleton-vehicle-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  
+  .skeleton-circle {
+    border-radius: 50%;
+    background: #e2e8f0;
+    
+    &.large {
+      width: 64px;
+      height: 64px;
+    }
+    
+    &.medium {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  
+  .skeleton-vehicle-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+// Service Row Skeleton
+.skeleton-service-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  
+  .skeleton-service-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.skeleton-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 0;
+}
+
+// Branch Skeleton
+.branch-skeleton {
+  .skeleton-branch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    .skeleton-branch-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+}
+
+// Payment Rows Skeleton
+.skeleton-payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  
+  &.total {
+    padding-top: 10px;
+    margin-top: 6px;
+    border-top: 2px solid #e2e8f0;
+  }
+}
+
+// Action Buttons Skeleton
+.skeleton-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  
+  .skeleton-button {
+    height: 50px;
+    border-radius: 12px;
+    background: #e2e8f0;
+    
+    &.primary {
+      background: #e2e8f0;
+    }
+    
+    &.secondary {
+      background: #e2e8f0;
+    }
+    
+    &.danger {
+      background: #e2e8f0;
+    }
+    
+    &.outline {
+      background: #e2e8f0;
+      height: 48px;
+    }
+  }
+}
+
+// ==========================
+// BOOKING DETAILS CONTENT
+// ==========================
+
+.booking-details-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+.booking-details-container {
+  padding: 16px 16px 80px;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: auto;
+}
+
+// ==========================
+// HEADER
+// ==========================
+
+.details-header {
+  margin-bottom: 16px;
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    
+    .back-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $white;
+      border: 1px solid $border-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px $shadow-light;
+      
+      ion-icon {
+        font-size: 20px;
+        color: $text-dark;
+      }
+      
+      &:hover {
+        border-color: $brand-blue;
+        box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+      }
+    }
+    
+    .details-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: $text-dark;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+    
+    .placeholder {
+      width: 40px;
+    }
+  }
+  
+  .details-subtitle {
+    font-size: 13px;
+    color: $text-gray;
+    margin: 4px 0 0 52px;
+    font-weight: 400;
+  }
+}
+
+// ==========================
+// QR CODE CARD
+// ==========================
+
+.qr-code-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  
+  .qr-code-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 12px;
+    
+    ion-icon {
+      font-size: 20px;
+      color: $brand-blue;
+    }
+    
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+    }
+  }
+  
+  .qr-code-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    padding: 8px;
+    
+    .qr-code-wrapper {
+      background: $white;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px $shadow-light;
+      
+      .qr-code-image {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+        animation: qrFadeIn 0.8s ease-out;
+      }
+    }
+    
+    .qr-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: $text-light;
+      
+      ion-icon {
+        font-size: 40px;
+        animation: spin 1s linear infinite;
+      }
+      
+      span {
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .qr-code-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid $border-color;
+    margin-top: 12px;
+    
+    .qr-label {
+      font-size: 10px;
+      color: $text-light;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+    
+    .qr-reference {
+      font-size: 16px;
+      font-weight: 700;
+      color: $brand-blue;
+      font-family: monospace;
+      letter-spacing: 1px;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .qr-download-btn {
+      padding: 6px 14px;
+      background: rgba($brand-blue, 0.08);
+      color: $brand-blue;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+      font-family: $font-family;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+      
+      &:hover {
+        background: rgba($brand-blue, 0.15);
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+// ==========================
+// STATUS BANNER
+// ==========================
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &.confirmed {
+    background: rgba($brand-blue, 0.08);
+    border: 1px solid rgba($brand-blue, 0.15);
+    
+    .status-icon {
+      background: rgba($brand-blue, 0.15);
+      ion-icon { color: $brand-blue; }
+    }
+  }
+  
+  &.completed {
+    background: rgba($success, 0.08);
+    border: 1px solid rgba($success, 0.15);
+    
+    .status-icon {
+      background: rgba($success, 0.15);
+      ion-icon { color: $success; }
+    }
+  }
+  
+  &.pending {
+    background: rgba($warning, 0.08);
+    border: 1px solid rgba($warning, 0.15);
+    
+    .status-icon {
+      background: rgba($warning, 0.15);
+      ion-icon { color: $warning; }
+    }
+  }
+  
+  &.cancelled {
+    background: rgba($danger, 0.08);
+    border: 1px solid rgba($danger, 0.15);
+    
+    .status-icon {
+      background: rgba($danger, 0.15);
+      ion-icon { color: $danger; }
+    }
+  }
+  
+  .status-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 22px;
+    }
+  }
+  
+  .status-info {
+    flex: 1;
+    
+    .status-label {
+      display: block;
+      font-size: 11px;
+      color: $text-light;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .status-value {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: $text-dark;
+    }
+  }
+  
+  .status-date {
+    font-size: 11px;
+    color: $text-light;
+    font-weight: 500;
+  }
+}
+
+// ==========================
+// REFERENCE CARD
+// ==========================
+
+.reference-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 14px 18px;
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .reference-label {
+    display: block;
+    font-size: 11px;
+    color: $text-light;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .reference-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: $brand-blue;
+    margin: 4px 0;
+    font-family: monospace;
+    letter-spacing: 1px;
+  }
+  
+  .reference-date {
+    display: block;
+    font-size: 12px;
+    color: $text-gray;
+  }
+}
+
+// ==========================
+// DETAILS CARD
+// ==========================
+
+.details-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .details-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .detail-value {
+      font-size: 13px;
+      color: $text-dark;
+      font-weight: 600;
+      text-align: right;
+      
+      &.payment-method {
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+// ==========================
+// VEHICLE CARD
+// ==========================
+
+.vehicle-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .vehicle-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .vehicle-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    
+    .vehicle-image {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      
+      ion-icon {
+        font-size: 28px;
+        color: $white;
+      }
+    }
+    
+    .vehicle-details {
+      flex: 1;
+      
+      .vehicle-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: $text-dark;
+        margin: 0 0 2px;
+      }
+      
+      .vehicle-plate {
+        display: block;
+        font-size: 13px;
+        color: $text-gray;
+        font-weight: 500;
+      }
+      
+      .vehicle-make-model {
+        display: block;
+        font-size: 12px;
+        color: $text-light;
+      }
+    }
+  }
+}
+
+// ==========================
+// SERVICE & PACKAGE CARD
+// ==========================
+
+.service-package-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .service-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $border-color;
+    
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      
+      ion-icon {
+        font-size: 24px;
+        color: $white;
+      }
+    }
+    
+    .service-details {
+      flex: 1;
+      
+      .service-label {
+        display: block;
+        font-size: 10px;
+        color: $text-light;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+      
+      .service-name {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: $text-dark;
+      }
+      
+      .service-price {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: $brand-blue;
+      }
+    }
+  }
+  
+  .package-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 12px;
+    
+    .package-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      
+      ion-icon {
+        font-size: 24px;
+        color: $white;
+      }
+    }
+    
+    .package-details {
+      flex: 1;
+      
+      .package-label {
+        display: block;
+        font-size: 10px;
+        color: $text-light;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+      
+      .package-name {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: $text-dark;
+      }
+      
+      .package-price {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+// ==========================
+// BRANCH CARD
+// ==========================
+
+.branch-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px $shadow-light;
+  }
+  
+  .branch-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($brand-blue, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 20px;
+      color: $brand-blue;
+    }
+  }
+  
+  .branch-info {
+    flex: 1;
+    
+    .branch-label {
+      display: block;
+      font-size: 10px;
+      color: $text-light;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+    
+    .branch-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    .branch-address {
+      display: block;
+      font-size: 12px;
+      color: $text-gray;
+    }
+  }
+  
+  .branch-arrow {
+    font-size: 20px;
+    color: $text-light;
+  }
+}
+
+// ==========================
+// TIMELINE CARD
+// ==========================
+
+.timeline-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .timeline-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .timeline-item {
+    display: flex;
+    gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: $border-color;
+      margin-top: 4px;
+      flex-shrink: 0;
+      position: relative;
+      
+      &.active {
+        background: $brand-blue;
+        box-shadow: 0 0 0 4px rgba($brand-blue, 0.15);
+      }
+    }
+    
+    .timeline-content {
+      flex: 1;
+      
+      .timeline-time {
+        display: block;
+        font-size: 11px;
+        color: $text-light;
+        font-weight: 500;
+      }
+      
+      .timeline-event {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: $text-dark;
+      }
+      
+      .timeline-status {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 1px 10px;
+        border-radius: 10px;
+        margin-top: 2px;
+        
+        &.Completed {
+          background: rgba($success, 0.12);
+          color: $success;
+        }
+        
+        &.InProgress {
+          background: rgba($brand-blue, 0.12);
+          color: $brand-blue;
+        }
+        
+        &.Pending {
+          background: rgba($warning, 0.12);
+          color: $warning;
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// PAYMENT DETAILS CARD
+// ==========================
+
+.payment-details-card {
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px $shadow-light;
+  
+  .payment-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  .payment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .payment-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+    }
+    
+    .payment-value {
+      font-size: 13px;
+      color: $text-dark;
+      font-weight: 600;
+      
+      &.paid {
+        color: $success;
+      }
+      
+      &.pending {
+        color: $warning;
+      }
+      
+      &.failed {
+        color: $danger;
+      }
+    }
+    
+    &.total {
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 2px solid $border-color;
+      
+      .payment-label {
+        font-size: 15px;
+        font-weight: 700;
+        color: $text-dark;
+      }
+      
+      .payment-value.total-amount {
+        font-size: 18px;
+        font-weight: 800;
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
+// ==========================
+// ACTION BUTTONS
+// ==========================
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: $font-family;
+    
+    ion-icon {
+      font-size: 18px;
+    }
+    
+    span {
+      flex: 1;
+      text-align: center;
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+  
+  .btn-primary {
+    background: $brand-blue;
+    color: $white;
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.3);
+    
+    &:hover {
+      background: $brand-hover;
+      box-shadow: 0 6px 24px rgba($brand-blue, 0.4);
+    }
+  }
+  
+  .btn-secondary {
+    background: rgba($brand-blue, 0.08);
+    color: $brand-blue;
+    
+    &:hover {
+      background: rgba($brand-blue, 0.15);
+    }
+  }
+  
+  .btn-danger {
+    background: rgba($danger, 0.08);
+    color: $danger;
+    border: 1px solid rgba($danger, 0.15);
+    
+    &:hover {
+      background: rgba($danger, 0.15);
+    }
+  }
+  
+  .btn-outline {
+    background: transparent;
+    color: $text-gray;
+    border: 1.5px solid $border-color;
+    
+    &:hover {
+      border-color: $brand-blue;
+      color: $brand-blue;
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SPACER
+// ==========================
+
+.bottom-spacer {
+  height: 20px;
+}
+
+// ==========================
+// ANIMATIONS
+// ==========================
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes qrFadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .booking-details-container {
+    padding: 12px 12px 80px;
+  }
+  
+  .qr-code-card {
+    .qr-code-container {
+      min-height: 140px;
+      
+      .qr-code-wrapper .qr-code-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  }
+  
+  .status-banner {
+    flex-wrap: wrap;
+    
+    .status-date {
+      width: 100%;
+      text-align: right;
+    }
+  }
+  
+  .service-package-card {
+    .service-info {
+      flex-wrap: wrap;
+    }
+    
+    .package-info {
+      flex-wrap: wrap;
+    }
+  }
+  
+  // Responsive skeleton
+  .skeleton-qr-box {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  
+  .skeleton-vehicle-row .skeleton-circle.large {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .qr-code-card {
+    animation: none !important;
+  }
+  
+  .qr-code-wrapper .qr-code-image {
+    animation: none !important;
+  }
+  
+  .qr-loading ion-icon {
+    animation: none !important;
+  }
+  
+  .branch-card:hover {
+    transform: none !important;
+  }
+  
+  .skeleton-wrapper {
+    animation: none !important;
+  }
+  
+  .skeleton-line {
+    animation: none !important;
+  }
+}

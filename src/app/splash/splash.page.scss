@@ -1,0 +1,515 @@
+// ============================================================
+// SPLASH PAGE - BROKEN GLASS EFFECT
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+// ==========================
+// VARIABLES
+// ==========================
+
+$brand-blue: #2563eb;
+$brand-dark: #1a3a8a;
+$brand-light: #60a5fa;
+$white: #ffffff;
+$gold: #fbbf24;
+$gold-light: #fcd34d;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// ==========================
+// SPLASH CONTENT
+// ==========================
+
+.splash-content {
+  --background: #1a3a8a;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #0d2847, #1a3a8a, #1e40af);
+  position: relative;
+  overflow: hidden;
+}
+
+// ==========================
+// ANIMATED BACKGROUND
+// ==========================
+
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(80px);
+    
+    &.glow-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(96, 165, 250, 0.15);
+      top: -100px;
+      right: -100px;
+      animation: float-glow 8s ease-in-out infinite;
+    }
+    
+    &.glow-2 {
+      width: 350px;
+      height: 350px;
+      background: rgba(251, 191, 36, 0.08);
+      bottom: 100px;
+      left: -80px;
+      animation: float-glow 10s ease-in-out infinite reverse;
+    }
+    
+    &.glow-3 {
+      width: 300px;
+      height: 300px;
+      background: rgba(96, 165, 250, 0.1);
+      bottom: 300px;
+      right: 50%;
+      animation: float-glow 12s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes float-glow {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  50% { transform: translate(30px, -30px) scale(1.2); opacity: 0.4; }
+}
+
+// ==========================
+// BROKEN GLASS EFFECT
+// ==========================
+
+.glass-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.glass-shard {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: scale(0);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.05);
+  
+  &.shard-1 {
+    top: 45%;
+    left: 25%;
+    width: 60px;
+    height: 8px;
+    transform: rotate(15deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.05s;
+  }
+  
+  &.shard-2 {
+    top: 55%;
+    right: 30%;
+    width: 50px;
+    height: 6px;
+    transform: rotate(-20deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.1s;
+  }
+  
+  &.shard-3 {
+    top: 48%;
+    left: 35%;
+    width: 40px;
+    height: 5px;
+    transform: rotate(45deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.15s;
+  }
+  
+  &.shard-4 {
+    top: 52%;
+    right: 35%;
+    width: 45px;
+    height: 7px;
+    transform: rotate(-35deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.2s;
+  }
+  
+  &.shard-5 {
+    top: 50%;
+    left: 45%;
+    width: 30px;
+    height: 4px;
+    transform: rotate(60deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.25s;
+  }
+  
+  &.shard-6 {
+    top: 50%;
+    right: 45%;
+    width: 35px;
+    height: 5px;
+    transform: rotate(-50deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.3s;
+  }
+  
+  &.shard-7 {
+    top: 42%;
+    left: 50%;
+    width: 25px;
+    height: 3px;
+    transform: rotate(80deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.35s;
+  }
+  
+  &.shard-8 {
+    top: 58%;
+    right: 50%;
+    width: 28px;
+    height: 4px;
+    transform: rotate(-70deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.4s;
+  }
+  
+  &.shard-9 {
+    top: 45%;
+    left: 55%;
+    width: 20px;
+    height: 3px;
+    transform: rotate(30deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.45s;
+  }
+  
+  &.shard-10 {
+    top: 55%;
+    right: 55%;
+    width: 22px;
+    height: 4px;
+    transform: rotate(-25deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.5s;
+  }
+  
+  &.shard-11 {
+    top: 50%;
+    left: 60%;
+    width: 15px;
+    height: 3px;
+    transform: rotate(50deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.55s;
+  }
+  
+  &.shard-12 {
+    top: 50%;
+    right: 60%;
+    width: 18px;
+    height: 3px;
+    transform: rotate(-40deg);
+    animation: shatter 0.6s ease-out forwards 3.2s;
+    animation-delay: 0.6s;
+  }
+}
+
+@keyframes shatter {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg) translate(0, 0);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.5) rotate(10deg) translate(10px, -10px);
+    background: rgba(251, 191, 36, 0.3);
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.2) rotate(-5deg) translate(-15px, 15px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg) translate(30px, -30px);
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0px rgba(251, 191, 36, 0);
+  }
+}
+
+// ==========================
+// FLASH EFFECT
+// ==========================
+
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.4), transparent);
+  opacity: 0;
+  animation: flash 0.8s ease forwards 3.2s;
+}
+
+@keyframes flash {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  30% {
+    width: 400px;
+    height: 400px;
+    opacity: 1;
+  }
+  100% {
+    width: 600px;
+    height: 600px;
+    opacity: 0;
+  }
+}
+
+// ==========================
+// BRAND SECTION - CENTERED
+// ==========================
+
+.splash-content-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  
+  .brand-name {
+    font-size: 48px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    position: relative;
+    z-index: 3;
+    
+    .smart {
+      color: $white;
+      opacity: 0;
+      animation: slideInLeft 0.8s ease forwards 0.3s;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .carwash {
+      color: $gold;
+      opacity: 0;
+      animation: slideInRight 0.8s ease forwards 0.6s;
+      text-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+    }
+  }
+  
+  .brand-underline {
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $gold, $brand-light, $gold);
+    border-radius: 2px;
+    animation: expandLine 1s ease forwards 1s;
+    margin: 4px auto 0;
+  }
+  
+  .brand-tagline {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 8px 0 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards 1.4s;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+// ==========================
+// ANIMATIONS
+// ==========================
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 120px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .brand-text {
+    .brand-name {
+      font-size: 32px;
+      gap: 2px;
+    }
+    
+    .brand-tagline {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+    
+    .brand-underline {
+      height: 2px;
+    }
+  }
+  
+  .glass-shard {
+    transform: scale(0.7) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-text {
+    .brand-name {
+      font-size: 26px;
+    }
+    
+    .brand-tagline {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+  }
+  
+  .glass-shard {
+    transform: scale(0.5) !important;
+  }
+}
+
+// ==========================
+// REDUCED MOTION
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg .glow {
+    animation: none !important;
+  }
+  
+  .brand-text .brand-name .smart {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .brand-text .brand-name .carwash {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .brand-text .brand-underline {
+    animation: none !important;
+    width: 120px;
+    opacity: 1;
+  }
+  
+  .brand-text .brand-tagline {
+    animation: none !important;
+    opacity: 1;
+  }
+  
+  .glass-shard {
+    animation: none !important;
+    opacity: 0;
+  }
+  
+  .glass-container::before {
+    animation: none !important;
+  }
+}

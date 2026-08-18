@@ -1,0 +1,213 @@
+<ion-content class="signup-content" [scroll]="false">
+  
+  <!-- ==========================
+  SIGNUP FORM
+  ========================== -->
+  <div class="signup-wrapper">
+    
+    <!-- Back Button -->
+    <button class="back-button" (click)="goBack()" aria-label="Go back">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+
+    <!-- Icon -->
+    <div class="signup-icon">
+      <div class="icon-wrapper">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Welcome Text -->
+    <div class="welcome-text">
+      <h2>Create Account</h2>
+      <p>Join Smart CarWash and roll out clean</p>
+    </div>
+
+    <!-- Signup Form -->
+    <form class="signup-form" (ngSubmit)="submit()" [formGroup]="form" novalidate>
+      
+      <!-- Name & Surname Row -->
+      <div class="form-row">
+        <!-- Name -->
+        <div class="form-group half">
+          <div class="input-wrapper" [class.focused]="nameFocused">
+            <ion-icon name="person-outline" class="input-icon"></ion-icon>
+            <input 
+              type="text" 
+              class="form-input" 
+              placeholder="First Name"
+              formControlName="name"
+              (focus)="nameFocused = true"
+              (blur)="nameFocused = false"
+            />
+          </div>
+          <div class="error-message" *ngIf="isInvalid('name')">
+            <span *ngIf="name?.errors?.['required']">Name is required</span>
+            <span *ngIf="name?.errors?.['minlength']">Min 2 characters</span>
+          </div>
+        </div>
+
+        <!-- Surname -->
+        <div class="form-group half">
+          <div class="input-wrapper" [class.focused]="surnameFocused">
+            <ion-icon name="person-outline" class="input-icon"></ion-icon>
+            <input 
+              type="text" 
+              class="form-input" 
+              placeholder="Surname"
+              formControlName="surname"
+              (focus)="surnameFocused = true"
+              (blur)="surnameFocused = false"
+            />
+          </div>
+          <div class="error-message" *ngIf="isInvalid('surname')">
+            <span *ngIf="surname?.errors?.['required']">Surname is required</span>
+            <span *ngIf="surname?.errors?.['minlength']">Min 2 characters</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.focused]="emailFocused">
+          <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+          <input 
+            type="email" 
+            class="form-input" 
+            placeholder="Email Address"
+            formControlName="email"
+            (focus)="emailFocused = true"
+            (blur)="emailFocused = false"
+          />
+        </div>
+        <div class="error-message" *ngIf="isInvalid('email')">
+          <span *ngIf="email?.errors?.['required']">Email is required</span>
+          <span *ngIf="email?.errors?.['email']">Enter a valid email address</span>
+        </div>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.focused]="phoneFocused">
+          <ion-icon name="call-outline" class="input-icon"></ion-icon>
+          <span class="dial-code">+27</span>
+          <input 
+            type="tel" 
+            class="form-input" 
+            placeholder="Phone Number"
+            formControlName="phone"
+            maxlength="9"
+            inputmode="numeric"
+            (focus)="phoneFocused = true"
+            (blur)="phoneFocused = false"
+          />
+        </div>
+        <div class="error-message" *ngIf="isInvalid('phone')">
+          <span *ngIf="phone?.errors?.['required']">Phone number is required</span>
+          <span *ngIf="phone?.errors?.['pattern']">Enter a valid 9-digit number</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.focused]="passwordFocused">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            class="form-input" 
+            placeholder="Password"
+            formControlName="password"
+            (focus)="passwordFocused = true"
+            (blur)="passwordFocused = false"
+          />
+          <ion-icon 
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+            class="password-toggle"
+            (click)="togglePassword()"
+          ></ion-icon>
+        </div>
+        <div class="error-message" *ngIf="isInvalid('password')">
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
+          <span *ngIf="password?.errors?.['minlength']">Must be at least 6 characters</span>
+          <span *ngIf="password?.errors?.['pattern']">Must contain a number and uppercase letter</span>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <div class="input-wrapper" [class.focused]="confirmPasswordFocused">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <input 
+            [type]="showConfirmPassword ? 'text' : 'password'" 
+            class="form-input" 
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+            (focus)="confirmPasswordFocused = true"
+            (blur)="confirmPasswordFocused = false"
+          />
+          <ion-icon 
+            [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'" 
+            class="password-toggle"
+            (click)="toggleConfirmPassword()"
+          ></ion-icon>
+        </div>
+        <div class="error-message" *ngIf="isInvalid('confirmPassword')">
+          <span *ngIf="confirmPassword?.errors?.['required']">Please confirm your password</span>
+          <span *ngIf="form.errors?.['mismatch']">Passwords do not match</span>
+        </div>
+      </div>
+
+      <!-- Terms & Conditions -->
+      <div class="terms-wrapper">
+        <label class="terms-checkbox">
+          <input type="checkbox" formControlName="terms" />
+          <span>I agree to the <a href="javascript:void(0)" (click)="openTerms()">Terms of Service</a> and <a href="javascript:void(0)" (click)="openPrivacy()">Privacy Policy</a></span>
+        </label>
+        <div class="error-message" *ngIf="isInvalid('terms')">
+          <span>You must accept the terms to continue</span>
+        </div>
+      </div>
+
+      <!-- Signup Button -->
+      <button type="submit" class="btn-signup" [disabled]="isLoading">
+        <span>{{ isLoading ? 'Creating Account...' : 'Create Account' }}</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </button>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span class="line"></span>
+      <span class="text">or sign up with</span>
+      <span class="line"></span>
+    </div>
+
+    <!-- Social Signup -->
+    <div class="social-signup">
+      <button class="social-btn google" (click)="signupWithGoogle()">
+        <ion-icon name="logo-google" class="social-icon"></ion-icon>
+        <span class="social-name">Google</span>
+      </button>
+      
+      <button class="social-btn facebook" (click)="signupWithFacebook()">
+        <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+        <span class="social-name">Facebook</span>
+      </button>
+
+      <button class="social-btn apple" (click)="signupWithApple()">
+        <ion-icon name="logo-apple" class="social-icon"></ion-icon>
+        <span class="social-name">Apple</span>
+      </button>
+    </div>
+
+    <!-- Login Link -->
+    <div class="login-link">
+      <p>
+        Already have an account? 
+        <span class="login-btn" (click)="goToLogin()">Sign In</span>
+      </p>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,695 @@
+// ============================================================
+// SIGNUP PAGE - MATCHES LOGIN PAGE
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+$primary: #2563eb;
+$primary-dark: #1a3a8a;
+$primary-light: #3b82f6;
+$text-dark: #1e293b;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$white: #ffffff;
+$border-color: #e2e8f0;
+$danger: #ef4444;
+$success: #22c55e;
+$google: #ea4335;
+$facebook: #1877f2;
+$apple: #000000;
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+* {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// ==========================
+// SIGNUP CONTENT
+// ==========================
+
+.signup-content {
+  --background: #f8fafc;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ==========================
+// SIGNUP WRAPPER
+// ==========================
+
+.signup-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 24px 24px 32px;
+  position: relative;
+}
+
+// ==========================
+// BACK BUTTON
+// ==========================
+
+.back-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  ion-icon {
+    font-size: 22px;
+    color: $text-dark;
+  }
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+// ==========================
+// SIGNUP ICON
+// ==========================
+
+.signup-icon {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-top: 12px;
+}
+
+.icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f172a, #1a3a8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  
+  ion-icon {
+    font-size: 32px;
+    color: $white;
+  }
+}
+
+// ==========================
+// WELCOME TEXT
+// ==========================
+
+.welcome-text {
+  text-align: left;
+  margin-bottom: 28px;
+  
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 4px;
+    letter-spacing: -0.5px;
+  }
+  
+  p {
+    font-size: 14px;
+    color: $text-gray;
+    margin: 0;
+  }
+}
+
+// ==========================
+// SIGNUP FORM
+// ==========================
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Consistent spacing between form groups
+}
+
+// ==========================
+// FORM ROW (Name & Surname)
+// ==========================
+
+.form-row {
+  display: flex;
+  gap: 12px; // Consistent gap between name and surname
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px; // Consistent gap between input and error message
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+// ==========================
+// INPUT WRAPPER
+// ==========================
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: $white;
+  border: 1.5px solid $border-color;
+  border-radius: 12px;
+  padding: 0 14px;
+  transition: all 0.3s ease;
+  min-height: 48px; // Consistent height for all inputs
+  
+  &.focused {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
+  }
+  
+  .input-icon {
+    font-size: 18px;
+    color: $text-light;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  &.focused .input-icon {
+    color: $primary;
+  }
+  
+  .dial-code {
+    color: $text-dark;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 8px;
+    padding-right: 8px;
+    border-right: 1px solid $border-color;
+  }
+  
+  .form-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    font-size: 14px;
+    font-family: $font-family;
+    color: $text-dark;
+    background: transparent;
+    min-height: 44px;
+    
+    &::placeholder {
+      color: $text-light;
+      font-weight: 400;
+    }
+  }
+  
+  .password-toggle {
+    font-size: 18px;
+    color: $text-light;
+    cursor: pointer;
+    padding: 6px;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: $text-dark;
+    }
+  }
+}
+
+// ==========================
+// ERROR MESSAGES
+// ==========================
+
+.error-message {
+  font-size: 12px;
+  color: $danger;
+  margin-top: 4px;
+  padding: 0 4px;
+  min-height: 18px; // Consistent height for error messages
+}
+
+// ==========================
+// TERMS
+// ==========================
+
+.terms-wrapper {
+  margin: 2px 0; // Consistent spacing
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: $text-gray;
+  cursor: pointer;
+  
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: $primary;
+    cursor: pointer;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  
+  span {
+    line-height: 1.4;
+    
+    a {
+      color: $primary;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ==========================
+// SIGNUP BUTTON
+// ==========================
+
+.btn-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #0f172a, #1a3a8a);
+  color: $white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: $font-family;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(37, 99, 235, 0.35);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  ion-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover:not(:disabled) ion-icon {
+    transform: translateX(4px);
+  }
+}
+
+// ==========================
+// DIVIDER
+// ==========================
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0 16px;
+  
+  .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $border-color, transparent);
+  }
+  
+  .text {
+    font-size: 12px;
+    font-weight: 500;
+    color: $text-light;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    padding: 0 4px;
+  }
+}
+
+// ==========================
+// SOCIAL SIGNUP
+// ==========================
+
+.social-signup {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1.5px solid $border-color;
+  background: $white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: $font-family;
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-dark;
+  min-height: 44px;
+  
+  .social-icon {
+    font-size: 20px;
+  }
+  
+  .social-name {
+    font-weight: 600;
+    font-size: 12px;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  &:active {
+    transform: scale(0.97);
+  }
+  
+  &.google {
+    .social-icon { color: $google; }
+    &:hover { 
+      border-color: $google;
+      background: rgba(234, 67, 53, 0.04);
+    }
+  }
+  
+  &.facebook {
+    .social-icon { color: $facebook; }
+    &:hover { 
+      border-color: $facebook;
+      background: rgba(24, 119, 242, 0.04);
+    }
+  }
+  
+  &.apple {
+    .social-icon { color: $apple; }
+    &:hover { 
+      border-color: $apple;
+      background: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+// ==========================
+// LOGIN LINK
+// ==========================
+
+.login-link {
+  text-align: left;
+  margin-top: 18px;
+  font-size: 14px;
+  color: $text-gray;
+  
+  .login-btn {
+    color: $primary;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: $primary-dark;
+      text-decoration: underline;
+    }
+  }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .signup-wrapper {
+    padding: 20px 16px 24px;
+  }
+  
+  .back-button {
+    top: -4px;
+    left: -4px;
+    width: 36px;
+    height: 36px;
+    
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+  
+  .icon-wrapper {
+    width: 56px;
+    height: 56px;
+    
+    ion-icon {
+      font-size: 28px;
+    }
+  }
+  
+  .welcome-text h2 {
+    font-size: 22px;
+  }
+  
+  .social-btn {
+    padding: 9px 8px;
+    min-height: 38px;
+    font-size: 12px;
+    gap: 6px;
+    
+    .social-icon {
+      font-size: 18px;
+    }
+    
+    .social-name {
+      font-size: 11px;
+    }
+  }
+  
+  // Form row responsive - stack on mobile
+  .form-row {
+    flex-direction: column;
+    gap: 16px; // Same as form gap on mobile
+  }
+}
+
+@media (max-width: 380px) {
+  .signup-wrapper {
+    padding: 16px 12px 20px;
+  }
+  
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+  
+  .welcome-text h2 {
+    font-size: 20px;
+  }
+  
+  .welcome-text p {
+    font-size: 13px;
+  }
+  
+  .social-btn {
+    padding: 8px 6px;
+    min-height: 34px;
+    font-size: 11px;
+    gap: 4px;
+    
+    .social-icon {
+      font-size: 16px;
+    }
+    
+    .social-name {
+      font-size: 10px;
+    }
+  }
+  
+  .btn-signup {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 769px) {
+  .signup-wrapper {
+    padding: 32px 32px 40px;
+    max-width: 420px;
+  }
+  
+  .icon-wrapper {
+    width: 72px;
+    height: 72px;
+    
+    ion-icon {
+      font-size: 36px;
+    }
+  }
+  
+  .welcome-text h2 {
+    font-size: 26px;
+  }
+}
+
+// ==========================
+// DARK MODE
+// ==========================
+
+@media (prefers-color-scheme: dark) {
+  .signup-content {
+    --background: #0f172a;
+  }
+  
+  .welcome-text h2 {
+    color: $white;
+  }
+  
+  .welcome-text p {
+    color: #94a3b8;
+  }
+  
+  .input-wrapper {
+    background: #1e293b;
+    border-color: #334155;
+    
+    .form-input {
+      color: $white;
+      
+      &::placeholder {
+        color: #64748b;
+      }
+    }
+    
+    &.focused {
+      border-color: $primary;
+      background: #1e293b;
+    }
+  }
+  
+  .dial-code {
+    color: $white;
+    border-color: #334155;
+  }
+  
+  .social-btn {
+    background: #1e293b;
+    border-color: #334155;
+    color: $white;
+    
+    &.apple .social-icon {
+      color: $white;
+    }
+  }
+  
+  .divider .line {
+    background: linear-gradient(90deg, transparent, #334155, transparent);
+  }
+  
+  .divider .text {
+    color: #64748b;
+  }
+  
+  .login-link {
+    color: #94a3b8;
+    
+    .login-btn {
+      color: #60a5fa;
+      
+      &:hover {
+        color: #93bbfc;
+      }
+    }
+  }
+  
+  .back-button {
+    ion-icon {
+      color: $white;
+    }
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+  
+  .terms-checkbox {
+    color: #94a3b8;
+    
+    span a {
+      color: #60a5fa;
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-signup::before {
+    display: none !important;
+  }
+  
+  .btn-signup:hover:not(:disabled) {
+    transform: none !important;
+  }
+  
+  .social-btn:hover {
+    transform: none !important;
+  }
+}
