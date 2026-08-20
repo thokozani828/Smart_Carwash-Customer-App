@@ -1,12 +1,6 @@
 // ============================================================
-// BOOK A WASH PAGE - COMPLETE STYLES
+// BOOKING PAGE - SAME DESIGN LANGUAGE AS HOME PAGE
 // ============================================================
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-// ==========================
-// VARIABLES
-// ==========================
 
 $brand-blue: #2563eb;
 $brand-hover: #1d4ed8;
@@ -25,14 +19,6 @@ $shadow-light: rgba(0, 0, 0, 0.04);
 $shadow-medium: rgba(0, 0, 0, 0.08);
 $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-* {
-  font-family: $font-family;
-}
-
-// ==========================
-// BOOKING CONTENT
-// ==========================
-
 .booking-content {
   --background: #f8fafc;
   --padding-top: 0;
@@ -43,7 +29,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 .booking-container {
-  padding: 16px 16px 110px;
+  padding: 16px 16px 120px;
   max-width: 600px;
   margin: 0 auto;
   height: 100%;
@@ -93,6 +79,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       color: $text-dark;
       margin: 0;
       letter-spacing: -0.3px;
+      font-family: $font-family;
     }
     
     .placeholder {
@@ -105,11 +92,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     color: $text-gray;
     margin: 4px 0 0 52px;
     font-weight: 400;
+    font-family: $font-family;
   }
 }
 
 // ==========================
-// SELECTED CAR WASH BANNER (NEW)
+// SELECTED CAR WASH BANNER
 // ==========================
 
 .selected-carwash-banner {
@@ -119,7 +107,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   background: linear-gradient(135deg, #eff6ff, #dbeafe);
   padding: 16px;
   border-radius: 16px;
-  margin: 8px 16px 20px 16px;
+  margin-bottom: 20px;
   border: 1px solid #bfdbfe;
   box-shadow: 0 2px 8px rgba($brand-blue, 0.08);
   
@@ -128,9 +116,16 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     height: 56px;
     border-radius: 12px;
     background: $white;
-    padding: 6px;
-    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 28px;
+      color: $brand-blue;
+    }
   }
   
   .banner-info {
@@ -141,6 +136,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       font-weight: 700;
       color: $text-dark;
       margin: 0 0 4px 0;
+      font-family: $font-family;
     }
     
     p {
@@ -150,6 +146,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       display: flex;
       align-items: center;
       gap: 4px;
+      font-family: $font-family;
       
       ion-icon {
         font-size: 14px;
@@ -161,6 +158,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       gap: 12px;
       font-size: 12px;
       color: $text-gray;
+      font-family: $font-family;
       
       span {
         display: flex;
@@ -185,10 +183,6 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   flex-direction: column;
   gap: 18px;
 }
-
-// ==========================
-// FORM GROUP
-// ==========================
 
 .form-group {
   display: flex;
@@ -723,45 +717,6 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
-// BOOKING SUMMARY
-// ==========================
-
-.booking-summary {
-  background: rgba($brand-blue, 0.04);
-  border: 1px solid rgba($brand-blue, 0.08);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin: 4px 0;
-  
-  .summary-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 0;
-    
-    &:last-child {
-      border-top: 1px solid rgba($brand-blue, 0.08);
-      padding-top: 8px;
-      margin-top: 4px;
-    }
-    
-    .summary-label {
-      font-size: 13px;
-      color: $text-gray;
-      font-weight: 500;
-      font-family: $font-family;
-    }
-    
-    .summary-value {
-      font-size: 14px;
-      font-weight: 700;
-      color: $text-dark;
-      font-family: $font-family;
-    }
-  }
-}
-
-// ==========================
 // NOTES
 // ==========================
 
@@ -790,6 +745,39 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     
     &::placeholder {
       color: $text-light;
+    }
+  }
+}
+
+// ==========================
+// BOOKING SUMMARY
+// ==========================
+
+.booking-summary {
+  background: rgba($brand-blue, 0.04);
+  border: 1px solid rgba($brand-blue, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 4px 0;
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    
+    .summary-label {
+      font-size: 13px;
+      color: $text-gray;
+      font-weight: 500;
+      font-family: $font-family;
+    }
+    
+    .summary-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: $text-dark;
+      font-family: $font-family;
     }
   }
 }
@@ -868,373 +856,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
-// BOTTOM NAVIGATION
-// ==========================
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: $white;
-  border-top: 1px solid $border-color;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0 18px;
-  z-index: 1000;
-  box-shadow: 0 -4px 20px $shadow-light;
-  height: 82px;
-  
-  .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    padding: 6px 12px;
-    transition: all 0.3s ease;
-    position: relative;
-    flex: 1;
-    
-    ion-icon {
-      font-size: 28px;
-      color: $text-light;
-      transition: color 0.3s ease;
-    }
-    
-    span {
-      font-size: 12px;
-      color: $text-light;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      font-family: $font-family;
-    }
-    
-    &:hover {
-      ion-icon {
-        color: $brand-blue;
-      }
-      
-      span {
-        color: $brand-blue;
-      }
-    }
-    
-    &.active:not(.book-center) {
-      ion-icon {
-        color: $brand-blue;
-      }
-      
-      span {
-        color: $brand-blue;
-        font-weight: 600;
-      }
-      
-      &::after {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 28px;
-        height: 4px;
-        background: $brand-blue;
-        border-radius: 3px;
-      }
-    }
-    
-    &.book-center {
-      margin-top: -28px;
-      flex: 1.4;
-      
-      .nav-indicator {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        background: $brand-blue;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        
-        ion-icon {
-          font-size: 36px;
-          color: $white;
-          transition: all 0.3s ease;
-        }
-        
-        &::after {
-          content: '';
-          position: absolute;
-          inset: -6px;
-          border-radius: 50%;
-          background: rgba($brand-blue, 0.2);
-          animation: pulse-ring 2s ease-in-out infinite;
-        }
-      }
-      
-      span {
-        margin-top: 6px;
-        font-weight: 600;
-        color: $brand-blue;
-        font-size: 12px;
-      }
-      
-      &::after {
-        display: none !important;
-      }
-      
-      &:hover {
-        .nav-indicator {
-          transform: translateY(-3px) scale(1.06);
-          box-shadow: 0 8px 36px rgba($brand-blue, 0.5);
-        }
-      }
-      
-      &:active {
-        .nav-indicator {
-          transform: scale(0.93);
-        }
-      }
-    }
-  }
-}
-
-@keyframes pulse-ring {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.15;
-  }
-}
-
-// ==========================
-// RESPONSIVE
-// ==========================
-
-@media (max-width: 480px) {
-  .booking-container {
-    padding: 12px 12px 100px;
-  }
-  
-  .service-options {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .wash-type-options {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .date-options {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-  }
-  
-  .time-options {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .booking-header {
-    .header-top {
-      .booking-title {
-        font-size: 18px;
-      }
-    }
-    
-    .booking-subtitle {
-      margin-left: 0;
-    }
-  }
-  
-  .bottom-nav {
-    padding: 8px 0 14px;
-    height: 74px;
-    
-    .nav-item {
-      padding: 4px 8px;
-      
-      ion-icon {
-        font-size: 24px;
-      }
-      
-      span {
-        font-size: 11px;
-      }
-      
-      &.book-center {
-        margin-top: -24px;
-        flex: 1.4;
-        
-        .nav-indicator {
-          width: 60px;
-          height: 60px;
-          
-          ion-icon {
-            font-size: 30px;
-          }
-        }
-      }
-    }
-    
-    .nav-item:not(.book-center) {
-      &.active::after {
-        width: 22px;
-        height: 3px;
-      }
-    }
-  }
-}
-
-@media (max-width: 360px) {
-  .service-options {
-    grid-template-columns: 1fr;
-  }
-  
-  .wash-type-options {
-    grid-template-columns: 1fr;
-  }
-  
-  .time-options {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .date-options {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  .bottom-nav {
-    height: 66px;
-    padding: 6px 0 12px;
-    
-    .nav-item {
-      ion-icon {
-        font-size: 20px;
-      }
-      
-      span {
-        font-size: 9px;
-      }
-      
-      &.book-center {
-        margin-top: -20px;
-        
-        .nav-indicator {
-          width: 52px;
-          height: 52px;
-          
-          ion-icon {
-            font-size: 26px;
-          }
-        }
-      }
-    }
-    
-    .nav-item:not(.book-center) {
-      &.active::after {
-        width: 18px;
-        height: 3px;
-      }
-    }
-  }
-}
-
-// ==========================
-// DARK MODE
-// ==========================
-
-@media (prefers-color-scheme: dark) {
-  .payment-option {
-    background: #1e293b;
-    border-color: #334155;
-    
-    &:hover:not(.disabled) {
-      border-color: $brand-blue;
-      background: #1a3a8a;
-    }
-    
-    &.selected {
-      border-color: $brand-blue;
-      background: rgba($brand-blue, 0.1);
-    }
-    
-    &.disabled {
-      &:hover {
-        border-color: #334155;
-        background: #1e293b;
-      }
-    }
-    
-    .payment-info {
-      .payment-name {
-        color: #ffffff;
-      }
-      
-      .payment-desc {
-        color: #94a3b8;
-      }
-    }
-    
-    .payment-disabled-overlay {
-      background: rgba(15, 23, 42, 0.6);
-      
-      ion-icon {
-        color: #64748b;
-      }
-    }
-  }
-  
-  .vehicle-item.add-vehicle {
-    border-top-color: #334155;
-    
-    .add-vehicle-icon {
-      color: #60a5fa;
-    }
-    
-    .vehicle-item-name {
-      color: #60a5fa;
-    }
-  }
-}
-
-// ==========================
-// ACCESSIBILITY
-// ==========================
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-confirm::after {
-    display: none !important;
-  }
-  
-  .btn-confirm:hover ion-icon {
-    transform: none !important;
-  }
-  
-  .nav-indicator::after {
-    animation: none !important;
-  }
-  
-  .book-center:hover .nav-indicator {
-    transform: none !important;
-  }
-}
-
-// ==========================
 // SKELETON LOADING
 // ==========================
 
 @keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: 200px 0;
-  }
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
 }
 
 .skeleton {
@@ -1272,36 +899,39 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   width: 60%;
 }
 
-.skeleton-text-lg {
-  height: 20px;
-  border-radius: 4px;
-}
-
 .skeleton-circle {
   border-radius: 50%;
   aspect-ratio: 1;
 }
 
-.skeleton-card {
-  border-radius: 12px;
-  min-height: 60px;
-}
-
-.skeleton-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-}
-
-.skeleton-button {
+.skeleton-select {
   height: 48px;
   border-radius: 12px;
 }
 
-.skeleton-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+.skeleton-service-item {
+  height: 100px;
+  border-radius: 12px;
+}
+
+.skeleton-wash-item {
+  height: 80px;
+  border-radius: 12px;
+}
+
+.skeleton-payment-item {
+  height: 56px;
+  border-radius: 12px;
+}
+
+.skeleton-summary {
+  height: 80px;
+  border-radius: 12px;
+}
+
+.skeleton-confirm-btn {
+  height: 56px;
+  border-radius: 14px;
 }
 
 .booking-skeleton {
@@ -1343,127 +973,530 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   display: flex;
   flex-direction: column;
   gap: 8px;
-  
-  .skeleton-label {
-    height: 16px;
-    width: 30%;
-    border-radius: 4px;
-  }
-  
-  .skeleton-select {
-    height: 48px;
-    border-radius: 12px;
-  }
 }
 
 .skeleton-service-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  
-  .skeleton-service-item {
-    height: 100px;
-    border-radius: 12px;
-  }
-}
-
-.skeleton-package-scroll {
-  display: flex;
-  gap: 10px;
-  overflow: hidden;
-  
-  .skeleton-package-item {
-    min-width: 180px;
-    height: 160px;
-    border-radius: 12px;
-    flex-shrink: 0;
-  }
-}
-
-.skeleton-branch-item {
-  height: 72px;
-  border-radius: 12px;
 }
 
 .skeleton-wash-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  
-  .skeleton-wash-item {
-    height: 80px;
-    border-radius: 12px;
-  }
-}
-
-.skeleton-date-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  
-  .skeleton-date-item {
-    height: 56px;
-    border-radius: 10px;
-  }
-}
-
-.skeleton-time-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  
-  .skeleton-time-item {
-    height: 44px;
-    border-radius: 10px;
-  }
-}
-
-.skeleton-payment-item {
-  height: 56px;
-  border-radius: 12px;
-}
-
-.skeleton-notes {
-  height: 80px;
-  border-radius: 12px;
-}
-
-.skeleton-summary {
-  height: 80px;
-  border-radius: 12px;
-}
-
-.skeleton-confirm-btn {
-  height: 56px;
-  border-radius: 14px;
-  margin-top: 4px;
 }
 
 .skeleton-w-100 { width: 100%; }
 .skeleton-w-75 { width: 75%; }
 .skeleton-w-50 { width: 50%; }
-.skeleton-w-25 { width: 25%; }
-.skeleton-w-70 { width: 70%; }
 .skeleton-w-40 { width: 40%; }
 .skeleton-w-30 { width: 30%; }
+.skeleton-w-70 { width: 70%; }
 
-// Dark mode skeleton
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: #2d3748;
+// ==========================
+// FLOATING GLASS BOTTOM NAVIGATION
+// ==========================
+
+.uber-bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.2));
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 12px 12px;
+  z-index: 1000;
+  height: 72px;
+  box-shadow: var(--glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.12));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 500px;
+  margin: 0 auto;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
   }
   
-  .skeleton::after {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 255, 0.08) 50%, 
-      transparent 100%
-    );
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    flex: 1;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    min-height: 48px;
+    border-radius: 16px;
+    
+    .nav-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      ion-icon {
+        font-size: 24px;
+        color: #9ca3af;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .nav-badge {
+        position: absolute;
+        top: -4px;
+        right: -8px;
+        background: #ef4444;
+        color: white;
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        border: 2px solid var(--glass-bg, #ffffff);
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+    }
+    
+    .nav-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+    
+    &.active {
+      background: var(--nav-active-bg, rgba(0, 0, 0, 0.06));
+      box-shadow: inset 0 0 20px var(--nav-active-glow, rgba(0, 0, 0, 0.08));
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.08);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+      }
+      
+      .nav-label {
+        color: #000000;
+        font-weight: 600;
+      }
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.03);
+        
+        .nav-icon ion-icon {
+          color: #4b5563;
+        }
+        
+        .nav-label {
+          color: #4b5563;
+        }
+      }
+    }
+    
+    &:active {
+      transform: scale(0.94);
+    }
   }
 }
 
-// Reduced motion for skeleton
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .booking-container {
+    padding: 12px 12px 100px;
+  }
+  
+  .service-options {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .wash-type-options {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .date-options {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  
+  .time-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .booking-header {
+    .booking-title {
+      font-size: 18px;
+    }
+    
+    .booking-subtitle {
+      margin-left: 0;
+    }
+  }
+  
+  .uber-bottom-nav {
+    bottom: 16px;
+    left: 12px;
+    right: 12px;
+    height: 64px;
+    padding: 6px 8px 10px;
+    border-radius: 20px;
+    
+    .nav-item {
+      padding: 4px 8px;
+      min-height: 40px;
+      border-radius: 12px;
+      
+      .nav-icon {
+        width: 24px;
+        height: 24px;
+        
+        ion-icon {
+          font-size: 20px;
+        }
+        
+        .nav-badge {
+          font-size: 9px;
+          min-width: 16px;
+          height: 16px;
+          top: -2px;
+          right: -6px;
+        }
+      }
+      
+      .nav-label {
+        font-size: 9px;
+        letter-spacing: 0.1px;
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .service-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .wash-type-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .time-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .date-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .booking-container {
+    padding: 8px 8px 90px;
+  }
+  
+  .uber-bottom-nav {
+    bottom: 12px;
+    left: 8px;
+    right: 8px;
+    height: 58px;
+    padding: 4px 6px 8px;
+    border-radius: 16px;
+    
+    .nav-item {
+      padding: 2px 4px;
+      min-height: 36px;
+      
+      .nav-icon {
+        width: 20px;
+        height: 20px;
+        
+        ion-icon {
+          font-size: 18px;
+        }
+        
+        .nav-badge {
+          font-size: 8px;
+          min-width: 14px;
+          height: 14px;
+        }
+      }
+      
+      .nav-label {
+        font-size: 8px;
+      }
+    }
+  }
+}
+
+// ==========================
+// DARK MODE
+// ==========================
+
+@media (prefers-color-scheme: dark) {
+  .booking-content {
+    --background: #0d0d0d;
+  }
+  
+  .booking-container {
+    background: #0d0d0d;
+  }
+  
+  .booking-title {
+    color: #ffffff !important;
+  }
+  
+  .booking-subtitle {
+    color: #94a3b8 !important;
+  }
+  
+  .back-button {
+    background: #1a1a1a !important;
+    border-color: #333333 !important;
+    
+    ion-icon {
+      color: #ffffff !important;
+    }
+  }
+  
+  .selected-carwash-banner {
+    background: linear-gradient(135deg, #1a3a8a, #0d2847);
+    border-color: #1d4ed8;
+    
+    .banner-logo {
+      background: #1a1a1a;
+      
+      ion-icon {
+        color: #60a5fa;
+      }
+    }
+    
+    .banner-info {
+      h2 {
+        color: #ffffff;
+      }
+      
+      p {
+        color: #94a3b8;
+      }
+      
+      .banner-meta {
+        color: #94a3b8;
+      }
+    }
+  }
+  
+  .select-wrapper {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .select-value {
+      color: #ffffff;
+      
+      &.placeholder {
+        color: #6b7280;
+      }
+    }
+  }
+  
+  .vehicle-list {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .vehicle-item {
+      border-color: #333333;
+      
+      .vehicle-item-name {
+        color: #ffffff;
+      }
+      
+      &:hover {
+        background: rgba(96, 165, 250, 0.05);
+      }
+    }
+  }
+  
+  .service-option {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .service-option-name {
+      color: #ffffff;
+    }
+    
+    .service-option-duration {
+      color: #6b7280;
+    }
+    
+    &.selected {
+      background: rgba(96, 165, 250, 0.08);
+      border-color: #60a5fa;
+    }
+  }
+  
+  .wash-type-option {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    span {
+      color: #ffffff;
+    }
+    
+    .wash-type-desc {
+      color: #6b7280;
+    }
+    
+    &.selected {
+      background: rgba(96, 165, 250, 0.08);
+      border-color: #60a5fa;
+    }
+  }
+  
+  .location-display {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .location-value {
+      color: #ffffff;
+      
+      &.placeholder {
+        color: #6b7280;
+      }
+    }
+  }
+  
+  .date-option {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .date-number {
+      color: #ffffff;
+    }
+    
+    &.selected {
+      background: rgba(96, 165, 250, 0.08);
+      border-color: #60a5fa;
+    }
+  }
+  
+  .time-option {
+    background: #1a1a1a;
+    border-color: #333333;
+    color: #ffffff;
+    
+    &.selected {
+      background: rgba(96, 165, 250, 0.08);
+      border-color: #60a5fa;
+      color: #60a5fa;
+    }
+  }
+  
+  .payment-option {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .payment-name {
+      color: #ffffff;
+    }
+    
+    .payment-desc {
+      color: #94a3b8;
+    }
+    
+    .payment-icon {
+      color: #94a3b8;
+    }
+    
+    &.selected {
+      background: rgba(96, 165, 250, 0.08);
+      border-color: #60a5fa;
+    }
+    
+    &.disabled {
+      .payment-disabled-overlay {
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+  
+  .notes-wrapper {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .notes-input {
+      color: #ffffff;
+      
+      &::placeholder {
+        color: #6b7280;
+      }
+    }
+  }
+  
+  .booking-summary {
+    background: rgba(96, 165, 250, 0.05);
+    border-color: rgba(96, 165, 250, 0.1);
+    
+    .summary-value {
+      color: #ffffff;
+    }
+  }
+  
+  .skeleton {
+    background: #2d3748;
+    
+    &::after {
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.08) 50%, 
+        transparent 100%
+      );
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
 @media (prefers-reduced-motion: reduce) {
+  .btn-confirm::after {
+    display: none !important;
+  }
+  
+  .btn-confirm:hover ion-icon {
+    transform: none !important;
+  }
+  
   .skeleton::after {
     animation: none !important;
   }

@@ -1,9 +1,8 @@
-<ion-content class="booking-content" scroll="true">
+<ion-content class="booking-content" [scroll]="true">
   <div class="booking-container">
     
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading" class="booking-skeleton">
-      <!-- Header Skeleton -->
       <div class="skeleton-header">
         <div class="skeleton skeleton-circle"></div>
         <div class="skeleton-header-text">
@@ -11,8 +10,6 @@
           <div class="skeleton skeleton-text-sm skeleton-w-40"></div>
         </div>
       </div>
-
-      <!-- Form Group Skeleton - Vehicle -->
       <div class="skeleton-form-group">
         <div class="skeleton skeleton-text skeleton-w-30"></div>
         <div class="skeleton skeleton-select"></div>
@@ -40,7 +37,7 @@
       <div class="skeleton skeleton-confirm-btn"></div>
     </div>
 
-    <!-- Actual Content (shown when not loading) -->
+    <!-- Actual Content -->
     <div *ngIf="!isLoading">
       
       <!-- Header with Back Button -->
@@ -52,11 +49,14 @@
           <h1 class="booking-title">Book a Wash</h1>
           <div class="placeholder"></div>
         </div>
+        <p class="booking-subtitle">Complete the form to book your wash</p>
       </div>
 
-      <!-- ✅ DISPLAY THE SELECTED CAR WASH INFO -->
+      <!-- Selected Car Wash Banner -->
       <div class="selected-carwash-banner" *ngIf="carwash">
-        <img [src]="carwash.logo" class="banner-logo" alt="Logo" />
+        <div class="banner-logo">
+          <ion-icon name="car-outline"></ion-icon>
+        </div>
         <div class="banner-info">
           <h2>{{ carwash.name }}</h2>
           <p><ion-icon name="location-outline"></ion-icon> {{ carwash.address }}</p>
@@ -68,7 +68,7 @@
       </div>
 
       <!-- Booking Form -->
-      <form class="booking-form" (ngSubmit)="confirmBooking()" #bookingForm="ngForm">
+      <form class="booking-form" (ngSubmit)="confirmBooking()">
         
         <!-- Select Vehicle -->
         <div class="form-group">
@@ -226,13 +226,17 @@
               </div>
               <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'mobile'"></ion-icon>
             </div>
-            <div class="payment-option" [class.selected]="paymentMethod === 'cash'" (click)="selectPaymentMethod('cash')">
+            <div class="payment-option" [class.selected]="paymentMethod === 'cash'" (click)="selectPaymentMethod('cash')"
+                 [class.disabled]="!isCashAvailable()">
               <ion-icon name="cash-outline" class="payment-icon"></ion-icon>
               <div class="payment-info">
                 <span class="payment-name">Cash Payment</span>
                 <span class="payment-desc">Pay at the branch</span>
               </div>
               <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'cash'"></ion-icon>
+              <div class="payment-disabled-overlay" *ngIf="!isCashAvailable()">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+              </div>
             </div>
           </div>
         </div>
@@ -272,29 +276,49 @@
     <div class="bottom-spacer"></div>
   </div>
 
-  <!-- Bottom Navigation Bar -->
-  <div class="bottom-nav">
-    <div class="nav-item active book-center" (click)="navigateTo('booking')">
-      <div class="nav-indicator">
+  <!-- FLOATING GLASS BOTTOM NAVIGATION -->
+  <nav class="uber-bottom-nav" role="navigation" aria-label="Main navigation">
+    
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('home')" 
+      [class.active]="currentRoute === 'home'">
+      <div class="nav-icon">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+      <span class="nav-label">Home</span>
+    </button>
+
+    <button 
+      class="nav-item active" 
+      (click)="navigateTo('booking')" 
+      [class.active]="currentRoute === 'booking'">
+      <div class="nav-icon">
         <ion-icon name="calendar-outline"></ion-icon>
       </div>
-      <span>Book</span>
-    </div>
-    <div class="nav-item" (click)="navigateTo('booking-history')">
-      <ion-icon name="time-outline"></ion-icon>
-      <span>History</span>
-    </div>
-    <div class="nav-item home-center" (click)="navigateTo('home')">
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Home</span>
-    </div>
-    <div class="nav-item" (click)="navigateTo('vehicles')">
-      <ion-icon name="car-outline"></ion-icon>
-      <span>Vehicles</span>
-    </div>
-    <div class="nav-item" (click)="navigateTo('vip-membership')">
-      <ion-icon name="star-outline"></ion-icon>
-      <span>VIP</span>
-    </div>
-  </div>
+      <span class="nav-label">Book</span>
+    </button>
+
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('booking-history')" 
+      [class.active]="currentRoute === 'booking-history'">
+      <div class="nav-icon">
+        <ion-icon name="time-outline"></ion-icon>
+      </div>
+      <span class="nav-label">History</span>
+    </button>
+
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('vehicles')" 
+      [class.active]="currentRoute === 'vehicles'">
+      <div class="nav-icon">
+        <ion-icon name="car-outline"></ion-icon>
+        <span class="nav-badge">2</span>
+      </div>
+      <span class="nav-label">Vehicles</span>
+    </button>
+
+  </nav>
 </ion-content>
