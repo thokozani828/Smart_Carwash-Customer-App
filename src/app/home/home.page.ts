@@ -59,6 +59,14 @@ export class HomePage {
     }, 1500);
   }
 
+  /**
+   * Navigate to Carwash Map
+   */
+  goToCarwashMap(): void {
+    console.log('[Home] Navigating to carwash map');
+    this.navCtrl.navigateForward('/carwash-map');
+  }
+
   navigateTo(page: string): void {
     console.log('[Home] Navigating to:', page);
     this.navCtrl.navigateForward(`/${page}`);

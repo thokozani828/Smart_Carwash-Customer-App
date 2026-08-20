@@ -199,7 +199,11 @@ import {
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  standalone: true,
+  imports: [
+    IonApp, 
+    IonRouterOutlet,
+  ],
 })
 export class AppComponent {
   constructor() {
@@ -383,11 +387,6 @@ export class AppComponent {
       'map-outline': mapOutline,
       'business-outline': businessOutline,
       'today-outline': todayOutline
-      // Note: The following icons are already registered above:
-      // 'location-outline', 'time-outline', 'checkmark-circle-outline', 
-      // 'close-outline', 'arrow-back-outline', 'home-outline', 
-      // 'car-outline', 'calendar-outline', 'alert-circle-outline',
-      // 'sparkles-outline', 'phone-portrait-outline', 'mail-outline', 'person-outline'
     });
   }
 }

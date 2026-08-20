@@ -75,9 +75,9 @@
       </div>
 
       <!-- ========================== -->
-      <!-- MEGA BOOKING CTA - NEW LAYOUT -->
+      <!-- MEGA BOOKING CTA - UPDATED -->
       <!-- ========================== -->
-      <div class="mega-booking-cta" (click)="navigateTo('booking')">
+      <div class="mega-booking-cta" (click)="goToCarwashMap()">
         <div class="mega-cta-content">
           <div class="mega-cta-left">
             <div class="mega-cta-badge">
@@ -93,10 +93,10 @@
           </div>
         </div>
         
-        <!-- Book Now Button - Directly below 60 Seconds -->
-        <button class="book-now-btn" (click)="$event.stopPropagation(); navigateTo('booking')">
-          <ion-icon name="calendar-outline"></ion-icon>
-          Book Now
+        <!-- Book Now Button - Navigates to Carwash Map -->
+        <button class="book-now-btn" (click)="$event.stopPropagation(); goToCarwashMap()">
+          <ion-icon name="map-outline"></ion-icon>
+          Find Carwashes
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </button>
         

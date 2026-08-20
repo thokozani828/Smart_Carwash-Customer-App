@@ -1,21 +1,50 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { addIcons } from 'ionicons';
+import { 
+  arrowBackOutline, 
+  carOutline, 
+  constructOutline, 
+  locationOutline, 
+  navigateOutline, 
+  calendarOutline, 
+  timeOutline, 
+  cardOutline, 
+  cashOutline, 
+  createOutline, 
+  homeOutline,
+  starOutline,
+  phonePortraitOutline,
+  swapHorizontalOutline,
+  locateOutline,
+  checkmarkOutline,
+  addCircleOutline,
+  arrowForwardOutline,
+  chevronDownOutline,
+  lockClosedOutline,
+  sparklesOutline,
+  waterOutline,
+  diamondOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.page.html',
   styleUrls: ['./booking.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IonicModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BookingPage {
+export class BookingPage implements OnInit {
   
   // Loading state
   isLoading: boolean = true;
+  
+  // ✅ Holds the clicked car wash data from the map page
+  carwash: any = null;
 
   // Vehicles
   vehicles: any[] = [];
@@ -50,6 +79,16 @@ export class BookingPage {
     private router: Router,
     private navCtrl: NavController
   ) {
+    // ✅ Register icons
+    addIcons({
+      arrowBackOutline, carOutline, constructOutline, locationOutline, navigateOutline, 
+      calendarOutline, timeOutline, cardOutline, cashOutline, createOutline, homeOutline,
+      starOutline, phonePortraitOutline, swapHorizontalOutline, locateOutline, 
+      checkmarkOutline, addCircleOutline, arrowForwardOutline, chevronDownOutline, 
+      lockClosedOutline, sparklesOutline, waterOutline, diamondOutline
+    });
+
+    // Track current route
     this.currentRoute = this.router.url.split('/')[1] || 'booking';
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url.split('/')[1] || 'booking';
@@ -60,6 +99,13 @@ export class BookingPage {
    * Initialize - Load data with skeleton
    */
   ngOnInit(): void {
+    // ✅ FIX: Use this.router.getCurrentNavigation() instead of navCtrl
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state) {
+      this.carwash = navigation.extras.state['carwash'];
+    }
+
+    // Then load the form data
     this.loadData();
   }
 
@@ -96,6 +142,7 @@ export class BookingPage {
 
       this.availableTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
       
+      // Set default selections
       this.selectedDate = '2026-07-17';
       this.isLoading = false;
     }, 2000);

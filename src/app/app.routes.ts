@@ -130,6 +130,10 @@ export const routes: Routes = [
   path: 'forgot-password',
   loadComponent: () => import('./forgot-password/forgot-password.page').then(m => m.ForgotPasswordPage)
 },
+{
+  path: 'carwash-map',
+  loadComponent: () => import('./carwash-map/carwash-map.page').then(m => m.CarwashMapPage)
+},
 
   {
     path: '**',

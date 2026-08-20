@@ -1,0 +1,661 @@
+// ============================================================
+// CARWASH MAP PAGE
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+$brand-blue: #2563eb;
+$brand-light: #3b82f6;
+$brand-dark: #1a3a8a;
+$white: #ffffff;
+$gray-50: #f8fafc;
+$gray-100: #f1f5f9;
+$gray-200: #e2e8f0;
+$gray-300: #cbd5e1;
+$gray-400: #94a3b8;
+$gray-500: #64748b;
+$gray-600: #475569;
+$gray-700: #334155;
+$gray-800: #1e293b;
+$success: #22c55e;
+$warning: #f59e0b;
+$danger: #ef4444;
+$shadow-light: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.08);
+$shadow-heavy: rgba(0, 0, 0, 0.12);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+* {
+  font-family: $font-family;
+}
+
+// ==========================
+// CONTENT
+// ==========================
+
+.carwash-content {
+  --background: #f1f5f9;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 100vh;
+}
+
+// ==========================
+// FULL MAP
+// ==========================
+
+.full-map {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: #e8ecf1;
+  z-index: 0;
+}
+
+// ==========================
+// LOTTIE ANIMATIONS
+// ==========================
+
+.lottie-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.lottie-small {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.lottie-empty {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.loading-carwashes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  
+  p {
+    font-size: 13px;
+    color: $gray-500;
+    margin-top: 8px;
+  }
+}
+
+// ==========================
+// MAP FALLBACK
+// ==========================
+
+.map-fallback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  z-index: 1;
+  color: $gray-700;
+  
+  p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: $gray-500;
+  }
+}
+
+// ==========================
+// BACK BUTTON
+// ==========================
+
+.back-btn {
+  position: fixed;
+  top: 48px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px $shadow-medium;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  
+  ion-icon {
+    font-size: 24px;
+    color: $gray-700;
+  }
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px $shadow-heavy;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// ==========================
+// LOCATION INFO
+// ==========================
+
+.location-info {
+  position: fixed;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  
+  .location-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 2px 12px $shadow-medium;
+    
+    ion-icon {
+      font-size: 18px;
+      color: $brand-blue;
+    }
+    
+    span {
+      font-size: 13px;
+      font-weight: 500;
+      color: $gray-700;
+    }
+  }
+}
+
+// ==========================
+// BOTTOM SHEET
+// ==========================
+
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background: $white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 32px $shadow-heavy;
+  max-height: 80vh;
+  transition: max-height 0.3s ease;
+  
+  &.expanded {
+    max-height: 92vh;
+  }
+}
+
+.sheet-handle {
+  padding: 12px 20px 8px;
+  cursor: pointer;
+  
+  .handle-bar {
+    width: 40px;
+    height: 4px;
+    background: $gray-300;
+    border-radius: 2px;
+    margin: 0 auto 12px;
+  }
+  
+  .sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .sheet-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: $gray-800;
+    }
+    
+    .sheet-count {
+      font-size: 13px;
+      color: $gray-500;
+      font-weight: 500;
+    }
+  }
+}
+
+.sheet-content {
+  padding: 0 16px 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+// ==========================
+// SEARCH BAR
+// ==========================
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: $gray-100;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  
+  .search-icon {
+    font-size: 20px;
+    color: $gray-400;
+  }
+  
+  input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: $gray-700;
+    outline: none;
+    
+    &::placeholder {
+      color: $gray-400;
+    }
+  }
+}
+
+// ==========================
+// FILTER CHIPS
+// ==========================
+
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  
+  .filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    background: $gray-100;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: $gray-600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    
+    ion-icon {
+      font-size: 14px;
+    }
+    
+    &:hover {
+      background: $gray-200;
+    }
+    
+    &.active {
+      background: $brand-blue;
+      color: $white;
+    }
+  }
+}
+
+// ==========================
+// CARWASH LIST
+// ==========================
+
+.carwash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.carwash-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: $gray-50;
+  border-radius: 12px;
+  border: 1px solid $gray-200;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: $brand-blue;
+    box-shadow: 0 2px 8px $shadow-light;
+  }
+  
+  .carwash-avatar {
+    position: relative;
+    flex-shrink: 0;
+    
+    .carwash-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      ion-icon {
+        font-size: 28px;
+        color: $brand-blue;
+      }
+    }
+    
+    .carwash-status {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 8px;
+      border: 2px solid $white;
+      
+      &.open {
+        background: $success;
+        color: $white;
+      }
+      
+      &.closed {
+        background: $gray-400;
+        color: $white;
+      }
+    }
+  }
+  
+  .carwash-info {
+    flex: 1;
+    min-width: 0;
+    
+    .carwash-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: $gray-800;
+      margin: 0 0 4px;
+    }
+    
+    .carwash-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+      
+      ion-icon {
+        font-size: 14px;
+        color: $warning;
+        fill: $warning;
+      }
+      
+      span {
+        font-size: 13px;
+        font-weight: 600;
+        color: $gray-700;
+      }
+      
+      .reviews {
+        font-weight: 400;
+        color: $gray-400;
+        font-size: 12px;
+      }
+    }
+    
+    .carwash-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      
+      span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: $gray-500;
+        
+        ion-icon {
+          font-size: 14px;
+          color: $gray-400;
+        }
+      }
+    }
+  }
+  
+  .carwash-actions {
+    flex-shrink: 0;
+    
+    .book-btn {
+      padding: 6px 16px;
+      background: $brand-blue;
+      color: $white;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: $brand-light;
+        transform: scale(1.05);
+      }
+      
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+// ==========================
+// EMPTY STATE
+// ==========================
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  
+  ion-icon {
+    font-size: 48px;
+    color: $gray-300;
+    margin-bottom: 12px;
+  }
+  
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: $gray-700;
+    margin: 0 0 4px;
+  }
+  
+  p {
+    font-size: 14px;
+    color: $gray-400;
+    margin: 0;
+  }
+}
+
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .back-btn {
+    top: 12px;
+    left: 12px;
+    width: 38px;
+    height: 38px;
+    
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+  
+  .location-info {
+    top: 12px;
+    
+    .location-chip {
+      padding: 6px 12px;
+      font-size: 12px;
+      
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .bottom-sheet {
+    max-height: 85vh;
+  }
+  
+  .carwash-item {
+    padding: 10px;
+    
+    .carwash-avatar {
+      .carwash-icon {
+        width: 48px;
+        height: 48px;
+        
+        ion-icon {
+          font-size: 24px;
+        }
+      }
+    }
+    
+    .carwash-info {
+      .carwash-name {
+        font-size: 13px;
+      }
+      
+      .carwash-meta {
+        span {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}
+
+// ... (Keep your existing map and sheet styles above) ...
+
+// ==========================
+// SKELETON LOADER STYLES
+// ==========================
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.skeleton-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+// Skeleton Avatar (Circle)
+.skeleton-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+  animation: shimmer 1.5s infinite;
+}
+
+// Skeleton Info Section
+.skeleton-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-line.name {
+  width: 60%;
+  height: 14px;
+}
+
+.skeleton-line.rating {
+  width: 40%;
+  height: 10px;
+}
+
+.skeleton-line.meta {
+  width: 70%;
+  height: 10px;
+}
+
+// Skeleton Button
+.skeleton-btn {
+  width: 56px;
+  height: 30px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  flex-shrink: 0;
+  animation: shimmer 1.5s infinite;
+}
+
+// THE SHIMMER ANIMATION
+@keyframes shimmer {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -109,6 +109,74 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
+// SELECTED CAR WASH BANNER (NEW)
+// ==========================
+
+.selected-carwash-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  padding: 16px;
+  border-radius: 16px;
+  margin: 8px 16px 20px 16px;
+  border: 1px solid #bfdbfe;
+  box-shadow: 0 2px 8px rgba($brand-blue, 0.08);
+  
+  .banner-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: $white;
+    padding: 6px;
+    object-fit: contain;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .banner-info {
+    flex: 1;
+    
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: $text-dark;
+      margin: 0 0 4px 0;
+    }
+    
+    p {
+      font-size: 13px;
+      color: $text-gray;
+      margin: 0 0 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+    
+    .banner-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: $text-gray;
+      
+      span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        
+        ion-icon {
+          font-size: 14px;
+          color: $warning;
+        }
+      }
+    }
+  }
+}
+
+// ==========================
 // FORM
 // ==========================
 

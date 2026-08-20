@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,6 +20,9 @@ import {
   arrowBackOutline,
 } from 'ionicons/icons';
 
+// Declare lottie for CDN
+declare var lottie: any;
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -28,8 +31,8 @@ import {
   imports: [CommonModule, FormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class LoginPage {
-  identifier: string = ''; // Can be email or phone number
+export class LoginPage implements AfterViewInit {
+  identifier: string = '';
   password: string = '';
   rememberMe: boolean = false;
   showPassword: boolean = false;
@@ -37,7 +40,9 @@ export class LoginPage {
   submitted: boolean = false;
   identifierFocused: boolean = false;
   passwordFocused: boolean = false;
-  imageError: boolean = false; // Added for image error handling
+  imageError: boolean = false;
+
+  private animationItem: any;
 
   constructor(
     private router: Router,
@@ -60,29 +65,70 @@ export class LoginPage {
     });
   }
 
+  ngAfterViewInit() {
+    this.loadLottieAnimation();
+  }
+
+  loadLottieAnimation() {
+    // Wait for DOM to be ready
+    setTimeout(() => {
+      const container = document.getElementById('lottie-container');
+      if (container && typeof lottie !== 'undefined') {
+        try {
+          this.animationItem = lottie.loadAnimation({
+            container: container,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            // Use the local file you downloaded
+            path: 'assets/animations/car-wash-login.json'
+          });
+          console.log('[Lottie] Animation loaded successfully from local file');
+        } catch (error) {
+          console.error('[Lottie] Error loading animation:', error);
+          // Fallback to CDN if local file fails
+          this.loadFallbackAnimation(container);
+        }
+      } else {
+        console.warn('[Lottie] Container not found or lottie not loaded');
+        // Try again after a delay
+        setTimeout(() => this.loadLottieAnimation(), 500);
+      }
+    }, 200);
+  }
+
+  loadFallbackAnimation(container: any) {
+    try {
+      this.animationItem = lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://assets10.lottiefiles.com/packages/lf20_1pczf4sl.json'
+      });
+      console.log('[Lottie] Fallback animation loaded from CDN');
+    } catch (error) {
+      console.error('[Lottie] Fallback also failed:', error);
+    }
+  }
+
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
-  /**
-   * Validate if the identifier is either an email or a valid phone number
-   */
   isValidIdentifier(): boolean {
     if (!this.identifier) return false;
     
-    // Check if it's an email
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (emailRegex.test(this.identifier)) {
       return true;
     }
     
-    // Check if it's a phone number (supports various formats)
     const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     if (phoneRegex.test(this.identifier.replace(/\s/g, ''))) {
       return true;
     }
     
-    // Check if it's a simple numeric phone number (9-15 digits)
     const simplePhoneRegex = /^[0-9]{9,15}$/;
     if (simplePhoneRegex.test(this.identifier.replace(/\s/g, ''))) {
       return true;
@@ -91,15 +137,8 @@ export class LoginPage {
     return false;
   }
 
-  /**
-   * Handle image loading errors
-   */
   handleImageError(event: any): void {
     this.imageError = true;
-    console.log('Image failed to load, using fallback');
-    // You can set a fallback image here
-    // event.target.src = 'assets/images/logo_fallback.png';
-    // Or hide the image
     event.target.style.display = 'none';
   }
 
@@ -119,10 +158,6 @@ export class LoginPage {
       identifier: this.identifier, 
       rememberMe: this.rememberMe 
     });
-    
-    // Determine if it's email or phone
-    const isEmail = this.identifier.includes('@');
-    console.log('[Login] Login with:', isEmail ? 'Email' : 'Phone');
     
     setTimeout(() => {
       this.isLoading = false;

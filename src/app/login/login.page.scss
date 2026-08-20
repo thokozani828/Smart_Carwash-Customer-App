@@ -1,5 +1,5 @@
 // ============================================================
-// LOGIN PAGE - BIG LOGO, NO CONTAINER
+// LOGIN PAGE - WITH LOTTIE ANIMATION
 // ============================================================
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -42,7 +42,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 }
 
 // ==========================
-// LOGIN WRAPPER - NO CONTAINER
+// LOGIN WRAPPER
 // ==========================
 
 .login-wrapper {
@@ -83,39 +83,95 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 }
 
 // ==========================
-// BRAND LOGO - BIGGER & CENTERED
+// LOTTIE ANIMATION CONTAINER
 // ==========================
 
-.brand-logo {
-  margin-bottom: 20px;
-  padding-top: 8px;
-  text-align: center;
-}
-
-.logo-image-wrapper {
+.lottie-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.brand-image {
-  max-width: 400px;
+  align-items: center;
+  margin: 0 auto 12px auto;
   width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  background: transparent;
-  padding: 0;
-  box-shadow: none;
-  transition: all 0.3s ease;
+  min-height: 200px;
+  position: relative;
   
-  &:hover {
-    transform: scale(1.02);
+  #lottie-container {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+  // Loading spinner
+  .lottie-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border: 4px solid $border-color;
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    z-index: 1;
+    display: none; // Hidden by default, shown via JS
+    
+    &.active {
+      display: block;
+    }
+  }
+  
+  // Fallback when animation fails
+  .lottie-fallback {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: $text-gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    background: $white;
+    padding: 20px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    
+    ion-icon {
+      font-size: 56px;
+      color: $primary;
+      opacity: 0.4;
+    }
+    
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-gray;
+    }
+    
+    &.active {
+      display: flex;
+    }
   }
 }
 
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 // ==========================
-// WELCOME TEXT - LEFT ALIGNED
+// WELCOME TEXT
 // ==========================
 
 .welcome-text {
@@ -421,7 +477,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 }
 
 // ==========================
-// REGISTER LINK - LEFT ALIGNED
+// REGISTER LINK
 // ==========================
 
 .register-link {
@@ -463,8 +519,13 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     }
   }
   
-  .brand-image {
-    max-width: 280px;
+  .lottie-container {
+    min-height: 160px;
+    
+    #lottie-container {
+      width: 160px;
+      height: 160px;
+    }
   }
   
   .welcome-text h2 {
@@ -492,8 +553,13 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     padding: 12px 12px 20px;
   }
   
-  .brand-image {
-    max-width: 220px;
+  .lottie-container {
+    min-height: 140px;
+    
+    #lottie-container {
+      width: 140px;
+      height: 140px;
+    }
   }
   
   .welcome-text h2 {
@@ -531,8 +597,13 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     max-width: 440px;
   }
   
-  .brand-image {
-    max-width: 480px;
+  .lottie-container {
+    min-height: 240px;
+    
+    #lottie-container {
+      width: 240px;
+      height: 240px;
+    }
   }
   
   .welcome-text h2 {
@@ -541,8 +612,13 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 }
 
 @media (min-width: 1024px) {
-  .brand-image {
-    max-width: 550px;
+  .lottie-container {
+    min-height: 280px;
+    
+    #lottie-container {
+      width: 280px;
+      height: 280px;
+    }
   }
 }
 
@@ -555,12 +631,23 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     --background: #0f172a;
   }
   
-  .brand-image {
-    background: transparent;
-    box-shadow: none;
+  .lottie-container {
+    #lottie-container {
+      svg {
+        filter: brightness(0.9);
+      }
+    }
     
-    &:hover {
-      box-shadow: none;
+    .lottie-fallback {
+      background: #1e293b;
+      
+      ion-icon {
+        color: #60a5fa;
+      }
+      
+      span {
+        color: #94a3b8;
+      }
     }
   }
   
@@ -660,7 +747,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     transform: none !important;
   }
   
-  .brand-image:hover {
-    transform: none !important;
+  .lottie-loading {
+    animation: none !important;
   }
 }

@@ -1,0 +1,125 @@
+<ion-content class="carwash-content">
+  
+  <!-- ========================== -->
+  <!-- FULL MAP BACKGROUND (STATIC) -->
+  <!-- ========================== -->
+  <div class="full-map">
+    <img 
+      src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
+      style="width: 100%; height: 100%; object-fit: cover;" 
+      alt="Map Background"
+    />
+    
+    <!-- LOTTIE ANIMATIONS ON MAP -->
+    <div class="lottie-marker" style="position: absolute; top: 25%; left: 35%; transform: translate(-50%, -50%); z-index: 2;">
+      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    </div>
+    <div class="lottie-marker" style="position: absolute; top: 50%; left: 70%; transform: translate(-50%, -50%); z-index: 2;">
+      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    </div>
+    <div class="lottie-marker" style="position: absolute; top: 65%; left: 20%; transform: translate(-50%, -50%); z-index: 2;">
+      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    </div>
+    <div class="lottie-marker" style="position: absolute; top: 20%; left: 80%; transform: translate(-50%, -50%); z-index: 2;">
+      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    </div>
+  </div>
+
+  <!-- MAP OVERLAYS -->
+  <div class="back-btn" (click)="goBack()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </div>
+  <div class="location-info">
+    <div class="location-chip">
+      <ion-icon name="location-outline"></ion-icon>
+      <span>Your Location</span>
+    </div>
+  </div>
+
+  <!-- ========================== -->
+  <!-- BOTTOM SHEET -->
+  <!-- ========================== -->
+  <div class="bottom-sheet" [class.expanded]="isExpanded">
+    
+    <div class="sheet-handle" (click)="toggleSheet()">
+      <div class="handle-bar"></div>
+      <div class="sheet-header">
+        <span class="sheet-title">Available Carwashes</span>
+        <span class="sheet-count">{{ isLoading ? 'Loading...' : filteredCarwashes.length + ' nearby' }}</span>
+      </div>
+    </div>
+
+    <div class="sheet-content">
+      
+      <!-- SEARCH BAR -->
+      <div class="search-bar">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input type="text" placeholder="Search carwashes..." [(ngModel)]="searchQuery" (ionInput)="filterCarwashes()" />
+      </div>
+
+      <!-- FILTER CHIPS -->
+      <div class="filter-chips">
+        <div class="filter-chip" [class.active]="selectedFilter === 'all'" (click)="setFilter('all')">All</div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'rating'" (click)="setFilter('rating')"><ion-icon name="star-outline"></ion-icon> Top Rated</div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'distance'" (click)="setFilter('distance')"><ion-icon name="location-outline"></ion-icon> Distance</div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'open'" (click)="setFilter('open')"><ion-icon name="time-outline"></ion-icon> Open Now</div>
+      </div>
+
+      <!-- ========================== -->
+      <!-- SKELETON LOADING STATE -->
+      <!-- ========================== -->
+      <div class="skeleton-list" *ngIf="isLoading">
+        <div class="skeleton-item" *ngFor="let i of [1,2,3,4,5]">
+          <div class="skeleton-avatar"></div>
+          <div class="skeleton-info">
+            <div class="skeleton-line name"></div>
+            <div class="skeleton-line rating"></div>
+            <div class="skeleton-line meta"></div>
+          </div>
+          <div class="skeleton-btn"></div>
+        </div>
+      </div>
+
+      <!-- ========================== -->
+      <!-- REAL CARWASH LIST -->
+      <!-- ========================== -->
+      <div class="carwash-list" *ngIf="!isLoading">
+        <div class="carwash-item" *ngFor="let carwash of filteredCarwashes" (click)="selectCarwash(carwash)" [attr.data-id]="carwash.id">
+          <div class="carwash-avatar">
+            <div class="carwash-icon" style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+              <img [src]="carwash.logo" alt="Logo" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div class="carwash-status" [ngClass]="carwash.isOpen ? 'open' : 'closed'">
+              {{ carwash.isOpen ? 'Open' : 'Closed' }}
+            </div>
+          </div>
+          <div class="carwash-info">
+            <h4 class="carwash-name">{{ carwash.name }}</h4>
+            <div class="carwash-rating">
+              <ion-icon name="star"></ion-icon>
+              <span>{{ carwash.rating }}</span>
+              <span class="reviews">({{ carwash.reviews }} reviews)</span>
+            </div>
+            <div class="carwash-meta">
+              <span><ion-icon name="location-outline"></ion-icon> {{ carwash.distance }} km away</span>
+              <span><ion-icon name="time-outline"></ion-icon> {{ carwash.waitTime }} min wait</span>
+            </div>
+          </div>
+          <div class="carwash-actions">
+            <button class="book-btn" (click)="$event.stopPropagation(); bookCarwash(carwash)">
+              Book
+            </button>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="filteredCarwashes.length === 0">
+          <ion-icon name="search-outline"></ion-icon>
+          <h4>No carwashes found</h4>
+          <p>Try adjusting your search or filters.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

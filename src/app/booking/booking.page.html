@@ -1,9 +1,8 @@
-<ion-content class="booking-content" [scroll]="true">
+<ion-content class="booking-content" scroll="true">
   <div class="booking-container">
     
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading" class="booking-skeleton">
-      
       <!-- Header Skeleton -->
       <div class="skeleton-header">
         <div class="skeleton skeleton-circle"></div>
@@ -18,8 +17,6 @@
         <div class="skeleton skeleton-text skeleton-w-30"></div>
         <div class="skeleton skeleton-select"></div>
       </div>
-
-      <!-- Service Options Skeleton -->
       <div class="skeleton-form-group">
         <div class="skeleton skeleton-text skeleton-w-30"></div>
         <div class="skeleton-service-grid">
@@ -27,8 +24,6 @@
           <div class="skeleton skeleton-service-item"></div>
         </div>
       </div>
-
-      <!-- Wash Type Skeleton -->
       <div class="skeleton-form-group">
         <div class="skeleton skeleton-text skeleton-w-30"></div>
         <div class="skeleton-wash-grid">
@@ -36,59 +31,19 @@
           <div class="skeleton skeleton-wash-item"></div>
         </div>
       </div>
-
-      <!-- Date Options Skeleton -->
-      <div class="skeleton-form-group">
-        <div class="skeleton skeleton-text skeleton-w-30"></div>
-        <div class="skeleton-date-grid">
-          <div class="skeleton skeleton-date-item"></div>
-          <div class="skeleton skeleton-date-item"></div>
-          <div class="skeleton skeleton-date-item"></div>
-          <div class="skeleton skeleton-date-item"></div>
-          <div class="skeleton skeleton-date-item"></div>
-          <div class="skeleton skeleton-date-item"></div>
-          <div class="skeleton skeleton-date-item"></div>
-        </div>
-      </div>
-
-      <!-- Time Options Skeleton -->
-      <div class="skeleton-form-group">
-        <div class="skeleton skeleton-text skeleton-w-30"></div>
-        <div class="skeleton-time-grid">
-          <div class="skeleton skeleton-time-item"></div>
-          <div class="skeleton skeleton-time-item"></div>
-          <div class="skeleton skeleton-time-item"></div>
-          <div class="skeleton skeleton-time-item"></div>
-        </div>
-      </div>
-
-      <!-- Payment Options Skeleton -->
       <div class="skeleton-form-group">
         <div class="skeleton skeleton-text skeleton-w-30"></div>
         <div class="skeleton skeleton-payment-item"></div>
         <div class="skeleton skeleton-payment-item"></div>
-        <div class="skeleton skeleton-payment-item"></div>
-        <div class="skeleton skeleton-payment-item"></div>
       </div>
-
-      <!-- Notes Skeleton -->
-      <div class="skeleton-form-group">
-        <div class="skeleton skeleton-text skeleton-w-30"></div>
-        <div class="skeleton skeleton-notes"></div>
-      </div>
-
-      <!-- Summary Skeleton -->
       <div class="skeleton skeleton-summary"></div>
-
-      <!-- Confirm Button Skeleton -->
       <div class="skeleton skeleton-confirm-btn"></div>
-
     </div>
 
     <!-- Actual Content (shown when not loading) -->
     <div *ngIf="!isLoading">
       
-      <!-- Header -->
+      <!-- Header with Back Button -->
       <div class="booking-header">
         <div class="header-top">
           <div class="back-button" (click)="goBack()">
@@ -97,7 +52,19 @@
           <h1 class="booking-title">Book a Wash</h1>
           <div class="placeholder"></div>
         </div>
-        <p class="booking-subtitle">Complete the form to book your car wash</p>
+      </div>
+
+      <!-- ✅ DISPLAY THE SELECTED CAR WASH INFO -->
+      <div class="selected-carwash-banner" *ngIf="carwash">
+        <img [src]="carwash.logo" class="banner-logo" alt="Logo" />
+        <div class="banner-info">
+          <h2>{{ carwash.name }}</h2>
+          <p><ion-icon name="location-outline"></ion-icon> {{ carwash.address }}</p>
+          <div class="banner-meta">
+            <span><ion-icon name="star"></ion-icon> {{ carwash.rating }}</span>
+            <span><ion-icon name="time-outline"></ion-icon> {{ carwash.waitTime }} min wait</span>
+          </div>
+        </div>
       </div>
 
       <!-- Booking Form -->
@@ -125,7 +92,6 @@
               </div>
               <ion-icon name="checkmark-outline" class="vehicle-check" *ngIf="selectedVehicle?.id === vehicle.id"></ion-icon>
             </div>
-            <!-- Add Vehicle Option -->
             <div class="vehicle-item add-vehicle" (click)="addVehicle()">
               <div class="vehicle-item-info">
                 <ion-icon name="add-circle-outline" class="add-vehicle-icon"></ion-icon>
@@ -179,7 +145,7 @@
           </div>
         </div>
 
-        <!-- GPS Location (Mobile Wash) -->
+        <!-- GPS Location -->
         <div class="form-group" *ngIf="washType === 'mobile'">
           <label class="form-label">
             <ion-icon name="navigate-outline"></ion-icon>
@@ -229,14 +195,13 @@
           </div>
         </div>
 
-        <!-- Payment Method with Cash Disabled for Mobile -->
+        <!-- Payment Method -->
         <div class="form-group">
           <label class="form-label">
             <ion-icon name="card-outline"></ion-icon>
             Payment Method
           </label>
           <div class="payment-options">
-            <!-- Card Payment -->
             <div class="payment-option" [class.selected]="paymentMethod === 'card'" (click)="selectPaymentMethod('card')">
               <ion-icon name="card-outline" class="payment-icon"></ion-icon>
               <div class="payment-info">
@@ -245,8 +210,6 @@
               </div>
               <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'card'"></ion-icon>
             </div>
-
-            <!-- EFT Payment -->
             <div class="payment-option" [class.selected]="paymentMethod === 'eft'" (click)="selectPaymentMethod('eft')">
               <ion-icon name="swap-horizontal-outline" class="payment-icon"></ion-icon>
               <div class="payment-info">
@@ -255,8 +218,6 @@
               </div>
               <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'eft'"></ion-icon>
             </div>
-
-            <!-- Mobile Payment -->
             <div class="payment-option" [class.selected]="paymentMethod === 'mobile'" (click)="selectPaymentMethod('mobile')">
               <ion-icon name="phone-portrait-outline" class="payment-icon"></ion-icon>
               <div class="payment-info">
@@ -265,22 +226,13 @@
               </div>
               <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'mobile'"></ion-icon>
             </div>
-
-            <!-- Cash Payment - Disabled for Mobile Wash -->
-            <div class="payment-option" 
-                 [class.selected]="paymentMethod === 'cash'" 
-                 [class.disabled]="!isCashAvailable()"
-                 (click)="selectPaymentMethod('cash')">
+            <div class="payment-option" [class.selected]="paymentMethod === 'cash'" (click)="selectPaymentMethod('cash')">
               <ion-icon name="cash-outline" class="payment-icon"></ion-icon>
               <div class="payment-info">
                 <span class="payment-name">Cash Payment</span>
-                <span class="payment-desc" *ngIf="isCashAvailable()">Pay at the branch</span>
-                <span class="payment-desc" *ngIf="!isCashAvailable()">Not available for mobile wash</span>
+                <span class="payment-desc">Pay at the branch</span>
               </div>
               <ion-icon name="checkmark-circle" class="payment-check" [class.visible]="paymentMethod === 'cash'"></ion-icon>
-              <div class="payment-disabled-overlay" *ngIf="!isCashAvailable()">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-              </div>
             </div>
           </div>
         </div>
@@ -306,13 +258,8 @@
             <span class="summary-label">Total Amount</span>
             <span class="summary-value">{{ getTotalAmount() }}</span>
           </div>
-          <div class="summary-row" *ngIf="paymentMethod">
-            <span class="summary-label">Payment Method</span>
-            <span class="summary-value">{{ getPaymentMethodName() }}</span>
-          </div>
         </div>
 
-        <!-- Confirm Booking Button -->
         <button type="submit" class="btn-confirm" [disabled]="!isFormValid()">
           <span>Confirm Booking</span>
           <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -322,9 +269,7 @@
 
     </div>
 
-    <!-- Bottom Spacer -->
     <div class="bottom-spacer"></div>
-
   </div>
 
   <!-- Bottom Navigation Bar -->

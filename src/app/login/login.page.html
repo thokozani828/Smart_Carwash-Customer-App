@@ -1,7 +1,7 @@
 <ion-content class="login-content" [scroll]="false">
   
   <!-- ==========================
-  LOGIN FORM
+  LOGIN FORM WITH LOTTIE
   ========================== -->
   <div class="login-wrapper">
     
@@ -10,16 +10,9 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </button>
 
-    <!-- Brand Logo - Centered -->
-    <div class="brand-logo">
-      <div class="logo-image-wrapper">
-        <img 
-          src="assets/images/logo_name-removebg-preview.png" 
-          alt="Smart CarWash" 
-          class="brand-image"
-          (error)="handleImageError($event)"
-        />
-      </div>
+    <!-- Lottie Animation Container using CDN -->
+    <div class="lottie-container">
+      <div id="lottie-container" class="lottie-animation"></div>
     </div>
 
     <!-- Welcome Text - Left Aligned -->
