@@ -3,6 +3,7 @@
     
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading" class="home-skeleton">
+      
       <!-- Header Skeleton -->
       <div class="skeleton-header">
         <div class="skeleton-flex">
@@ -46,9 +47,10 @@
         <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
         <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
       </div>
+
     </div>
 
-    <!-- Actual Content -->
+    <!-- Actual Content (shown when not loading) -->
     <div *ngIf="!isLoading">
       
       <!-- Header -->
@@ -60,20 +62,20 @@
             </div>
             <div class="greeting-text">
               <span class="greeting-label">Good Morning 👋</span>
-              <h1 class="customer-name">{{ customerName }}</h1>
+              <h1 class="customer-name">Thokozani</h1>
             </div>
           </div>
           <div class="header-actions">
             <div class="notification-btn" (click)="navigateTo('notifications')">
               <ion-icon name="notifications-outline"></ion-icon>
-              <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+              <span class="notification-badge">3</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Mega Booking CTA -->
-      <div class="mega-booking-cta" (click)="goToCarwashMap()">
+      <!-- MEGA BOOKING CTA -->
+      <div class="mega-booking-cta" (click)="navigateTo('booking')">
         <div class="mega-cta-content">
           <div class="mega-cta-left">
             <div class="mega-cta-badge">
@@ -89,12 +91,14 @@
           </div>
         </div>
         
-        <button class="book-now-btn" (click)="$event.stopPropagation(); goToCarwashMap()">
-          <ion-icon name="map-outline"></ion-icon>
-          Find Carwashes
+        <!-- Book Now Button -->
+        <button class="book-now-btn" (click)="$event.stopPropagation(); navigateTo('booking')">
+          <ion-icon name="calendar-outline"></ion-icon>
+          Book Now
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </button>
         
+        <!-- Features Row -->
         <div class="mega-cta-features">
           <div class="feature-chip">
             <ion-icon name="time-outline"></ion-icon>
@@ -144,31 +148,31 @@
       </div>
 
       <!-- Active Booking -->
-      <div class="active-booking-card" *ngIf="activeBooking" (click)="navigateTo('live-tracking')">
+      <div class="active-booking-card" (click)="navigateTo('live-tracking')">
         <div class="active-booking-header">
           <div class="active-booking-status">
             <span class="status-dot"></span>
-            <span class="status-text">{{ activeBooking.status }}</span>
+            <span class="status-text">In Progress</span>
           </div>
-          <span class="queue-badge">Queue #{{ activeBooking.queueNumber }}</span>
+          <span class="queue-badge">Queue #3</span>
         </div>
         <div class="active-booking-info">
-          <h3>{{ activeBooking.serviceName }}</h3>
+          <h3>Premium Wash</h3>
           <p>
             <ion-icon name="car-outline"></ion-icon>
-            {{ activeBooking.vehicle }}
+            BMW X5 · Blue
           </p>
           <p>
             <ion-icon name="location-outline"></ion-icon>
-            {{ activeBooking.location }}
+            Kwamashu
           </p>
         </div>
         <div class="active-booking-progress">
           <div class="progress-steps">
-            <div class="step" [class.completed]="activeBooking.step >= 1" [class.active]="activeBooking.step === 1">Booked</div>
-            <div class="step" [class.completed]="activeBooking.step >= 2" [class.active]="activeBooking.step === 2">Washing</div>
-            <div class="step" [class.completed]="activeBooking.step >= 3" [class.active]="activeBooking.step === 3">Drying</div>
-            <div class="step" [class.completed]="activeBooking.step >= 4" [class.active]="activeBooking.step === 4">Done</div>
+            <div class="step completed">Booked</div>
+            <div class="step active">Washing</div>
+            <div class="step">Drying</div>
+            <div class="step">Done</div>
           </div>
         </div>
         <button class="track-btn" (click)="$event.stopPropagation(); navigateTo('live-tracking')">
@@ -205,7 +209,7 @@
           </div>
           <div class="loyalty-info">
             <span class="loyalty-label">Points</span>
-            <span class="loyalty-value">{{ loyaltyPoints | number }}</span>
+            <span class="loyalty-value">2,450</span>
           </div>
         </div>
         <div class="vip-card" (click)="navigateTo('vip-membership')">
@@ -214,41 +218,39 @@
           </div>
           <div class="vip-info">
             <span class="vip-label">VIP Status</span>
-            <span class="vip-value" [class.gold]="vipTier === 'Gold'" [class.silver]="vipTier === 'Silver'">
-              {{ vipTier }} Member
-            </span>
+            <span class="vip-value gold">Gold Member</span>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Bottom Spacer for nav -->
+    <!-- Bottom Spacer -->
     <div class="bottom-spacer"></div>
 
   </div>
 
-  <!-- Bottom Navigation Bar - Robust & Persistent -->
+  <!-- Bottom Navigation Bar -->
   <div class="bottom-nav">
-    <div class="nav-item" [class.active]="activeTab === 'booking'" (click)="switchTab('booking')">
+    <div class="nav-item" (click)="navigateTo('booking')">
       <ion-icon name="calendar-outline"></ion-icon>
       <span>Book</span>
     </div>
-    <div class="nav-item" [class.active]="activeTab === 'history'" (click)="switchTab('history')">
+    <div class="nav-item" (click)="navigateTo('booking-history')">
       <ion-icon name="time-outline"></ion-icon>
       <span>History</span>
     </div>
-    <div class="nav-item home-center" [class.active]="activeTab === 'home'" (click)="switchTab('home')">
+    <div class="nav-item active home-center" (click)="navigateTo('home')">
       <div class="home-indicator">
         <ion-icon name="home-outline"></ion-icon>
       </div>
       <span>Home</span>
     </div>
-    <div class="nav-item" [class.active]="activeTab === 'vehicles'" (click)="switchTab('vehicles')">
+    <div class="nav-item" (click)="navigateTo('vehicles')">
       <ion-icon name="car-outline"></ion-icon>
       <span>Vehicles</span>
     </div>
-    <div class="nav-item" [class.active]="activeTab === 'vip'" (click)="switchTab('vip')">
+    <div class="nav-item" (click)="navigateTo('vip-membership')">
       <ion-icon name="star-outline"></ion-icon>
       <span>VIP</span>
     </div>
