@@ -9,6 +9,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,13 +26,13 @@ jobs:
 
       - run: npm install
 
-      # ✅ FIX: Build with the correct base-href (your repo name)
+      # Build with base-href matching your GitHub repository name
       - run: npm run build -- --base-href=/Smart_Carwash-Customer-App/
 
-      # ✅ FIX: Upload the correct folder from the dist directory
+      # Upload the static browser assets folder
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/customer-app
+          path: 'dist/customer-app/browser'
 
   deploy:
     needs: build
