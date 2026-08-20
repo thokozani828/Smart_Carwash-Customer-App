@@ -1,12 +1,6 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -18,7 +12,7 @@
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Optional CSS utils */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
@@ -27,31 +21,23 @@
 
 /**
  * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
  */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
 /* ============================================================
-   UBER-STYLE TYPOGRAPHY SYSTEM - Inter Font
+   UBER FONT - EXACT MATCH
    ============================================================ */
 
-// Import Inter font from Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 
-// Set Inter as the global font
 :root {
   --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   
-  // UBER COLORS
+  // Uber Colors
   --uber-black: #000000;
   --uber-white: #ffffff;
   --uber-bg-secondary: #f6f6f6;
-  --uber-border: #d6d6d6;
+  --uber-border: #e8e8e8;
   --uber-text-primary: #000000;
   --uber-text-secondary: #6e6e6e;
   --uber-text-light: #9ca3af;
@@ -62,10 +48,21 @@
   --uber-shadow-light: rgba(0, 0, 0, 0.04);
   --uber-shadow-medium: rgba(0, 0, 0, 0.08);
   --uber-shadow-heavy: rgba(0, 0, 0, 0.15);
+  
+  // Glass navigation variables
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --glass-blur: 20px;
+  --nav-active-bg: rgba(0, 0, 0, 0.06);
+  --nav-active-glow: rgba(0, 0, 0, 0.08);
 }
 
 * {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -74,96 +71,383 @@ body {
   line-height: 1.5;
   color: #000000;
   background: #f6f6f6;
-}
-
-// ============================================================
-// UBER-STYLE TYPOGRAPHY CLASSES
-// ============================================================
-
-.uber-page-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 34px;
-  letter-spacing: -0.5px;
-  color: #000000;
-}
-
-.uber-large-heading {
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 30px;
-  letter-spacing: -0.3px;
-  color: #000000;
-}
-
-.uber-section-heading {
-  font-family: 'Inter', sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 26px;
-  letter-spacing: -0.2px;
-  color: #000000;
-}
-
-.uber-card-heading {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 22px;
-  letter-spacing: 0;
-  color: #000000;
-}
-
-.uber-body {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0;
-  color: #000000;
+  letter-spacing: -0.01em;
 }
 
-.uber-secondary-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0;
-  color: #6e6e6e;
+/* ============================================================
+   PAGE TRANSITIONS - FULLY ROBUST
+   ============================================================ */
+
+// ============================================
+// ENTER ANIMATION (When page appears)
+// ============================================
+
+ion-page {
+  animation: pageEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity;
 }
 
-.uber-caption {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0.1px;
-  color: #6e6e6e;
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.uber-button-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0;
+// ============================================
+// EXIT ANIMATION (When page leaves)
+// ============================================
+
+ion-page.ion-page-leave {
+  animation: pageExit 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity;
 }
 
-.uber-nav-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: 0;
+@keyframes pageExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+}
+
+// ============================================
+// IONIC ROUTER OUTLET TRANSITIONS
+// ============================================
+
+ion-router-outlet {
+  animation: fadeSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// CONTENT FADE IN
+// ============================================
+
+ion-content {
+  animation: contentFadeIn 0.6s ease-out;
+  will-change: opacity;
+}
+
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// ============================================
+// STAGGERED CHILD ANIMATIONS
+// ============================================
+
+.stagger-children > * {
+  opacity: 0;
+  animation: staggerFadeIn 0.5s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+@keyframes staggerFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// NAVIGATION TRANSITION - SLIDE BETWEEN PAGES
+// ============================================
+
+// Forward navigation (push)
+ion-page.nav-forward {
+  animation: slideForward 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideForward {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// Back navigation (pop)
+ion-page.nav-back {
+  animation: slideBack 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideBack {
+  0% {
+    transform: translateX(-30%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// ============================================
+// MICRO INTERACTIONS
+// ============================================
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.hover-scale {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* ============================================================
+   FLOATING GLASS BOTTOM NAVIGATION
+   ============================================================ */
+
+.uber-bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.2));
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 12px 12px;
+  z-index: 1000;
+  height: 72px;
+  box-shadow: var(--glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.12));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 500px;
+  margin: 0 auto;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
+  }
+  
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    flex: 1;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    min-height: 48px;
+    border-radius: 16px;
+    
+    .nav-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      ion-icon {
+        font-size: 24px;
+        color: #9ca3af;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .nav-badge {
+        position: absolute;
+        top: -4px;
+        right: -8px;
+        background: #ef4444;
+        color: white;
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        border: 2px solid var(--glass-bg, #ffffff);
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+    }
+    
+    .nav-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+    
+    &.active {
+      background: var(--nav-active-bg, rgba(0, 0, 0, 0.06));
+      box-shadow: inset 0 0 20px var(--nav-active-glow, rgba(0, 0, 0, 0.08));
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.08);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+      }
+      
+      .nav-label {
+        color: #000000;
+        font-weight: 600;
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 16px;
+        height: 3px;
+        background: #000000;
+        border-radius: 3px;
+        opacity: 0.8;
+      }
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.03);
+        
+        .nav-icon ion-icon {
+          color: #4b5563;
+        }
+        
+        .nav-label {
+          color: #4b5563;
+        }
+      }
+    }
+    
+    &:active {
+      transform: scale(0.94);
+    }
+  }
+  
+  .nav-item.home-center {
+    .nav-icon {
+      width: 34px;
+      height: 34px;
+      margin-top: -2px;
+      
+      ion-icon {
+        font-size: 28px;
+        color: #9ca3af;
+      }
+    }
+    
+    .nav-label {
+      font-weight: 500;
+    }
+    
+    &.active {
+      background: rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.1);
+        filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.15));
+      }
+      
+      .nav-label {
+        color: #000000;
+        font-weight: 600;
+      }
+      
+      &::after {
+        background: #000000;
+        width: 20px;
+        height: 3px;
+      }
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
 }
 
 /* ============================================================
    UBER-STYLE BUTTONS
    ============================================================ */
 
-// Primary button - Uber black (#000000)
 .uber-primary-btn {
   height: 52px;
   width: 100%;
@@ -200,7 +484,6 @@ body {
   }
 }
 
-// Secondary button - White (#ffffff) with border (#d6d6d6)
 .uber-secondary-btn {
   height: 52px;
   width: 100%;
@@ -236,424 +519,291 @@ body {
   }
 }
 
-// Small button variant
-.uber-btn-sm {
-  height: 40px;
-  border-radius: 20px;
-  padding: 0 16px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
 /* ============================================================
-   UBER-STYLE SPACING SYSTEM
-   Spacing: 4 → 8 → 12 → 16 → 20 → 24 → 32 → 40 → 48px
-   ============================================================ */
-
-.uber-page-container {
-  padding: 24px 20px;
-}
-
-.uber-section {
-  margin-bottom: 32px;
-}
-
-.uber-section-title {
-  margin-bottom: 12px;
-}
-
-.uber-card {
-  padding: 16px;
-  border-radius: 16px;
-  background: #ffffff;
-  border: 1px solid #d6d6d6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.uber-button-group {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-// Spacing utility classes
-.uber-m-4 { margin: 4px; }
-.uber-m-8 { margin: 8px; }
-.uber-m-12 { margin: 12px; }
-.uber-m-16 { margin: 16px; }
-.uber-m-20 { margin: 20px; }
-.uber-m-24 { margin: 24px; }
-.uber-m-32 { margin: 32px; }
-.uber-m-40 { margin: 40px; }
-.uber-m-48 { margin: 48px; }
-
-.uber-p-4 { padding: 4px; }
-.uber-p-8 { padding: 8px; }
-.uber-p-12 { padding: 12px; }
-.uber-p-16 { padding: 16px; }
-.uber-p-20 { padding: 20px; }
-.uber-p-24 { padding: 24px; }
-.uber-p-32 { padding: 32px; }
-.uber-p-40 { padding: 40px; }
-.uber-p-48 { padding: 48px; }
-
-.uber-mt-4 { margin-top: 4px; }
-.uber-mt-8 { margin-top: 8px; }
-.uber-mt-12 { margin-top: 12px; }
-.uber-mt-16 { margin-top: 16px; }
-.uber-mt-20 { margin-top: 20px; }
-.uber-mt-24 { margin-top: 24px; }
-.uber-mt-32 { margin-top: 32px; }
-.uber-mt-40 { margin-top: 40px; }
-.uber-mt-48 { margin-top: 48px; }
-
-.uber-mb-4 { margin-bottom: 4px; }
-.uber-mb-8 { margin-bottom: 8px; }
-.uber-mb-12 { margin-bottom: 12px; }
-.uber-mb-16 { margin-bottom: 16px; }
-.uber-mb-20 { margin-bottom: 20px; }
-.uber-mb-24 { margin-bottom: 24px; }
-.uber-mb-32 { margin-bottom: 32px; }
-.uber-mb-40 { margin-bottom: 40px; }
-.uber-mb-48 { margin-bottom: 48px; }
-
-/* ============================================================
-   UBER-STYLE COLORS - Utility Classes
-   ============================================================ */
-
-// Background colors
-.uber-bg-black { background: #000000; }
-.uber-bg-white { background: #ffffff; }
-.uber-bg-secondary { background: #f6f6f6; }
-.uber-bg-border { background: #d6d6d6; }
-
-// Text colors
-.uber-text-black { color: #000000; }
-.uber-text-white { color: #ffffff; }
-.uber-text-secondary { color: #6e6e6e; }
-.uber-text-light { color: #9ca3af; }
-
-// Border colors
-.uber-border-black { border-color: #000000; }
-.uber-border-white { border-color: #ffffff; }
-.uber-border-gray { border-color: #d6d6d6; }
-
-// Status colors
-.uber-text-success { color: #22c55e; }
-.uber-text-warning { color: #f59e0b; }
-.uber-text-danger { color: #ef4444; }
-.uber-text-gold { color: #fbbf24; }
-
-.uber-bg-success { background: #22c55e; }
-.uber-bg-warning { background: #f59e0b; }
-.uber-bg-danger { background: #ef4444; }
-.uber-bg-gold { background: #fbbf24; }
-
-/* ============================================================
-   IONIC OVERRIDES FOR UBER STYLE
-   ============================================================ */
-
-// Override Ionic's default button styles
-ion-button {
-  --border-radius: 26px !important;
-  --padding-start: 24px !important;
-  --padding-end: 24px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  height: 52px !important;
-}
-
-ion-button[color="dark"] {
-  --background: #000000 !important;
-  --color: #ffffff !important;
-}
-
-ion-button[fill="outline"] {
-  --border-color: #d6d6d6 !important;
-  --color: #000000 !important;
-}
-
-// Override Ionic card styles
-ion-card {
-  border-radius: 16px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-  margin: 0 0 16px 0 !important;
-  border: 1px solid #d6d6d6 !important;
-  background: #ffffff !important;
-}
-
-// Override Ionic list styles
-ion-list {
-  background: transparent !important;
-  padding: 0 !important;
-}
-
-ion-item {
-  --padding-start: 16px !important;
-  --padding-end: 16px !important;
-  --inner-padding-end: 0 !important;
-  --background: #ffffff !important;
-  --border-color: #d6d6d6 !important;
-  font-family: 'Inter', sans-serif !important;
-  color: #000000 !important;
-}
-
-// Override Ionic header styles
-ion-header {
-  ion-toolbar {
-    --background: #ffffff;
-    --border-color: #d6d6d6;
-    --padding-start: 20px;
-    --padding-end: 20px;
-    
-    ion-title {
-      font-family: 'Inter', sans-serif !important;
-      font-size: 28px !important;
-      font-weight: 700 !important;
-      letter-spacing: -0.5px !important;
-      padding: 0 !important;
-      color: #000000 !important;
-    }
-  }
-}
-
-// Override Ionic content styles
-ion-content {
-  --background: #f6f6f6;
-  --padding-start: 0;
-  --padding-end: 0;
-}
-
-// Override Ionic modal styles
-ion-modal {
-  --border-radius: 16px 16px 0 0 !important;
-}
-
-// Override Ionic toast styles
-ion-toast {
-  --border-radius: 12px !important;
-  font-family: 'Inter', sans-serif !important;
-}
-
-// Override Ionic tabs
-ion-tabs {
-  ion-tab-bar {
-    --background: #ffffff;
-    --border: 1px solid #d6d6d6;
-  }
-  
-  ion-tab-button {
-    --color: #9ca3af;
-    --color-selected: #000000;
-    font-family: 'Inter', sans-serif !important;
-  }
-}
-
-/* ============================================================
-   UBER-STYLE SEARCH BAR
-   ============================================================ */
-
-.uber-search-bar {
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #d6d6d6;
-  border-radius: 26px;
-  padding: 0 16px;
-  height: 52px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-
-  ion-icon {
-    font-size: 20px;
-    color: #6e6e6e;
-    margin-right: 12px;
-    flex-shrink: 0;
-  }
-
-  span {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #6e6e6e;
-    letter-spacing: 0;
-    line-height: 24px;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-/* ============================================================
-   UBER-STYLE BADGE
-   ============================================================ */
-
-.uber-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1px;
-  line-height: 16px;
-  background: rgba(0, 0, 0, 0.06);
-  color: #000000;
-
-  &.uber-badge-success {
-    background: rgba(34, 197, 94, 0.15);
-    color: #22c55e;
-  }
-
-  &.uber-badge-warning {
-    background: rgba(245, 158, 11, 0.15);
-    color: #f59e0b;
-  }
-
-  &.uber-badge-danger {
-    background: rgba(239, 68, 68, 0.15);
-    color: #ef4444;
-  }
-
-  &.uber-badge-gold {
-    background: rgba(251, 191, 36, 0.2);
-    color: #f59e0b;
-  }
-}
-
-/* ============================================================
-   ANIMATIONS
-   ============================================================ */
-
-.uber-scale-on-press {
-  transition: transform 0.15s ease;
-  
-  &:active {
-    transform: scale(0.96);
-  }
-}
-
-.uber-fade-in {
-  animation: uberFadeIn 0.3s ease-in-out;
-}
-
-@keyframes uberFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ============================================================
-   DARK MODE OVERRIDES - Uber style
+   DARK MODE
    ============================================================ */
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --uber-black: #ffffff;
-    --uber-white: #1a1a1a;
-    --uber-bg-secondary: #0d0d0d;
-    --uber-border: #333333;
-    --uber-text-primary: #ffffff;
-    --uber-text-secondary: #999999;
-    --uber-text-light: #666666;
+    --glass-bg: rgba(26, 26, 26, 0.88);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --nav-active-bg: rgba(255, 255, 255, 0.08);
+    --nav-active-glow: rgba(255, 255, 255, 0.05);
   }
-
+  
   body {
     background: #0d0d0d;
     color: #ffffff;
   }
-
-  .uber-page-title,
-  .uber-large-heading,
-  .uber-section-heading,
-  .uber-card-heading,
-  .uber-body {
-    color: #ffffff;
-  }
-
-  .uber-secondary-text,
-  .uber-caption {
-    color: #999999;
-  }
-
-  .uber-card {
-    background: #1a1a1a;
-    border-color: #333333;
-  }
-
-  .uber-primary-btn {
-    background: #ffffff;
-    color: #000000;
-  }
-
-  .uber-secondary-btn {
-    background: #1a1a1a;
-    color: #ffffff;
-    border-color: #333333;
-  }
-
-  ion-card {
-    background: #1a1a1a !important;
-    border-color: #333333 !important;
-  }
-
-  ion-item {
-    --background: #1a1a1a !important;
-    --border-color: #333333 !important;
-    color: #ffffff !important;
-  }
-
-  ion-header ion-toolbar {
-    --background: #0d0d0d;
-    --border-color: #333333;
+  
+  .uber-bottom-nav {
+    &::before {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    }
     
-    ion-title {
-      color: #ffffff !important;
+    .nav-item {
+      .nav-icon ion-icon {
+        color: #6b7280;
+      }
+      
+      .nav-label {
+        color: #6b7280;
+      }
+      
+      &.active {
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.05);
+        
+        .nav-icon ion-icon {
+          color: #ffffff;
+          filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+        }
+        
+        .nav-label {
+          color: #ffffff;
+        }
+        
+        &::after {
+          background: #ffffff;
+        }
+      }
+      
+      @media (hover: hover) {
+        &:hover:not(.active) {
+          background: rgba(255, 255, 255, 0.04);
+          
+          .nav-icon ion-icon {
+            color: #9ca3af;
+          }
+          
+          .nav-label {
+            color: #9ca3af;
+          }
+        }
+      }
+    }
+    
+    .nav-item.home-center {
+      .nav-icon ion-icon {
+        color: #6b7280;
+      }
+      
+      &.active {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.08);
+        
+        .nav-icon ion-icon {
+          color: #ffffff;
+          filter: drop-shadow(0 2px 12px rgba(255, 255, 255, 0.15));
+        }
+        
+        .nav-label {
+          color: #ffffff;
+        }
+        
+        &::after {
+          background: #ffffff;
+        }
+      }
     }
   }
+}
 
-  ion-content {
-    --background: #0d0d0d;
-  }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 
-  ion-tabs ion-tab-bar {
-    --background: #1a1a1a;
-    --border: 1px solid #333333;
-  }
-
-  .uber-search-bar {
-    background: #1a1a1a;
-    border-color: #333333;
-
-    span {
-      color: #999999;
+@media (max-width: 480px) {
+  .uber-bottom-nav {
+    bottom: 16px;
+    left: 12px;
+    right: 12px;
+    height: 64px;
+    padding: 6px 8px 10px;
+    border-radius: 20px;
+    
+    .nav-item {
+      padding: 4px 8px;
+      min-height: 40px;
+      border-radius: 12px;
+      
+      .nav-icon {
+        width: 24px;
+        height: 24px;
+        
+        ion-icon {
+          font-size: 20px;
+        }
+        
+        .nav-badge {
+          font-size: 9px;
+          min-width: 16px;
+          height: 16px;
+          top: -2px;
+          right: -6px;
+        }
+      }
+      
+      .nav-label {
+        font-size: 9px;
+        letter-spacing: 0.1px;
+      }
+      
+      &.active::after {
+        width: 12px;
+        height: 2px;
+        top: 3px;
+      }
+      
+      &.home-center {
+        .nav-icon {
+          width: 28px;
+          height: 28px;
+          
+          ion-icon {
+            font-size: 24px;
+          }
+        }
+        
+        &.active::after {
+          width: 16px;
+        }
+      }
     }
+  }
+}
 
-    ion-icon {
-      color: #999999;
+@media (max-width: 380px) {
+  .uber-bottom-nav {
+    bottom: 12px;
+    left: 8px;
+    right: 8px;
+    height: 58px;
+    padding: 4px 6px 8px;
+    border-radius: 16px;
+    
+    .nav-item {
+      padding: 2px 4px;
+      min-height: 36px;
+      
+      .nav-icon {
+        width: 20px;
+        height: 20px;
+        
+        ion-icon {
+          font-size: 18px;
+        }
+        
+        .nav-badge {
+          font-size: 8px;
+          min-width: 14px;
+          height: 14px;
+        }
+      }
+      
+      .nav-label {
+        font-size: 8px;
+      }
+      
+      &.home-center {
+        .nav-icon {
+          width: 24px;
+          height: 24px;
+          
+          ion-icon {
+            font-size: 22px;
+          }
+        }
+      }
     }
   }
+}
 
-  .uber-badge {
-    background: rgba(255, 255, 255, 0.06);
-    color: #ffffff;
+/* ============================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  ion-page,
+  ion-router-outlet,
+  ion-content,
+  .stagger-children > * {
+    animation: none !important;
+    transition: none !important;
   }
+  
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .uber-bottom-nav .nav-item:hover {
+    transform: none !important;
+  }
+  
+  .uber-bottom-nav .nav-item:active {
+    transform: none !important;
+  }
+  
+  .uber-bottom-nav .nav-item {
+    transition: none !important;
+  }
+  
+  .uber-bottom-nav .nav-item.active .nav-icon ion-icon {
+    transform: none !important;
+  }
+}
 
-  .uber-bg-white { background: #1a1a1a; }
-  .uber-bg-secondary { background: #0d0d0d; }
-  .uber-border-gray { border-color: #333333; }
-  .uber-text-black { color: #ffffff; }
-  .uber-text-secondary { color: #999999; }
-  .uber-text-light { color: #666666; }
+/* ============================================================
+   BROWSER COMPATIBILITY FALLBACKS
+   ============================================================ */
+
+// Firefox fallback for backdrop-filter
+@supports not (backdrop-filter: blur(20px)) {
+  .uber-bottom-nav {
+    background: rgba(255, 255, 255, 0.95);
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .uber-bottom-nav {
+      background: rgba(26, 26, 26, 0.95);
+    }
+  }
+}
+
+// Safari fallback for will-change
+@supports not (will-change: transform) {
+  ion-page,
+  ion-router-outlet,
+  ion-content,
+  .stagger-children > *,
+  .hover-lift,
+  .hover-scale {
+    will-change: auto !important;
+  }
+}
+
+// Old browser fallback for transform
+@supports not (transform: translateY(0)) {
+  @keyframes pageEnter {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes pageExit {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes fadeSlideIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes staggerFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 }

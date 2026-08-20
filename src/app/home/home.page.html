@@ -1,10 +1,8 @@
 <ion-content class="home-content" [scroll]="true">
-  <div class="home-container">
+  <div class="home-container stagger-children">
     
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading" class="home-skeleton">
-      
-      <!-- Header Skeleton -->
       <div class="skeleton-header">
         <div class="skeleton-flex">
           <div class="skeleton skeleton-circle" style="width:44px;height:44px;"></div>
@@ -15,22 +13,14 @@
         </div>
         <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
       </div>
-
-      <!-- Mega Booking CTA Skeleton -->
       <div class="skeleton-card" style="height:180px;border-radius:18px;"></div>
-
-      <!-- Quick Actions Skeleton -->
       <div class="skeleton-grid-4">
         <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
         <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
         <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
         <div class="skeleton skeleton-card" style="height:80px;border-radius:12px;"></div>
       </div>
-
-      <!-- Active Booking Skeleton -->
       <div class="skeleton-card" style="height:200px;border-radius:14px;"></div>
-
-      <!-- Services Skeleton -->
       <div class="skeleton-section-header">
         <div class="skeleton skeleton-text skeleton-w-30"></div>
         <div class="skeleton skeleton-text-sm skeleton-w-15"></div>
@@ -41,20 +31,17 @@
         <div class="skeleton skeleton-card" style="height:90px;border-radius:12px;"></div>
         <div class="skeleton skeleton-card" style="height:90px;border-radius:12px;"></div>
       </div>
-
-      <!-- Loyalty & VIP Skeleton -->
       <div class="skeleton-grid-2">
         <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
         <div class="skeleton skeleton-card" style="height:70px;border-radius:12px;"></div>
       </div>
-
     </div>
 
-    <!-- Actual Content (shown when not loading) -->
+    <!-- Actual Content -->
     <div *ngIf="!isLoading">
       
       <!-- Header -->
-      <div class="home-header">
+      <div class="home-header hover-lift">
         <div class="header-top">
           <div class="greeting">
             <div class="profile-icon" (click)="navigateTo('profile')">
@@ -75,7 +62,7 @@
       </div>
 
       <!-- MEGA BOOKING CTA -->
-      <div class="mega-booking-cta" (click)="navigateTo('booking')">
+      <div class="mega-booking-cta hover-lift" (click)="navigateToCarWashMap()">
         <div class="mega-cta-content">
           <div class="mega-cta-left">
             <div class="mega-cta-badge">
@@ -84,21 +71,14 @@
             </div>
             <h2 class="mega-cta-title">Book Your Wash <br><span class="highlight">in 60 Seconds</span></h2>
           </div>
-          <div class="mega-cta-right">
-            <div class="mega-cta-circle">
-              <ion-icon name="arrow-forward"></ion-icon>
-            </div>
-          </div>
         </div>
         
-        <!-- Book Now Button -->
-        <button class="book-now-btn" (click)="$event.stopPropagation(); navigateTo('booking')">
+        <button class="book-now-btn hover-scale" (click)="$event.stopPropagation(); navigateToCarWashMap()">
           <ion-icon name="calendar-outline"></ion-icon>
           Book Now
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </button>
         
-        <!-- Features Row -->
         <div class="mega-cta-features">
           <div class="feature-chip">
             <ion-icon name="time-outline"></ion-icon>
@@ -121,25 +101,25 @@
 
       <!-- Quick Actions -->
       <div class="quick-actions-grid">
-        <div class="quick-action-card" (click)="navigateTo('vehicles')">
+        <div class="quick-action-card hover-lift" (click)="navigateTo('vehicles')">
           <div class="quick-action-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
             <ion-icon name="car-outline"></ion-icon>
           </div>
           <span>Vehicles</span>
         </div>
-        <div class="quick-action-card" (click)="navigateTo('booking-history')">
+        <div class="quick-action-card hover-lift" (click)="navigateTo('booking-history')">
           <div class="quick-action-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
             <ion-icon name="time-outline"></ion-icon>
           </div>
           <span>History</span>
         </div>
-        <div class="quick-action-card" (click)="navigateTo('payments')">
+        <div class="quick-action-card hover-lift" (click)="navigateTo('payments')">
           <div class="quick-action-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
             <ion-icon name="card-outline"></ion-icon>
           </div>
           <span>Payments</span>
         </div>
-        <div class="quick-action-card" (click)="navigateTo('vip-membership')">
+        <div class="quick-action-card hover-lift" (click)="navigateTo('vip-membership')">
           <div class="quick-action-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
             <ion-icon name="star-outline"></ion-icon>
           </div>
@@ -148,7 +128,7 @@
       </div>
 
       <!-- Active Booking -->
-      <div class="active-booking-card" (click)="navigateTo('live-tracking')">
+      <div class="active-booking-card hover-lift" (click)="navigateTo('live-tracking')">
         <div class="active-booking-header">
           <div class="active-booking-status">
             <span class="status-dot"></span>
@@ -175,7 +155,7 @@
             <div class="step">Done</div>
           </div>
         </div>
-        <button class="track-btn" (click)="$event.stopPropagation(); navigateTo('live-tracking')">
+        <button class="track-btn hover-scale" (click)="$event.stopPropagation(); navigateTo('live-tracking')">
           <ion-icon name="location-outline"></ion-icon>
           Track Now
         </button>
@@ -189,7 +169,7 @@
         </div>
         
         <div class="services-grid">
-          <div class="service-card" *ngFor="let service of services" (click)="navigateTo('booking')">
+          <div class="service-card hover-lift" *ngFor="let service of services" (click)="navigateTo('booking')">
             <div class="service-icon" [style.background]="service.color">
               <ion-icon [name]="service.icon"></ion-icon>
             </div>
@@ -203,7 +183,7 @@
 
       <!-- Loyalty & VIP -->
       <div class="loyalty-vip-row">
-        <div class="loyalty-card" (click)="navigateTo('loyalty')">
+        <div class="loyalty-card hover-lift" (click)="navigateTo('loyalty')">
           <div class="loyalty-icon">
             <ion-icon name="gift-outline"></ion-icon>
           </div>
@@ -212,7 +192,7 @@
             <span class="loyalty-value">2,450</span>
           </div>
         </div>
-        <div class="vip-card" (click)="navigateTo('vip-membership')">
+        <div class="vip-card hover-lift" (click)="navigateTo('vip-membership')">
           <div class="vip-icon">
             <ion-icon name="star"></ion-icon>
           </div>
@@ -225,34 +205,57 @@
 
     </div>
 
-    <!-- Bottom Spacer -->
     <div class="bottom-spacer"></div>
 
   </div>
 
-  <!-- Bottom Navigation Bar -->
-  <div class="bottom-nav">
-    <div class="nav-item" (click)="navigateTo('booking')">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <span>Book</span>
-    </div>
-    <div class="nav-item" (click)="navigateTo('booking-history')">
-      <ion-icon name="time-outline"></ion-icon>
-      <span>History</span>
-    </div>
-    <div class="nav-item active home-center" (click)="navigateTo('home')">
-      <div class="home-indicator">
+  <!-- FLOATING GLASS BOTTOM NAVIGATION -->
+  <nav class="uber-bottom-nav" role="navigation" aria-label="Main navigation">
+    
+    <!-- Home (Centered with glass highlight) -->
+    <button 
+      class="nav-item home-center" 
+      (click)="navigateTo('home')" 
+      [class.active]="currentRoute === 'home'">
+      <div class="nav-icon">
         <ion-icon name="home-outline"></ion-icon>
       </div>
-      <span>Home</span>
-    </div>
-    <div class="nav-item" (click)="navigateTo('vehicles')">
-      <ion-icon name="car-outline"></ion-icon>
-      <span>Vehicles</span>
-    </div>
-    <div class="nav-item" (click)="navigateTo('vip-membership')">
-      <ion-icon name="star-outline"></ion-icon>
-      <span>VIP</span>
-    </div>
-  </div>
+      <span class="nav-label">Home</span>
+    </button>
+
+    <!-- Book -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('booking')" 
+      [class.active]="currentRoute === 'booking'">
+      <div class="nav-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <span class="nav-label">Book</span>
+    </button>
+
+    <!-- History -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('booking-history')" 
+      [class.active]="currentRoute === 'booking-history'">
+      <div class="nav-icon">
+        <ion-icon name="time-outline"></ion-icon>
+      </div>
+      <span class="nav-label">History</span>
+    </button>
+
+    <!-- Vehicles -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('vehicles')" 
+      [class.active]="currentRoute === 'vehicles'">
+      <div class="nav-icon">
+        <ion-icon name="car-outline"></ion-icon>
+        <span class="nav-badge">2</span>
+      </div>
+      <span class="nav-label">Vehicles</span>
+    </button>
+
+  </nav>
 </ion-content>
