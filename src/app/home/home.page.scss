@@ -1,33 +1,27 @@
 // ============================================================
-// HOME PAGE - REDESIGNED
+// HOME PAGE - CLEAN & ROBUST
 // ============================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 // ==========================
 // VARIABLES
 // ==========================
 
-$brand-blue: #2563eb;
-$brand-hover: #1d4ed8;
-$brand-dark: #1a3a8a;
+$brand: #2563eb;
+$brand-dark: #1e3a8a;
 $text-dark: #0f172a;
 $text-gray: #64748b;
 $text-light: #94a3b8;
-$border-color: #e2e8f0;
+$border: #e8edf4;
 $white: #ffffff;
 $success: #22c55e;
 $warning: #f59e0b;
-$danger: #ef4444;
 $gold: #fbbf24;
-$purple: #8b5cf6;
-$shadow-light: rgba(0, 0, 0, 0.04);
-$shadow-medium: rgba(0, 0, 0, 0.08);
-$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
-* {
-  font-family: $font-family;
-}
+$shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+$radius: 16px;
+$radius-sm: 12px;
 
 // ==========================
 // HOME CONTENT
@@ -39,15 +33,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   --padding-bottom: 0;
   --padding-start: 0;
   --padding-end: 0;
-  height: 100vh;
 }
 
 .home-container {
-  padding: 16px 16px 110px;
+  padding: 16px 16px 100px;
   max-width: 600px;
   margin: 0 auto;
-  height: 100%;
-  overflow-y: auto;
 }
 
 // ==========================
@@ -73,21 +64,21 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba($brand-blue, 0.1);
+    background: rgba($brand, 0.10);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
     
     ion-icon {
       font-size: 28px;
-      color: $brand-blue;
+      color: $brand;
     }
     
     &:hover {
-      background: rgba($brand-blue, 0.2);
-      transform: scale(1.05);
+      background: rgba($brand, 0.20);
+      transform: scale(1.04);
     }
   }
   
@@ -119,12 +110,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   height: 40px;
   border-radius: 50%;
   background: $white;
-  border: 1px solid $border-color;
+  border: 1px solid $border;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   
   ion-icon {
     font-size: 20px;
@@ -132,15 +123,15 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   }
   
   &:hover {
-    border-color: $brand-blue;
-    box-shadow: 0 4px 16px rgba($brand-blue, 0.1);
+    border-color: $brand;
+    box-shadow: 0 4px 12px rgba($brand, 0.12);
   }
   
   .notification-badge {
     position: absolute;
     top: -4px;
     right: -4px;
-    background: $danger;
+    background: #ef4444;
     color: $white;
     font-size: 10px;
     font-weight: 700;
@@ -155,7 +146,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
-// MEGA BOOKING CTA - NO ROUND CIRCLE
+// MEGA BOOKING CTA
 // ==========================
 
 .mega-booking-cta {
@@ -167,7 +158,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.10);
   box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
   
   &::before {
@@ -183,7 +174,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   }
   
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: 0 12px 48px rgba(37, 99, 235, 0.25);
   }
   
@@ -203,7 +194,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
         gap: 6px;
         padding: 4px 12px;
         background: rgba($warning, 0.15);
-        border: 1px solid rgba($warning, 0.2);
+        border: 1px solid rgba($warning, 0.20);
         border-radius: 20px;
         color: $gold;
         font-size: 11px;
@@ -224,7 +215,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
         line-height: 1.2;
         
         .highlight {
-          background: linear-gradient(135deg, $gold, #fbbf24);
+          background: linear-gradient(135deg, $gold, #f59e0b);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -232,14 +223,29 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       }
     }
     
-    // REMOVED .mega-cta-right and .mega-cta-circle
+    .mega-cta-right {
+      .mega-cta-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255,255,255,0.10);
+        
+        ion-icon {
+          font-size: 24px;
+          color: $gold;
+        }
+      }
+    }
   }
   
-  // Book Now Button - Directly below 60 Seconds
   .book-now-btn {
     display: flex;
     width: 100%;
-    margin-top: 12px;
+    margin-top: 14px;
     padding: 14px 20px;
     background: linear-gradient(135deg, $gold, #f59e0b);
     color: #1a2634;
@@ -249,7 +255,6 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: $font-family;
     position: relative;
     z-index: 1;
     align-items: center;
@@ -271,7 +276,6 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     }
   }
   
-  // Features - Now below the button
   .mega-cta-features {
     display: flex;
     gap: 12px;
@@ -295,17 +299,17 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       
       ion-icon {
         font-size: 14px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.50);
       }
       
       span {
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.70);
         font-weight: 500;
       }
       
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.10);
         transform: translateY(-2px);
       }
     }
@@ -340,15 +344,15 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   gap: 6px;
   padding: 14px 8px;
   background: $white;
-  border-radius: 12px;
-  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  border: 1px solid $border;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px $shadow-light;
-    border-color: $brand-blue;
+    box-shadow: $shadow;
+    border-color: $brand;
   }
   
   .quick-action-icon {
@@ -378,17 +382,17 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 
 .active-booking-card {
   background: $white;
-  border: 1px solid $border-color;
-  border-radius: 14px;
+  border: 1px solid $border;
+  border-radius: $radius;
   padding: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 2px 8px $shadow-light;
+  box-shadow: $shadow;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px $shadow-light;
+    box-shadow: $shadow-lg;
   }
   
   .active-booking-header {
@@ -465,7 +469,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
         left: 12%;
         right: 12%;
         height: 2px;
-        background: $border-color;
+        background: $border;
         transform: translateY(-50%);
       }
       
@@ -485,7 +489,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
         }
         
         &.active {
-          color: $brand-blue;
+          color: $brand;
         }
       }
     }
@@ -494,14 +498,14 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   .track-btn {
     width: 100%;
     padding: 10px;
-    background: rgba($brand-blue, 0.08);
-    color: $brand-blue;
+    background: rgba($brand, 0.08);
+    color: $brand;
     border: none;
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -512,7 +516,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     }
     
     &:hover {
-      background: rgba($brand-blue, 0.15);
+      background: rgba($brand, 0.15);
     }
   }
 }
@@ -545,7 +549,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   
   .view-all {
     font-size: 12px;
-    color: $brand-blue;
+    color: $brand;
     font-weight: 500;
     cursor: pointer;
     
@@ -563,16 +567,16 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 
 .service-card {
   background: $white;
-  border: 1px solid $border-color;
-  border-radius: 12px;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
   padding: 12px 8px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px $shadow-light;
+    box-shadow: $shadow;
   }
   
   .service-icon {
@@ -601,13 +605,13 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     .service-price {
       font-size: 11px;
       font-weight: 700;
-      color: $brand-blue;
+      color: $brand;
     }
   }
 }
 
 // ==========================
-// LOYALTY & VIP ROW
+// LOYALTY & VIP
 // ==========================
 
 .loyalty-vip-row {
@@ -620,19 +624,19 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 .loyalty-card,
 .vip-card {
   background: $white;
-  border: 1px solid $border-color;
-  border-radius: 12px;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
   padding: 14px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px $shadow-light;
+  transition: all 0.2s;
+  box-shadow: $shadow;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px $shadow-light;
+    box-shadow: $shadow-lg;
   }
   
   .loyalty-icon,
@@ -673,13 +677,17 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       &.gold {
         color: $gold;
       }
+      
+      &.silver {
+        color: #94a3b8;
+      }
     }
   }
 }
 
 .loyalty-card .loyalty-icon {
-  background: rgba($brand-blue, 0.1);
-  ion-icon { color: $brand-blue; }
+  background: rgba($brand, 0.10);
+  ion-icon { color: $brand; }
 }
 
 .vip-card .vip-icon {
@@ -692,11 +700,11 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // ==========================
 
 .bottom-spacer {
-  height: 20px;
+  height: 16px;
 }
 
 // ==========================
-// BOTTOM NAVIGATION - BIGGER WITH CENTERED HOME
+// BOTTOM NAVIGATION
 // ==========================
 
 .bottom-nav {
@@ -705,355 +713,123 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   left: 0;
   right: 0;
   background: $white;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $border;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 0 18px;
+  padding: 8px 0 16px;
   z-index: 1000;
-  box-shadow: 0 -4px 20px $shadow-light;
-  height: 82px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+  height: 76px;
   
   .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
     cursor: pointer;
-    padding: 6px 12px;
-    transition: all 0.3s ease;
+    padding: 4px 8px;
+    transition: all 0.2s;
     position: relative;
     flex: 1;
     
     ion-icon {
-      font-size: 28px;
+      font-size: 24px;
       color: $text-light;
-      transition: color 0.3s ease;
+      transition: color 0.2s;
     }
     
     span {
-      font-size: 12px;
+      font-size: 11px;
       color: $text-light;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: color 0.2s;
     }
     
     &:hover {
-      ion-icon {
-        color: $brand-blue;
-      }
-      
-      span {
-        color: $brand-blue;
-      }
+      ion-icon { color: $brand; }
+      span { color: $brand; }
     }
     
-    // Default active state for non-home items
     &.active:not(.home-center) {
-      ion-icon {
-        color: $brand-blue;
-      }
+      ion-icon { color: $brand; }
+      span { color: $brand; font-weight: 600; }
       
-      span {
-        color: $brand-blue;
-        font-weight: 600;
+      &::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 24px;
+        height: 3px;
+        background: $brand;
+        border-radius: 3px;
       }
     }
     
-    // ==========================
-    // HOME INDICATOR - CENTERED WITH ROUND INDICATOR (BIGGER)
-    // ==========================
+    // Home Center Button
     &.home-center {
-      margin-top: -28px;
+      margin-top: -24px;
       flex: 1.4;
       
       .home-indicator {
-        width: 72px;
-        height: 72px;
+        width: 64px;
+        height: 64px;
         border-radius: 50%;
-        background: $brand-blue;
+        background: $brand;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
+        box-shadow: 0 6px 24px rgba($brand, 0.35);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         
         ion-icon {
-          font-size: 36px;
+          font-size: 32px;
           color: $white;
-          transition: all 0.3s ease;
         }
         
-        // Glow effect
         &::after {
           content: '';
           position: absolute;
-          inset: -6px;
+          inset: -4px;
           border-radius: 50%;
-          background: rgba($brand-blue, 0.2);
+          background: rgba($brand, 0.15);
           animation: pulse-ring 2s ease-in-out infinite;
         }
       }
       
       span {
-        margin-top: 6px;
+        margin-top: 4px;
         font-weight: 600;
-        color: $brand-blue;
-        font-size: 12px;
+        color: $brand;
       }
       
-      // Remove default active indicator
-      &::after {
-        display: none !important;
+      &:hover .home-indicator {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow: 0 8px 32px rgba($brand, 0.45);
       }
       
-      &:hover {
-        .home-indicator {
-          transform: translateY(-3px) scale(1.06);
-          box-shadow: 0 8px 36px rgba($brand-blue, 0.5);
-        }
+      &:active .home-indicator {
+        transform: scale(0.94);
       }
       
-      &:active {
-        .home-indicator {
-          transform: scale(0.93);
-        }
-      }
-    }
-    
-    // Bottom line indicator for non-home items (bigger)
-    &:not(.home-center) {
-      &.active {
-        &::after {
-          content: '';
-          position: absolute;
-          top: -2px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 28px;
-          height: 4px;
-          background: $brand-blue;
-          border-radius: 3px;
-        }
+      &.active .home-indicator {
+        background: darken($brand, 8%);
       }
     }
   }
 }
 
-// Pulse animation for home indicator
 @keyframes pulse-ring {
   0%, 100% {
     transform: scale(1);
     opacity: 0.6;
   }
   50% {
-    transform: scale(1.15);
+    transform: scale(1.2);
     opacity: 0.15;
-  }
-}
-
-// ==========================
-// RESPONSIVE
-// ==========================
-
-@media (max-width: 480px) {
-  .home-container {
-    padding: 12px 12px 100px;
-  }
-  
-  .mega-booking-cta {
-    padding: 18px;
-    
-    .mega-cta-content {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    .mega-cta-title {
-      font-size: 20px;
-    }
-    
-    .book-now-btn {
-      padding: 12px 16px;
-      font-size: 14px;
-      
-      ion-icon {
-        font-size: 18px;
-      }
-    }
-    
-    .mega-cta-features {
-      gap: 8px;
-      justify-content: center;
-      
-      .feature-chip {
-        padding: 4px 12px;
-        
-        ion-icon {
-          font-size: 12px;
-        }
-        
-        span {
-          font-size: 11px;
-        }
-      }
-    }
-  }
-  
-  .quick-actions-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .loyalty-vip-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .bottom-nav {
-    padding: 8px 0 14px;
-    height: 74px;
-    
-    .nav-item {
-      padding: 4px 8px;
-      
-      ion-icon {
-        font-size: 24px;
-      }
-      
-      span {
-        font-size: 11px;
-      }
-      
-      &.home-center {
-        margin-top: -24px;
-        flex: 1.4;
-        
-        .home-indicator {
-          width: 60px;
-          height: 60px;
-          
-          ion-icon {
-            font-size: 30px;
-          }
-        }
-      }
-    }
-    
-    .nav-item:not(.home-center) {
-      &.active::after {
-        width: 22px;
-        height: 3px;
-      }
-    }
-  }
-}
-
-@media (max-width: 380px) {
-  .mega-booking-cta {
-    .book-now-btn {
-      padding: 10px 14px;
-      font-size: 13px;
-      
-      ion-icon {
-        font-size: 16px;
-      }
-    }
-    
-    .mega-cta-features {
-      .feature-chip {
-        padding: 3px 10px;
-        
-        ion-icon {
-          font-size: 11px;
-        }
-        
-        span {
-          font-size: 10px;
-        }
-      }
-    }
-  }
-  
-  .bottom-nav {
-    height: 66px;
-    padding: 6px 0 12px;
-    
-    .nav-item {
-      ion-icon {
-        font-size: 20px;
-      }
-      
-      span {
-        font-size: 9px;
-      }
-      
-      &.home-center {
-        margin-top: -20px;
-        
-        .home-indicator {
-          width: 52px;
-          height: 52px;
-          
-          ion-icon {
-            font-size: 26px;
-          }
-        }
-      }
-    }
-    
-    .nav-item:not(.home-center) {
-      &.active::after {
-        width: 18px;
-        height: 3px;
-      }
-    }
-  }
-}
-
-// ==========================
-// ACCESSIBILITY
-// ==========================
-
-@media (prefers-reduced-motion: reduce) {
-  .mega-booking-cta::before {
-    animation: none !important;
-  }
-  
-  .mega-cta-badge ion-icon {
-    animation: none !important;
-  }
-  
-  .status-dot {
-    animation: none !important;
-  }
-  
-  .home-indicator::after {
-    animation: none !important;
-  }
-  
-  .mega-booking-cta:hover {
-    transform: none !important;
-  }
-  
-  .quick-action-card:hover {
-    transform: none !important;
-  }
-  
-  .active-booking-card:hover {
-    transform: none !important;
-  }
-  
-  .loyalty-card:hover,
-  .vip-card:hover {
-    transform: none !important;
-  }
-  
-  .home-center:hover .home-indicator {
-    transform: none !important;
   }
 }
 
@@ -1061,14 +837,9 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // SKELETON LOADING
 // ==========================
 
-// Skeleton base animation
 @keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: 200px 0;
-  }
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
 }
 
 .skeleton {
@@ -1095,39 +866,18 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   }
 }
 
-.skeleton-text {
-  height: 14px;
-  border-radius: 4px;
-}
+.skeleton-text { height: 14px; border-radius: 4px; }
+.skeleton-text-sm { height: 12px; border-radius: 4px; width: 60%; }
+.skeleton-circle { border-radius: 50%; aspect-ratio: 1; }
+.skeleton-card { border-radius: 12px; min-height: 60px; }
 
-.skeleton-text-sm {
-  height: 12px;
-  border-radius: 4px;
-  width: 60%;
-}
-
-.skeleton-circle {
-  border-radius: 50%;
-  aspect-ratio: 1;
-}
-
-.skeleton-card {
-  border-radius: 12px;
-  min-height: 60px;
-}
-
-// Skeleton width helpers
 .skeleton-w-100 { width: 100%; }
 .skeleton-w-75 { width: 75%; }
 .skeleton-w-50 { width: 50%; }
-.skeleton-w-25 { width: 25%; }
-.skeleton-w-70 { width: 70%; }
 .skeleton-w-40 { width: 40%; }
 .skeleton-w-30 { width: 30%; }
-.skeleton-w-20 { width: 20%; }
 .skeleton-w-15 { width: 15%; }
 
-// Home skeleton specific
 .home-skeleton {
   padding: 16px 0;
   display: flex;
@@ -1173,24 +923,88 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   padding: 4px 0;
 }
 
-// Dark mode support for skeleton
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: #2d3748;
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .home-container { padding: 12px 12px 90px; }
+  
+  .mega-booking-cta {
+    padding: 18px;
+    
+    .mega-cta-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .mega-cta-title { font-size: 20px; }
+    
+    .book-now-btn {
+      padding: 12px 16px;
+      font-size: 14px;
+      
+      ion-icon { font-size: 18px; }
+    }
+    
+    .mega-cta-features {
+      gap: 8px;
+      justify-content: center;
+      
+      .feature-chip {
+        padding: 4px 12px;
+        
+        ion-icon { font-size: 12px; }
+        span { font-size: 11px; }
+      }
+    }
   }
   
-  .skeleton::after {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 255, 0.08) 50%, 
-      transparent 100%
-    );
+  .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .loyalty-vip-row { grid-template-columns: 1fr; }
+  
+  .bottom-nav {
+    height: 68px;
+    padding: 6px 0 12px;
+    
+    .nav-item {
+      ion-icon { font-size: 22px; }
+      span { font-size: 10px; }
+      
+      &.home-center {
+        margin-top: -20px;
+        
+        .home-indicator {
+          width: 56px;
+          height: 56px;
+          
+          ion-icon { font-size: 28px; }
+        }
+      }
+    }
   }
 }
 
-// Reduced motion for skeleton
-@media (prefers-reduced-motion: reduce) {
-  .skeleton::after {
-    animation: none !important;
+@media (max-width: 380px) {
+  .bottom-nav {
+    height: 60px;
+    padding: 4px 0 10px;
+    
+    .nav-item {
+      ion-icon { font-size: 18px; }
+      span { font-size: 9px; }
+      
+      &.home-center {
+        margin-top: -16px;
+        
+        .home-indicator {
+          width: 48px;
+          height: 48px;
+          
+          ion-icon { font-size: 24px; }
+        }
+      }
+    }
   }
 }
