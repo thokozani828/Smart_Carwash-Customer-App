@@ -3,8 +3,6 @@
     
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading" class="vehicles-skeleton">
-      
-      <!-- Header Skeleton -->
       <div class="skeleton-header">
         <div class="skeleton-flex">
           <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
@@ -13,17 +11,14 @@
         </div>
         <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
       </div>
-
-      <!-- Vehicle Cards Skeleton -->
       <div class="skeleton-vehicle-list">
         <div class="skeleton skeleton-card" style="height:120px;border-radius:14px;"></div>
         <div class="skeleton skeleton-card" style="height:120px;border-radius:14px;"></div>
         <div class="skeleton skeleton-card" style="height:120px;border-radius:14px;"></div>
       </div>
-
     </div>
 
-    <!-- Actual Content (shown when not loading) -->
+    <!-- Actual Content -->
     <div *ngIf="!isLoading">
       
       <!-- Header -->
@@ -42,7 +37,7 @@
 
       <!-- Vehicle List -->
       <div class="vehicles-list">
-        <div class="vehicle-card" *ngFor="let vehicle of vehicles" (click)="viewVehicle(vehicle)">
+        <div class="vehicle-card hover-lift" *ngFor="let vehicle of vehicles" (click)="viewVehicle(vehicle)">
           <div class="vehicle-image" [style.background]="vehicle.color">
             <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" alt="{{ vehicle.name }}" class="vehicle-img" />
             <ion-icon *ngIf="!vehicle.imageUrl" name="car-outline"></ion-icon>
@@ -96,10 +91,59 @@
 
     </div>
 
-    <!-- Bottom Spacer -->
     <div class="bottom-spacer"></div>
 
   </div>
+
+  <!-- FLOATING GLASS BOTTOM NAVIGATION - MATCHING HOME PAGE -->
+  <nav class="uber-bottom-nav" role="navigation" aria-label="Main navigation">
+    
+    <!-- Home (Centered with glass highlight) -->
+    <button 
+      class="nav-item home-center" 
+      (click)="navigateTo('home')" 
+      [class.active]="isActive('home')">
+      <div class="nav-icon">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+      <span class="nav-label">Home</span>
+    </button>
+
+    <!-- Book -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('booking')" 
+      [class.active]="isActive('booking')">
+      <div class="nav-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <span class="nav-label">Book</span>
+    </button>
+
+    <!-- History -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('booking-history')" 
+      [class.active]="isActive('booking-history')">
+      <div class="nav-icon">
+        <ion-icon name="time-outline"></ion-icon>
+      </div>
+      <span class="nav-label">History</span>
+    </button>
+
+    <!-- Vehicles -->
+    <button 
+      class="nav-item active" 
+      (click)="navigateTo('vehicles')" 
+      [class.active]="isActive('vehicles')">
+      <div class="nav-icon">
+        <ion-icon name="car-outline"></ion-icon>
+        <span class="nav-badge">{{ vehicles.length }}</span>
+      </div>
+      <span class="nav-label">Vehicles</span>
+    </button>
+
+  </nav>
 
   <!-- Add/Edit Vehicle Modal -->
   <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
@@ -204,19 +248,16 @@
       </div>
       
       <div class="modal-body" *ngIf="selectedVehicleDetails">
-        <!-- Vehicle Image -->
         <div class="details-image" [style.background]="selectedVehicleDetails.color">
           <img *ngIf="selectedVehicleDetails.imageUrl" [src]="selectedVehicleDetails.imageUrl" alt="{{ selectedVehicleDetails.name }}" />
           <ion-icon *ngIf="!selectedVehicleDetails.imageUrl" name="car-outline"></ion-icon>
         </div>
         
-        <!-- Vehicle Info -->
         <div class="details-info">
           <h2 class="details-name">{{ selectedVehicleDetails.name }}</h2>
           <span class="details-plate">{{ selectedVehicleDetails.plate }}</span>
         </div>
         
-        <!-- Vehicle Specs -->
         <div class="details-specs">
           <div class="spec-item">
             <div class="spec-icon" style="background: rgba(37, 99, 235, 0.1);">
@@ -256,7 +297,6 @@
           </div>
         </div>
         
-        <!-- Quick Actions -->
         <div class="details-actions">
           <button class="details-btn primary" (click)="editFromDetails()">
             <ion-icon name="create-outline"></ion-icon>
@@ -268,32 +308,6 @@
           </button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Bottom Navigation Bar - Vehicles Highlighted -->
-  <div class="bottom-nav">
-    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <span>Book</span>
-    </div>
-    <div class="nav-item" [class.active]="isActive('booking-history')" (click)="navigateTo('booking-history')">
-      <ion-icon name="time-outline"></ion-icon>
-      <span>History</span>
-    </div>
-    <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Home</span>
-    </div>
-    <div class="nav-item active vehicles-center" (click)="navigateTo('vehicles')">
-      <div class="nav-indicator">
-        <ion-icon name="car-outline"></ion-icon>
-      </div>
-      <span>Vehicles</span>
-    </div>
-    <div class="nav-item" [class.active]="isActive('vip-membership')" (click)="navigateTo('vip-membership')">
-      <ion-icon name="star-outline"></ion-icon>
-      <span>VIP</span>
     </div>
   </div>
 </ion-content>

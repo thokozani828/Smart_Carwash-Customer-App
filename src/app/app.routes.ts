@@ -135,6 +135,7 @@ export const routes: Routes = [
   loadComponent: () => import('./carwash-map/carwash-map.page').then(m => m.CarwashMapPage)
 },
 
+
   {
     path: '**',
     redirectTo: 'splash',

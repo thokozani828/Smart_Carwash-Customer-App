@@ -1,8 +1,5 @@
 <ion-content class="login-content" [scroll]="false">
   
-  <!-- ==========================
-  LOGIN FORM WITH LOTTIE
-  ========================== -->
   <div class="login-wrapper">
     
     <!-- Back Button -->
@@ -10,115 +7,81 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </button>
 
-    <!-- Lottie Animation Container using CDN -->
+    <!-- Lottie Animation -->
     <div class="lottie-container">
-      <div id="lottie-container" class="lottie-animation"></div>
+      <div #lottieContainer class="lottie-animation"></div>
     </div>
 
-    <!-- Welcome Text - Left Aligned -->
-    <div class="welcome-text">
-      <h2>Welcome Back</h2>
-      <p>Sign in to continue</p>
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+      <h1 class="welcome-title">Welcome Back</h1>
+      <p class="welcome-subtitle">Choose your account to continue</p>
     </div>
 
-    <!-- Login Form -->
-    <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
-      
-      <!-- Email/Phone Field -->
-      <div class="form-group">
-        <div class="input-wrapper" [class.focused]="identifierFocused">
-          <ion-icon name="person-outline" class="input-icon"></ion-icon>
-          <input 
-            type="text" 
-            class="form-input" 
-            placeholder="Email or Phone Number"
-            [(ngModel)]="identifier"
-            name="identifier"
-            required
-            (focus)="identifierFocused = true"
-            (blur)="identifierFocused = false"
-          />
+    <!-- Account Cards -->
+    <div class="accounts-container">
+      <div class="account-card" *ngFor="let identifier of savedIdentifiers" 
+           (click)="selectIdentifier(identifier)">
+        <div class="account-avatar">
+          <div class="avatar-inner" [class.email]="isEmail(identifier)" [class.phone]="isPhone(identifier)">
+            <ion-icon [name]="getIdentifierIcon(identifier)"></ion-icon>
+          </div>
+          <div class="account-badge" *ngIf="isEmail(identifier)">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
         </div>
-        <div class="error-message" *ngIf="!identifier && submitted">
-          <span>Email or phone number is required</span>
+        <div class="account-details">
+          <span class="account-name">{{ identifier }}</span>
+          <span class="account-type">{{ isEmail(identifier) ? 'Email Account' : 'Phone Number' }}</span>
         </div>
-        <div class="error-message" *ngIf="identifier && !isValidIdentifier() && submitted">
-          <span>Please enter a valid email or phone number</span>
+        <div class="account-action">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
         </div>
       </div>
 
-      <!-- Password Field -->
-      <div class="form-group">
-        <div class="input-wrapper" [class.focused]="passwordFocused">
-          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
-          <input 
-            [type]="showPassword ? 'text' : 'password'" 
-            class="form-input" 
-            placeholder="Password"
-            [(ngModel)]="password"
-            name="password"
-            required
-            (focus)="passwordFocused = true"
-            (blur)="passwordFocused = false"
-          />
-          <ion-icon 
-            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
-            class="password-toggle"
-            (click)="togglePassword()"
-          ></ion-icon>
+      <!-- Add Account Card -->
+      <div class="account-card add-account" (click)="addNewAccount()">
+        <div class="account-avatar add-avatar">
+          <ion-icon name="add-outline"></ion-icon>
         </div>
-        <div class="error-message" *ngIf="!password && submitted">
-          <span>Password is required</span>
+        <div class="account-details">
+          <span class="account-name">Add New Account</span>
+          <span class="account-type">Sign in with different email or phone</span>
+        </div>
+        <div class="account-action">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
         </div>
       </div>
-
-      <!-- Form Options -->
-      <div class="form-options">
-        <label class="remember-me">
-          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
-          <span>Remember me</span>
-        </label>
-        <span class="forgot-password" (click)="forgotPassword()">Forgot Password?</span>
-      </div>
-
-      <!-- Login Button -->
-      <button type="submit" class="btn-login" [disabled]="isLoading">
-        <span>{{ isLoading ? 'Signing In...' : 'Sign In' }}</span>
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </button>
-
-    </form>
+    </div>
 
     <!-- Divider -->
-    <div class="divider">
-      <span class="line"></span>
-      <span class="text">or continue with</span>
-      <span class="line"></span>
+    <div class="divider-section">
+      <span class="divider-line"></span>
+      <span class="divider-text">or continue with</span>
+      <span class="divider-line"></span>
     </div>
 
     <!-- Social Login -->
-    <div class="social-login">
+    <div class="social-section">
       <button class="social-btn google" (click)="loginWithGoogle()">
-        <ion-icon name="logo-google" class="social-icon"></ion-icon>
-        <span class="social-name">Google</span>
+        <ion-icon name="logo-google"></ion-icon>
+        <span>Google</span>
       </button>
-      
       <button class="social-btn facebook" (click)="loginWithFacebook()">
-        <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
-        <span class="social-name">Facebook</span>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <span>Facebook</span>
       </button>
-
       <button class="social-btn apple" (click)="loginWithApple()">
-        <ion-icon name="logo-apple" class="social-icon"></ion-icon>
-        <span class="social-name">Apple</span>
+        <ion-icon name="logo-apple"></ion-icon>
+        <span>Apple</span>
       </button>
     </div>
 
-    <!-- Register Link - Left Aligned -->
-    <div class="register-link">
-      <p>
+    <!-- Footer -->
+    <div class="footer-section">
+      <p class="footer-text">
         Don't have an account? 
-        <span class="register-btn" (click)="goToSignup()">Sign Up</span>
+        <span class="footer-link" (click)="goToSignup()">Sign Up</span>
       </p>
     </div>
 

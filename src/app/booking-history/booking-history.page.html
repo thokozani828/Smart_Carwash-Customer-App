@@ -3,8 +3,6 @@
     
     <!-- Skeleton Loading -->
     <div *ngIf="isLoading" class="history-skeleton">
-      
-      <!-- Header Skeleton -->
       <div class="skeleton-header">
         <div class="skeleton-flex">
           <div class="skeleton skeleton-circle" style="width:40px;height:40px;"></div>
@@ -13,24 +11,19 @@
         </div>
         <div class="skeleton skeleton-text-sm skeleton-w-30"></div>
       </div>
-
-      <!-- Tabs Skeleton -->
       <div class="skeleton-tabs">
         <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
         <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
         <div class="skeleton skeleton-card" style="flex:1;height:40px;border-radius:10px;"></div>
       </div>
-
-      <!-- Booking List Skeleton -->
       <div class="skeleton-booking-list">
         <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
         <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
         <div class="skeleton skeleton-card" style="height:140px;border-radius:14px;"></div>
       </div>
-
     </div>
 
-    <!-- Actual Content (shown when not loading) -->
+    <!-- Actual Content -->
     <div *ngIf="!isLoading">
       
       <!-- Header -->
@@ -63,7 +56,7 @@
 
       <!-- Booking List -->
       <div class="bookings-list">
-        <div class="booking-item" *ngFor="let booking of filteredBookings" (click)="viewBookingDetails(booking)">
+        <div class="booking-item hover-lift" *ngFor="let booking of filteredBookings" (click)="viewBookingDetails(booking)">
           <div class="booking-header">
             <div class="booking-service">
               <h3 class="booking-name">{{ booking.service }}</h3>
@@ -128,34 +121,57 @@
 
     </div>
 
-    <!-- Bottom Spacer -->
     <div class="bottom-spacer"></div>
 
   </div>
 
-  <!-- Bottom Navigation Bar - History Highlighted -->
-  <div class="bottom-nav">
-    <div class="nav-item" [class.active]="isActive('booking')" (click)="navigateTo('booking')">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <span>Book</span>
-    </div>
-    <div class="nav-item active history-center" (click)="navigateTo('booking-history')">
-      <div class="nav-indicator">
+  <!-- FLOATING GLASS BOTTOM NAVIGATION - MATCHING HOME PAGE -->
+  <nav class="uber-bottom-nav" role="navigation" aria-label="Main navigation">
+    
+    <!-- Home (Centered with glass highlight) -->
+    <button 
+      class="nav-item home-center" 
+      (click)="navigateTo('home')" 
+      [class.active]="isActive('home')">
+      <div class="nav-icon">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+      <span class="nav-label">Home</span>
+    </button>
+
+    <!-- Book -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('booking')" 
+      [class.active]="isActive('booking')">
+      <div class="nav-icon">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+      <span class="nav-label">Book</span>
+    </button>
+
+    <!-- History -->
+    <button 
+      class="nav-item active" 
+      (click)="navigateTo('booking-history')" 
+      [class.active]="isActive('booking-history')">
+      <div class="nav-icon">
         <ion-icon name="time-outline"></ion-icon>
       </div>
-      <span>History</span>
-    </div>
-     <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Home</span>
-    </div>
-    <div class="nav-item" [class.active]="isActive('vehicles')" (click)="navigateTo('vehicles')">
-      <ion-icon name="car-outline"></ion-icon>
-      <span>Vehicles</span>
-    </div>
-    <div class="nav-item" [class.active]="isActive('vip-membership')" (click)="navigateTo('vip-membership')">
-      <ion-icon name="star-outline"></ion-icon>
-      <span>VIP</span>
-    </div>
-  </div>
+      <span class="nav-label">History</span>
+    </button>
+
+    <!-- Vehicles -->
+    <button 
+      class="nav-item" 
+      (click)="navigateTo('vehicles')" 
+      [class.active]="isActive('vehicles')">
+      <div class="nav-icon">
+        <ion-icon name="car-outline"></ion-icon>
+        <span class="nav-badge">2</span>
+      </div>
+      <span class="nav-label">Vehicles</span>
+    </button>
+
+  </nav>
 </ion-content>

@@ -1,32 +1,27 @@
 // ============================================================
-// LOGIN PAGE - WITH LOTTIE ANIMATION
+// LOGIN PAGE - PROFESSIONAL REDESIGN
 // ============================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-$primary: #2563eb;
-$primary-dark: #1a3a8a;
-$primary-light: #3b82f6;
-$text-dark: #1e293b;
-$text-gray: #64748b;
-$text-light: #94a3b8;
-$white: #ffffff;
+$brand-primary: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-light: #dbeafe;
+$text-primary: #0f172a;
+$text-secondary: #64748b;
+$text-tertiary: #94a3b8;
+$bg-primary: #ffffff;
+$bg-secondary: #f8fafc;
 $border-color: #e2e8f0;
-$danger: #ef4444;
-$google: #ea4335;
-$facebook: #1877f2;
-$apple: #000000;
-$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-* {
-  font-family: $font-family;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+$shadow-sm: rgba(0, 0, 0, 0.04);
+$shadow-md: rgba(0, 0, 0, 0.08);
+$shadow-lg: rgba(0, 0, 0, 0.12);
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 20px;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
 // ==========================
-// LOGIN CONTENT
+// CONTENT
 // ==========================
 
 .login-content {
@@ -36,20 +31,18 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   --padding-start: 0;
   --padding-end: 0;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-// ==========================
-// LOGIN WRAPPER
-// ==========================
-
 .login-wrapper {
-  width: 100%;
+  padding: 24px 24px 32px;
   max-width: 420px;
-  padding: 20px 24px 32px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
+  background: #f8fafc;
 }
 
 // ==========================
@@ -58,284 +51,109 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 
 .back-button {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: transparent;
-  border: none;
+  background: $bg-primary;
+  border: 1px solid $border-color;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: $transition;
+  box-shadow: 0 2px 8px $shadow-sm;
   z-index: 10;
   
   ion-icon {
     font-size: 22px;
-    color: $text-dark;
+    color: $text-primary;
   }
   
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
+    border-color: $brand-primary;
+    box-shadow: 0 4px 16px rgba($brand-primary, 0.1);
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.92);
   }
 }
 
 // ==========================
-// LOTTIE ANIMATION CONTAINER
+// LOTTIE ANIMATION
 // ==========================
 
 .lottie-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 12px auto;
-  width: 100%;
-  min-height: 200px;
-  position: relative;
+  margin-bottom: 12px;
   
-  #lottie-container {
-    width: 200px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+  .lottie-animation {
+    width: 140px;
+    height: 140px;
     
     svg {
       width: 100%;
       height: 100%;
     }
   }
-  
-  // Loading spinner
-  .lottie-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
-    border: 4px solid $border-color;
-    border-top-color: $primary;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    z-index: 1;
-    display: none; // Hidden by default, shown via JS
-    
-    &.active {
-      display: block;
-    }
-  }
-  
-  // Fallback when animation fails
-  .lottie-fallback {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: $text-gray;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    background: $white;
-    padding: 20px 30px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    
-    ion-icon {
-      font-size: 56px;
-      color: $primary;
-      opacity: 0.4;
-    }
-    
-    span {
-      font-size: 14px;
-      font-weight: 600;
-      color: $text-gray;
-    }
-    
-    &.active {
-      display: flex;
-    }
-  }
-}
-
-@keyframes spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 // ==========================
-// WELCOME TEXT
+// WELCOME SECTION
 // ==========================
 
-.welcome-text {
-  text-align: left;
-  margin-bottom: 24px;
+.welcome-section {
+  text-align: center;
+  margin-bottom: 28px;
   
-  h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: $text-dark;
-    margin: 0 0 4px;
+  .welcome-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: $text-primary;
+    margin: 0 0 6px;
     letter-spacing: -0.5px;
+    font-family: $font-family;
   }
   
-  p {
-    font-size: 14px;
-    color: $text-gray;
+  .welcome-subtitle {
+    font-size: 15px;
+    color: $text-secondary;
     margin: 0;
+    font-weight: 400;
+    font-family: $font-family;
   }
 }
 
 // ==========================
-// LOGIN FORM
+// ACCOUNTS CONTAINER
 // ==========================
 
-.login-form {
+.accounts-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 20px;
 }
 
-.form-group {
-  width: 100%;
-}
+// ==========================
+// ACCOUNT CARD
+// ==========================
 
-.input-wrapper {
+.account-card {
   display: flex;
   align-items: center;
-  background: $white;
+  gap: 16px;
+  padding: 14px 18px;
+  background: $bg-primary;
   border: 1.5px solid $border-color;
-  border-radius: 12px;
-  padding: 0 14px;
-  transition: all 0.3s ease;
-  
-  &.focused {
-    border-color: $primary;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
-  }
-  
-  .input-icon {
-    font-size: 18px;
-    color: $text-light;
-    margin-right: 10px;
-    transition: color 0.3s ease;
-  }
-  
-  &.focused .input-icon {
-    color: $primary;
-  }
-  
-  .form-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 12px 0;
-    font-size: 14px;
-    font-family: $font-family;
-    color: $text-dark;
-    background: transparent;
-    min-height: 44px;
-    
-    &::placeholder {
-      color: $text-light;
-      font-weight: 400;
-    }
-  }
-  
-  .password-toggle {
-    font-size: 18px;
-    color: $text-light;
-    cursor: pointer;
-    padding: 6px;
-    transition: color 0.3s ease;
-    
-    &:hover {
-      color: $text-dark;
-    }
-  }
-}
-
-.error-message {
-  font-size: 12px;
-  color: $danger;
-  margin-top: 4px;
-  padding: 0 4px;
-  min-height: 16px;
-}
-
-// ==========================
-// FORM OPTIONS
-// ==========================
-
-.form-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 2px 0 2px;
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: $text-gray;
+  border-radius: $radius-md;
   cursor: pointer;
-  
-  input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: $primary;
-    cursor: pointer;
-  }
-  
-  span {
-    user-select: none;
-  }
-}
-
-.forgot-password {
-  font-size: 13px;
-  color: $primary;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  
-  &:hover {
-    color: $primary-dark;
-    text-decoration: underline;
-  }
-}
-
-// ==========================
-// LOGIN BUTTON
-// ==========================
-
-.btn-login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #0f172a, #1a3a8a);
-  color: $white;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: $font-family;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
-  margin-top: 4px;
+  transition: $transition;
   position: relative;
   overflow: hidden;
   
@@ -343,76 +161,201 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: $brand-primary;
+    opacity: 0;
+    transition: $transition;
   }
   
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(37, 99, 235, 0.35);
+  &:hover {
+    border-color: $brand-primary;
+    transform: translateX(6px);
+    box-shadow: 0 8px 24px rgba($brand-primary, 0.08);
     
     &::before {
-      left: 100%;
+      opacity: 1;
+    }
+    
+    .account-action ion-icon {
+      transform: translateX(4px);
+      color: $brand-primary;
     }
   }
   
-  &:active:not(:disabled) {
+  &:active {
     transform: scale(0.98);
   }
   
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  .account-avatar {
+    position: relative;
+    flex-shrink: 0;
+    
+    .avatar-inner {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: $transition;
+      
+      &.email {
+        background: rgba($brand-primary, 0.1);
+        ion-icon {
+          color: $brand-primary;
+          font-size: 22px;
+        }
+      }
+      
+      &.phone {
+        background: rgba(34, 197, 94, 0.1);
+        ion-icon {
+          color: #22c55e;
+          font-size: 22px;
+        }
+      }
+    }
+    
+    .account-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
+      background: $brand-primary;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid $bg-primary;
+      
+      ion-icon {
+        font-size: 10px;
+        color: white;
+      }
+    }
   }
   
-  ion-icon {
-    font-size: 20px;
-    transition: transform 0.3s ease;
+  .account-details {
+    flex: 1;
+    min-width: 0;
+    
+    .account-name {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: $text-primary;
+      font-family: $font-family;
+      letter-spacing: -0.2px;
+    }
+    
+    .account-type {
+      display: block;
+      font-size: 12px;
+      color: $text-tertiary;
+      font-weight: 400;
+      font-family: $font-family;
+      margin-top: 1px;
+    }
   }
   
-  &:hover:not(:disabled) ion-icon {
-    transform: translateX(4px);
+  .account-action {
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 20px;
+      color: $text-tertiary;
+      transition: $transition;
+    }
   }
 }
 
 // ==========================
-// DIVIDER
+// ADD ACCOUNT CARD
 // ==========================
 
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 20px 0 16px;
+.account-card.add-account {
+  border-style: dashed;
+  background: rgba($brand-primary, 0.02);
   
-  .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, $border-color, transparent);
+  &::before {
+    display: none;
   }
   
-  .text {
+  .add-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba($brand-primary, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 26px;
+      color: $brand-primary;
+    }
+  }
+  
+  .account-details {
+    .account-name {
+      color: $brand-primary;
+    }
+    
+    .account-type {
+      color: $text-secondary;
+    }
+  }
+  
+  &:hover {
+    border-color: $brand-primary;
+    background: rgba($brand-primary, 0.04);
+    transform: translateX(6px);
+    
+    .add-avatar {
+      background: rgba($brand-primary, 0.12);
+    }
+  }
+}
+
+// ==========================
+// DIVIDER SECTION
+// ==========================
+
+.divider-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0 18px;
+  
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: $border-color;
+  }
+  
+  .divider-text {
     font-size: 12px;
+    color: $text-tertiary;
     font-weight: 500;
-    color: $text-light;
+    font-family: $font-family;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
-    padding: 0 4px;
   }
 }
 
 // ==========================
-// SOCIAL LOGIN
+// SOCIAL SECTION
 // ==========================
 
-.social-login {
+.social-section {
   display: flex;
-  gap: 10px;
-  width: 100%;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 .social-btn {
@@ -421,80 +364,90 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 11px;
-  border-radius: 12px;
+  padding: 12px 8px;
+  background: $bg-primary;
   border: 1.5px solid $border-color;
-  background: $white;
+  border-radius: $radius-sm;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: $font-family;
-  font-size: 13px;
-  font-weight: 500;
-  color: $text-dark;
-  min-height: 44px;
+  transition: $transition;
+  min-height: 48px;
   
-  .social-icon {
-    font-size: 20px;
+  ion-icon {
+    font-size: 22px;
   }
   
-  .social-name {
-    font-weight: 600;
+  span {
     font-size: 12px;
+    font-weight: 600;
+    font-family: $font-family;
+    color: $text-primary;
   }
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px $shadow-md;
   }
   
   &:active {
-    transform: scale(0.97);
+    transform: scale(0.95);
   }
   
   &.google {
-    .social-icon { color: $google; }
-    &:hover { 
-      border-color: $google;
-      background: rgba(234, 67, 53, 0.04);
-    }
+    ion-icon { color: #ea4335; }
+    &:hover { border-color: #ea4335; }
   }
   
   &.facebook {
-    .social-icon { color: $facebook; }
-    &:hover { 
-      border-color: $facebook;
-      background: rgba(24, 119, 242, 0.04);
-    }
+    ion-icon { color: #1877f2; }
+    &:hover { border-color: #1877f2; }
   }
   
   &.apple {
-    .social-icon { color: $apple; }
-    &:hover { 
-      border-color: $apple;
-      background: rgba(0, 0, 0, 0.04);
-    }
+    ion-icon { color: #000000; }
+    &:hover { border-color: #000000; }
   }
 }
 
 // ==========================
-// REGISTER LINK
+// FOOTER SECTION
 // ==========================
 
-.register-link {
-  text-align: left;
-  margin-top: 16px;
-  font-size: 14px;
-  color: $text-gray;
+.footer-section {
+  text-align: center;
+  padding-top: 4px;
   
-  .register-btn {
-    color: $primary;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s ease;
+  .footer-text {
+    font-size: 14px;
+    color: $text-secondary;
+    margin: 0;
+    font-family: $font-family;
     
-    &:hover {
-      color: $primary-dark;
-      text-decoration: underline;
+    .footer-link {
+      color: $brand-primary;
+      font-weight: 700;
+      cursor: pointer;
+      transition: $transition;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: $brand-primary;
+        transform: scaleX(0);
+        transition: $transition;
+      }
+      
+      &:hover {
+        color: $brand-hover;
+        
+        &::after {
+          transform: scaleX(1);
+        }
+      }
     }
   }
 }
@@ -503,122 +456,59 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 // RESPONSIVE
 // ==========================
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
   .login-wrapper {
     padding: 16px 16px 24px;
   }
   
-  .back-button {
-    top: -4px;
-    left: -4px;
-    width: 36px;
-    height: 36px;
-    
-    ion-icon {
-      font-size: 20px;
-    }
+  .lottie-container .lottie-animation {
+    width: 100px;
+    height: 100px;
   }
   
-  .lottie-container {
-    min-height: 160px;
-    
-    #lottie-container {
-      width: 160px;
-      height: 160px;
-    }
+  .welcome-section .welcome-title {
+    font-size: 24px;
   }
   
-  .welcome-text h2 {
-    font-size: 22px;
+  .account-card {
+    padding: 12px 14px;
+    
+    .account-avatar .avatar-inner {
+      width: 40px;
+      height: 40px;
+      
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+    
+    .account-details .account-name {
+      font-size: 14px;
+    }
   }
   
   .social-btn {
-    padding: 9px 8px;
-    min-height: 38px;
-    font-size: 12px;
-    gap: 6px;
+    padding: 10px 6px;
+    min-height: 40px;
     
-    .social-icon {
+    ion-icon {
       font-size: 18px;
     }
     
-    .social-name {
-      font-size: 11px;
-    }
-  }
-}
-
-@media (max-width: 380px) {
-  .login-wrapper {
-    padding: 12px 12px 20px;
-  }
-  
-  .lottie-container {
-    min-height: 140px;
-    
-    #lottie-container {
-      width: 140px;
-      height: 140px;
-    }
-  }
-  
-  .welcome-text h2 {
-    font-size: 20px;
-  }
-  
-  .welcome-text p {
-    font-size: 13px;
-  }
-  
-  .social-btn {
-    padding: 8px 6px;
-    min-height: 34px;
-    font-size: 11px;
-    gap: 4px;
-    
-    .social-icon {
-      font-size: 16px;
-    }
-    
-    .social-name {
+    span {
       font-size: 10px;
     }
   }
-  
-  .btn-login {
-    padding: 12px;
-    font-size: 14px;
-  }
 }
 
-@media (min-width: 769px) {
-  .login-wrapper {
-    padding: 32px 32px 40px;
-    max-width: 440px;
+@media (min-height: 800px) {
+  .lottie-container .lottie-animation {
+    width: 160px;
+    height: 160px;
   }
   
-  .lottie-container {
-    min-height: 240px;
-    
-    #lottie-container {
-      width: 240px;
-      height: 240px;
-    }
-  }
-  
-  .welcome-text h2 {
-    font-size: 26px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lottie-container {
-    min-height: 280px;
-    
-    #lottie-container {
-      width: 280px;
-      height: 280px;
-    }
+  .welcome-section .welcome-title {
+    font-size: 32px;
   }
 }
 
@@ -631,101 +521,131 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     --background: #0f172a;
   }
   
-  .lottie-container {
-    #lottie-container {
-      svg {
-        filter: brightness(0.9);
+  .login-wrapper {
+    background: #0f172a;
+  }
+  
+  .back-button {
+    background: #1e293b;
+    border-color: #334155;
+    
+    ion-icon {
+      color: #ffffff;
+    }
+  }
+  
+  .welcome-section {
+    .welcome-title {
+      color: #ffffff;
+    }
+    
+    .welcome-subtitle {
+      color: #94a3b8;
+    }
+  }
+  
+  .account-card {
+    background: #1e293b;
+    border-color: #334155;
+    
+    .account-details {
+      .account-name {
+        color: #ffffff;
+      }
+      
+      .account-type {
+        color: #94a3b8;
       }
     }
     
-    .lottie-fallback {
-      background: #1e293b;
+    .account-avatar {
+      .avatar-inner {
+        &.email {
+          background: rgba(96, 165, 250, 0.15);
+          ion-icon {
+            color: #60a5fa;
+          }
+        }
+        
+        &.phone {
+          background: rgba(52, 211, 153, 0.15);
+          ion-icon {
+            color: #34d399;
+          }
+        }
+      }
+      
+      .account-badge {
+        border-color: #1e293b;
+      }
+    }
+    
+    &:hover {
+      border-color: #60a5fa;
+      box-shadow: 0 8px 24px rgba(96, 165, 250, 0.08);
+    }
+  }
+  
+  .account-card.add-account {
+    background: rgba(96, 165, 250, 0.04);
+    
+    .add-avatar {
+      background: rgba(96, 165, 250, 0.1);
       
       ion-icon {
         color: #60a5fa;
       }
-      
-      span {
-        color: #94a3b8;
-      }
     }
-  }
-  
-  .welcome-text h2 {
-    color: $white;
-  }
-  
-  .welcome-text p {
-    color: #94a3b8;
-  }
-  
-  .input-wrapper {
-    background: #1e293b;
-    border-color: #334155;
     
-    .form-input {
-      color: $white;
-      
-      &::placeholder {
-        color: #64748b;
+    .account-details {
+      .account-name {
+        color: #60a5fa;
       }
     }
     
-    &.focused {
-      border-color: $primary;
-      background: #1e293b;
+    &:hover {
+      background: rgba(96, 165, 250, 0.08);
     }
   }
   
   .social-btn {
     background: #1e293b;
     border-color: #334155;
-    color: $white;
     
-    &.apple .social-icon {
-      color: $white;
+    span {
+      color: #ffffff;
+    }
+    
+    &.apple ion-icon {
+      color: #ffffff;
+    }
+    
+    &:hover {
+      &.google { border-color: #ea4335; }
+      &.facebook { border-color: #1877f2; }
+      &.apple { border-color: #6b7280; }
     }
   }
   
-  .divider .line {
-    background: linear-gradient(90deg, transparent, #334155, transparent);
+  .divider-section {
+    .divider-line {
+      background: #334155;
+    }
+    
+    .divider-text {
+      color: #64748b;
+    }
   }
   
-  .divider .text {
-    color: #64748b;
-  }
-  
-  .register-link {
+  .footer-section .footer-text {
     color: #94a3b8;
     
-    .register-btn {
+    .footer-link {
       color: #60a5fa;
       
-      &:hover {
-        color: #93bbfc;
+      &::after {
+        background: #60a5fa;
       }
-    }
-  }
-  
-  .remember-me {
-    color: #94a3b8;
-  }
-  
-  .forgot-password {
-    color: #60a5fa;
-    
-    &:hover {
-      color: #93bbfc;
-    }
-  }
-  
-  .back-button {
-    ion-icon {
-      color: $white;
-    }
-    
-    &:hover {
-      background: rgba(255, 255, 255, 0.05);
     }
   }
 }
@@ -735,19 +655,23 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 // ==========================
 
 @media (prefers-reduced-motion: reduce) {
-  .btn-login::before {
-    display: none !important;
+  .account-card {
+    transition: none !important;
+    
+    &:hover {
+      transform: none !important;
+    }
   }
   
-  .btn-login:hover:not(:disabled) {
-    transform: none !important;
+  .social-btn {
+    transition: none !important;
+    
+    &:hover {
+      transform: none !important;
+    }
   }
   
-  .social-btn:hover {
-    transform: none !important;
-  }
-  
-  .lottie-loading {
-    animation: none !important;
+  .back-button {
+    transition: none !important;
   }
 }

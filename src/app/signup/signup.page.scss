@@ -1,33 +1,31 @@
 // ============================================================
-// SIGNUP PAGE - MATCHES LOGIN PAGE
+// SIGNUP PAGE - PROFESSIONAL REDESIGN
 // ============================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-$primary: #2563eb;
-$primary-dark: #1a3a8a;
-$primary-light: #3b82f6;
-$text-dark: #1e293b;
-$text-gray: #64748b;
-$text-light: #94a3b8;
-$white: #ffffff;
+$brand-primary: #2563eb;
+$brand-hover: #1d4ed8;
+$brand-dark: #1a3a8a;
+$brand-light: #dbeafe;
+$text-primary: #0f172a;
+$text-secondary: #64748b;
+$text-tertiary: #94a3b8;
+$bg-primary: #ffffff;
+$bg-secondary: #f8fafc;
 $border-color: #e2e8f0;
-$danger: #ef4444;
+$white: #ffffff;
 $success: #22c55e;
-$google: #ea4335;
-$facebook: #1877f2;
-$apple: #000000;
-$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-* {
-  font-family: $font-family;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+$danger: #ef4444;
+$shadow-sm: rgba(0, 0, 0, 0.04);
+$shadow-md: rgba(0, 0, 0, 0.08);
+$shadow-lg: rgba(0, 0, 0, 0.12);
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 20px;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
 // ==========================
-// SIGNUP CONTENT
+// CONTENT
 // ==========================
 
 .signup-content {
@@ -37,20 +35,18 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   --padding-start: 0;
   --padding-end: 0;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-// ==========================
-// SIGNUP WRAPPER
-// ==========================
-
 .signup-wrapper {
-  width: 100%;
-  max-width: 400px;
   padding: 24px 24px 32px;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
+  background: #f8fafc;
 }
 
 // ==========================
@@ -59,174 +55,170 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 
 .back-button {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: transparent;
-  border: none;
+  background: $bg-primary;
+  border: 1px solid $border-color;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: $transition;
+  box-shadow: 0 2px 8px $shadow-sm;
+  z-index: 10;
   
   ion-icon {
     font-size: 22px;
-    color: $text-dark;
+    color: $text-primary;
   }
   
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
+    border-color: $brand-primary;
+    box-shadow: 0 4px 16px rgba($brand-primary, 0.1);
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.92);
   }
 }
 
 // ==========================
-// SIGNUP ICON
+// LOTTIE ANIMATION
 // ==========================
 
-.signup-icon {
+.lottie-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  
+  .lottie-animation {
+    width: 120px;
+    height: 120px;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+// ==========================
+// WELCOME SECTION
+// ==========================
+
+.welcome-section {
   text-align: center;
   margin-bottom: 24px;
-  padding-top: 12px;
-}
-
-.icon-wrapper {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0f172a, #1a3a8a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
   
-  ion-icon {
-    font-size: 32px;
-    color: $white;
-  }
-}
-
-// ==========================
-// WELCOME TEXT
-// ==========================
-
-.welcome-text {
-  text-align: left;
-  margin-bottom: 28px;
-  
-  h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: $text-dark;
+  .welcome-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: $text-primary;
     margin: 0 0 4px;
     letter-spacing: -0.5px;
+    font-family: $font-family;
   }
   
-  p {
+  .welcome-subtitle {
     font-size: 14px;
-    color: $text-gray;
+    color: $text-secondary;
     margin: 0;
+    font-weight: 400;
+    font-family: $font-family;
   }
 }
 
 // ==========================
-// SIGNUP FORM
+// FORM
 // ==========================
 
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 16px; // Consistent spacing between form groups
+  gap: 14px;
 }
-
-// ==========================
-// FORM ROW (Name & Surname)
-// ==========================
 
 .form-row {
   display: flex;
-  gap: 12px; // Consistent gap between name and surname
-  width: 100%;
+  gap: 12px;
+  
+  .form-group {
+    flex: 1;
+  }
 }
 
 .form-group {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px; // Consistent gap between input and error message
+  gap: 4px;
 }
-
-.form-group.half {
-  flex: 1;
-}
-
-// ==========================
-// INPUT WRAPPER
-// ==========================
 
 .input-wrapper {
   display: flex;
   align-items: center;
-  background: $white;
+  gap: 12px;
+  background: $bg-primary;
   border: 1.5px solid $border-color;
-  border-radius: 12px;
+  border-radius: $radius-sm;
   padding: 0 14px;
-  transition: all 0.3s ease;
-  min-height: 48px; // Consistent height for all inputs
+  transition: $transition;
   
   &.focused {
-    border-color: $primary;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
+    border-color: $brand-primary;
+    box-shadow: 0 0 0 4px rgba($brand-primary, 0.08);
   }
   
   .input-icon {
-    font-size: 18px;
-    color: $text-light;
-    margin-right: 10px;
-    transition: color 0.3s ease;
+    font-size: 20px;
+    color: $text-tertiary;
+    flex-shrink: 0;
+    transition: $transition;
   }
   
   &.focused .input-icon {
-    color: $primary;
-  }
-  
-  .dial-code {
-    color: $text-dark;
-    font-weight: 700;
-    font-size: 14px;
-    margin-right: 8px;
-    padding-right: 8px;
-    border-right: 1px solid $border-color;
+    color: $brand-primary;
   }
   
   .form-input {
     flex: 1;
+    padding: 14px 0;
     border: none;
     outline: none;
-    padding: 12px 0;
-    font-size: 14px;
-    font-family: $font-family;
-    color: $text-dark;
+    font-size: 15px;
+    font-weight: 500;
+    color: $text-primary;
     background: transparent;
-    min-height: 44px;
+    font-family: $font-family;
     
     &::placeholder {
-      color: $text-light;
+      color: $text-tertiary;
       font-weight: 400;
     }
   }
   
+  .dial-code {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+    font-family: $font-family;
+    padding-right: 4px;
+    border-right: 1.5px solid $border-color;
+  }
+  
   .password-toggle {
-    font-size: 18px;
-    color: $text-light;
+    font-size: 20px;
+    color: $text-tertiary;
     cursor: pointer;
-    padding: 6px;
-    transition: color 0.3s ease;
+    padding: 4px;
+    transition: $transition;
     
     &:hover {
-      color: $text-dark;
+      color: $text-secondary;
     }
   }
 }
@@ -238,9 +230,16 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 .error-message {
   font-size: 12px;
   color: $danger;
-  margin-top: 4px;
-  padding: 0 4px;
-  min-height: 18px; // Consistent height for error messages
+  font-weight: 500;
+  font-family: $font-family;
+  padding-left: 4px;
+  min-height: 18px;
+  
+  span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 }
 
 // ==========================
@@ -248,7 +247,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 // ==========================
 
 .terms-wrapper {
-  margin: 2px 0; // Consistent spacing
+  margin-top: 2px;
 }
 
 .terms-checkbox {
@@ -256,30 +255,29 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  color: $text-gray;
+  color: $text-secondary;
   cursor: pointer;
+  font-family: $font-family;
+  line-height: 1.5;
   
   input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: $primary;
-    cursor: pointer;
-    margin-top: 2px;
     flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    accent-color: $brand-primary;
+    cursor: pointer;
   }
   
-  span {
-    line-height: 1.4;
+  a {
+    color: $brand-primary;
+    font-weight: 600;
+    text-decoration: none;
+    transition: $transition;
     
-    a {
-      color: $primary;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      color: $brand-hover;
+      text-decoration: underline;
     }
   }
 }
@@ -293,58 +291,42 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #0f172a, #1a3a8a);
+  padding: 16px 24px;
+  background: linear-gradient(145deg, $brand-dark, $brand-primary);
   color: $white;
   border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: $radius-sm;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: $transition;
+  width: 100%;
   font-family: $font-family;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 20px rgba($brand-primary, 0.3);
   margin-top: 4px;
-  position: relative;
-  overflow: hidden;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
+  ion-icon {
+    font-size: 20px;
+    transition: $transition;
   }
   
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(37, 99, 235, 0.35);
+    box-shadow: 0 6px 28px rgba($brand-primary, 0.4);
     
-    &::before {
-      left: 100%;
+    ion-icon {
+      transform: translateX(4px);
     }
   }
   
   &:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
   
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-  
-  ion-icon {
-    font-size: 20px;
-    transition: transform 0.3s ease;
-  }
-  
-  &:hover:not(:disabled) ion-icon {
-    transform: translateX(4px);
+    transform: none !important;
   }
 }
 
@@ -352,37 +334,37 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 // DIVIDER
 // ==========================
 
-.divider {
+.divider-section {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 20px 0 16px;
+  gap: 16px;
+  margin: 18px 0 16px;
   
-  .line {
+  .divider-line {
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, $border-color, transparent);
+    background: $border-color;
   }
   
-  .text {
+  .divider-text {
     font-size: 12px;
+    color: $text-tertiary;
     font-weight: 500;
-    color: $text-light;
+    font-family: $font-family;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
-    padding: 0 4px;
   }
 }
 
 // ==========================
-// SOCIAL SIGNUP
+// SOCIAL SECTION
 // ==========================
 
-.social-signup {
+.social-section {
   display: flex;
-  gap: 10px;
-  width: 100%;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 .social-btn {
@@ -391,80 +373,90 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 11px;
-  border-radius: 12px;
+  padding: 12px 8px;
+  background: $bg-primary;
   border: 1.5px solid $border-color;
-  background: $white;
+  border-radius: $radius-sm;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: $font-family;
-  font-size: 13px;
-  font-weight: 500;
-  color: $text-dark;
-  min-height: 44px;
+  transition: $transition;
+  min-height: 48px;
   
-  .social-icon {
-    font-size: 20px;
+  ion-icon {
+    font-size: 22px;
   }
   
-  .social-name {
-    font-weight: 600;
+  span {
     font-size: 12px;
+    font-weight: 600;
+    font-family: $font-family;
+    color: $text-primary;
   }
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px $shadow-md;
   }
   
   &:active {
-    transform: scale(0.97);
+    transform: scale(0.95);
   }
   
   &.google {
-    .social-icon { color: $google; }
-    &:hover { 
-      border-color: $google;
-      background: rgba(234, 67, 53, 0.04);
-    }
+    ion-icon { color: #ea4335; }
+    &:hover { border-color: #ea4335; }
   }
   
   &.facebook {
-    .social-icon { color: $facebook; }
-    &:hover { 
-      border-color: $facebook;
-      background: rgba(24, 119, 242, 0.04);
-    }
+    ion-icon { color: #1877f2; }
+    &:hover { border-color: #1877f2; }
   }
   
   &.apple {
-    .social-icon { color: $apple; }
-    &:hover { 
-      border-color: $apple;
-      background: rgba(0, 0, 0, 0.04);
-    }
+    ion-icon { color: #000000; }
+    &:hover { border-color: #000000; }
   }
 }
 
 // ==========================
-// LOGIN LINK
+// FOOTER
 // ==========================
 
-.login-link {
-  text-align: left;
-  margin-top: 18px;
-  font-size: 14px;
-  color: $text-gray;
+.footer-section {
+  text-align: center;
+  padding-top: 2px;
   
-  .login-btn {
-    color: $primary;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s ease;
+  .footer-text {
+    font-size: 14px;
+    color: $text-secondary;
+    margin: 0;
+    font-family: $font-family;
     
-    &:hover {
-      color: $primary-dark;
-      text-decoration: underline;
+    .footer-link {
+      color: $brand-primary;
+      font-weight: 700;
+      cursor: pointer;
+      transition: $transition;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: $brand-primary;
+        transform: scaleX(0);
+        transition: $transition;
+      }
+      
+      &:hover {
+        color: $brand-hover;
+        
+        &::after {
+          transform: scaleX(1);
+        }
+      }
     }
   }
 }
@@ -473,117 +465,59 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 // RESPONSIVE
 // ==========================
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
   .signup-wrapper {
-    padding: 20px 16px 24px;
+    padding: 16px 16px 24px;
   }
   
-  .back-button {
-    top: -4px;
-    left: -4px;
-    width: 36px;
-    height: 36px;
-    
-    ion-icon {
-      font-size: 20px;
-    }
+  .lottie-container .lottie-animation {
+    width: 90px;
+    height: 90px;
   }
   
-  .icon-wrapper {
-    width: 56px;
-    height: 56px;
-    
-    ion-icon {
-      font-size: 28px;
-    }
+  .welcome-section .welcome-title {
+    font-size: 24px;
   }
   
-  .welcome-text h2 {
-    font-size: 22px;
+  .form-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .input-wrapper .form-input {
+    font-size: 14px;
+    padding: 12px 0;
   }
   
   .social-btn {
-    padding: 9px 8px;
-    min-height: 38px;
-    font-size: 12px;
-    gap: 6px;
+    padding: 10px 6px;
+    min-height: 40px;
     
-    .social-icon {
+    ion-icon {
       font-size: 18px;
     }
     
-    .social-name {
-      font-size: 11px;
-    }
-  }
-  
-  // Form row responsive - stack on mobile
-  .form-row {
-    flex-direction: column;
-    gap: 16px; // Same as form gap on mobile
-  }
-}
-
-@media (max-width: 380px) {
-  .signup-wrapper {
-    padding: 16px 12px 20px;
-  }
-  
-  .icon-wrapper {
-    width: 48px;
-    height: 48px;
-    
-    ion-icon {
-      font-size: 24px;
-    }
-  }
-  
-  .welcome-text h2 {
-    font-size: 20px;
-  }
-  
-  .welcome-text p {
-    font-size: 13px;
-  }
-  
-  .social-btn {
-    padding: 8px 6px;
-    min-height: 34px;
-    font-size: 11px;
-    gap: 4px;
-    
-    .social-icon {
-      font-size: 16px;
-    }
-    
-    .social-name {
+    span {
       font-size: 10px;
     }
   }
-  
-  .btn-signup {
-    padding: 12px;
-    font-size: 14px;
+}
+
+@media (max-width: 480px) and (min-width: 381px) {
+  .form-row {
+    flex-direction: column;
+    gap: 14px;
   }
 }
 
-@media (min-width: 769px) {
-  .signup-wrapper {
-    padding: 32px 32px 40px;
-    max-width: 420px;
+@media (min-height: 800px) {
+  .lottie-container .lottie-animation {
+    width: 140px;
+    height: 140px;
   }
   
-  .icon-wrapper {
-    width: 72px;
-    height: 72px;
-    
-    ion-icon {
-      font-size: 36px;
-    }
-  }
-  
-  .welcome-text h2 {
-    font-size: 26px;
+  .welcome-section .welcome-title {
+    font-size: 32px;
   }
 }
 
@@ -596,12 +530,27 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     --background: #0f172a;
   }
   
-  .welcome-text h2 {
-    color: $white;
+  .signup-wrapper {
+    background: #0f172a;
   }
   
-  .welcome-text p {
-    color: #94a3b8;
+  .back-button {
+    background: #1e293b;
+    border-color: #334155;
+    
+    ion-icon {
+      color: #ffffff;
+    }
+  }
+  
+  .welcome-section {
+    .welcome-title {
+      color: #ffffff;
+    }
+    
+    .welcome-subtitle {
+      color: #94a3b8;
+    }
   }
   
   .input-wrapper {
@@ -609,46 +558,35 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     border-color: #334155;
     
     .form-input {
-      color: $white;
+      color: #ffffff;
       
       &::placeholder {
         color: #64748b;
       }
     }
     
-    &.focused {
-      border-color: $primary;
-      background: #1e293b;
+    .input-icon {
+      color: #64748b;
     }
-  }
-  
-  .dial-code {
-    color: $white;
-    border-color: #334155;
-  }
-  
-  .social-btn {
-    background: #1e293b;
-    border-color: #334155;
-    color: $white;
     
-    &.apple .social-icon {
-      color: $white;
+    .dial-code {
+      color: #ffffff;
+      border-color: #334155;
+    }
+    
+    &.focused {
+      border-color: #60a5fa;
+      
+      .input-icon {
+        color: #60a5fa;
+      }
     }
   }
   
-  .divider .line {
-    background: linear-gradient(90deg, transparent, #334155, transparent);
-  }
-  
-  .divider .text {
-    color: #64748b;
-  }
-  
-  .login-link {
+  .terms-checkbox {
     color: #94a3b8;
     
-    .login-btn {
+    a {
       color: #60a5fa;
       
       &:hover {
@@ -657,21 +595,44 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
     }
   }
   
-  .back-button {
-    ion-icon {
-      color: $white;
+  .social-btn {
+    background: #1e293b;
+    border-color: #334155;
+    
+    span {
+      color: #ffffff;
+    }
+    
+    &.apple ion-icon {
+      color: #ffffff;
     }
     
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
+      &.google { border-color: #ea4335; }
+      &.facebook { border-color: #1877f2; }
+      &.apple { border-color: #6b7280; }
     }
   }
   
-  .terms-checkbox {
+  .divider-section {
+    .divider-line {
+      background: #334155;
+    }
+    
+    .divider-text {
+      color: #64748b;
+    }
+  }
+  
+  .footer-section .footer-text {
     color: #94a3b8;
     
-    span a {
+    .footer-link {
       color: #60a5fa;
+      
+      &::after {
+        background: #60a5fa;
+      }
     }
   }
 }
@@ -681,15 +642,27 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 // ==========================
 
 @media (prefers-reduced-motion: reduce) {
-  .btn-signup::before {
-    display: none !important;
+  .input-wrapper {
+    transition: none !important;
   }
   
-  .btn-signup:hover:not(:disabled) {
-    transform: none !important;
+  .btn-signup {
+    transition: none !important;
+    
+    &:hover:not(:disabled) {
+      transform: none !important;
+    }
   }
   
-  .social-btn:hover {
-    transform: none !important;
+  .social-btn {
+    transition: none !important;
+    
+    &:hover {
+      transform: none !important;
+    }
+  }
+  
+  .back-button {
+    transition: none !important;
   }
 }

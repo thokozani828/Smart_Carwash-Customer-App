@@ -1,12 +1,6 @@
 // ============================================================
-// HISTORY PAGE - SAME DESIGN AS HOME
+// HISTORY PAGE - SAME DESIGN LANGUAGE AS HOME PAGE
 // ============================================================
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-// ==========================
-// VARIABLES
-// ==========================
 
 $brand-blue: #2563eb;
 $brand-hover: #1d4ed8;
@@ -23,11 +17,8 @@ $gold: #fbbf24;
 $purple: #8b5cf6;
 $shadow-light: rgba(0, 0, 0, 0.04);
 $shadow-medium: rgba(0, 0, 0, 0.08);
+$shadow-heavy: rgba(0, 0, 0, 0.12);
 $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
-* {
-  font-family: $font-family;
-}
 
 // ==========================
 // HISTORY CONTENT
@@ -43,7 +34,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 .history-container {
-  padding: 16px 16px 110px;
+  padding: 16px 16px 120px;
   max-width: 600px;
   margin: 0 auto;
   height: 100%;
@@ -93,6 +84,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       color: $text-dark;
       margin: 0;
       letter-spacing: -0.3px;
+      font-family: $font-family;
     }
     
     .placeholder {
@@ -105,6 +97,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     color: $text-gray;
     margin: 4px 0 0 52px;
     font-weight: 400;
+    font-family: $font-family;
   }
 }
 
@@ -115,10 +108,10 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 .tabs-container {
   display: flex;
   gap: 8px;
+  margin-bottom: 16px;
   background: $white;
   border-radius: 14px;
-  padding: 4px;
-  margin-bottom: 16px;
+  padding: 6px;
   border: 1px solid $border-color;
   box-shadow: 0 2px 8px $shadow-light;
   
@@ -138,21 +131,23 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     font-family: $font-family;
     
     .tab-count {
-      background: rgba(0, 0, 0, 0.05);
-      padding: 0 8px;
-      border-radius: 10px;
       font-size: 11px;
       font-weight: 600;
+      padding: 1px 8px;
+      border-radius: 10px;
+      background: rgba($text-gray, 0.08);
+      color: $text-gray;
+      transition: all 0.3s ease;
     }
     
     &:hover {
-      background: rgba($brand-blue, 0.04);
+      color: $brand-blue;
     }
     
     &.active {
       background: $brand-blue;
       color: $white;
-      box-shadow: 0 4px 12px rgba($brand-blue, 0.2);
+      box-shadow: 0 2px 12px rgba($brand-blue, 0.2);
       
       .tab-count {
         background: rgba(255, 255, 255, 0.2);
@@ -163,7 +158,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
-// BOOKING LIST
+// BOOKINGS LIST
 // ==========================
 
 .bookings-list {
@@ -174,12 +169,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 
 .booking-item {
   background: $white;
+  border: 1px solid $border-color;
   border-radius: 14px;
   padding: 16px;
-  border: 1px solid $border-color;
-  box-shadow: 0 2px 8px $shadow-light;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 8px $shadow-light;
   
   &:hover {
     transform: translateY(-2px);
@@ -191,45 +186,46 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     
     .booking-service {
       .booking-name {
         font-size: 16px;
         font-weight: 700;
         color: $text-dark;
-        margin: 0 0 4px;
+        margin: 0 0 2px;
         font-family: $font-family;
+        letter-spacing: -0.2px;
       }
       
       .booking-date {
         font-size: 12px;
         color: $text-gray;
-        font-weight: 500;
+        font-weight: 400;
         font-family: $font-family;
       }
     }
     
     .booking-status-badge {
-      padding: 4px 12px;
-      border-radius: 12px;
       font-size: 11px;
       font-weight: 600;
-      text-transform: capitalize;
+      padding: 4px 12px;
+      border-radius: 12px;
       font-family: $font-family;
+      text-transform: capitalize;
       
       &.upcoming {
-        background: rgba($brand-blue, 0.1);
+        background: rgba($brand-blue, 0.08);
         color: $brand-blue;
       }
       
       &.completed {
-        background: rgba($success, 0.1);
+        background: rgba($success, 0.08);
         color: $success;
       }
       
       &.cancelled {
-        background: rgba($danger, 0.1);
+        background: rgba($danger, 0.08);
         color: $danger;
       }
     }
@@ -240,21 +236,17 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     grid-template-columns: 1fr 1fr;
     gap: 6px 12px;
     margin-bottom: 12px;
-    padding: 10px 0;
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
     
     .detail-item {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 12px;
+      font-size: 13px;
       color: $text-gray;
-      font-weight: 500;
       font-family: $font-family;
       
       ion-icon {
-        font-size: 14px;
+        font-size: 16px;
         color: $text-light;
         flex-shrink: 0;
       }
@@ -265,6 +257,8 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    border-top: 1px solid $border-color;
+    padding-top: 12px;
     
     .action-btn {
       display: flex;
@@ -280,43 +274,47 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       font-family: $font-family;
       
       ion-icon {
-        font-size: 14px;
+        font-size: 16px;
       }
       
-      &.reschedule-btn {
-        background: rgba($purple, 0.1);
-        color: $purple;
-        
-        &:hover {
-          background: rgba($purple, 0.2);
-        }
+      &:active {
+        transform: scale(0.95);
       }
+    }
+    
+    .reschedule-btn {
+      background: rgba($brand-blue, 0.08);
+      color: $brand-blue;
       
-      &.rebook-btn {
-        background: rgba($brand-blue, 0.1);
-        color: $brand-blue;
-        
-        &:hover {
-          background: rgba($brand-blue, 0.2);
-        }
+      &:hover {
+        background: rgba($brand-blue, 0.15);
       }
+    }
+    
+    .rebook-btn {
+      background: rgba($success, 0.08);
+      color: $success;
       
-      &.receipt-btn {
-        background: rgba($gold, 0.1);
-        color: $gold;
-        
-        &:hover {
-          background: rgba($gold, 0.2);
-        }
+      &:hover {
+        background: rgba($success, 0.15);
       }
+    }
+    
+    .receipt-btn {
+      background: rgba($text-gray, 0.08);
+      color: $text-gray;
       
-      &.cancel-booking-btn {
-        background: rgba($danger, 0.1);
-        color: $danger;
-        
-        &:hover {
-          background: rgba($danger, 0.2);
-        }
+      &:hover {
+        background: rgba($text-gray, 0.15);
+      }
+    }
+    
+    .cancel-booking-btn {
+      background: rgba($danger, 0.08);
+      color: $danger;
+      
+      &:hover {
+        background: rgba($danger, 0.15);
       }
     }
     
@@ -324,8 +322,9 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       font-size: 12px;
       color: $text-light;
       font-weight: 500;
-      margin-left: auto;
       font-family: $font-family;
+      margin-left: auto;
+      padding: 6px 0;
     }
   }
 }
@@ -335,53 +334,61 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // ==========================
 
 .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
   text-align: center;
-  padding: 60px 20px;
   
   .empty-icon {
-    font-size: 72px;
+    font-size: 56px;
     color: $text-light;
-    opacity: 0.3;
+    margin-bottom: 12px;
   }
   
   .empty-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: $text-dark;
-    margin: 16px 0 8px;
+    margin: 0 0 4px;
     font-family: $font-family;
   }
   
   .empty-desc {
     font-size: 14px;
     color: $text-gray;
-    margin: 0 0 20px;
+    margin: 0 0 16px;
     font-family: $font-family;
   }
   
   .empty-btn {
-    padding: 12px 28px;
-    background: linear-gradient(135deg, $brand-blue, $brand-hover);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(145deg, $brand-dark, $brand-blue);
     color: $white;
     border: none;
     border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     font-family: $font-family;
-    box-shadow: 0 4px 16px rgba($brand-blue, 0.25);
+    box-shadow: 0 4px 16px rgba($brand-blue, 0.3);
     
     ion-icon {
-      font-size: 18px;
+      font-size: 20px;
     }
     
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba($brand-blue, 0.35);
+      box-shadow: 0 6px 24px rgba($brand-blue, 0.4);
+    }
+    
+    &:active {
+      transform: scale(0.97);
     }
   }
 }
@@ -395,317 +402,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
-// BOTTOM NAVIGATION - HISTORY HIGHLIGHTED
-// ==========================
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: $white;
-  border-top: 1px solid $border-color;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0 18px;
-  z-index: 1000;
-  box-shadow: 0 -4px 20px $shadow-light;
-  height: 82px;
-  
-  .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    padding: 6px 12px;
-    transition: all 0.3s ease;
-    position: relative;
-    flex: 1;
-    
-    ion-icon {
-      font-size: 28px;
-      color: $text-light;
-      transition: color 0.3s ease;
-    }
-    
-    span {
-      font-size: 12px;
-      color: $text-light;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      font-family: $font-family;
-    }
-    
-    &:hover {
-      ion-icon {
-        color: $brand-blue;
-      }
-      
-      span {
-        color: $brand-blue;
-      }
-    }
-    
-    // Default active state for normal items
-    &.active:not(.history-center) {
-      ion-icon {
-        color: $brand-blue;
-      }
-      
-      span {
-        color: $brand-blue;
-        font-weight: 600;
-      }
-      
-      // Line indicator for normal items
-      &::after {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 28px;
-        height: 4px;
-        background: $brand-blue;
-        border-radius: 3px;
-      }
-    }
-    
-    // ==========================
-    // HISTORY INDICATOR - ROUND (HIGHLIGHTED)
-    // ==========================
-    &.history-center {
-      margin-top: -28px;
-      flex: 1.4;
-      
-      .nav-indicator {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        background: $brand-blue;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        
-        ion-icon {
-          font-size: 36px;
-          color: $white;
-          transition: all 0.3s ease;
-        }
-        
-        // Glow effect
-        &::after {
-          content: '';
-          position: absolute;
-          inset: -6px;
-          border-radius: 50%;
-          background: rgba($brand-blue, 0.2);
-          animation: pulse-ring 2s ease-in-out infinite;
-        }
-      }
-      
-      span {
-        margin-top: 6px;
-        font-weight: 600;
-        color: $brand-blue;
-        font-size: 12px;
-      }
-      
-      // Remove default line indicator
-      &::after {
-        display: none !important;
-      }
-      
-      &:hover {
-        .nav-indicator {
-          transform: translateY(-3px) scale(1.06);
-          box-shadow: 0 8px 36px rgba($brand-blue, 0.5);
-        }
-      }
-      
-      &:active {
-        .nav-indicator {
-          transform: scale(0.93);
-        }
-      }
-    }
-  }
-}
-
-// Pulse animation for round indicator
-@keyframes pulse-ring {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.15;
-  }
-}
-
-// ==========================
-// RESPONSIVE
-// ==========================
-
-@media (max-width: 480px) {
-  .history-container {
-    padding: 12px 12px 100px;
-  }
-  
-  .tabs-container {
-    .tab {
-      font-size: 12px;
-      padding: 8px 10px;
-      
-      .tab-count {
-        font-size: 10px;
-      }
-    }
-  }
-  
-  .booking-item {
-    padding: 14px;
-    
-    .booking-details {
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 8px;
-    }
-    
-    .booking-actions {
-      .action-btn {
-        font-size: 11px;
-        padding: 4px 10px;
-      }
-    }
-  }
-  
-  .history-header {
-    .header-top {
-      .history-title {
-        font-size: 18px;
-      }
-    }
-    
-    .history-subtitle {
-      margin-left: 0;
-    }
-  }
-  
-  .bottom-nav {
-    padding: 8px 0 14px;
-    height: 74px;
-    
-    .nav-item {
-      padding: 4px 8px;
-      
-      ion-icon {
-        font-size: 24px;
-      }
-      
-      span {
-        font-size: 11px;
-      }
-      
-      &.history-center {
-        margin-top: -24px;
-        flex: 1.4;
-        
-        .nav-indicator {
-          width: 60px;
-          height: 60px;
-          
-          ion-icon {
-            font-size: 30px;
-          }
-        }
-      }
-    }
-    
-    .nav-item:not(.history-center) {
-      &.active::after {
-        width: 22px;
-        height: 3px;
-      }
-    }
-  }
-}
-
-@media (max-width: 380px) {
-  .booking-details {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .bottom-nav {
-    height: 66px;
-    padding: 6px 0 12px;
-    
-    .nav-item {
-      ion-icon {
-        font-size: 20px;
-      }
-      
-      span {
-        font-size: 9px;
-      }
-      
-      &.history-center {
-        margin-top: -20px;
-        
-        .nav-indicator {
-          width: 52px;
-          height: 52px;
-          
-          ion-icon {
-            font-size: 26px;
-          }
-        }
-      }
-    }
-    
-    .nav-item:not(.history-center) {
-      &.active::after {
-        width: 18px;
-        height: 3px;
-      }
-    }
-  }
-}
-
-// ==========================
-// ACCESSIBILITY
-// ==========================
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-indicator::after {
-    animation: none !important;
-  }
-  
-  .history-center:hover .nav-indicator {
-    transform: none !important;
-  }
-  
-  .booking-item:hover {
-    transform: none !important;
-  }
-}
-
-// ==========================
 // SKELETON LOADING
 // ==========================
 
 @keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: 200px 0;
-  }
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
 }
 
 .skeleton {
@@ -774,12 +476,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 4px 0;
 }
 
 .skeleton-flex {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
 }
 
@@ -794,30 +496,441 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   gap: 12px;
 }
 
-.skeleton-section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 0;
-}
+// ==========================
+// FLOATING GLASS BOTTOM NAVIGATION
+// ==========================
 
-// Dark mode support for skeleton
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: #2d3748;
+.uber-bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.2));
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 12px 12px;
+  z-index: 1000;
+  height: 72px;
+  box-shadow: var(--glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.12));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 500px;
+  margin: 0 auto;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
   }
   
-  .skeleton::after {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 255, 0.08) 50%, 
-      transparent 100%
-    );
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    flex: 1;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    min-height: 48px;
+    border-radius: 16px;
+    
+    .nav-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      ion-icon {
+        font-size: 24px;
+        color: #9ca3af;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .nav-badge {
+        position: absolute;
+        top: -4px;
+        right: -8px;
+        background: #ef4444;
+        color: white;
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        border: 2px solid var(--glass-bg, #ffffff);
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+    }
+    
+    .nav-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+    
+    &.active {
+      background: var(--nav-active-bg, rgba(0, 0, 0, 0.06));
+      box-shadow: inset 0 0 20px var(--nav-active-glow, rgba(0, 0, 0, 0.08));
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.08);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+      }
+      
+      .nav-label {
+        color: #000000;
+        font-weight: 600;
+      }
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.03);
+        
+        .nav-icon ion-icon {
+          color: #4b5563;
+        }
+        
+        .nav-label {
+          color: #4b5563;
+        }
+      }
+    }
+    
+    &:active {
+      transform: scale(0.94);
+    }
+  }
+  
+  .nav-item.home-center {
+    .nav-icon {
+      width: 34px;
+      height: 34px;
+      margin-top: -2px;
+      
+      ion-icon {
+        font-size: 28px;
+        color: #9ca3af;
+      }
+    }
+    
+    .nav-label {
+      font-weight: 500;
+    }
+    
+    &.active {
+      background: rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.1);
+        filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.15));
+      }
+      
+      .nav-label {
+        color: #000000;
+        font-weight: 600;
+      }
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
   }
 }
 
-// Reduced motion for skeleton
+// ==========================
+// RESPONSIVE
+// ==========================
+
+@media (max-width: 480px) {
+  .history-container {
+    padding: 12px 12px 100px;
+  }
+  
+  .booking-item {
+    padding: 14px;
+    
+    .booking-details {
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 12px;
+      
+      .detail-item {
+        font-size: 12px;
+      }
+    }
+  }
+  
+  .uber-bottom-nav {
+    bottom: 16px;
+    left: 12px;
+    right: 12px;
+    height: 64px;
+    padding: 6px 8px 10px;
+    border-radius: 20px;
+    
+    .nav-item {
+      padding: 4px 8px;
+      min-height: 40px;
+      border-radius: 12px;
+      
+      .nav-icon {
+        width: 24px;
+        height: 24px;
+        
+        ion-icon {
+          font-size: 20px;
+        }
+        
+        .nav-badge {
+          font-size: 9px;
+          min-width: 16px;
+          height: 16px;
+          top: -2px;
+          right: -6px;
+        }
+      }
+      
+      .nav-label {
+        font-size: 9px;
+        letter-spacing: 0.1px;
+      }
+      
+      &.home-center {
+        .nav-icon {
+          width: 28px;
+          height: 28px;
+          
+          ion-icon {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .history-container {
+    padding: 8px 8px 90px;
+  }
+  
+  .booking-item .booking-actions {
+    .action-btn {
+      font-size: 11px;
+      padding: 4px 10px;
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .tabs-container .tab {
+    font-size: 12px;
+    padding: 8px 8px;
+    
+    .tab-count {
+      font-size: 10px;
+    }
+  }
+  
+  .uber-bottom-nav {
+    bottom: 12px;
+    left: 8px;
+    right: 8px;
+    height: 58px;
+    padding: 4px 6px 8px;
+    border-radius: 16px;
+    
+    .nav-item {
+      padding: 2px 4px;
+      min-height: 36px;
+      
+      .nav-icon {
+        width: 20px;
+        height: 20px;
+        
+        ion-icon {
+          font-size: 18px;
+        }
+        
+        .nav-badge {
+          font-size: 8px;
+          min-width: 14px;
+          height: 14px;
+        }
+      }
+      
+      .nav-label {
+        font-size: 8px;
+      }
+      
+      &.home-center {
+        .nav-icon {
+          width: 24px;
+          height: 24px;
+          
+          ion-icon {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==========================
+// DARK MODE
+// ==========================
+
+@media (prefers-color-scheme: dark) {
+  .history-content {
+    --background: #0d0d0d;
+  }
+  
+  .history-container {
+    background: #0d0d0d;
+  }
+  
+  .history-title {
+    color: #ffffff !important;
+  }
+  
+  .history-subtitle {
+    color: #94a3b8 !important;
+  }
+  
+  .back-button {
+    background: #1a1a1a !important;
+    border-color: #333333 !important;
+    
+    ion-icon {
+      color: #ffffff !important;
+    }
+  }
+  
+  .tabs-container {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .tab {
+      color: #94a3b8;
+      
+      .tab-count {
+        background: rgba(255, 255, 255, 0.06);
+        color: #94a3b8;
+      }
+      
+      &.active {
+        background: #2563eb;
+        color: #ffffff;
+        
+        .tab-count {
+          background: rgba(255, 255, 255, 0.2);
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  
+  .booking-item {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .booking-header {
+      .booking-service {
+        .booking-name {
+          color: #ffffff;
+        }
+        
+        .booking-date {
+          color: #94a3b8;
+        }
+      }
+    }
+    
+    .booking-details .detail-item {
+      color: #94a3b8;
+      
+      ion-icon {
+        color: #6b7280;
+      }
+    }
+    
+    .booking-actions {
+      border-color: #333333;
+    }
+  }
+  
+  .empty-state {
+    .empty-title {
+      color: #ffffff;
+    }
+    
+    .empty-desc {
+      color: #94a3b8;
+    }
+  }
+  
+  .skeleton {
+    background: #2d3748;
+    
+    &::after {
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.08) 50%, 
+        transparent 100%
+      );
+    }
+  }
+}
+
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
 @media (prefers-reduced-motion: reduce) {
+  .booking-item:hover {
+    transform: none !important;
+  }
+  
+  .empty-btn:hover {
+    transform: none !important;
+  }
+  
   .skeleton::after {
     animation: none !important;
   }

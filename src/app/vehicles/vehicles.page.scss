@@ -2,12 +2,6 @@
 // VEHICLES PAGE - SAME DESIGN AS HOME
 // ============================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-// ==========================
-// VARIABLES
-// ==========================
-
 $brand-blue: #2563eb;
 $brand-hover: #1d4ed8;
 $brand-dark: #1a3a8a;
@@ -43,7 +37,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 .vehicles-container {
-  padding: 16px 16px 110px;
+  padding: 16px 16px 120px;
   max-width: 600px;
   margin: 0 auto;
   height: 100%;
@@ -93,6 +87,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       color: $text-dark;
       margin: 0;
       letter-spacing: -0.3px;
+      font-family: $font-family;
     }
     
     .add-button {
@@ -125,6 +120,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     color: $text-gray;
     margin: 4px 0 0 52px;
     font-weight: 400;
+    font-family: $font-family;
   }
 }
 
@@ -641,6 +637,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       font-weight: 800;
       color: $text-dark;
       margin: 0 0 4px;
+      font-family: $font-family;
     }
     
     .details-plate {
@@ -650,6 +647,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       background: rgba(0, 0, 0, 0.04);
       padding: 2px 14px;
       border-radius: 12px;
+      font-family: $font-family;
     }
   }
   
@@ -692,6 +690,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
           font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.3px;
+          font-family: $font-family;
         }
         
         .spec-value {
@@ -699,6 +698,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
           font-size: 14px;
           font-weight: 600;
           color: $text-dark;
+          font-family: $font-family;
         }
       }
     }
@@ -772,150 +772,177 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 }
 
 // ==========================
-// BOTTOM NAVIGATION - VEHICLES HIGHLIGHTED
+// FLOATING GLASS BOTTOM NAVIGATION
 // ==========================
 
-.bottom-nav {
+.uber-bottom-nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: $white;
-  border-top: 1px solid $border-color;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
+  backdrop-filter: blur(var(--glass-blur, 20px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 20px));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.2));
+  border-radius: 24px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 0 18px;
+  padding: 8px 12px 12px;
   z-index: 1000;
-  box-shadow: 0 -4px 20px $shadow-light;
-  height: 82px;
+  height: 72px;
+  box-shadow: var(--glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.12));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 500px;
+  margin: 0 auto;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
+  }
   
   .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 2px;
     cursor: pointer;
     padding: 6px 12px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     flex: 1;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    min-height: 48px;
+    border-radius: 16px;
     
-    ion-icon {
-      font-size: 28px;
-      color: $text-light;
-      transition: color 0.3s ease;
-    }
-    
-    span {
-      font-size: 12px;
-      color: $text-light;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      font-family: $font-family;
-    }
-    
-    &:hover {
+    .nav-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
       ion-icon {
-        color: $brand-blue;
+        font-size: 24px;
+        color: #9ca3af;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
-      span {
-        color: $brand-blue;
-      }
-    }
-    
-    &.active:not(.vehicles-center) {
-      ion-icon {
-        color: $brand-blue;
-      }
-      
-      span {
-        color: $brand-blue;
-        font-weight: 600;
-      }
-      
-      &::after {
-        content: '';
+      .nav-badge {
         position: absolute;
-        top: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 28px;
-        height: 4px;
-        background: $brand-blue;
-        border-radius: 3px;
-      }
-    }
-    
-    &.vehicles-center {
-      margin-top: -28px;
-      flex: 1.4;
-      
-      .nav-indicator {
-        width: 72px;
-        height: 72px;
+        top: -4px;
+        right: -8px;
+        background: #ef4444;
+        color: white;
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 18px;
+        height: 18px;
         border-radius: 50%;
-        background: $brand-blue;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 6px 28px rgba($brand-blue, 0.4);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        
-        ion-icon {
-          font-size: 36px;
-          color: $white;
-          transition: all 0.3s ease;
-        }
-        
-        &::after {
-          content: '';
-          position: absolute;
-          inset: -6px;
-          border-radius: 50%;
-          background: rgba($brand-blue, 0.2);
-          animation: pulse-ring 2s ease-in-out infinite;
-        }
+        font-family: $font-family;
+        border: 2px solid var(--glass-bg, #ffffff);
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+    }
+    
+    .nav-label {
+      font-family: $font-family;
+      font-size: 10px;
+      font-weight: 500;
+      color: #9ca3af;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.2px;
+      line-height: 1.2;
+    }
+    
+    &.active {
+      background: var(--nav-active-bg, rgba(0, 0, 0, 0.06));
+      box-shadow: inset 0 0 20px var(--nav-active-glow, rgba(0, 0, 0, 0.08));
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.08);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
       }
       
-      span {
-        margin-top: 6px;
+      .nav-label {
+        color: #000000;
         font-weight: 600;
-        color: $brand-blue;
-        font-size: 12px;
       }
-      
-      &::after {
-        display: none !important;
-      }
-      
-      &:hover {
-        .nav-indicator {
-          transform: translateY(-3px) scale(1.06);
-          box-shadow: 0 8px 36px rgba($brand-blue, 0.5);
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.03);
+        
+        .nav-icon ion-icon {
+          color: #4b5563;
         }
-      }
-      
-      &:active {
-        .nav-indicator {
-          transform: scale(0.93);
+        
+        .nav-label {
+          color: #4b5563;
         }
       }
     }
+    
+    &:active {
+      transform: scale(0.94);
+    }
   }
-}
-
-// Pulse animation for round indicator
-@keyframes pulse-ring {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.15;
+  
+  .nav-item.home-center {
+    .nav-icon {
+      width: 34px;
+      height: 34px;
+      margin-top: -2px;
+      
+      ion-icon {
+        font-size: 28px;
+        color: #9ca3af;
+      }
+    }
+    
+    .nav-label {
+      font-weight: 500;
+    }
+    
+    &.active {
+      background: rgba(0, 0, 0, 0.08);
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+      
+      .nav-icon ion-icon {
+        color: #000000;
+        transform: scale(1.1);
+        filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.15));
+      }
+      
+      .nav-label {
+        color: #000000;
+        font-weight: 600;
+      }
+    }
+    
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
   }
 }
 
@@ -993,40 +1020,50 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     }
   }
   
-  .bottom-nav {
-    padding: 8px 0 14px;
-    height: 74px;
+  .uber-bottom-nav {
+    bottom: 16px;
+    left: 12px;
+    right: 12px;
+    height: 64px;
+    padding: 6px 8px 10px;
+    border-radius: 20px;
     
     .nav-item {
       padding: 4px 8px;
+      min-height: 40px;
+      border-radius: 12px;
       
-      ion-icon {
-        font-size: 24px;
-      }
-      
-      span {
-        font-size: 11px;
-      }
-      
-      &.vehicles-center {
-        margin-top: -24px;
-        flex: 1.4;
+      .nav-icon {
+        width: 24px;
+        height: 24px;
         
-        .nav-indicator {
-          width: 60px;
-          height: 60px;
-          
-          ion-icon {
-            font-size: 30px;
-          }
+        ion-icon {
+          font-size: 20px;
+        }
+        
+        .nav-badge {
+          font-size: 9px;
+          min-width: 16px;
+          height: 16px;
+          top: -2px;
+          right: -6px;
         }
       }
-    }
-    
-    .nav-item:not(.vehicles-center) {
-      &.active::after {
-        width: 22px;
-        height: 3px;
+      
+      .nav-label {
+        font-size: 9px;
+        letter-spacing: 0.1px;
+      }
+      
+      &.home-center {
+        .nav-icon {
+          width: 28px;
+          height: 28px;
+          
+          ion-icon {
+            font-size: 24px;
+          }
+        }
       }
     }
   }
@@ -1043,65 +1080,229 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     }
   }
   
-  .bottom-nav {
-    height: 66px;
-    padding: 6px 0 12px;
+  .uber-bottom-nav {
+    bottom: 12px;
+    left: 8px;
+    right: 8px;
+    height: 58px;
+    padding: 4px 6px 8px;
+    border-radius: 16px;
     
     .nav-item {
-      ion-icon {
-        font-size: 20px;
-      }
+      padding: 2px 4px;
+      min-height: 36px;
       
-      span {
-        font-size: 9px;
-      }
-      
-      &.vehicles-center {
-        margin-top: -20px;
+      .nav-icon {
+        width: 20px;
+        height: 20px;
         
-        .nav-indicator {
-          width: 52px;
-          height: 52px;
-          
-          ion-icon {
-            font-size: 26px;
-          }
+        ion-icon {
+          font-size: 18px;
+        }
+        
+        .nav-badge {
+          font-size: 8px;
+          min-width: 14px;
+          height: 14px;
         }
       }
-    }
-    
-    .nav-item:not(.vehicles-center) {
-      &.active::after {
-        width: 18px;
-        height: 3px;
+      
+      .nav-label {
+        font-size: 8px;
+      }
+      
+      &.home-center {
+        .nav-icon {
+          width: 24px;
+          height: 24px;
+          
+          ion-icon {
+            font-size: 22px;
+          }
+        }
       }
     }
   }
 }
 
 // ==========================
-// ACCESSIBILITY
+// DARK MODE
 // ==========================
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-color-scheme: dark) {
+  .vehicles-content {
+    --background: #0d0d0d;
+  }
+  
+  .vehicles-container {
+    background: #0d0d0d;
+  }
+  
+  .vehicles-title {
+    color: #ffffff !important;
+  }
+  
+  .vehicles-subtitle {
+    color: #94a3b8 !important;
+  }
+  
+  .back-button {
+    background: #1a1a1a !important;
+    border-color: #333333 !important;
+    
+    ion-icon {
+      color: #ffffff !important;
+    }
+  }
+  
+  .add-button {
+    background: #2563eb !important;
+    
+    &:hover {
+      background: #1d4ed8 !important;
+    }
+  }
+  
+  .vehicle-card {
+    background: #1a1a1a;
+    border-color: #333333;
+    
+    .vehicle-name {
+      color: #ffffff;
+    }
+    
+    .vehicle-details {
+      span {
+        color: #94a3b8;
+        background: rgba(255, 255, 255, 0.04);
+        
+        ion-icon {
+          color: #6b7280;
+        }
+      }
+    }
+    
+    &:hover {
+      border-color: #2563eb;
+    }
+  }
+  
   .modal-overlay {
-    animation: none !important;
+    .modal-content {
+      background: #1a1a1a;
+      
+      .modal-header {
+        background: #1a1a1a;
+        border-color: #333333;
+        
+        .modal-title {
+          color: #ffffff;
+        }
+        
+        .modal-close {
+          background: rgba(255, 255, 255, 0.05);
+          
+          ion-icon {
+            color: #ffffff;
+          }
+        }
+      }
+      
+      .modal-body {
+        .form-group {
+          .form-label {
+            color: #ffffff;
+          }
+          
+          .form-input {
+            background: #0d0d0d;
+            border-color: #333333;
+            color: #ffffff;
+            
+            &::placeholder {
+              color: #6b7280;
+            }
+          }
+        }
+        
+        .image-upload-wrapper {
+          border-color: #333333;
+          
+          .image-placeholder {
+            span {
+              color: #94a3b8;
+            }
+          }
+        }
+        
+        .color-options {
+          .color-option {
+            .color-name {
+              color: #94a3b8;
+            }
+          }
+        }
+      }
+      
+      .modal-footer {
+        border-color: #333333;
+        
+        .modal-btn {
+          &.cancel-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+          }
+        }
+      }
+    }
   }
   
-  .modal-overlay .modal-content {
-    animation: none !important;
+  .details-modal {
+    .details-info {
+      .details-name {
+        color: #ffffff;
+      }
+      
+      .details-plate {
+        color: #94a3b8;
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+    
+    .details-specs {
+      .spec-item {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: #333333;
+        
+        .spec-info {
+          .spec-value {
+            color: #ffffff;
+          }
+        }
+      }
+    }
   }
   
-  .nav-indicator::after {
-    animation: none !important;
+  .empty-state {
+    .empty-title {
+      color: #ffffff;
+    }
+    
+    .empty-desc {
+      color: #94a3b8;
+    }
   }
   
-  .vehicles-center:hover .nav-indicator {
-    transform: none !important;
-  }
-  
-  .vehicle-card:hover {
-    transform: none !important;
+  .skeleton {
+    background: #2d3748;
+    
+    &::after {
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.08) 50%, 
+        transparent 100%
+      );
+    }
   }
 }
 
@@ -1197,22 +1398,28 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   gap: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: #2d3748;
+// ==========================
+// ACCESSIBILITY
+// ==========================
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay {
+    animation: none !important;
+  }
+  
+  .modal-overlay .modal-content {
+    animation: none !important;
   }
   
   .skeleton::after {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 255, 0.08) 50%, 
-      transparent 100%
-    );
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .skeleton::after {
     animation: none !important;
+  }
+  
+  .vehicle-card:hover {
+    transform: none !important;
+  }
+  
+  .add-button:hover {
+    transform: none !important;
   }
 }

@@ -1,27 +1,31 @@
 <ion-content class="carwash-content">
   
   <!-- ========================== -->
-  <!-- FULL MAP BACKGROUND (STATIC) -->
+  <!-- FULL MAP BACKGROUND -->
   <!-- ========================== -->
   <div class="full-map">
+    <!-- Static Map Image -->
     <img 
       src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
-      style="width: 100%; height: 100%; object-fit: cover;" 
+      class="map-image"
       alt="Map Background"
     />
     
-    <!-- LOTTIE ANIMATIONS ON MAP -->
-    <div class="lottie-marker" style="position: absolute; top: 25%; left: 35%; transform: translate(-50%, -50%); z-index: 2;">
-      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    <!-- Map Overlay -->
+    <div class="map-overlay"></div>
+    
+    <!-- Lottie Markers on Map -->
+    <div class="lottie-marker" style="top: 25%; left: 35%;">
+      <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_j1ad4yfb.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
     </div>
-    <div class="lottie-marker" style="position: absolute; top: 50%; left: 70%; transform: translate(-50%, -50%); z-index: 2;">
-      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    <div class="lottie-marker" style="top: 50%; left: 70%;">
+      <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_j1ad4yfb.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
     </div>
-    <div class="lottie-marker" style="position: absolute; top: 65%; left: 20%; transform: translate(-50%, -50%); z-index: 2;">
-      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    <div class="lottie-marker" style="top: 65%; left: 20%;">
+      <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_j1ad4yfb.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
     </div>
-    <div class="lottie-marker" style="position: absolute; top: 20%; left: 80%; transform: translate(-50%, -50%); z-index: 2;">
-      <lottie-player src="https://lottie.host/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e/3b1e3e5e-5b5e-4e8e-9e8e-3b1e3e5e5b5e.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+    <div class="lottie-marker" style="top: 20%; left: 80%;">
+      <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_j1ad4yfb.json" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
     </div>
   </div>
 
@@ -29,6 +33,7 @@
   <div class="back-btn" (click)="goBack()">
     <ion-icon name="arrow-back-outline"></ion-icon>
   </div>
+  
   <div class="location-info">
     <div class="location-chip">
       <ion-icon name="location-outline"></ion-icon>
@@ -37,15 +42,19 @@
   </div>
 
   <!-- ========================== -->
-  <!-- BOTTOM SHEET -->
+  <!-- DRAGGABLE BOTTOM SHEET -->
   <!-- ========================== -->
-  <div class="bottom-sheet" [class.expanded]="isExpanded">
+  <div class="bottom-sheet" [class.expanded]="isExpanded" [class.collapsed]="!isExpanded">
     
+    <!-- Sheet Handle -->
     <div class="sheet-handle" (click)="toggleSheet()">
       <div class="handle-bar"></div>
       <div class="sheet-header">
-        <span class="sheet-title">Available Carwashes</span>
-        <span class="sheet-count">{{ isLoading ? 'Loading...' : filteredCarwashes.length + ' nearby' }}</span>
+        <div class="sheet-header-left">
+          <span class="sheet-title">Nearby Carwashes</span>
+          <span class="sheet-count">{{ isLoading ? '...' : filteredCarwashes.length + ' found' }}</span>
+        </div>
+        <ion-icon name="chevron-up-outline" class="sheet-toggle-icon" [class.rotated]="isExpanded"></ion-icon>
       </div>
     </div>
 
@@ -54,19 +63,41 @@
       <!-- SEARCH BAR -->
       <div class="search-bar">
         <ion-icon name="search-outline" class="search-icon"></ion-icon>
-        <input type="text" placeholder="Search carwashes..." [(ngModel)]="searchQuery" (ionInput)="filterCarwashes()" />
+        <input 
+          type="text" 
+          placeholder="Search carwashes..." 
+          [(ngModel)]="searchQuery" 
+          (ionInput)="filterCarwashes()" 
+        />
+        <ion-icon 
+          *ngIf="searchQuery" 
+          name="close-circle-outline" 
+          class="clear-search"
+          (click)="clearSearch()"
+        ></ion-icon>
       </div>
 
       <!-- FILTER CHIPS -->
       <div class="filter-chips">
-        <div class="filter-chip" [class.active]="selectedFilter === 'all'" (click)="setFilter('all')">All</div>
-        <div class="filter-chip" [class.active]="selectedFilter === 'rating'" (click)="setFilter('rating')"><ion-icon name="star-outline"></ion-icon> Top Rated</div>
-        <div class="filter-chip" [class.active]="selectedFilter === 'distance'" (click)="setFilter('distance')"><ion-icon name="location-outline"></ion-icon> Distance</div>
-        <div class="filter-chip" [class.active]="selectedFilter === 'open'" (click)="setFilter('open')"><ion-icon name="time-outline"></ion-icon> Open Now</div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'all'" (click)="setFilter('all')">
+          <span>All</span>
+        </div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'rating'" (click)="setFilter('rating')">
+          <ion-icon name="star-outline"></ion-icon>
+          <span>Top Rated</span>
+        </div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'distance'" (click)="setFilter('distance')">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>Nearest</span>
+        </div>
+        <div class="filter-chip" [class.active]="selectedFilter === 'open'" (click)="setFilter('open')">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>Open Now</span>
+        </div>
       </div>
 
       <!-- ========================== -->
-      <!-- SKELETON LOADING STATE -->
+      <!-- SKELETON LOADING -->
       <!-- ========================== -->
       <div class="skeleton-list" *ngIf="isLoading">
         <div class="skeleton-item" *ngFor="let i of [1,2,3,4,5]">
@@ -81,15 +112,16 @@
       </div>
 
       <!-- ========================== -->
-      <!-- REAL CARWASH LIST -->
+      <!-- CARWASH LIST -->
       <!-- ========================== -->
       <div class="carwash-list" *ngIf="!isLoading">
-        <div class="carwash-item" *ngFor="let carwash of filteredCarwashes" (click)="selectCarwash(carwash)" [attr.data-id]="carwash.id">
+        <div class="carwash-item" *ngFor="let carwash of filteredCarwashes" 
+             (click)="selectCarwash(carwash)">
           <div class="carwash-avatar">
-            <div class="carwash-icon" style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              <img [src]="carwash.logo" alt="Logo" style="width: 100%; height: 100%; object-fit: cover;" />
+            <div class="carwash-icon">
+              <img [src]="carwash.logo" alt="Logo" />
             </div>
-            <div class="carwash-status" [ngClass]="carwash.isOpen ? 'open' : 'closed'">
+            <div class="carwash-status" [class.open]="carwash.isOpen" [class.closed]="!carwash.isOpen">
               {{ carwash.isOpen ? 'Open' : 'Closed' }}
             </div>
           </div>
@@ -98,16 +130,17 @@
             <div class="carwash-rating">
               <ion-icon name="star"></ion-icon>
               <span>{{ carwash.rating }}</span>
-              <span class="reviews">({{ carwash.reviews }} reviews)</span>
+              <span class="reviews">({{ carwash.reviews }})</span>
             </div>
             <div class="carwash-meta">
-              <span><ion-icon name="location-outline"></ion-icon> {{ carwash.distance }} km away</span>
-              <span><ion-icon name="time-outline"></ion-icon> {{ carwash.waitTime }} min wait</span>
+              <span><ion-icon name="location-outline"></ion-icon> {{ carwash.distance }} km</span>
+              <span><ion-icon name="time-outline"></ion-icon> {{ carwash.waitTime }} min</span>
             </div>
           </div>
           <div class="carwash-actions">
             <button class="book-btn" (click)="$event.stopPropagation(); bookCarwash(carwash)">
-              Book
+              <span>Book</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
             </button>
           </div>
         </div>
@@ -115,7 +148,7 @@
         <div class="empty-state" *ngIf="filteredCarwashes.length === 0">
           <ion-icon name="search-outline"></ion-icon>
           <h4>No carwashes found</h4>
-          <p>Try adjusting your search or filters.</p>
+          <p>Try adjusting your search or filters</p>
         </div>
       </div>
 

@@ -10,7 +10,9 @@ import {
   timeOutline, 
   arrowBackOutline,
   starOutline,
-  carSportOutline
+  carSportOutline,
+  closeCircleOutline,
+  chevronUpOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -26,15 +28,14 @@ export class CarwashMapPage implements OnInit {
   isExpanded = false;
   searchQuery = '';
   selectedFilter = 'all';
-  isLoading = true; // ✅ Skeleton trigger
+  isLoading = true;
   
-  // Carwash Data
   carwashes: any[] = [
     { id: 1, name: 'Wash & Go Main', rating: 4.8, reviews: 234, distance: 0.8, waitTime: 5, isOpen: true, 
       logo: 'https://cdn-icons-png.flaticon.com/512/3202/3202923.png', address: '123 Main Street' },
     { id: 2, name: 'Express Auto Spa', rating: 4.5, reviews: 189, distance: 1.2, waitTime: 10, isOpen: true, 
       logo: 'https://cdn-icons-png.flaticon.com/512/3202/3202930.png', address: '45 Beach Road' },
-    { id: 3, name: 'Premium Car Care Centre', rating: 4.9, reviews: 312, distance: 2.1, waitTime: 15, isOpen: true, 
+    { id: 3, name: 'Premium Car Care', rating: 4.9, reviews: 312, distance: 2.1, waitTime: 15, isOpen: true, 
       logo: 'https://cdn-icons-png.flaticon.com/512/3202/3202932.png', address: '78 Garden Avenue' },
     { id: 4, name: 'VIP Detailing Studio', rating: 4.7, reviews: 156, distance: 3.0, waitTime: 20, isOpen: false, 
       logo: 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png', address: '12 Sunset Boulevard' },
@@ -48,12 +49,19 @@ export class CarwashMapPage implements OnInit {
 
   constructor(private navCtrl: NavController) {
     addIcons({
-      searchOutline, locationOutline, star, timeOutline, arrowBackOutline, starOutline, carSportOutline
+      searchOutline, 
+      locationOutline, 
+      star, 
+      timeOutline, 
+      arrowBackOutline, 
+      starOutline, 
+      carSportOutline,
+      closeCircleOutline,
+      chevronUpOutline
     });
   }
 
   ngOnInit() {
-    // ✅ Show Skeleton for 1.5 seconds, then load data
     this.isLoading = true;
     setTimeout(() => {
       this.filteredCarwashes = [...this.carwashes];
@@ -61,16 +69,15 @@ export class CarwashMapPage implements OnInit {
     }, 1500);
   }
 
-  // SEARCH & FILTER LOGIC
   filterCarwashes() {
-    if (this.isLoading) return; // Don't filter while skeleton is showing
+    if (this.isLoading) return;
 
     let filtered = [...this.carwashes];
 
     if (this.searchQuery.trim()) {
       const query = this.searchQuery.toLowerCase().trim();
       filtered = filtered.filter(cw => 
-        cw.name.toLowerCase().startsWith(query) ||
+        cw.name.toLowerCase().includes(query) ||
         cw.address.toLowerCase().includes(query)
       );
     }
@@ -83,6 +90,11 @@ export class CarwashMapPage implements OnInit {
     }
 
     this.filteredCarwashes = filtered;
+  }
+
+  clearSearch() {
+    this.searchQuery = '';
+    this.filterCarwashes();
   }
 
   setFilter(filter: string) {

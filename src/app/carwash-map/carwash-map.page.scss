@@ -1,45 +1,43 @@
 // ============================================================
-// CARWASH MAP PAGE
+// CARWASH MAP PAGE - COMPLETE STYLES
 // ============================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-$brand-blue: #2563eb;
-$brand-light: #3b82f6;
+$brand-primary: #2563eb;
+$brand-hover: #1d4ed8;
 $brand-dark: #1a3a8a;
+$brand-light: #dbeafe;
+$text-primary: #0f172a;
+$text-secondary: #64748b;
+$text-tertiary: #94a3b8;
+$bg-primary: #ffffff;
+$bg-secondary: #f8fafc;
+$border-color: #e2e8f0;
 $white: #ffffff;
-$gray-50: #f8fafc;
-$gray-100: #f1f5f9;
-$gray-200: #e2e8f0;
-$gray-300: #cbd5e1;
-$gray-400: #94a3b8;
-$gray-500: #64748b;
-$gray-600: #475569;
-$gray-700: #334155;
-$gray-800: #1e293b;
 $success: #22c55e;
-$warning: #f59e0b;
 $danger: #ef4444;
-$shadow-light: rgba(0, 0, 0, 0.04);
-$shadow-medium: rgba(0, 0, 0, 0.08);
-$shadow-heavy: rgba(0, 0, 0, 0.12);
+$warning: #f59e0b;
+$shadow-sm: rgba(0, 0, 0, 0.04);
+$shadow-md: rgba(0, 0, 0, 0.08);
+$shadow-lg: rgba(0, 0, 0, 0.12);
+$shadow-xl: rgba(0, 0, 0, 0.16);
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 20px;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
-* {
-  font-family: $font-family;
-}
 
 // ==========================
 // CONTENT
 // ==========================
 
 .carwash-content {
-  --background: #f1f5f9;
+  --background: #f8fafc;
   --padding-top: 0;
   --padding-bottom: 0;
   --padding-start: 0;
   --padding-end: 0;
   height: 100vh;
+  position: relative;
 }
 
 // ==========================
@@ -47,123 +45,97 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // ==========================
 
 .full-map {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: #e8ecf1;
   z-index: 0;
-}
-
-// ==========================
-// LOTTIE ANIMATIONS
-// ==========================
-
-.lottie-container {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-}
-
-.lottie-small {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto;
-}
-
-.lottie-empty {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-}
-
-.loading-carwashes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  overflow: hidden;
   
-  p {
-    font-size: 13px;
-    color: $gray-500;
-    margin-top: 8px;
+  .map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.1) 0%,
+      rgba(15, 23, 42, 0.3) 50%,
+      rgba(15, 23, 42, 0.6) 100%
+    );
+    z-index: 1;
   }
 }
 
 // ==========================
-// MAP FALLBACK
+// LOTTIE MARKERS
 // ==========================
 
-.map-fallback {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #f1f5f9;
-  z-index: 1;
-  color: $gray-700;
+.lottie-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: float-marker 3s ease-in-out infinite;
   
-  p {
-    margin-top: 8px;
-    font-size: 14px;
-    color: $gray-500;
-  }
+  &:nth-child(2) { animation-delay: 0.5s; }
+  &:nth-child(3) { animation-delay: 1s; }
+  &:nth-child(4) { animation-delay: 1.5s; }
+}
+
+@keyframes float-marker {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -60%) scale(1.05); }
 }
 
 // ==========================
-// BACK BUTTON
+// MAP OVERLAYS
 // ==========================
 
 .back-btn {
-  position: fixed;
-  top: 48px;
+  position: absolute;
+  top: 16px;
   left: 16px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px $shadow-medium;
+  background: $white;
+  border: 1px solid $border-color;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: $transition;
+  box-shadow: 0 2px 8px $shadow-sm;
   z-index: 10;
-  transition: all 0.3s ease;
   
   ion-icon {
-    font-size: 24px;
-    color: $gray-700;
+    font-size: 22px;
+    color: $text-primary;
   }
   
   &:hover {
+    border-color: $brand-primary;
+    box-shadow: 0 4px 16px rgba($brand-primary, 0.1);
     transform: scale(1.05);
-    box-shadow: 0 4px 16px $shadow-heavy;
   }
   
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
   }
 }
 
-// ==========================
-// LOCATION INFO
-// ==========================
-
 .location-info {
-  position: fixed;
-  top: 48px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: absolute;
+  top: 16px;
+  right: 16px;
   z-index: 10;
   
   .location-chip {
@@ -171,21 +143,23 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba($white, 0.92);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
-    box-shadow: 0 2px 12px $shadow-medium;
+    border: 1px solid rgba($white, 0.2);
+    box-shadow: 0 2px 12px $shadow-sm;
+    font-family: $font-family;
     
     ion-icon {
       font-size: 18px;
-      color: $brand-blue;
+      color: $brand-primary;
     }
     
     span {
       font-size: 13px;
       font-weight: 500;
-      color: $gray-700;
+      color: $text-primary;
     }
   }
 }
@@ -195,32 +169,55 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // ==========================
 
 .bottom-sheet {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 5;
-  background: $white;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 -4px 32px $shadow-heavy;
-  max-height: 80vh;
-  transition: max-height 0.3s ease;
+  background: $bg-primary;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 30px $shadow-lg;
+  z-index: 20;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 90vh;
+  height: 120px;
+  overflow: hidden;
   
   &.expanded {
-    max-height: 92vh;
+    height: 85vh;
+    
+    .sheet-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  &.collapsed {
+    height: 120px;
+    
+    .sheet-content {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
   }
 }
+
+// ==========================
+// SHEET HANDLE
+// ==========================
 
 .sheet-handle {
   padding: 12px 20px 8px;
   cursor: pointer;
+  user-select: none;
   
   .handle-bar {
     width: 40px;
     height: 4px;
-    background: $gray-300;
+    background: $border-color;
     border-radius: 2px;
     margin: 0 auto 12px;
+    transition: $transition;
   }
   
   .sheet-header {
@@ -228,24 +225,64 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     justify-content: space-between;
     align-items: center;
     
-    .sheet-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: $gray-800;
+    .sheet-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      
+      .sheet-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: $text-primary;
+        font-family: $font-family;
+        letter-spacing: -0.2px;
+      }
+      
+      .sheet-count {
+        font-size: 12px;
+        color: $text-tertiary;
+        font-weight: 500;
+        font-family: $font-family;
+        background: rgba($text-tertiary, 0.08);
+        padding: 2px 12px;
+        border-radius: 12px;
+      }
     }
     
-    .sheet-count {
-      font-size: 13px;
-      color: $gray-500;
-      font-weight: 500;
+    .sheet-toggle-icon {
+      font-size: 22px;
+      color: $text-tertiary;
+      transition: transform 0.3s ease;
+      
+      &.rotated {
+        transform: rotate(180deg);
+      }
     }
   }
 }
 
+// ==========================
+// SHEET CONTENT
+// ==========================
+
 .sheet-content {
-  padding: 0 16px 16px;
-  max-height: 70vh;
+  padding: 0 20px 20px;
+  transition: all 0.3s ease;
+  height: calc(100% - 80px);
   overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: 2px;
+  }
 }
 
 // ==========================
@@ -255,27 +292,51 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: $gray-100;
-  border-radius: 12px;
-  padding: 10px 14px;
-  margin-bottom: 12px;
+  gap: 12px;
+  background: $bg-secondary;
+  border: 1.5px solid $border-color;
+  border-radius: $radius-sm;
+  padding: 0 14px;
+  margin-bottom: 14px;
+  transition: $transition;
+  
+  &:focus-within {
+    border-color: $brand-primary;
+    box-shadow: 0 0 0 4px rgba($brand-primary, 0.08);
+  }
   
   .search-icon {
     font-size: 20px;
-    color: $gray-400;
+    color: $text-tertiary;
+    flex-shrink: 0;
   }
   
   input {
     flex: 1;
+    padding: 12px 0;
     border: none;
-    background: transparent;
-    font-size: 14px;
-    color: $gray-700;
     outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+    background: transparent;
+    font-family: $font-family;
     
     &::placeholder {
-      color: $gray-400;
+      color: $text-tertiary;
+      font-weight: 400;
+    }
+  }
+  
+  .clear-search {
+    font-size: 18px;
+    color: $text-tertiary;
+    cursor: pointer;
+    padding: 4px;
+    transition: $transition;
+    
+    &:hover {
+      color: $text-secondary;
     }
   }
 }
@@ -291,33 +352,104 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   overflow-x: auto;
   padding-bottom: 4px;
   
+  &::-webkit-scrollbar {
+    height: 0;
+  }
+  
   .filter-chip {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     padding: 6px 14px;
-    background: $gray-100;
+    background: $bg-secondary;
+    border: 1.5px solid $border-color;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 500;
-    color: $gray-600;
+    color: $text-secondary;
     cursor: pointer;
+    transition: $transition;
     white-space: nowrap;
-    transition: all 0.3s ease;
+    font-family: $font-family;
     
     ion-icon {
-      font-size: 14px;
+      font-size: 16px;
     }
     
     &:hover {
-      background: $gray-200;
+      border-color: $brand-primary;
+      color: $brand-primary;
     }
     
     &.active {
-      background: $brand-blue;
+      background: $brand-primary;
+      border-color: $brand-primary;
       color: $white;
+      
+      ion-icon {
+        color: $white;
+      }
     }
   }
+}
+
+// ==========================
+// SKELETON LOADING
+// ==========================
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  background: $bg-secondary;
+  border-radius: $radius-sm;
+  animation: shimmer 1.5s infinite;
+  
+  .skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $border-color;
+    flex-shrink: 0;
+  }
+  
+  .skeleton-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    
+    .skeleton-line {
+      height: 12px;
+      background: $border-color;
+      border-radius: 4px;
+      
+      &.name { width: 60%; }
+      &.rating { width: 40%; }
+      &.meta { width: 70%; }
+    }
+  }
+  
+  .skeleton-btn {
+    width: 60px;
+    height: 32px;
+    background: $border-color;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
 // ==========================
@@ -327,23 +459,29 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 .carwash-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding-bottom: 20px;
 }
 
 .carwash-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
-  background: $gray-50;
-  border-radius: 12px;
-  border: 1px solid $gray-200;
+  gap: 14px;
+  padding: 14px;
+  background: $bg-primary;
+  border: 1.5px solid $border-color;
+  border-radius: $radius-sm;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: $transition;
   
   &:hover {
-    border-color: $brand-blue;
-    box-shadow: 0 2px 8px $shadow-light;
+    border-color: $brand-primary;
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px $shadow-sm;
+  }
+  
+  &:active {
+    transform: scale(0.98);
   }
   
   .carwash-avatar {
@@ -351,17 +489,19 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     flex-shrink: 0;
     
     .carwash-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: $brand-light;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       
-      ion-icon {
-        font-size: 28px;
-        color: $brand-blue;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
     
@@ -370,19 +510,20 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       bottom: -4px;
       right: -4px;
       font-size: 9px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 2px 8px;
-      border-radius: 8px;
-      border: 2px solid $white;
+      border-radius: 10px;
+      font-family: $font-family;
+      border: 2px solid $bg-primary;
       
       &.open {
-        background: $success;
-        color: $white;
+        background: rgba($success, 0.12);
+        color: $success;
       }
       
       &.closed {
-        background: $gray-400;
-        color: $white;
+        background: rgba($danger, 0.12);
+        color: $danger;
       }
     }
   }
@@ -392,10 +533,12 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     min-width: 0;
     
     .carwash-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: $gray-800;
+      font-size: 15px;
+      font-weight: 700;
+      color: $text-primary;
       margin: 0 0 4px;
+      font-family: $font-family;
+      letter-spacing: -0.2px;
     }
     
     .carwash-rating {
@@ -407,38 +550,37 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
       ion-icon {
         font-size: 14px;
         color: $warning;
-        fill: $warning;
       }
       
       span {
         font-size: 13px;
         font-weight: 600;
-        color: $gray-700;
+        color: $text-primary;
+        font-family: $font-family;
       }
       
       .reviews {
-        font-weight: 400;
-        color: $gray-400;
         font-size: 12px;
+        font-weight: 400;
+        color: $text-tertiary;
       }
     }
     
     .carwash-meta {
       display: flex;
-      align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
+      font-size: 12px;
+      color: $text-secondary;
+      font-family: $font-family;
       
       span {
         display: flex;
         align-items: center;
         gap: 4px;
-        font-size: 12px;
-        color: $gray-500;
         
         ion-icon {
           font-size: 14px;
-          color: $gray-400;
+          color: $text-tertiary;
         }
       }
     }
@@ -448,19 +590,32 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
     flex-shrink: 0;
     
     .book-btn {
-      padding: 6px 16px;
-      background: $brand-blue;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      background: $brand-primary;
       color: $white;
       border: none;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: $transition;
+      font-family: $font-family;
+      
+      ion-icon {
+        font-size: 16px;
+        transition: $transition;
+      }
       
       &:hover {
-        background: $brand-light;
-        transform: scale(1.05);
+        background: $brand-hover;
+        transform: translateX(2px);
+        
+        ion-icon {
+          transform: translateX(2px);
+        }
       }
       
       &:active {
@@ -484,21 +639,23 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
   
   ion-icon {
     font-size: 48px;
-    color: $gray-300;
+    color: $text-tertiary;
     margin-bottom: 12px;
   }
   
   h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: $gray-700;
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-primary;
     margin: 0 0 4px;
+    font-family: $font-family;
   }
   
   p {
     font-size: 14px;
-    color: $gray-400;
+    color: $text-secondary;
     margin: 0;
+    font-family: $font-family;
   }
 }
 
@@ -506,146 +663,177 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // RESPONSIVE
 // ==========================
 
-@media (max-width: 480px) {
-  .back-btn {
-    top: 12px;
-    left: 12px;
-    width: 38px;
-    height: 38px;
-    
-    ion-icon {
-      font-size: 20px;
-    }
-  }
-  
-  .location-info {
-    top: 12px;
-    
-    .location-chip {
-      padding: 6px 12px;
-      font-size: 12px;
-      
-      ion-icon {
-        font-size: 16px;
-      }
-    }
-  }
-  
+@media (max-width: 380px) {
   .bottom-sheet {
-    max-height: 85vh;
+    height: 100px;
+    
+    &.expanded {
+      height: 80vh;
+    }
+  }
+  
+  .sheet-handle {
+    padding: 10px 16px 6px;
+  }
+  
+  .sheet-content {
+    padding: 0 16px 16px;
   }
   
   .carwash-item {
-    padding: 10px;
+    padding: 12px;
     
-    .carwash-avatar {
-      .carwash-icon {
-        width: 48px;
-        height: 48px;
-        
-        ion-icon {
-          font-size: 24px;
-        }
+    .carwash-avatar .carwash-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .carwash-info .carwash-name {
+      font-size: 14px;
+    }
+    
+    .carwash-actions .book-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+  
+  .filter-chips {
+    .filter-chip {
+      padding: 4px 10px;
+      font-size: 11px;
+    }
+  }
+}
+
+@media (min-height: 800px) {
+  .bottom-sheet {
+    height: 140px;
+    
+    &.expanded {
+      height: 88vh;
+    }
+  }
+}
+
+// ==========================
+// DARK MODE
+// ==========================
+
+@media (prefers-color-scheme: dark) {
+  .carwash-content {
+    --background: #0f172a;
+  }
+  
+  .bottom-sheet {
+    background: #1a1a1a;
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .back-btn {
+    background: #1e293b;
+    border-color: #334155;
+    
+    ion-icon {
+      color: $white;
+    }
+  }
+  
+  .location-chip {
+    background: rgba(30, 41, 59, 0.92);
+    border-color: rgba(255, 255, 255, 0.05);
+    
+    span {
+      color: $white;
+    }
+  }
+  
+  .sheet-handle {
+    .handle-bar {
+      background: #334155;
+    }
+    
+    .sheet-header {
+      .sheet-title {
+        color: $white;
+      }
+      
+      .sheet-count {
+        color: #94a3b8;
+        background: rgba(255, 255, 255, 0.06);
       }
     }
+  }
+  
+  .search-bar {
+    background: #1e293b;
+    border-color: #334155;
+    
+    input {
+      color: $white;
+      
+      &::placeholder {
+        color: #64748b;
+      }
+    }
+    
+    &:focus-within {
+      border-color: #60a5fa;
+    }
+  }
+  
+  .filter-chips .filter-chip {
+    background: #1e293b;
+    border-color: #334155;
+    color: #94a3b8;
+    
+    &.active {
+      background: #60a5fa;
+      border-color: #60a5fa;
+      color: #0f172a;
+    }
+  }
+  
+  .carwash-item {
+    background: #1e293b;
+    border-color: #334155;
     
     .carwash-info {
       .carwash-name {
-        font-size: 13px;
+        color: $white;
+      }
+      
+      .carwash-rating span {
+        color: $white;
       }
       
       .carwash-meta {
-        span {
-          font-size: 11px;
-        }
+        color: #94a3b8;
       }
     }
+    
+    .carwash-avatar .carwash-status {
+      border-color: #1e293b;
+    }
+    
+    &:hover {
+      border-color: #60a5fa;
+    }
   }
-}
-
-// ... (Keep your existing map and sheet styles above) ...
-
-// ==========================
-// SKELETON LOADER STYLES
-// ==========================
-
-.skeleton-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 4px 0;
-}
-
-.skeleton-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 12px;
-  border: 1px solid #f1f5f9;
-}
-
-// Skeleton Avatar (Circle)
-.skeleton-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
-  background: #e2e8f0;
-  flex-shrink: 0;
-  animation: shimmer 1.5s infinite;
-}
-
-// Skeleton Info Section
-.skeleton-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.skeleton-line {
-  height: 12px;
-  background: #e2e8f0;
-  border-radius: 6px;
-  animation: shimmer 1.5s infinite;
-}
-
-.skeleton-line.name {
-  width: 60%;
-  height: 14px;
-}
-
-.skeleton-line.rating {
-  width: 40%;
-  height: 10px;
-}
-
-.skeleton-line.meta {
-  width: 70%;
-  height: 10px;
-}
-
-// Skeleton Button
-.skeleton-btn {
-  width: 56px;
-  height: 30px;
-  background: #e2e8f0;
-  border-radius: 8px;
-  flex-shrink: 0;
-  animation: shimmer 1.5s infinite;
-}
-
-// THE SHIMMER ANIMATION
-@keyframes shimmer {
-  0% {
-    opacity: 0.6;
+  
+  .empty-state {
+    h4 { color: $white; }
+    p { color: #94a3b8; }
   }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.6;
+  
+  .skeleton-item {
+    background: #1e293b;
+    
+    .skeleton-avatar,
+    .skeleton-line,
+    .skeleton-btn {
+      background: #334155;
+    }
   }
 }
 
@@ -654,8 +842,23 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, He
 // ==========================
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  .lottie-marker {
     animation: none !important;
+  }
+  
+  .bottom-sheet {
     transition: none !important;
+  }
+  
+  .carwash-item:hover {
+    transform: none !important;
+  }
+  
+  .book-btn:hover {
+    transform: none !important;
+  }
+  
+  .back-btn:hover {
+    transform: none !important;
   }
 }
