@@ -149,22 +149,9 @@ import {
   shieldOutline,
   
   // ==========================
-  // INDEMNITY ICONS
-  // ==========================
-  qrCodeOutline as qrIcon,
-  refreshOutline as refreshIcon,
-  downloadOutline as downloadIcon,
-  cameraOutline as cameraIcon,
-  
-  // ==========================
   // VIP PAYMENT ICONS
   // ==========================
   reloadOutline,
-  
-  // ==========================
-  // PAYMENT METHODS ICONS
-  // ==========================
-  phonePortraitOutline as phoneIcon,
   
   // ==========================
   // CHAT PAGE ICONS
@@ -177,7 +164,7 @@ import {
   chevronUpOutline,
   
   // ==========================
-  // CUSTOMIZE SUBSCRIPTION ICONS (NEW)
+  // CUSTOMIZE SUBSCRIPTION ICONS
   // ==========================
   banOutline,
   informationCircleOutline,
@@ -199,7 +186,7 @@ import {
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
-// Register all icons used across the app BEFORE bootstrapping
+// Register all icons - REMOVED ALIASES
 addIcons({
   // ==========================
   // AUTH & WELCOME PAGE ICONS
